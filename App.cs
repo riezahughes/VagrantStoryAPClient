@@ -1,26 +1,66 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using Archipelago.Core;
+﻿using Archipelago.Core;
 using Archipelago.Core.GameClients;
 using Archipelago.Core.Models;
-using Archipelago.Core.Util;
-using VagrantStoryArchipelago.Helpers;
 using Helpers;
 using Spectre.Console;
+using System.Collections.Concurrent;
+using System.Text;
 
-internal class Program
+// This is a complete structure showing how to organize your Archipelago client UI
+
+public class ArchipelagoUI
 {
-    private static async Task Main(string[] args)
+    private Layout _layout;
+    private ConcurrentQueue<string> _messages = new();
+    private ConcurrentQueue<string> _itemsReceived = new();
+    private ConcurrentQueue<string> _itemsSent = new();
+    private bool _isConnected = false;
+    private int _maxMessages = 15;
+    private int _maxItems = 10;
+
+    public async Task Run()
     {
+        // Step 1: Get login details BEFORE starting live display
+        var (url, port, slot, password) = GetLoginDetails();
 
-        // Connection details
-        string url;
-        string port;
-        string slot;
-        string password;
-        string gameName = "Vagrant Story";
+        // Step 2: Clear and start the live display
+        AnsiConsole.Clear();
+        _layout = CreateLayout();
 
-        DuckstationClient gameClient = null;
+        var cts = new CancellationTokenSource();
+
+        // Step 3: Start the live display in a background task
+        var displayTask = Task.Run(async () =>
+        {
+            await AnsiConsole.Live(_layout)
+                .AutoClear(false)
+                .StartAsync(async ctx =>
+                {
+                    while (!cts.Token.IsCancellationRequested)
+                    {
+                        UpdateLayout();
+                        ctx.UpdateTarget(_layout);
+                        await Task.Delay(100); // Refresh 10 times per second
+                    }
+                });
+        });
+
+
+        Console.OutputEncoding = Encoding.UTF8;
+        Console.Title = "Medievil 2 Archipelago Client";
+
+        // set values
+        const byte US_OFFSET = 0x38; // this is ADDED to addresses to get their US location
+        const byte JP_OFFSET = 0; // could add more offsfets here
+
+
+
+        bool playerStateUpdating = false;
+
+        bool firstRun = true;
+
+        CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+
         List<ILocation> GameLocations = null;
 
         ////////////////////////////
@@ -31,157 +71,289 @@ internal class Program
 
         // Make sure the connect is initialised
 
-        var clientLayout = CliHelpers.CreateGridLayout();
-        //AnsiConsole.Write(layout);
-        var mainMessages = new List<Markup>();
 
+        DuckstationClient gameClient = null;
+        bool clientInitializedAndConnected = false; // Renamed for clarity
         int retryAttempt = 0;
 
-        AnsiConsole.Live(clientLayout)
-            .StartAsync(async ctx =>
+        while (!clientInitializedAndConnected)
+        {
+            Console.Clear();
+            retryAttempt++;
+            Console.WriteLine($"\nAttempt #{retryAttempt}:");
+
+            try
             {
+                gameClient = new DuckstationClient();
+                clientInitializedAndConnected = true;
+            }
+            catch (Exception ex)
+            {
+                // Catch any exception thrown during the DuckstationClient constructor call
+                // or any other unexpected error during the try block.
+                Console.WriteLine($"Could not find Duckstation open.");
 
-                bool clientInitializedAndConnected = false;
-                int retryAttempt = 0;
+                // Wait for 5 seconds before the next retry
+                Thread.Sleep(5000); // 5000 milliseconds = 5 seconds
+            }
+        }
 
-                while (!clientInitializedAndConnected)
-                {
-                    retryAttempt++;
-                    CliHelpers.AddMessageToLeftPanel(clientLayout, mainMessages, $"Attempt #{retryAttempt} to connect...");
-
-                    try
-                    {
-                        gameClient = new DuckstationClient();
-                        clientInitializedAndConnected = true;
-                        CliHelpers.AddMessageToLeftPanel(clientLayout, mainMessages, "Connected!");
-                        ctx.Refresh();
-                    }
-                    catch (Exception)
-                    {
-                        CliHelpers.AddMessageToLeftPanel(clientLayout, mainMessages, "Could not find Duckstation open.");
-                        ctx.Refresh();
-
-                        Thread.Sleep(5000);
-                    }
-                }
-            });
-
+#if DEBUG
+#else
+            Console.Clear();
+#endif
 
         bool connected = gameClient.Connect();
+
         var archipelagoClient = new ArchipelagoClient(gameClient);
-
-        archipelagoClient.CancelMonitors();
-        archipelagoClient.Connected -= (sender, args) => APHelpers.OnConnectedLogic(sender, args, archipelagoClient);
-        archipelagoClient.Disconnected -= (sender, args) => APHelpers.OnDisconnectedLogic(sender, args, archipelagoClient);
-        archipelagoClient.ItemReceived -= (sender, args) => APHelpers.ItemReceivedLogic(sender, args, archipelagoClient);
-        archipelagoClient.LocationCompleted -= (sender, args) => APHelpers.Client_LocationCompletedLogic(sender, args, archipelagoClient);
-
-        CliHelpers.AddMessageToLeftPanel(clientLayout, mainMessages, "Successfully connected to Duckstation.");
-
-        // get the duckstation offset
-        try
-        {
-            Memory.GlobalOffset = Memory.GetDuckstationOffset();
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"An unexpected error occurred while getting Duckstation memory offset: {ex.Message}");
-            Console.WriteLine(ex); // Print full exception for debugging
-        }
-
-        url = AnsiConsole.Ask<string>("Enter AP url:", "archipelago.gg");
-        port = AnsiConsole.Ask<string>("Enter Port:");
-        slot = AnsiConsole.Ask<string>("Enter Slot Name:");
-        password = AnsiConsole.Prompt(new TextPrompt<string>("Enter Password:").Secret().AllowEmpty());
-
-        //Console.WriteLine("Details:");
-        //Console.WriteLine($"URL:{url}:{port}");
-        //Console.WriteLine($"Slot: {slot}");
-        //Console.WriteLine($"Password: {password}");
-
-        if (string.IsNullOrWhiteSpace(slot))
-        {
-            Console.WriteLine("Slot name cannot be empty. Please provide a valid slot name.");
-            return;
-        }
-
-        CliHelpers.AddMessageToLeftPanel(clientLayout, mainMessages, "Got the details! Attempting to connect to Archipelagos main server");
 
         // Register event handlers
         archipelagoClient.Connected += (sender, args) => APHelpers.OnConnectedLogic(sender, args, archipelagoClient);
         archipelagoClient.Disconnected += (sender, args) => APHelpers.OnDisconnectedLogic(sender, args, archipelagoClient);
         archipelagoClient.ItemReceived += (sender, args) => APHelpers.ItemReceivedLogic(sender, args, archipelagoClient);
-        archipelagoClient.MessageReceived += (sender, args) => APHelpers.Client_MessageReceivedLogic(sender, args, archipelagoClient);
+        archipelagoClient.MessageReceived += (sender, args) => APHelpers.Client_MessageReceivedLogic(sender, args, archipelagoClient, slot);
         archipelagoClient.LocationCompleted += (sender, args) => APHelpers.Client_LocationCompletedLogic(sender, args, archipelagoClient);
-        archipelagoClient.EnableLocationsCondition = () => Helpers.APHelpers.isInTheGame();
 
-        var cts = new CancellationTokenSource();
+
+        // Step 4: Connect to your services
+        AddMessage("Connecting to Archipelago...");
+        await ConnectToArchipelago(archipelagoClient, url, port, slot, password);
+
+        // Step 5: Start background tasks for monitoring
+        var monitorTask = MonitorGameEvents(cts.Token);
+
+        // Step 6: Command loop runs OUTSIDE the live display
+        await CommandLoop(cts);
+
+        // Cleanup
+        cts.Cancel();
+        await Task.WhenAll(displayTask, monitorTask);
+        AnsiConsole.MarkupLine("[yellow]Shutting down...[/]");
+    }
+
+    private (string url, string port, string username, string password) GetLoginDetails()
+    {
+        AnsiConsole.Write(new FigletText("Vagrant Story").Color(Color.Cyan1));
+        AnsiConsole.MarkupLine("[dim]Archipelago Client[/]\n");
+
+        var url = AnsiConsole.Ask<string>("Enter AP url:", "archipelago.gg");
+        var port = AnsiConsole.Ask<string>("Enter Port:", "38281");
+        var slot = AnsiConsole.Ask<string>("Enter Slot Name:");
+        var password = AnsiConsole.Prompt(
+            new TextPrompt<string>("Enter Password:")
+                .Secret()
+                .AllowEmpty());
+
+        return (url, port, slot, password);
+    }
+
+    private Layout CreateLayout()
+    {
+        var layout = new Layout("Root")
+            .SplitRows(
+                new Layout("Header").Size(5),
+                new Layout("Body"),
+                new Layout("Input").Size(3)
+            );
+
+        layout["Body"].SplitColumns(
+            new Layout("Left"),
+            new Layout("Right")
+        );
+
+        layout["Right"].SplitRows(
+            new Layout("ItemsReceived"),
+            new Layout("ItemsSent")
+        );
+
+        return layout;
+    }
+
+    private void UpdateLayout()
+    {
+        // Header with title and connection status
+        var statusColor = _isConnected ? "green" : "red";
+        var statusText = _isConnected ? "CONNECTED" : "DISCONNECTED";
+
+        var headerTable = new Table()
+            .Border(TableBorder.None)
+            .AddColumn(new TableColumn("").Width(40))
+            .AddColumn(new TableColumn("").RightAligned())
+            .HideHeaders();
+
+        headerTable.AddRow(
+            new Markup("[cyan1]VAGRANT STORY[/]\n[dim]Archipelago Client[/]"),
+            new Markup($"[{statusColor}]● {statusText}[/]")
+        );
+
+        _layout["Header"].Update(
+            new Panel(headerTable)
+                .BorderColor(Color.Blue)
+                .Padding(1, 0)
+        );
+
+        // Messages panel (left)
+        var messageText = string.Join("\n", _messages.TakeLast(_maxMessages));
+        _layout["Left"].Update(
+            new Panel(new Markup(messageText))
+                .Header("Messages")
+                .BorderColor(Color.Yellow)
+        );
+
+        // Items Received panel (top right)
+        var receivedText = string.Join("\n", _itemsReceived.TakeLast(_maxItems));
+        _layout["ItemsReceived"].Update(
+            new Panel(new Markup(receivedText.Length > 0 ? receivedText : "[dim]No items received yet[/]"))
+                .Header("Items Received")
+                .BorderColor(Color.Green)
+        );
+
+        // Items Sent panel (bottom right)
+        var sentText = string.Join("\n", _itemsSent.TakeLast(_maxItems));
+        _layout["ItemsSent"].Update(
+            new Panel(new Markup(sentText.Length > 0 ? sentText : "[dim]No items sent yet[/]"))
+                .Header("Items Sent")
+                .BorderColor(Color.Red)
+        );
+
+        // Input hint
+        _layout["Input"].Update(
+            new Panel("[dim]Type 'help' for commands, 'exit' to quit[/]")
+                .BorderColor(Color.Grey)
+        );
+    }
+
+    private async Task ConnectToArchipelago(ArchipelagoClient client, string url, string port, string slot, string password)
+    {
+        // Simulate connection
         try
         {
-            // 
-            await archipelagoClient.Connect(url + ":" + port, gameName);
-            CliHelpers.AddMessageToLeftPanel(clientLayout, mainMessages, "Connected. Attempting to Log in...");
 
-            await archipelagoClient?.Login(slot, password);
-            CliHelpers.AddMessageToLeftPanel(clientLayout, mainMessages, "Logged in!");
 
-            while (archipelagoClient.CurrentSession == null)
+
+            await client.Connect(url + ":" + port, "Medievil 2");
+            Thread.Sleep(1000);
+
+            await client?.Login(slot, password);
+
+
+            int retryCount = 0;
+            Console.WriteLine("Waiting for connection...");
+            while (client.IsLoggedIn == false)
             {
-                CliHelpers.AddMessageToLeftPanel(clientLayout, mainMessages, "Waiting for current session...");
+
+                if (retryCount >= 10)
+                {
+                    throw new Exception("The Medievil Client was unable to log into Archipelago. Please make sure your room is running, that you are putting in the correct details and that you are online.");
+
+                }
+                await client?.Login(slot, password);
+                retryCount++;
+                Console.Write(".");
                 Thread.Sleep(1000);
             }
 
-            archipelagoClient.CurrentSession.Locations.CheckedLocationsUpdated += APHelpers.Locations_CheckedLocationsUpdated;
-
-            GameLocations = LocationHelpers.BuildLocationList(archipelagoClient.Options);
-
-            // underscore runs the monitor locations task in the background. You can cane _= to await if you want to watch it more directly. 
-            _ = archipelagoClient.MonitorLocations(GameLocations); 
-
-            // Simple commands for interacting can go here
-            while (!cts.Token.IsCancellationRequested)
-            {
-                var input = Console.ReadLine();
-                if (input?.Trim().ToLower() == "exit")
-                {
-                    cts.Cancel();
-                    break;
-                }
-                else if (input?.Trim().ToLower().Contains("hint") == true)
-                {
-
-                    string hintString = input?.Trim().ToLower() == "hint" ? "!hint" : $"!hint {input.Substring(5).Trim()}";
-                    archipelagoClient.SendMessage(hintString);
-                }
-                else if (input?.Trim().ToLower() == "update")
-                {
-                    if (archipelagoClient.LocationState.CompletedLocations != null)
-                    {
-                        PlayerStateHelpers.UpdatePlayerState(archipelagoClient.CurrentSession.Items.AllItemsReceived);
-                        Console.WriteLine($"Player state updated. Total Count: {archipelagoClient.CurrentSession.Items.AllItemsReceived.Count}");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Cannot update player state: GameState or CompletedLocations is null.");
-                    }
-                }
-                else if (!string.IsNullOrWhiteSpace(input))
-                {
-                    Console.WriteLine($"Unknown command: '{input}'");
-                }
-            }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"An error occurred while connecting to Archipelago: {ex.Message}");
+            Console.WriteLine($"\nAn error occurred while connecting to Archipelago: {ex.Message}");
+#if DEBUG
             Console.WriteLine(ex); // Print full exception for debugging
+#endif
+            Console.ReadKey();
+            Environment.Exit(1);
+
         }
-        finally
+    }
+
+    private async Task MonitorGameEvents(CancellationToken token)
+    {
+        // This would be your actual game monitoring logic
+        // For demo purposes, simulate some events
+        int itemCount = 0;
+        while (!token.IsCancellationRequested)
         {
-            // Perform any necessary cleanup here
-            Console.WriteLine("Shutting down...");
+            await Task.Delay(5000);
 
+            if (_isConnected && itemCount < 5)
+            {
+                itemCount++;
+                AddItemReceived($"[green]• Iron Sword[/] from [cyan]Player{itemCount}[/]");
+                AddMessage($"[yellow]Received item from Player{itemCount}[/]");
+            }
         }
+    }
 
+    private async Task CommandLoop(CancellationTokenSource cts)
+    {
+        AddMessage("[cyan]Ready! Enter commands below the display.[/]");
+
+        while (!cts.Token.IsCancellationRequested)
+        {
+            // This reads from BELOW the live display area
+            var input = Console.ReadLine()?.Trim();
+
+            if (string.IsNullOrWhiteSpace(input)) continue;
+
+            switch (input.ToLower())
+            {
+                case "exit":
+                case "quit":
+                    AddMessage("[red]Shutting down...[/]");
+                    cts.Cancel();
+                    break;
+
+                case "help":
+                    AddMessage("[cyan]Commands: exit, help, hint [item], update, clear[/]");
+                    break;
+
+                case "clear":
+                    _messages.Clear();
+                    AddMessage("[dim]Messages cleared[/]");
+                    break;
+
+                case "update":
+                    AddMessage("[yellow]Updating player state...[/]");
+                    break;
+
+                default:
+                    if (input.StartsWith("hint"))
+                    {
+                        var hintItem = input.Length > 5 ? input.Substring(5).Trim() : "";
+                        AddMessage($"[magenta]Requesting hint for: {hintItem}[/]");
+                        // Send hint request to Archipelago
+                    }
+                    else
+                    {
+                        AddMessage($"[red]Unknown command: {input}[/]");
+                    }
+                    break;
+            }
+        }
+    }
+
+    public void AddMessage(string message)
+    {
+        _messages.Enqueue($"[dim]{DateTime.Now:HH:mm:ss}[/] {message}");
+    }
+
+    public void AddItemReceived(string item)
+    {
+        _itemsReceived.Enqueue(item);
+    }
+
+    public void AddItemSent(string item)
+    {
+        _itemsSent.Enqueue(item);
+    }
+}
+
+// Usage in Program.cs:
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        var ui = new ArchipelagoUI();
+        await ui.Run();
     }
 }
