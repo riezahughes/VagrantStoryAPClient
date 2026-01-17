@@ -12,6 +12,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.1" />
     <PackageReference Include="Spectre.Console" Version="0.54.0" />
+	<PackageReference Include="Kokuban" Version="0.2.0" />
   </ItemGroup>
 
 </Project>
