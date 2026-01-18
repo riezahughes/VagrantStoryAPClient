@@ -96,7 +96,7 @@ namespace Helpers
                 prefix = " << ";
             }
 
-            Console.WriteLine(bg + (fg + $"[{timestamp}] {prefix} {message} "));
+            Console.WriteLine(bg + (fg + $"[{timestamp}]{prefix}{message}"));
         }
 
         public static void Client_LocationCompletedLogic(object sender, LocationCompletedEventArgs e, ArchipelagoClient client)
