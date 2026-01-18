@@ -433,12 +433,13 @@ namespace Helpers
 
                         locations.Add(new Location()
                         {
-                            Id = locationId, // the id of the location in the ap world
-                            Name = loc.Name, // the name you want to give this location
-                            Address = loc.Address, // the address of the location you want to deal with
-                            CheckType = loc.CheckType, // the type of value you're watching
-                            CompareType = LocationCheckCompareType.Match, // the kind of compare you want to do on the value
-                            CheckValue = loc.Check // the value in integer string value
+                            Id = locationId,
+                            Name = loc.Name,
+                            Address = loc.Address,
+                            CheckType = loc.CheckType, 
+                            CompareType = LocationCheckCompareType.Match, 
+                            CheckValue = loc.Check
+                            
                         });
 
                         location_index++;

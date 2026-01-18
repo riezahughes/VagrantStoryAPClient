@@ -75,7 +75,7 @@ internal class App
         bool connected = gameClient.Connect();
         var archipelagoClient = new ArchipelagoClient(gameClient);
 
-        archipelagoClient.CancelMonitors();
+        //archipelagoClient.CancelMonitors();
 
         Console.WriteLine("Successfully connected to Duckstation.");
 
@@ -165,19 +165,6 @@ internal class App
             await archipelagoClient?.Login(slot, password);
 
             int retryCount = 0;
-            while (archipelagoClient.IsLoggedIn == false)
-            {
-
-                if (retryCount >= 10)
-                {
-                    throw new Exception("The Vagrant Story Client was unable to log into Archipelago. Please make sure your room is running, that you are putting in the correct details and that you are online.");
-
-                }
-                await archipelagoClient?.Login(slot, password);
-                retryCount++;
-                Console.Write(".");
-                Thread.Sleep(1000);
-            }
 
         }
         catch (Exception ex)
@@ -239,9 +226,16 @@ internal class App
             Console.Clear();
 #endif
             Console.WriteLine("Listening...");
-
-            _ = archipelagoClient.MonitorLocations(GameLocations);
-            //_ = MemoryCheckThreads.PassiveLogicChecks(archipelagoClient, _cancellationTokenSource);
+            try
+            {
+                Thread.Sleep(2000);
+                await archipelagoClient.MonitorLocations(GameLocations);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected error occurred while monitoring locations: {ex.Message}");
+                Console.WriteLine(ex); 
+            }
 
             while (!_cancellationTokenSource.Token.IsCancellationRequested)
             {

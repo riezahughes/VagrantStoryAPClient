@@ -47,7 +47,7 @@ namespace Helpers
 
         public static async void OnDisconnectedLogic(object sender, ConnectionChangedEventArgs args, ArchipelagoClient client)
         {
-            if (client.CurrentSession != null)
+            if (client.CurrentSession == null)
             {
                 return;
             }
