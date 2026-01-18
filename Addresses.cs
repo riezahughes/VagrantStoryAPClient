@@ -1,6 +1,7 @@
 namespace VagrantStoryArchipelago
 {
-    class Addresses {
+    class Addresses
+    {
         // mark all your addresses here for easy access. Then you can just use Addresses.test, as an example.
         public const uint test = 0x000123123;
 
@@ -194,7 +195,7 @@ namespace VagrantStoryArchipelago
         public const uint InventoryItemSlot54 = 0x0006103c;
         public const uint InventoryItemSlot55 = 0x00061040;
         public const uint InventoryItemSlot56 = 0x00061044;
-        public const uint InventoryItemSlot57= 0x00061048;
+        public const uint InventoryItemSlot57 = 0x00061048;
         public const uint InventoryItemSlot58 = 0x0006104c;
         public const uint InventoryItemSlot59 = 0x00061050;
         public const uint InventoryItemSlot60 = 0x00061054;
@@ -203,6 +204,1395 @@ namespace VagrantStoryArchipelago
         public const uint InventoryItemSlot63 = 0x00061060;
         public const uint InventoryItemSlot64 = 0x00061064;
 
+        // Prologue
+        public const uint PR_PrologueInjuredWyvernBossDefeat = 0x0;
 
+        // Entrance to Darkness
+        public const uint WC_EntranceToDarknessEntered = 0x0;
+
+        // Worker's Breakroom
+        public const uint WC_WorkersBreakroomChest = 0x0;
+        public const uint WC_WorkersBreakroomEntered = 0x0;
+
+        // Hall of Struggle
+        public const uint WC_HallOfStruggleEntered = 0x0;
+
+        // Smokebarrel Stair
+        public const uint WC_SmokebarrelStairHealPanelFloorTrap = 0x0;
+        public const uint WC_SmokebarrelStairChamomileSigilUnlock = 0x0;
+        public const uint WC_SmokebarrelStairEntered = 0x0;
+
+        // Wine Guild Hall
+        public const uint WC_WineGuildHallEntered = 0x0;
+
+        // Wine Magnate's Chambers
+        public const uint WC_WineMagnatesChambersGustFloorTrap = 0x0;
+        public const uint WC_WineMagnatesChambersEntered = 0x0;
+
+        // Fine Vintage Vault
+        public const uint WC_FineVintageVaultEntered = 0x0;
+
+        // Chamber of Fear
+        public const uint WC_ChamberOfFearEntered = 0x0;
+
+        // The Reckoning Room
+        public const uint WC_TheReckoningRoomChest = 0x0;
+        public const uint WC_TheReckoningRoom = 0x0;
+
+        // A Laborer's Thirst
+        public const uint WC_ALaborersThirstEntered = 0x0;
+
+        // The Rich Drown in Wine
+        public const uint WC_TheRichDrownInWineEntered = 0x0;
+
+        // Room of Rotten Grapes
+        public const uint WC_RoomOfRottenGrapesHealPanelFloorTrap = 0x0;
+        public const uint WC_RoomOfRottenGrapesCursePanelFloorTrap = 0x0;
+        public const uint WC_RoomOfRottenGrapesEntered = 0x0;
+
+        // Blackmarket of Wines
+        public const uint WC_BlackmarketOfWinesChest = 0x0;
+        public const uint WC_BlackmarketOfWinesStockSigilUnlock = 0x0;
+        public const uint WC_BlackmarketOfWinesEntered = 0x0;
+
+        // The Gallows
+        public const uint WC_TheGallowsMinotaurBossDefeat = 0x0;
+        public const uint WC_TheGallowsAgainMinotaurZombieBossDefeat = 0x0;
+        public const uint WC_TheGallowsAgainChest = 0x0;
+        public const uint WC_TheGallowsChest = 0x0;
+        public const uint WC_TheGallowsEntered = 0x0;
+
+        // Room of Cheap Red Wine
+        public const uint WC_RoomOfCheapRedWineMandelBossDefeat = 0x0;
+        public const uint WC_RoomOfCheapRedWineHealPanelFloorTrap = 0x0;
+        public const uint WC_RoomOfCheapRedWineEntered = 0x0;
+
+        // Room of Cheap White Wine
+        public const uint WC_RoomOfCheapWhiteWineZombieFighterBossDefeat = 0x0;
+        public const uint WC_RoomOfCheapWhiteWineZombieBossDefeat = 0x0;
+        public const uint WC_RoomOfCheapWhiteWineGhoulBossDefeat = 0x0;
+        public const uint WC_RoomOfCheapWhiteWineEntered = 0x0;
+
+        // The Greedy One's Den
+        public const uint WC_TheGreedyOnesDenEntered = 0x0;
+
+        // The Hero's Winehall
+        public const uint WC_TheHerosWinehallDullahanBossDefeat = 0x0;
+        public const uint WC_TheHerosWinehallChest = 0x0;
+        public const uint WC_TheHerosWinehallEntered = 0x0;
+
+        // The Bread Peddler's Way
+        public const uint UW_TheBreadPeddlersWayEntered = 0x0;
+
+        // Way of the Mother Lode
+        public const uint UW_WayOfTheMotherLodeEntered = 0x0;
+
+        // Sewer of Ravenous Rats
+        public const uint UW_SewerOfRavenousRatsSilverKeyUnlock = 0x0;
+        public const uint UW_SewerOfRavenousRatsEntered = 0x0;
+
+        // Underdark Fishmarket
+        public const uint UW_UnderdarkFishmarketGiantCrabBossDefeat = 0x0;
+        public const uint UW_UnderdarkFishmarketEntered = 0x0;
+
+        // The Sunless Way
+        public const uint UW_TheSunlessWayIronKeyUnlock = 0x0;
+        public const uint UW_TheSunlessWayEntered = 0x0;
+
+        // Remembering Days of Yore
+        public const uint UW_RememberingDaysOfYoreIronKeyUnlock = 0x0;
+        public const uint UW_RememberingDaysOfYoreEntered = 0x0;
+
+        // Larder for a Lean Winter
+        public const uint UW_LarderForALeanWinterChest = 0x0;
+        public const uint UW_LarderForALeanWinterEntered = 0x0;
+
+        // Where the Hunter Climbed
+        public const uint UW_WhereTheHunterClimbedEntered = 0x0;
+
+        // Hall of Poverty
+        public const uint UW_HallOfPovertyEntered = 0x0;
+
+        // The Washing-Woman's Way
+        public const uint UW_TheWashingWomansWaySilverKeyUnlock = 0x0;
+        public const uint UW_TheWashingWomansWayHealPanelFloorTrap = 0x0;
+        public const uint UW_TheWashingWomansWayCurePanelFloorTrap = 0x0;
+        public const uint UW_TheWashingWomansWayEntered = 0x0;
+
+        // Nameless Dark Oblivion
+        public const uint UW_NamelessDarkOblivionSilverKeyUnlock = 0x0;
+        public const uint UW_NamelessDarkOblivionEntered = 0x0;
+
+        // Sinner's Corner
+        public const uint UW_SinnersCornerEntered = 0x0;
+
+        // Fear of the Fall
+        public const uint UW_FearOfTheFallDarkElementalBossDefeat = 0x0;
+        public const uint UW_FearOfTheFallEntered = 0x0;
+
+        // The Children's Hideout
+        public const uint UW_TheChildrensHideoutChest = 0x0;
+        public const uint UW_TheChildrensHideoutEntered = 0x0;
+
+        // Corner of Prayers
+        public const uint UW_CornerOfPrayersGoldKeyUnlock = 0x0;
+        public const uint UW_CornerOfPrayersEntered = 0x0;
+
+        // Hope Obstructed
+        public const uint UW_HopeObstructedEntered = 0x0;
+
+        // Beggars of the Mouthharp
+        public const uint UW_BeggarsOfTheMouthharpSilverKeyUnlock = 0x0;
+        public const uint UW_BeggarsOfTheMouthharpEntered = 0x0;
+
+        // Corner of the Wretched
+        public const uint UW_CornerOfTheWretchedEntered = 0x0;
+
+        // Crossroads of Rest
+        public const uint UW_CrossroadsOfRestGustFloorTrap = 0x0;
+        public const uint UW_CrossroadsOfRestEntered = 0x0;
+
+        // Path to the Greengrocer
+        public const uint UW_PathToTheGreengrocerEntered = 0x0;
+
+        // Path of the Children
+        public const uint UW_PathOfTheChildrenEntered = 0x0;
+
+        // Salvation for the Mother
+        public const uint UW_SalvationForTheMotherGoldKeyUnlock = 0x0;
+        public const uint UW_SalvationForTheMotherDiabolosFloorTrap = 0x0;
+        public const uint UW_SalvationForTheMotherPoisonPanelFloorTrap = 0x0;
+        public const uint UW_SalvationForTheMotherEntered = 0x0;
+
+        // The Body Fragile Yields
+        public const uint UW_TheBodyFragileYieldsGoldKeyUnlock = 0x0;
+        public const uint UW_TheBodyFragileYieldsEntered = 0x0;
+
+        // Bite the Master's Wounds
+        public const uint UW_BiteTheMastersWoundsEntered = 0x0;
+
+        // Workshop 'Godhands'
+        public const uint UW_WorkshopGodhandsEntered = 0x0;
+
+        // The Crumbling Market (South)
+        public const uint UW_TheCrumblingMarketSouthEntered = 0x0;
+
+        // The Crumbling Market (North)
+        public const uint UW_TheCrumblingMarketNorthChest = 0x0;
+        public const uint UW_TheCrumblingMarketNorthEruptionFloorTrap = 0x0;
+        public const uint UW_TheCrumblingMarketNorthFreezeFloorTrap = 0x0;
+        public const uint UW_TheCrumblingMarketNorthGustFloorTrap = 0x0;
+        public const uint UW_TheCrumblingMarketNorthTerraThrustFloorTrap = 0x0;
+        public const uint UW_TheCrumblingMarketNorthHolyLightFloorTrap = 0x0;
+        public const uint UW_TheCrumblingMarketNorthEntered = 0x0;
+
+        // Where Flood Waters Ran
+        public const uint UW_WhereFloodWatersRanEntered = 0x0;
+
+        // Tears from Empty Sockets
+        public const uint UW_TearsFromEmptySocketsEntered = 0x0;
+
+        // Hall to a New World
+        public const uint UE_HallToANewWorldEntered = 0x0;
+
+        // Place of Free Words
+        public const uint UE_PlaceOfFreeWordsHarpyBossDefeat = 0x0;
+        public const uint UE_PlaceOfFreeWordsEntered = 0x0;
+
+        // Bazaar of the Bizarre
+        public const uint UE_BazaarOfTheBizarreLichBossDefeat = 0x0;
+        public const uint UE_BazaarOfTheBizarreEntered = 0x0;
+
+        // Noble Gold and Silk
+        public const uint UE_NobleGoldAndSilkIronKeyUnlock = 0x0;
+        public const uint UE_NobleGoldAndSilkEntered = 0x0;
+
+        // Weapons Not Allowed
+        public const uint UE_WeaponsNotAllowedChest = 0x0;
+        public const uint UE_WeaponsNotAllowedEntered = 0x0;
+
+        // A Knight Sells his Sword
+        public const uint UE_AKnightSellsHisSwordEntered = 0x0;
+
+        // Gemsword Blackmarket
+        public const uint UE_GemswordBlackmarketNightstalkerBossDefeat = 0x0;
+        public const uint UE_GemswordBlackmarketEntered = 0x0;
+
+        // The Pirate's Son
+        public const uint UE_ThePiratesSonEntered = 0x0;
+
+        // Sale of the Sword
+        public const uint UE_SaleOfTheSwordChest = 0x0;
+        public const uint UE_SaleOfTheSwordEntered = 0x0;
+
+        // The Greengrocer's Stair
+        public const uint UEN_TheGreengrocersStairNeesaBossDefeat = 0x0;
+        public const uint UEN_TheGreengrocersStairTiegerBossDefeat = 0x0;
+        public const uint UEN_TheGreengrocersStairEntered = 0x0;
+
+        // Where Black Waters Ran
+        public const uint UEN_WhereBlackWatersRanEntered = 0x0;
+
+        // Arms Against Invaders
+        public const uint UEN_ArmsAgainstInvadersEntered = 0x0;
+
+        // Catspaw Blackmarket
+        public const uint UEN_CatspawBlackmarketDiabolosFloorTrap = 0x0;
+        public const uint UEN_CatspawBlackmarketTrapClearFloorTrap = 0x0;
+        public const uint UEN_CatspawBlackmarketChest = 0x0;
+        public const uint UEN_CatspawBlackmarketEntered = 0x0;
+
+        // Forcas Rise
+        public const uint TCS_ForcasRiseEntered = 0x0;
+
+        // Valdiman Gates
+        public const uint TCS_ValdimanGatesEntered = 0x0;
+
+        // Rue Aliano
+        public const uint TCS_RueAlianoMandrakeSigilUnlock = 0x0;
+
+        // The House Khazabas
+        public const uint TCS_TheHouseKhazabasChest = 0x0;
+
+        // Zebel's Walk
+        public const uint TCS_ZebelsWalkEntered = 0x0;
+
+        // Rue Volnac
+        public const uint TCS_RueVolnacEntered = 0x0;
+
+        // Rue Faltes
+        public const uint TCS_RueFaltesEntered = 0x0;
+
+        // Rue Morgue
+        public const uint TCS_RueMorgueEntered = 0x0;
+
+        // Rue Lejour
+        public const uint TCE_RueLejourEntered = 0x0;
+
+        // Kesch Bridge
+        public const uint TCE_KeschBridgeEntered = 0x0;
+
+        // Rue Crimnade
+        public const uint TCE_RueCrimnadeCattleyaSigilUnlock = 0x0;
+        public const uint TCE_RueCrimnadeEntered = 0x0;
+
+        // Workshop 'Junction Point'
+        public const uint TCE_WorkshopJunctionPointEntered = 0x0;
+
+        // Rue Fisserano
+        public const uint TCE_RueFisseranoHealPanelFloorTrap = 0x0;
+        public const uint TCE_RueFisseranoEntered = 0x0;
+
+        // Workshop 'Metal Works'
+        public const uint TCE_WorkshopMetalWorksEntered = 0x0;
+
+        // Shasras Hill Park
+        public const uint TCE_ShasrasHillParkBronzeKeyUnlock = 0x0;
+        public const uint TCE_ShasrasHillParkEntered = 0x0;
+
+        // The House Gilgitte
+        public const uint TCE_TheHouseGilgitteChest = 0x0;
+        public const uint TCE_TheHouseGilgitteEntered = 0x0;
+
+        // Gharmes Walk
+        public const uint TCE_GharmesWalkChest = 0x0;
+        public const uint TCE_GharmesWalkEntered = 0x0;
+
+        // Plateia Lumitar
+        public const uint TCE_PlateiaLumitarCurePanelFloorTrap = 0x0;
+        public const uint TCE_PlateiaLumitarEntered = 0x0;
+
+        // Rue Vermillion
+        public const uint TCW_RueVermillionCrimsonKeyUnlock = 0x0;
+        public const uint TCW_RueVermillionEntered = 0x0;
+
+        // The Rene Coastroad
+        public const uint TCW_TheReneCoastroadHealPanelFloorTrap = 0x0;
+        public const uint TCW_TheReneCoastroadEntered = 0x0;
+
+        // Workshop 'Magic Hammer'
+        public const uint TCW_WorkshopMagicHammerEntered = 0x0;
+
+
+        // Rue Mal Fallde
+        public const uint TCW_RueMalFalldeEntered = 0x0;
+
+        // Tircolas Flow (North)
+        public const uint TCW_TircolasFlowNorthDuaneBossDefeat = 0x0;
+        public const uint TCW_TircolasFlowNorthEntered = 0x0;
+
+        // Tircolas Flow (South)
+        public const uint TCW_TircolasFlowSouthEntered = 0x0;
+
+        // Rue Bouquet
+        public const uint TCW_RueBouquetEntered = 0x0;
+
+        // Glacialdra Kirk Ruins
+        public const uint TCW_GlacialdraKirkRuinsRoodInverseUnlock = 0x0;
+        public const uint TCW_GlacialdraKirkRuinsEntered = 0x0;
+
+        // Rue Sant D'alsa
+        public const uint TCW_RueSantDalsaEntered = 0x0;
+
+        // Dinas Walk
+        public const uint TCW_DinasWalkEntered = 0x0;
+
+        // Villeport Way
+        public const uint TCW_VilleportWayEntered = 0x0;
+
+        // The Soldier's Bedding
+        public const uint KEP_TheSoldiersBeddingGoldKeyUnlock = 0x0;
+        public const uint KEP_TheSoldiersBeddingEntered = 0x0;
+
+        // A Storm of Arrows
+        public const uint KEP_AStormOfArrowsKalmiaSigilUnlock = 0x0;
+        public const uint KEP_AStormOfArrowsColumbineSigilUnlock = 0x0;
+        public const uint KEP_AStormOfArrowsEntered = 0x0;
+
+        // Time Trial (Minotaur)
+        public const uint KEP_TimeTrialMinotaurMinotaurBossDefeat = 0x0;
+        public const uint KEP_TimeTrialMinotaurEntered = 0x0;
+
+        // Time Trial (Dragon)
+        public const uint KEP_TimeTrialDragonDragonBossDefeat = 0x0;
+        public const uint KEP_TimeTrialDragonEntered = 0x0;
+
+        // Urge the Boy On
+        public const uint KEP_UrgeTheBoyOnAnemoneSigilUnlock = 0x0;
+        public const uint KEP_UrgeTheBoyOnVerbenaSigilUnlock = 0x0;
+        public const uint KEP_UrgeTheBoyOnEntered = 0x0;
+
+        // Time Trial (Earth Dragon)
+        public const uint KEP_TimeTrialEarthDragonEarthDragonBossDefeat = 0x0;
+        public const uint KEP_TimeTrialEarthDragonEntered = 0x0;
+
+        // Time Trial (Snow Dragon)
+        public const uint KEP_TimeTrialSnowDragonSnowDragonBossDefeat = 0x0;
+        public const uint KEP_TimeTrialSnowDragonEntered = 0x0;
+
+        // A Taste of the Spoils
+        public const uint KEP_ATasteOfTheSpoilsSchirraSigilUnlock = 0x0;
+        public const uint KEP_ATasteOfTheSpoilsMarigoldSigilUnlock = 0x0;
+        public const uint KEP_ATasteOfTheSpoilsEntered = 0x0;
+
+        // Time Trial (Damascus Golem)
+        public const uint KEP_TimeTrialDamascusGolemDamascusGolemBossDefeat = 0x0;
+        public const uint KEP_TimeTrialDamascusGolemEntered = 0x0;
+
+        // Time Trial (Damascus Crab)
+        public const uint KEP_TimeTrialDamascusCrabDamascusCrabBossDefeat = 0x0;
+        public const uint KEP_TimeTrialDamascusCrabEntered = 0x0;
+
+        // Wiping Blood from Blades
+        public const uint KEP_WipingBloodFromBladesAzaleaSigilUnlock = 0x0;
+        public const uint KEP_WipingBloodFromBladesTigertailSigilUnlock = 0x0;
+        public const uint KEP_WipingBloodFromBladesEntered = 0x0;
+
+        // Time Trial (Death + Ogre Zombie)
+        public const uint KEP_TimeTrialDeathOgreZombieDeathBossDefeat = 0x0;
+        public const uint KEP_TimeTrialDeathOgreZombieOgreZombieBossDefeat = 0x0;
+        public const uint KEP_TimeTrialDeathOgreZombieEntered = 0x0;
+
+        // Time Trial (Asura)
+        public const uint KEP_TimeTrialAsuraAsuraBossDefeat = 0x0;
+        public const uint KEP_TimeTrialAsuraEntered = 0x0;
+
+        // The Warrior's Rest
+        public const uint KEP_TheWarriorsRestRosencrantzBossDefeat = 0x0;
+        public const uint KEP_TheWarriorsRestChest = 0x0;
+        public const uint KEP_TheWarriorsRestEntered = 0x0;
+
+        // Workshop 'Keane's Crafts'
+        public const uint KEP_WorkshopKeanesCraftsEntered = 0x0;
+
+        // The Dark Coast
+        public const uint TOK_TheDarkCoastTrapClearFloorTrap = 0x0;
+        public const uint TOK_TheDarkCoastHealPanelFloorTrap = 0x0;
+        public const uint TOK_TheDarkCoastEntered = 0x0;
+
+        // Hall of Prayer
+        public const uint TOK_HallOfPrayerLastCrusaderBossDefeat = 0x0;
+        public const uint TOK_HallOfPrayerEntered = 0x0;
+
+        // Those who Drink the Dark
+        public const uint TOK_ThoseWhoDrinkTheDarkSilverKeyUnlock = 0x0;
+        public const uint TOK_ThoseWhoDrinkTheDarkEntered = 0x0;
+
+        // The Chapel of Meschaunce
+        public const uint TOK_TheChapelOfMeschaunceMinotaurLordBossDefeat = 0x0;
+        public const uint TOK_TheChapelOfMeschaunceEntered = 0x0;
+
+        // The Resentful Ones
+        public const uint TOK_TheResentfulOnesSilverKeyUnlock = 0x0;
+        public const uint TOK_TheResentfulOnesEntered = 0x0;
+
+        // Those who Fear the Light
+        public const uint TOK_ThoseWhoFearTheLightEntered = 0x0;
+
+        // Chamber of Reason
+        public const uint TOK_ChamberOfReasonKaliBossDefeat = 0x0;
+        public const uint TOK_ChamberOfReasonEntered = 0x0;
+
+        // Exit to City Center
+        public const uint TOK_ExitToCityCenterEntered = 0x0;
+
+        // The Faerie Circle
+        public const uint SFF_TheFaerieCircleEntered = 0x0;
+
+        // The Hunt Begins
+        public const uint SFF_TheHuntBeginsEntered = 0x0;
+
+        // Which Way Home
+        public const uint SFF_WhichWayHomeEntered = 0x0;
+
+        // The Giving Trees
+        public const uint SFF_TheGivingTreesEntered = 0x0;
+
+        // The Birds and the Bees
+        public const uint SFF_TheBirdsAndTheBeesEntered = 0x0;
+
+        // The Wounded Boar
+        public const uint SFF_TheWoundedBoarEntered = 0x0;
+
+        // Golden Egg Way
+        public const uint SFF_GoldenEggWayEntered = 0x0;
+
+        // Traces of the Beast
+        public const uint SFF_TracesOfTheBeastEntered = 0x0;
+
+        // Fluttering Hope
+        public const uint SFF_FlutteringHopeEntered = 0x0;
+
+        // Return to the Land
+        public const uint SFF_ReturnToTheLandEntered = 0x0;
+
+        // The Yellow Wood
+        public const uint SFF_TheYellowWoodEntered = 0x0;
+
+        // They Also Feed
+        public const uint SFF_TheyAlsoFeedEntered = 0x0;
+
+        // The Spirit Trees
+        public const uint SFF_TheSpiritTreesEntered = 0x0;
+
+        // Where Soft Rains Fell
+        public const uint SFF_WhereSoftRainsFellEntered = 0x0;
+
+        // Forest River
+        public const uint SFF_ForestRiverCurePanelFloorTrap = 0x0;
+        public const uint SFF_ForestRiverChest = 0x0;
+        public const uint SFF_ForestRiverEntered = 0x0;
+
+        // Lamenting to the Moon
+        public const uint SFF_LamentingToTheMoonEntered = 0x0;
+
+        // Running with the Wolves
+        public const uint SFF_RunningWithTheWolvesEntered = 0x0;
+
+        // You Are the Prey
+        public const uint SFF_YouAreThePreyEntered = 0x0;
+
+        // The Secret Path
+        public const uint SFF_TheSecretPathEntered = 0x0;
+
+        // Hewn from Nature
+        public const uint SFF_HewnFromNatureGrissomBossDefeat = 0x0;
+        public const uint SFF_HewnFromNatureDarkCrusaderBossDefeat = 0x0;
+        public const uint SFF_HewnFromNatureChest = 0x0;
+        public const uint SFF_HewnFromNatureEntered = 0x0;
+
+        // The Wood Gate
+        public const uint SFF_TheWoodGateEntered = 0x0;
+
+        // The Wolves' Choice
+        public const uint SFF_TheWolvesChoiceEntered = 0x0;
+
+        // The Woodcutter's Run
+        public const uint SFF_TheWoodcuttersRunEntered = 0x0;
+
+        // The Hollow Hills
+        public const uint SFF_TheHollowHillsEntered = 0x0;
+
+        // Howl of the Wolf King
+        public const uint SFF_HowlOfTheWolfKingEntered = 0x0;
+
+        // The Silent Hedges
+        public const uint SFF_TheSilentHedgesEntered = 0x0;
+
+        // Steady the Boar-Spears
+        public const uint SFE_SteadyTheBoarSpearsRoodInverseUnlock = 0x0;
+        public const uint SFE_SteadyTheBoarSpearsEntered = 0x0;
+
+        // The Boar's Revenge
+        public const uint SFE_TheBoarsRevengeEntered = 0x0;
+
+        // Nature's Womb
+        public const uint SFE_NaturesWombDamascusCrabBossDefeat = 0x0;
+        public const uint SFE_NaturesWombEntered = 0x0;
+
+        // Prisoners' Niche
+        public const uint SNC_PrisonersNicheEntered = 0x0;
+
+        // Corridor of the Clerics
+        public const uint SNC_CorridorOfTheClericsEntered = 0x0;
+
+        // Priests' Confinement
+        public const uint SNC_PriestsConfinementEntered = 0x0;
+
+        // Alchemists' Laboratory
+        public const uint SNC_AlchemistsLaboratoryChest = 0x0;
+        public const uint SNC_AlchemistsLaboratoryEntered = 0x0;
+
+        // The Academia Corridor
+        public const uint SNC_TheAcademiaCorridorEntered = 0x0;
+
+        // Theology Classroom
+        public const uint SNC_TheologyClassroomEntered = 0x0;
+
+        // Shrine of the Martyrs
+        public const uint SNC_ShrineOfTheMartyrsEntered = 0x0;
+
+        // Hallowed Hope
+        public const uint SNC_HallowedHopeEntered = 0x0;
+
+        // Hall of Sacrilege
+        public const uint SNC_HallOfSacrilegeGolemBossDefeat = 0x0;
+        public const uint SNC_HallOfSacrilegeEntered = 0x0;
+
+        // Advent Ground (South)
+        public const uint SNC_AdventGroundSouthEntered = 0x0;
+
+        // Passage of the Refugees (South)
+        public const uint SNC_PassageOfTheRefugeesSouthHallOfSacrilegeUnlock = 0x0;
+        public const uint SNC_PassageOfTheRefugeesSouthEntered = 0x0;
+
+        // Passage of the Refugees (North)
+        public const uint SNC_PassageOfTheRefugeesNorthEntered = 0x0;
+
+        // Advent Ground (North)
+        public const uint SNC_AdventGroundNorthEntered = 0x0;
+
+        // The Cleansing Chantry
+        public const uint SNC_TheCleansingChantryDragonBossDefeat = 0x0;
+        public const uint SNC_TheCleansingChantryEntered = 0x0;
+
+        // Stairway to the Light
+        public const uint SNC_StairwayToTheLightEntered = 0x0;
+
+        // Dark Abhors Light
+        public const uint LQ_DarkAbhorsLightEntered = 0x0;
+
+        // Dream of the Holy Land
+        public const uint LQ_DreamOfTheHolyLandWaterElementalBossDefeat = 0x0;
+        public const uint LQ_DreamOfTheHolyLandAsterSigilUnlock = 0x0;
+        public const uint LQ_DreamOfTheHolyLandEntered = 0x0;
+
+        // The Ore Road
+        public const uint LQ_TheOreRoadEntered = 0x0;
+
+        // The Air Stirs
+        public const uint LQ_TheAirStirsEuleliaSigilUnlock = 0x0;
+        public const uint LQ_TheAirStirsEntered = 0x0;
+
+        // Bonds of Friendship
+        public const uint LQ_BondsOfFriendshipChest = 0x0;
+        public const uint LQ_BondsOfFriendshipEntered = 0x0;
+
+        // Atone for Eternity
+        public const uint LQ_AtoneForEternityDeathVaporFloorTrap = 0x0;
+        public const uint LQ_AtoneForEternityEntered = 0x0;
+
+        // Stair to Sanctuary
+        public const uint LQ_StairToSanctuaryEntered = 0x0;
+
+        // The Fallen Hall
+        public const uint LQ_TheFallenHallEntered = 0x0;
+
+        // The Rotten Core
+        public const uint LQ_TheRottenCoreEntered = 0x0;
+
+        // The Dreamer's Climb
+        public const uint LQ_TheDreamersClimbEuleliaSigilUnlock = 0x0;
+        public const uint LQ_TheDreamersClimbHealPanelFloorTrap = 0x0;
+        public const uint LQ_TheDreamersClimbEntered = 0x0;
+
+        // The Ore-Bearers
+        public const uint LQ_TheOreBearersPoisonPanelFloorTrap = 0x0;
+        public const uint LQ_TheOreBearersEntered = 0x0;
+
+        // Screams of the Wounded
+        public const uint LQ_ScreamsOfTheWoundedEntered = 0x0;
+
+        // Bacchus is Cheap
+        public const uint LQ_BacchusIsCheapEntered = 0x0;
+
+        // Sinner's Sustenence
+        public const uint LQ_SinnersSustenenceEntered = 0x0;
+
+        // The Timely Dew of Sleep
+        public const uint LQ_TheAirStirsGoldKeyUnlock = 0x0;
+        public const uint LQ_TheTimelyDewOfSleepEntered = 0x0;
+
+        // Companions in Arms
+        public const uint LQ_CompanionsInArmsChest = 0x0;
+        public const uint LQ_CompanionsInArmsEntered = 0x0;
+
+        // The Auction Block
+        public const uint LQ_TheAuctionBlockSilverKeyUnlock = 0x0;
+        public const uint LQ_TheAuctionBlockEntered = 0x0;
+
+        // Ascension
+        public const uint LQ_AscensionEntered = 0x0;
+
+        // Where the Serpent Hunts
+        public const uint LQ_WhereTheSerpentHuntsEntered = 0x0;
+
+        // Drowned in Fleeting Joy
+        public const uint LQ_DrownedInFleetingJoyChest = 0x0;
+        public const uint LQ_DrownedInFleetingJoyEntered = 0x0;
+
+        // Ants Prepare for Winter
+        public const uint LQ_AntsPrepareForWinterEntered = 0x0;
+
+        // The Laborer's Bonfire
+        public const uint LQ_TheLaborersBonfireMelissaSigilUnlock = 0x0;
+        public const uint LQ_TheLaborersBonfireParalysisPanelFloorTrap = 0x0;
+        public const uint LQ_TheLaborersBonfireEntered = 0x0;
+
+        // Stone and Sulfurous Fire
+        public const uint LQ_StoneAndSulfurousFireChest = 0x0;
+        public const uint LQ_StoneAndSulfurousFireEntered = 0x0;
+
+        // Torture Without End
+        public const uint LQ_TortureWithoutEndOgreLordBossDefeat = 0x0;
+        public const uint LQ_TortureWithoutEndEntered = 0x0;
+
+        // Way Down
+        public const uint LQ_WayDownEntered = 0x0;
+
+        // Excavated Hollow
+        public const uint LQ_ExcavatedHollowChest = 0x0;
+        public const uint LQ_ExcavatedHollowEntered = 0x0;
+
+        // Parting Regrets
+        public const uint LQ_PartingRegretsEntered = 0x0;
+
+        // Corridor of Tales
+        public const uint LQ_CorridorOfTalesEntered = 0x0;
+
+        // Dust Shall Eat the Days
+        public const uint LQ_DustShallEatTheDaysEntered = 0x0;
+
+        // Hall of the Wage-Paying
+        public const uint LQ_HallOfTheWagePayingSnowDragonBossDefeat = 0x0;
+        public const uint LQ_HallOfTheWagePayingEntered = 0x0;
+
+        // Tunnel of the Heartless
+        public const uint LQ_TunnelOfTheHeartlessEntered = 0x0;
+
+        // The Cage
+        public const uint IM1_TheCageEntered = 0x0;
+
+        // The Cauldron
+        public const uint IM1_TheCauldronGargoyleBossDefeat = 0x0;
+        public const uint IM1_TheCauldronWraithBossDefeat = 0x0;
+        public const uint IM1_TheCauldronTearoseSigilUnlock = 0x0;
+        public const uint IM1_TheCauldronEntered = 0x0;
+
+        // Wooden Horse
+        public const uint IM1_WoodenHorseEntered = 0x0;
+
+        // Starvation
+        public const uint IM1_StarvationWraithBossDefeat = 0x0;
+        public const uint IM1_StarvationMummyBossDefeat = 0x0;
+        public const uint IM1_StarvationEntered = 0x0;
+
+        // The Breast Ripper
+        public const uint IM1_TheBreastRipperEntered = 0x0;
+
+        // The Wheel
+        public const uint IM1_TheWheelChest = 0x0;
+        public const uint IM1_TheWheelEntered = 0x0;
+
+        // The Branks
+        public const uint IM1_TheBranksChest = 0x0;
+        public const uint IM1_TheBranksEntered = 0x0;
+
+        // The Pear
+        public const uint IM1_ThePearEntered = 0x0;
+
+        // The Judas Cradle
+        public const uint IM1_TheJudasCradleChest = 0x0;
+        public const uint IM1_TheJudasCradleEntered = 0x0;
+
+        // The Whirlygig
+        public const uint IM1_TheWhirlygigEntered = 0x0;
+
+        // Spanish Tickler
+        public const uint IM1_SpanishTicklerWyvernKnightBossDefeat = 0x0;
+        public const uint IM1_SpanishTicklerEntered = 0x0;
+
+        // Heretic's Fork
+        public const uint IM1_HereticsForkFreezeFloorTrap = 0x0;
+        public const uint IM1_HereticsForkGustFloorTrap = 0x0;
+        public const uint IM1_HereticsForkEntered = 0x0;
+
+        // The Chair of Spikes
+        public const uint IM1_TheChairOfSpikesEntered = 0x0;
+
+        // Blooding
+        public const uint IM1_BloodingDeathVaporFloorTrap = 0x0;
+        public const uint IM1_BloodingEruptionFloorTrap = 0x0;
+        public const uint IM1_BloodingEntered = 0x0;
+
+        // Bootikens
+        public const uint IM1_BootikensEntered = 0x0;
+
+        // Burial
+        public const uint IM1_BurialIronGolemBossDefeat = 0x0;
+        public const uint IM1_BurialEntered = 0x0;
+
+        // Burning
+        public const uint IM1_BurningTerraThrustFloorTrap = 0x0;
+        public const uint IM1_BurningHolyLightFloorTrap = 0x0;
+        public const uint IM1_BurningEntered = 0x0;
+
+        // Cleansing the Soul
+        public const uint IM1_CleansingTheSoulEntered = 0x0;
+
+        // The Ducking Stool
+        public const uint IM1_TheDuckingStoolChest = 0x0;
+        public const uint IM1_TheDuckingStoolEntered = 0x0;
+
+        // The Garotte
+        public const uint IM1_TheGarotteEntered = 0x0;
+
+        // Hanging
+        public const uint IM1_HangingSteelKeyUnlock = 0x0;
+        public const uint IM1_HangingEntered = 0x0;
+
+        // Impalement
+        public const uint IM1_ImpalementPlatinumKeyUnlock = 0x0;
+        public const uint IM1_ImpalementEntered = 0x0;
+
+        // Knotting
+        public const uint IM1_KnottingWyvernQueenBossDefeat = 0x0;
+        public const uint IM1_KnottingEntered = 0x0;
+
+        // The Eunics' Lot
+        public const uint IM2_TheEunicsLotEntered = 0x0;
+
+        // Ordeal By Fire
+        public const uint IM2_OrdealByFireDarkDragonBossDefeat = 0x0;
+        public const uint IM2_OrdealByFireEntered = 0x0;
+
+        // The Oven at Neisse
+        public const uint IM2_TheOvenAtNeisseEntered = 0x0;
+
+        // Pressing
+        public const uint IM2_PressingRavanaBossDefeat = 0x0;
+        public const uint IM2_PressingEntered = 0x0;
+
+        // The Mind Burns
+        public const uint IM2_TheMindBurnsFreezeFloorTrap = 0x0;
+        public const uint IM2_TheMindBurnsGustFloorTrap = 0x0;
+        public const uint IM2_TheMindBurnsEntered = 0x0;
+
+        // The Rack
+        public const uint IM2_TheRackEntered = 0x0;
+
+        // The Saw
+        public const uint IM2_TheSawDragonZombieBossDefeat = 0x0;
+        public const uint IM2_TheSawEntered = 0x0;
+
+        // The Cold's Bridle
+        public const uint IM2_TheColdsBridleCursePanelFloorTrap = 0x0;
+        public const uint IM2_TheColdsBridleDeathVaporFloorTrap = 0x0;
+        public const uint IM2_TheColdsBridlePoisonPanelFloorTrap = 0x0;
+        public const uint IM2_TheColdsBridleEntered = 0x0;
+
+        // The Shin-Vice
+        public const uint IM2_TheShinViceOgreZombieBossDefeat = 0x0;
+        public const uint IM2_TheShinViceDeathBossDefeat = 0x0;
+        public const uint IM2_TheShinViceEntered = 0x0;
+
+        // The Spider
+        public const uint IM2_TheSpiderEntered = 0x0;
+
+        // Lead Sprinkler
+        public const uint IM2_LeadSprinklerChest = 0x0;
+        public const uint IM2_LeadSprinklerParalysisPanelFloorTrap = 0x0;
+        public const uint IM2_LeadSprinklerEntered = 0x0;
+
+        // Squassation
+        public const uint IM2_SquassationChest = 0x0;
+        public const uint IM2_SquassationPoisonPanelFloorTrap = 0x0;
+        public const uint IM2_SquassationTerraThrustFloorTrap = 0x0;
+        public const uint IM2_SquassationEntered = 0x0;
+
+        // The Strappado
+        public const uint IM2_TheStrappadoEntered = 0x0;
+
+        // Thumbscrews
+        public const uint IM2_ThumbscrewsEntered = 0x0;
+
+        // The Pendulum
+        public const uint IM2_PendulumEntered = 0x0;
+        public const uint IM2_PendulumCursePanelFloorTrap = 0x0;
+
+        // Dragging
+        public const uint IM2_DraggingEntered = 0x0;
+        public const uint IM2_DraggingCursePanelFloorTrap = 0x0;
+
+        // Strangulation
+        public const uint IM2_StrangulationEntered = 0x0;
+
+        // Tablillas
+        public const uint IM2_TablillasEntered = 0x0;
+
+        // Tongue Slicer
+        public const uint IM2_TongueSlicerEntered = 0x0;
+
+        // Ordeal By Water
+        public const uint IM2_OrdealByWaterEntered = 0x0;
+
+        // Brank
+        public const uint IM2_BrankEntered = 0x0;
+
+        // Tormentum Insomniae
+        public const uint IM2_TormentumInsomniaeEntered = 0x0;
+
+        // The Iron Maiden
+        public const uint IM3_TheIronMaidenEntered = 0x0;
+        public const uint IM3_TheIronMaidenAsuraBossDefeat = 0x0;
+
+        // Judgement
+        public const uint IM3_JudgementEntered = 0x0;
+
+        // Saint Elmos Belt
+        public const uint IM3_SaintElmosBeltChest = 0x0;
+        public const uint IM3_SaintElmosBeltEntered = 0x0;
+
+        // Dunking The Witch
+        public const uint IM3_DunkingTheWitchChest = 0x0;
+        public const uint IM3_DunkingTheWitchEntered = 0x0;
+
+        // Into Holy Battle
+        public const uint GC1_IntoHolyBattleEntered = 0x0;
+
+        // The Poisoned Chapel
+        public const uint GC1_ThePoisonedChapelEntered = 0x0;
+        public const uint GC1_ThePoisonedChapelLaurelSigilUnlock = 0x0;
+
+        // Sin and Punishment
+        public const uint GC1_SinAndPunishmentEntered = 0x0;
+        public const uint GC1_SinAndPunishmentCursePanelFloorTrap = 0x0;
+        public const uint GC1_SinAndPunishmentEruptionPanelFloorTrap = 0x0;
+
+        // A Light in the Dark
+        public const uint GC1_ALightInTheDarkEntered = 0x0;
+        public const uint GC1_ALightInTheDarkArchDragonBossDefeat = 0x0;
+
+        // Monk's Leap
+        public const uint GC1_MonksLeapEntered = 0x0;
+        public const uint GC1_MonksLeapLichBossDefeat = 0x0;
+
+        // Hieratic Recollections
+        public const uint GC1_HieraticRecollectionsEntered = 0x0;
+
+        // The Flayed Confessional
+        public const uint GC1_TheFlayedConfessionalDjinnBossDefeat = 0x0;
+        public const uint GC1_TheFlayedConfessionalChest = 0x0;
+        public const uint GC1_TheFlayedConfessionalEntered = 0x0;
+
+        // Cracked Pleasures
+        public const uint GC1_CrackedPleasuresEntered = 0x0;
+
+        // Where Darkness Spreads
+        public const uint GC1_WhereDarknessSpreadsChest = 0x0;
+        public const uint GC1_WhereDarknessSpreadsEntered = 0x0;
+
+        // Struggle for the Soul
+        public const uint GCB_StruggleForTheSoulHealPanelFloorTrap = 0x0;
+        public const uint GCB_StruggleForTheSoulEntered = 0x0;
+
+        // Order and Chaos
+        public const uint GCB_OrderAndChaosMaridBossDefeat = 0x0;
+        public const uint GCB_OrderAndChaosEntered = 0x0;
+
+        // An Offering of Souls
+        public const uint GCB_AnOfferingOfSoulsEntered = 0x0;
+
+        // Truth and Lies
+        public const uint GCB_TruthAndLiesIfritBossDefeat = 0x0;
+        public const uint GCB_TruthAndLiesEntered = 0x0;
+
+        // Sanity and Madness
+        public const uint GCB_SanityandMadnessIronCrabBossDefeat = 0x0;
+        public const uint GCB_SanityandMadnessEntered = 0x0;
+
+        // The Victor's Laurels
+        public const uint GCB_TheVictorsLaurelsEntered = 0x0;
+
+        // Free from Base Desires
+        public const uint GC2_FreefromBaseDesiresEntered = 0x0;
+
+        // Abasement from Above
+        public const uint GC2_AbasementfromAbovePoisonPanelFloorTrap = 0x0;
+        public const uint GC2_AbasementfromAboveParalysisPanelFloorTrap = 0x0;
+        public const uint GC2_AbasementfromAboveCursePanelFloorTrap = 0x0;
+        public const uint GC2_AbasementfromAboveEntered = 0x0;
+
+        // The Convent Room
+        public const uint GC2_TheConventRoomEntered = 0x0;
+
+        // The Hall of Broken Vows
+        public const uint GC2_TheHallofBrokenVowsAcaciaSigilUnlock = 0x0;
+        public const uint GC2_TheHallofBrokenVowsFlameDragonBossDefeat = 0x0;
+        public const uint GC2_TheHallofBrokenVowsEntered = 0x0;
+
+        // Light and Dark Wage War
+        public const uint GC2_LightandDarkWageWarEntered = 0x0;
+
+        // An Arrow into Darkness
+        public const uint GC2_AnArrowintoDarknessChest = 0x0;
+        public const uint GC2_AnArrowintoDarknessEntered = 0x0;
+
+        // He Screams for Mercy
+        public const uint GC2_HeScreamsforMercyTerraThrustFloorTrap = 0x0;
+        public const uint GC2_HeScreamsforMercyCurePanelFloorTrap = 0x0;
+        public const uint GC2_HeScreamsforMercyEntered = 0x0;
+
+        // The Acolyte's Weakness
+        public const uint GC2_TheAcolytesWeaknessEntered = 0x0;
+
+        // Maelstrom of Malice
+        public const uint GC2_MaelstromOfMaliceLichLordBossDefeat = 0x0;
+        public const uint GC2_MaelstromOfMaliceEntered = 0x0;
+
+        // The Melodics of Madness
+        public const uint GC2_TheMelodicsOfMadnessPalmSigilUnlock = 0x0;
+        public const uint GC2_TheMelodicsOfMadnessEntered = 0x0;
+
+        // What Ails You, Kills You
+        public const uint GC2_WhatAilsYouKillsYouNightmareBossDefeat = 0x0;
+        public const uint GC2_WhatAilsYouKillsYouEntered = 0x0;
+
+        // The Wine-Lecher's Fall
+        public const uint GC3_TheWineLechersFallEntered = 0x0;
+
+        // The Heretics' Story (Lower)
+        public const uint GC3_TheHereticsStoryLowerCallaSigilUnlock = 0x0;
+        public const uint GC3_TheHereticsStoryLowerEntered = 0x0;
+
+        // The Heretics' Story (Upper)
+        public const uint GC3_TheHereticsStoryUpperEntered = 0x0;
+
+        // Despair of the Fallen
+        public const uint GC3_DespairOfTheFallenEntered = 0x0;
+
+        // Hopes of the Idealist
+        public const uint GC3_HopesOfTheIdealistDaoBossDefeat = 0x0;
+        public const uint GC3_HopesOfTheIdealistEntered = 0x0;
+
+        // Where the Soul Rots
+        public const uint GC3_WhereTheSoulRotsEntered = 0x0;
+
+        // The Atrium
+        public const uint GC4_TheAtriumEntered = 0x0;
+
+        // Dome
+        public const uint GCD_DomeGuildesternBossDefeat = 0x0;
+        public const uint GCD_DomeEntered = 0x0;
+
+        // Paling
+        public const uint GCD_PalingGuildesternApotheosBossDefeat = 0x0;
+        public const uint GCD_PalingEntered = 0x0;
+
+        // Stair to the Sinners
+        public const uint FP_StairToTheSinnersEntered = 0x0;
+
+        // Slaughter of the Innocent
+        public const uint FP_SlaughterOfTheInnocentDamascusGolemBossDefeat = 0x0;
+        public const uint FP_SlaughterOfTheInnocentEntered = 0x0;
+
+        // The Oracle Sins No More
+        public const uint FP_TheOracleSinsNoMoreCursePanelFloorTrap = 0x0;
+        public const uint FP_TheOracleSinsNoMoreHolyLightFloorTrap = 0x0;
+        public const uint FP_TheOracleSinsNoMoreEntered = 0x0;
+
+        // The Fallen Knight
+        public const uint FP_TheFallenKnightChest = 0x0;
+        public const uint FP_TheFallenKnightEntered = 0x0;
+
+        // Awaiting Retribution
+        public const uint FP_AwaitingRetributionChest = 0x0;
+        public const uint FP_AwaitingRetributionEntered = 0x0;
+
+        // Shelter From the Quake
+        public const uint ESC_ShelterFromTheQuakeGoldKeyUnlock = 0x0;
+        public const uint ESC_ShelterFromTheQuakeSilverKeyUnlock = 0x0;
+        public const uint ESC_ShelterFromTheQuakeEntered = 0x0;
+
+        // Buried Alive
+        public const uint ESC_BuriedAliveChest = 0x0;
+        public const uint ESC_BuriedAliveEntered = 0x0;
+
+        // Movement of Fear
+        public const uint ESC_MovementOfFearEntered = 0x0;
+
+        // Facing Your Illusions
+        public const uint ESC_FacingYourIllusionsDiabolosFloorTrap = 0x0;
+        public const uint ESC_FacingYourIllusionsEntered = 0x0;
+
+        // The Darkness Drinks
+        public const uint ESC_TheDarknessDrinksEntered = 0x0;
+
+        // Fear and Loathing
+        public const uint ESC_FearAndLoathingIfritBossDefeat = 0x0;
+        public const uint ESC_FearAndLoathingMaridBossDefeat = 0x0;
+        public const uint ESC_FearAndLoathingEntered = 0x0;
+
+        // Blood and The Beast
+        public const uint ESC_BloodAndTheBeastPoisonPanelFloorTrap = 0x0;
+        public const uint ESC_BloodAndTheBeastEntered = 0x0;
+
+        // Where Body and Soul Part
+        public const uint ESC_WhereBodyAndSoulPartChest = 0x0;
+        public const uint ESC_WhereBodyAndSoulPartEntered = 0x0;
+
+        // Students of Death
+        public const uint CWW_StudentsOfDeathCrimsonKeyUnlock = 0x0;
+        public const uint CWW_StudentsOfDeathEntered = 0x0;
+
+        // The Gabled Hall
+        public const uint CWW_TheGabledHallEntered = 0x0;
+
+        // Where the Master Fell
+        public const uint CWW_WhereTheMasterFellEntered = 0x0;
+
+        // In Wait of the Foe
+        public const uint CWS_InWaitOfTheFoeEntered = 0x0;
+
+        // Swords for the Land
+        public const uint CWS_SwordsForTheLandEntered = 0x0;
+
+        // The Weeping Boy
+        public const uint CWS_TheWeepingBoyEntered = 0x0;
+
+        // Where Weary Riders Rest
+        public const uint CWS_WhereWearyRidersRestEntered = 0x0;
+
+        // The Boy's Training Room
+        public const uint CWS_TheBoysTrainingRoomEntered = 0x0;
+
+        // From Squire to Knight
+        public const uint CWN_FromSquiretoKnightIronKeyUnlock = 0x0;
+        public const uint CWN_FromSquiretoKnightEntered = 0x0;
+
+        // Traces of Invasion Past
+        public const uint CWN_TracesofInvasionPastEntered = 0x0;
+
+        // Be for Battle Prepared
+        public const uint CWN_BeforBattlePreparedEntered = 0x0;
+
+        // Destruction and Rebirth
+        public const uint CWN_DestructionandRebirthEntered = 0x0;
+
+        // From Boy to Hero
+        public const uint CWN_FromBoytoHeroClematisSigilUnlock = 0x0;
+        public const uint CWN_FromBoytoHeroEntered = 0x0;
+
+        // A Welcome Invasion
+        public const uint CWN_AWelcomeInvasionEntered = 0x0;
+
+        // Train and Grow Strong
+        public const uint CWE_TrainandGrowStrongRoodInverseUnlock = 0x0;
+        public const uint CWE_TrainandGrowStrongEntered = 0x0;
+
+        // The Squire's Gathering
+        public const uint CWE_TheSquiresGatheringEntered = 0x0;
+
+        // The Invaders are Found
+        public const uint CWE_TheInvadersareFoundEntered = 0x0;
+
+        // The Dream Weavers
+        public const uint CWE_TheDreamWeaversEntered = 0x0;
+
+        // The Cornered Savage
+        public const uint CWE_TheCorneredSavageEntered = 0x0;
+
+        // Hall of Sworn Revenge
+        public const uint CAT_HallofSwornRevengeHealPanelFloorTrap = 0x0;
+        public const uint CAT_HallofSwornRevengeCurePanelFloorTrap = 0x0;
+        public const uint CAT_HallofSwornRevengeEntered = 0x0;
+
+        // The Last Blessing
+        public const uint CAT_TheLastBlessingEntered = 0x0;
+
+        // The Weeping Corridor
+        public const uint CAT_TheWeepingCorridorFreezeFloorTrap = 0x0;
+        public const uint CAT_TheWeepingCorridorEntered = 0x0;
+
+        // Persecution Hall
+        public const uint CAT_PersecutionHallEntered = 0x0;
+
+        // Rodent-Ridden Chamber
+        public const uint CAT_RodentRiddenChamberChest = 0x0;
+        public const uint CAT_RodentRiddenChamberEntered = 0x0;
+
+        // Shrine to the Martyrs
+        public const uint CAT_ShrinetotheMartyrsEntered = 0x0;
+
+        // The Lamenting Mother (West)
+        public const uint CAT_TheLamentingMotherWestGhostBossDefeat = 0x0;
+        public const uint CAT_TheLamentingMotherWestEntered = 0x0;
+
+        // The Lamenting Mother (East)
+        public const uint CAT_TheLamentingMotherEastChest = 0x0;
+        public const uint CAT_TheLamentingMotherEastEntered = 0x0;
+
+        // Hall of Dying Hope
+        public const uint CAT_HallofDyingHopeEntered = 0x0;
+
+        // Bandits' Hideout
+        public const uint CAT_BanditsHideoutChest = 0x0;
+        public const uint CAT_BanditsHideoutEntered = 0x0;
+
+        // The Bloody Hallway
+        public const uint CAT_TheBloodyHallwayEntered = 0x0;
+
+        // Faith Overcame Fear
+        public const uint CAT_FaithOvercameFearEntered = 0x0;
+
+        // The Withered Spring
+        public const uint CAT_TheWitheredSpringLilySigilUnlock = 0x0;
+        public const uint CAT_TheWitheredSpringEntered = 0x0;
+
+        // Workshop Work of Art
+        public const uint CAT_WorkshopWorkofArtEntered = 0x0;
+
+        // Repent O ye Sinners
+        public const uint CAT_RepentOyeSinnersEntered = 0x0;
+
+        // The Reapers Victims
+        public const uint CAT_TheReapersVictimsEntered = 0x0;
+
+        // The Last Stab of Hope
+        public const uint CAT_TheLastStabofHopeCurePanelFloorTrap = 0x0;
+        public const uint CAT_TheLastStabofHopeEntered = 0x0;
+
+        // Hallway of Heroes
+        public const uint CAT_HallwayofHeroesEntered = 0x0;
+
+        // The Beasts Domain
+        public const uint CAT_TheBeastsDomainLizardmanBossDefeat = 0x0;
+        public const uint CAT_TheBeastsDomainEntered = 0x0;
+
+        // Dreamers Entrance
+        public const uint AM1_DreamersEntranceEntered = 0x0;
+
+        // The Crossing
+        public const uint AM1_TheCrossingEntered = 0x0;
+
+        // Miners Resting Hall
+        public const uint AM1_MinersRestingHallChest = 0x0;
+        public const uint AM1_MinersRestingHallEntered = 0x0;
+
+        // Conflict and Accord
+        public const uint AM1_ConflictandAccordEntered = 0x0;
+
+        // The End of the Line
+        public const uint AM1_TheEndoftheLineEntered = 0x0;
+
+        // The Earthquakes Mark
+        public const uint AM1_TheEarthquakesMarkHyacinthSigilUnlock = 0x0;
+        public const uint AM1_TheEarthquakesMarkEruptionFloorTrap = 0x0;
+        public const uint AM1_TheEarthquakesMarkEntered = 0x0;
+
+        // Coal Mine Storage
+        public const uint AM1_CoalMineStorageChest = 0x0;
+        public const uint AM1_CoalMineStoragePoisonPanelFloorTrap = 0x0;
+        public const uint AM1_CoalMineStorageTrapClearFloorTrap = 0x0;
+        public const uint AM1_CoalMineStorageEntered = 0x0;
+
+        // The Suicide King
+        public const uint AM1_TheSuicideKingEntered = 0x0;
+
+        // The Battle's Beginning
+        public const uint AM1_TheBattlesBeginningWyvernBossDefeat = 0x0;
+        public const uint AM1_TheBattlesBeginningEntered = 0x0;
+
+        // What Lies Ahead?
+        public const uint AM1_WhatLiesAheadHealPanelFloorTrap = 0x0;
+        public const uint AM1_WhatLiesAheadEntered = 0x0;
+
+        // The Fruits of Friendship
+        public const uint AM1_TheFruitsofFriendshipEntered = 0x0;
+
+        // The Passion of Lovers
+        public const uint AM1_ThePassionofLoversHyacinthSigilUnlock = 0x0;
+        public const uint AM1_ThePassionofLoversEntered = 0x0;
+
+        // The Hall of Hope
+        public const uint AM1_TheHallofHopeEntered = 0x0;
+
+        // The Dark Tunnel
+        public const uint AM1_TheDarkTunnelEntered = 0x0;
+
+        // Everwant Passage
+        public const uint AM1_EverwantPassageSilverKeyUnlock = 0x0;
+        public const uint AM1_EverwantPassageEntered = 0x0;
+
+        // Mining Regrets
+        public const uint AM1_MiningRegretsChest = 0x0;
+        public const uint AM1_MiningRegretsDeathVaporFloorTrap = 0x0;
+        public const uint AM1_MiningRegretsEntered = 0x0;
+
+        // Rust in Peace
+        public const uint AM1_RustinPeaceChest = 0x0;
+        public const uint AM1_RustinPeaceEntered = 0x0;
+
+        // The Smeltry
+        public const uint AM1_TheSmeltryFireElementalBossDefeat = 0x0;
+        public const uint AM1_TheSmeltryEntered = 0x0;
+
+        // Clash of Hyaenas
+        public const uint AM1_ClashOfHyaenasEntered = 0x0;
+
+        // Greed Knows No Bounds
+        public const uint AM1_GreedKnowsNoBoundsEntered = 0x0;
+
+        // Live Long and Prosper
+        public const uint AM1_LiveLongAndProsperFernSigilUnlock = 0x0;
+        public const uint AM1_LiveLongAndProsperEntered = 0x0;
+
+        // Pray to the Mineral Gods
+        public const uint AM1_PrayToTheMineralGodsFernSigilUnlock = 0x0;
+        public const uint AM1_PrayToTheMineralGodsEntered = 0x0;
+
+        // Traitor's Parting
+        public const uint AM1_TraitorsPartingOgreBossDefeat = 0x0;
+        public const uint AM1_TraitorsPartingEntered = 0x0;
+
+        // Escapeway
+        public const uint AM1_EscapewayEntered = 0x0;
+
+        // Subtellurian Horrors
+        public const uint AM2_SubtellurianHorrorsEntered = 0x0;
+
+        // Dining in Darkness
+        public const uint AM2_DiningInDarknessSkyDragonBossDefeat = 0x0;
+        public const uint AM2_DiningInDarknessEntered = 0x0;
+
+        // Bandit's Hollow
+        public const uint AM2_BanditsHollowIronKeyUnlock = 0x0;
+        public const uint AM2_BanditsHollowEntered = 0x0;
+
+        // Delusions of Happiness
+        public const uint AM2_DelusionsOfHappinessChest = 0x0;
+        public const uint AM2_DelusionsOfHappinessEntered = 0x0;
+
+        // Work, Then Die
+        public const uint AM2_WorkThenDieEntered = 0x0;
+
+        // Rock Bottom
+        public const uint AM2_RockBottomEntered = 0x0;
+
+        // The Lunatic Veins
+        public const uint AM2_TheLunaticVeinsEntered = 0x0;
+
+        // Tomb of the Reborn
+        public const uint AM2_TombOfTheRebornEarthElementalBossDefeat = 0x0;
+        public const uint AM2_TombOfTheRebornEntered = 0x0;
+
+        // Fool's Gold, Fool's Loss
+        public const uint AM2_FoolsGoldFoolsLossParalysisPanelFloorTrap = 0x0;
+        public const uint AM2_FoolsGoldFoolsLossEntered = 0x0;
+
+        // Kilroy Was Here
+        public const uint AM2_KilroyWasHereEntered = 0x0;
+
+        // A Wager of Noble Gold
+        public const uint AM2_AWagerOfNobleGoldEntered = 0x0;
+
+        // Lambs to the Slaughter
+        public const uint AM2_LambsToTheSlaughterHealPanelFloorTrap = 0x0;
+        public const uint AM2_LambsToTheSlaughterEntered = 0x0;
+
+        // The Ore of Legend
+        public const uint AM2_TheOreOfLegendEntered = 0x0;
+
+        // Suicidal Desires
+        public const uint AM2_SuicidalDesiresChest = 0x0;
+        public const uint AM2_SuicidalDesiresDeathVaporFloorTrap = 0x0;
+        public const uint AM2_SuicidalDesiresParalysisPanelFloorTrap = 0x0;
+        public const uint AM2_SuicidalDesiresHolyLightFloorTrap = 0x0;
+        public const uint AM2_SuicidalDesiresTeraThrustFloorTrap = 0x0;
+        public const uint AM2_SuicidalDesiresGustFloorTrap = 0x0;
+        public const uint AM2_SuicidalDesiresFreezeFloorTrap = 0x0;
+        public const uint AM2_SuicidalDesiresEruptionFloorTrap = 0x0;
+        public const uint AM2_SuicidalDesiresTrapClearFloorTrap = 0x0;
+        public const uint AM2_SuicidalDesiresEntered = 0x0;
+
+        // Cry of the Beast
+        public const uint AM2_CryOfTheBeastEntered = 0x0;
+
+        // The Fallen Bricklayer
+        public const uint AM2_TheFallenBricklayerEntered = 0x0;
+
+        // Hall of Contemplation
+        public const uint AM2_HallOfContemplationEruptionFloorTrap = 0x0;
+        public const uint AM2_HallOfContemplationEntered = 0x0;
+
+        // Hall of the Empty Sconce
+        public const uint AM2_HallOfTheEmptySconceEntered = 0x0;
+
+        // Acolyte's Burial Vault
+        public const uint AM2_AcolytesBurialVaultChest = 0x0;
+        public const uint AM2_AcolytesBurialVaultEntered = 0x0;
+
+        // The Abandoned Catspaw
+        public const uint AM2_TheAbandonedCatspawEntered = 0x0;
+
+        // Crossing of Blood
+        public const uint AM2_CrossingOfBloodHolyLightFloorTrap = 0x0;
+        public const uint AM2_CrossingOfBloodDiabolosFloorTrap = 0x0;
+        public const uint AM2_CrossingOfBloodEntered = 0x0;
+
+        // Senses Lost
+        public const uint AM2_SensesLostEruptionFloorTrap = 0x0;
+        public const uint AM2_SensesLostPoisonPanelFloorTrap = 0x0;
+        public const uint AM2_SensesLostEntered = 0x0;
+
+        // Desire's Passage
+        public const uint AM2_DesiresPassageCurePanelFloorTrap = 0x0;
+        public const uint AM2_DesiresPassageEntered = 0x0;
+
+        // Way of Lost Children
+        public const uint AM2_WayOfLostChildrenEntered = 0x0;
+
+        // Hidden Resources
+        public const uint AM2_HiddenResourcesChest = 0x0;
+        public const uint AM2_HiddenResourcesEntered = 0x0;
+
+        // Treaty Room
+        public const uint AM2_TreatyRoomEntered = 0x0;
+
+        // The Miner's End
+        public const uint AM2_TheMinersEndAirElementalBossDefeat = 0x0;
+        public const uint AM2_TheMinersEndEntered = 0x0;
+
+        // Gambler's Passage
+        public const uint AM2_GamblersPassageEntered = 0x0;
+
+        // Revelation Shaft
+        public const uint AM2_RevelationShaftEntered = 0x0;
+
+        // Corridor of Shade
+        public const uint AM2_CorridorOfShadeEntered = 0x0;
+
+        // Credits
+        public const uint GE_Credits = 0x0;
     }
 }
