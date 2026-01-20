@@ -204,6 +204,132 @@ namespace VagrantStoryArchipelago
         public const uint InventoryItemSlot63 = 0x00061060;
         public const uint InventoryItemSlot64 = 0x00061064;
 
+        // Weapon Slots
+
+        public const uint InventoryWeaponSlot1_BladeSlot = 0x00060169;
+        public const uint InventoryWeaponSlot1_GripSlot = 0x0006016a;
+        public const uint InventoryWeaponSlot1_Equipped = 0x0006016b;
+        public const uint InventoryWeaponSlot1_Gem1 = 0x0006016c;
+        public const uint InventoryWeaponSlot1_Gem2 = 0x0006106d;
+        public const uint InventoryWeaponSlot1_Gem3 = 0x0006106e;
+        public const uint InventoryWeaponSlot1_FirstNameStart = 0x00061070;
+        public const uint InventoryWeaponSlot1_LastNameStart = 0x00061084;
+
+        public const uint InventoryWeaponSlot2_BladeSlot = 0x00060169;
+        public const uint InventoryWeaponSlot2_GripSlot = 0x0006016a;
+        public const uint InventoryWeaponSlot2_Equipped = 0x0006016b;
+        public const uint InventoryWeaponSlot2_Gem1 = 0x0006016c;
+        public const uint InventoryWeaponSlot2_Gem2 = 0x0006016d;
+        public const uint InventoryWeaponSlot2_Gem3 = 0x0006016e;
+        public const uint InventoryWeaponSlot2_FirstNameStart = 0x00060190;
+        public const uint InventoryWeaponSlot2_LastNameStart = 0x000601a4;
+
+        public const uint InventoryWeaponSlot3_BladeSlot = 0x000601a9;
+        public const uint InventoryWeaponSlot3_GripSlot = 0x000601aa;
+        public const uint InventoryWeaponSlot3_Equipped = 0x000601ab;
+        public const uint InventoryWeaponSlot3_Gem1 = 0x000601ac;
+        public const uint InventoryWeaponSlot3_Gem2 = 0x000601ad;
+        public const uint InventoryWeaponSlot3_Gem3 = 0x000601ae;
+        public const uint InventoryWeaponSlot3_FirstNameStart = 0x000601b0;
+        public const uint InventoryWeaponSlot3_LastNameStart = 0x000601c4;
+
+        public const uint InventoryWeaponSlot4_BladeSlot = 0x000601c9;
+        public const uint InventoryWeaponSlot4_GripSlot = 0x000601ca;
+        public const uint InventoryWeaponSlot4_Equipped = 0x000601cb;
+        public const uint InventoryWeaponSlot4_Gem1 = 0x000601cc;
+        public const uint InventoryWeaponSlot4_Gem2 = 0x000601cd;
+        public const uint InventoryWeaponSlot4_Gem3 = 0x000601ce;
+        public const uint InventoryWeaponSlot4_FirstNameStart = 0x000601d0;
+        public const uint InventoryWeaponSlot4_LastNameStart = 0x000601e4;
+
+        public const uint InventoryWeaponSlot5_BladeSlot = 0x000601e9;
+        public const uint InventoryWeaponSlot5_GripSlot = 0x000601ea;
+        public const uint InventoryWeaponSlot5_Equipped = 0x000601eb;
+        public const uint InventoryWeaponSlot5_Gem1 = 0x000601ec;
+        public const uint InventoryWeaponSlot5_Gem2 = 0x000601ed;
+        public const uint InventoryWeaponSlot5_Gem3 = 0x000601ee;
+        public const uint InventoryWeaponSlot5_FirstNameStart = 0x000601f0;
+        public const uint InventoryWeaponSlot5_LastNameStart = 0x00060204;
+
+        public const uint InventoryWeaponSlot6_BladeSlot = 0x00060209;
+        public const uint InventoryWeaponSlot6_GripSlot = 0x0006020a;
+        public const uint InventoryWeaponSlot6_Equipped = 0x0006020b;
+        public const uint InventoryWeaponSlot6_Gem1 = 0x0006020c;
+        public const uint InventoryWeaponSlot6_Gem2 = 0x0006020d;
+        public const uint InventoryWeaponSlot6_Gem3 = 0x0006020e;
+        public const uint InventoryWeaponSlot6_FirstNameStart = 0x00060210;
+        public const uint InventoryWeaponSlot6_LastNameStart = 0x00060224;
+
+        public const uint InventoryWeaponSlot7_BladeSlot = 0x00060229;
+        public const uint InventoryWeaponSlot7_GripSlot = 0x0006022a;
+        public const uint InventoryWeaponSlot7_Equipped = 0x0006022b;
+        public const uint InventoryWeaponSlot7_Gem1 = 0x0006022c;
+        public const uint InventoryWeaponSlot7_Gem2 = 0x0006022d;
+        public const uint InventoryWeaponSlot7_Gem3 = 0x0006022e;
+        public const uint InventoryWeaponSlot7_FirstNameStart = 0x00060230;
+        public const uint InventoryWeaponSlot7_LastNameStart = 0x00060244;
+
+        public const uint InventoryWeaponSlot8_BladeSlot = 0x00060249;
+        public const uint InventoryWeaponSlot8_GripSlot = 0x0006024a;
+        public const uint InventoryWeaponSlot8_Equipped = 0x0006024b;
+        public const uint InventoryWeaponSlot8_Gem1 = 0x0006024c;
+        public const uint InventoryWeaponSlot8_Gem2 = 0x0006024d;
+        public const uint InventoryWeaponSlot8_Gem3 = 0x0006024e;
+        public const uint InventoryWeaponSlot8_FirstNameStart = 0x00060250;
+        public const uint InventoryWeaponSlot8_LastNameStart = 0x00060264;
+
+        // Gem Inventory Slots
+
+        public const uint InventoryGemSlot01 = 0x00060a42;
+        public const uint InventoryGemSlot02 = 0x00060a5e;
+        public const uint InventoryGemSlot03 = 0x00060a7a;
+        public const uint InventoryGemSlot04 = 0x00060a96;
+        public const uint InventoryGemSlot05 = 0x00060ab2;
+        public const uint InventoryGemSlot06 = 0x00060ace;
+        public const uint InventoryGemSlot07 = 0x00060aea;
+        public const uint InventoryGemSlot08 = 0x00060b06;
+        public const uint InventoryGemSlot09 = 0x00060b22;
+        public const uint InventoryGemSlot10 = 0x00060b3e;
+        public const uint InventoryGemSlot11 = 0x00060b5a;
+        public const uint InventoryGemSlot12 = 0x00060b76;
+        public const uint InventoryGemSlot13 = 0x00060b92;
+        public const uint InventoryGemSlot14 = 0x00060bae;
+        public const uint InventoryGemSlot15 = 0x00060bca;
+        public const uint InventoryGemSlot16 = 0x00060be6;
+        public const uint InventoryGemSlot17 = 0x00060c02;
+        public const uint InventoryGemSlot18 = 0x00060c1e;
+        public const uint InventoryGemSlot19 = 0x00060c3a;
+        public const uint InventoryGemSlot20 = 0x00060c56;
+        public const uint InventoryGemSlot21 = 0x00060c72;
+        public const uint InventoryGemSlot22 = 0x00060c8e;
+        public const uint InventoryGemSlot23 = 0x00060caa;
+        public const uint InventoryGemSlot24 = 0x00060cc6;
+        public const uint InventoryGemSlot25 = 0x00060ce2;
+        public const uint InventoryGemSlot26 = 0x00060cfe;
+        public const uint InventoryGemSlot27 = 0x00060d1a;
+        public const uint InventoryGemSlot28 = 0x00060d36;
+        public const uint InventoryGemSlot29 = 0x00060d52;
+        public const uint InventoryGemSlot30 = 0x00060d6e;
+        public const uint InventoryGemSlot31 = 0x00060d8a;
+        public const uint InventoryGemSlot32 = 0x00060da6;
+        public const uint InventoryGemSlot33 = 0x00060dc2;
+        public const uint InventoryGemSlot34 = 0x00060dde;
+        public const uint InventoryGemSlot35 = 0x00060dfa;
+        public const uint InventoryGemSlot36 = 0x00060e16;
+        public const uint InventoryGemSlot37 = 0x00060e32;
+        public const uint InventoryGemSlot38 = 0x00060e4e;
+        public const uint InventoryGemSlot39 = 0x00060e6a;
+        public const uint InventoryGemSlot40 = 0x00060e86;
+        public const uint InventoryGemSlot41 = 0x00060ea2;
+        public const uint InventoryGemSlot42 = 0x00060ebe;
+        public const uint InventoryGemSlot43 = 0x00060eda;
+        public const uint InventoryGemSlot44 = 0x00060ef6;
+        public const uint InventoryGemSlot45 = 0x00060f12;
+        public const uint InventoryGemSlot46 = 0x00060f2e;
+        public const uint InventoryGemSlot47 = 0x00060f4a;
+        public const uint InventoryGemSlot48 = 0x00060f66;
+
+
         // Prologue
         public const uint PR_PrologueInjuredWyvernBossDefeat = 0x0;
 

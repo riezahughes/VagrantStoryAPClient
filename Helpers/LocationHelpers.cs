@@ -15,8 +15,6 @@ namespace Helpers
         public static List<ILocation> BuildLocationList(Dictionary<string, object> options)
         {
 
-
-
             int base_id = 99350000;
             int region_offset = 1000;
 
@@ -823,12 +821,13 @@ namespace Helpers
                         location_index++;
                     }
                 }
+                regional_index++;
             }
 #if DEBUG
-            foreach (var loc in locations)
-            {
-                Console.WriteLine($"{loc.Name}, {loc.Id}");
-            }
+            //foreach (var loc in locations)
+            //{
+            //    Console.WriteLine($"{loc.Name}, {loc.Id}");
+            //}
 #endif
             return locations;
         }

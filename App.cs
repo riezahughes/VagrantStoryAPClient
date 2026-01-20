@@ -1,20 +1,20 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Text;
 using Archipelago.Core;
 using Archipelago.Core.GameClients;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
-using VagrantStoryArchipelago.Helpers;
-using Helpers;
-using Spectre.Console;
-using System.Text;
-using Microsoft.Extensions.Configuration;
 using Archipelago.Core.Util.Overlay;
 using Archipelago.MultiClient.Net.Models;
-using VagrantStoryArchipelago;
+using Helpers;
+using Microsoft.Extensions.Configuration;
 
-internal class App
+public class App
 {
+
+    public static List<ItemReceivedEventArgs> delayedItems = new List<ItemReceivedEventArgs>();
+
     private static async Task Main(string[] args)
     {
         Console.OutputEncoding = Encoding.UTF8;
@@ -234,7 +234,7 @@ internal class App
             catch (Exception ex)
             {
                 Console.WriteLine($"An unexpected error occurred while monitoring locations: {ex.Message}");
-                Console.WriteLine(ex); 
+                Console.WriteLine(ex);
             }
 
             while (!_cancellationTokenSource.Token.IsCancellationRequested)
