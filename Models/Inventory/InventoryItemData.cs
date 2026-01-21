@@ -1,5 +1,4 @@
-﻿
-namespace VagrantStoryArchipelago.Models
+﻿namespace VagrantStoryArchipelago.Models.Inventory
 {
     public class InventoryItemData
     {
@@ -21,10 +20,10 @@ namespace VagrantStoryArchipelago.Models
         public uint UseFullAddress()
         {
             byte[] bytes = new byte[4]; // ulong is 8 bytes
-            bytes[0] = this.ItemSlot;
-            bytes[1] = this.Quantity;
-            bytes[2] = this.FreeSlot;
-            bytes[3] = this.ItemID;
+            bytes[0] = ItemSlot;
+            bytes[1] = Quantity;
+            bytes[2] = FreeSlot;
+            bytes[3] = ItemID;
             Array.Reverse(bytes);
 
             return BitConverter.ToUInt32(bytes, 0);

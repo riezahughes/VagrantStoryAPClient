@@ -5,7 +5,6 @@ using Kokuban;
 using Serilog;
 using VagrantStoryArchipelago;
 using VagrantStoryArchipelago.Helpers;
-using VagrantStoryArchipelago.Models;
 
 namespace Helpers
 {
@@ -73,55 +72,22 @@ namespace Helpers
             Console.WriteLine($"ItemReceived Firing. Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");
 #endif
 
-
-            // Specifically only for inventory items. Does not include weapons/armour/etc
-
-            var listOfSlots = ItemHelpers.GetInventoryItemSlots();
-
-            Console.WriteLine($"{listOfSlots.Count} slots found");
-
-            if (listOfSlots.Count >= 64)
-            {
-                Console.WriteLine($"Inventory full. Delaying {args.Item.Name}");
-                App.delayedItems.Add(args);
-                return;
-            }
-
-            InventoryItemData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.Name == args.Item.Name, null);
-
-
-            InventoryItemData itemData;
-
-            if (matchingItem is not null && matchingItem.Name != "Unknown Item")
-            {
-                Console.WriteLine($"{matchingItem.Name} has been found: Adding 5 to the quantity in slot {matchingItem.ItemSlot}");
-                itemData = new InventoryItemData(matchingItem.Name, matchingItem.ItemSlot, (byte)(matchingItem.Quantity + 0x05), matchingItem.FreeSlot, matchingItem.ItemID);
-            }
-            else
-            {
-                Console.WriteLine($"No Item has been found: Adding 5 of the item to the quantity in slot {listOfSlots.Count + 1}");
-                byte itemID = ItemHelpers.ItemReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
-                itemData = new InventoryItemData(args.Item.Name, (byte)(listOfSlots.Count + 1), 0x05, 0x01, itemID);
-            }
-
-
-
             switch (args.Item)
             {
-                case var x when ItemHelpers.ItemReference.Any(itm => itm.Value == x.Name) && matchingItem is null: ItemHelpers.SetNextFreeInventorySlot(itemData); break;
-                case var x when ItemHelpers.ItemReference.Any(itm => itm.Value == x.Name) && matchingItem is not null: ItemHelpers.SetInventorySlot(itemData, matchingItem.ItemSlot); break;
-                    //case var x when x.Name.ContainsAny("Ammo:"): ItemHandlers.ReceiveCountType(x, breakAmmoLimitOption); break;
-                    //case var x when x.Name.ContainsAny("Charge:"): ItemHandlers.ReceiveChargeType(x, breakChargeLimitOption); break;
-                    //case var x when ItemHandlers.ListOfWeaponStrings.Any(wpn => wpn == x.Name) || ItemHandlers.ListOfShieldStrings.Any(wpn => wpn == x.Name): ItemHandlers.ReceiveEquipment(x); break;
-                    //case var x when x.Name.ContainsAny("Life Bottle"): ItemHandlers.ReceiveLifeBottle(); break;
-                    //case var x when ItemHandlers.ListOfKeyItemStrings.Any(key => key == x.Name): ItemHandlers.ReceiveKeyItem(x); break;
-                    //case var x when x.Name.ContainsAny("Gold Coins"): ItemHandlers.ReceiveGold(x); break;
-                    //case var x when x.Name.ContainsAny("Health", "Energy:"): ItemHandlers.ReceiveEnergy(x); break;
-                    //case var x when x.Name.Contains("Trap: Heavy Dan"): TrapHandlers.HeavyDanTrap(); break;
-                    //case var x when x.Name.Contains("Trap: Light Dan"): TrapHandlers.LightDanTrap(); break;
-                    //case var x when x.Name.Contains("Trap: Lag"): TrapHandlers.RunLagTrap(); break;
-                    //case null: Console.WriteLine("Received an item with null data. Skipping."); break;
-                    //default: Console.WriteLine($"Item not recognised. ({args.Item.Name}) Skipping"); break;
+                case var x when ItemHelpers.ItemReference.Any(itm => itm.Value == x.Name): ItemHelpers.handleInventoryItem(args); break;
+                case var x when ItemHelpers.GemReference.Any(itm => itm.Value == x.Name): ItemHelpers.handleInventoryGem(args); break;
+                //case var x when x.Name.ContainsAny("Ammo:"): ItemHandlers.ReceiveCountType(x, breakAmmoLimitOption); break;
+                //case var x when x.Name.ContainsAny("Charge:"): ItemHandlers.ReceiveChargeType(x, breakChargeLimitOption); break;
+                //case var x when ItemHandlers.ListOfWeaponStrings.Any(wpn => wpn == x.Name) || ItemHandlers.ListOfShieldStrings.Any(wpn => wpn == x.Name): ItemHandlers.ReceiveEquipment(x); break;
+                //case var x when x.Name.ContainsAny("Life Bottle"): ItemHandlers.ReceiveLifeBottle(); break;
+                //case var x when ItemHandlers.ListOfKeyItemStrings.Any(key => key == x.Name): ItemHandlers.ReceiveKeyItem(x); break;
+                //case var x when x.Name.ContainsAny("Gold Coins"): ItemHandlers.ReceiveGold(x); break;
+                //case var x when x.Name.ContainsAny("Health", "Energy:"): ItemHandlers.ReceiveEnergy(x); break;
+                //case var x when x.Name.Contains("Trap: Heavy Dan"): TrapHandlers.HeavyDanTrap(); break;
+                //case var x when x.Name.Contains("Trap: Light Dan"): TrapHandlers.LightDanTrap(); break;
+                //case var x when x.Name.Contains("Trap: Lag"): TrapHandlers.RunLagTrap(); break;
+                //case null: Console.WriteLine("Received an item with null data. Skipping."); break;
+                default: Console.WriteLine($"Item not recognised. ({args.Item.Name}) Skipping"); break;
             };
 
             //PlayerStateHelpers.UpdatePlayerState(client, false);

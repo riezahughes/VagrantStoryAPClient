@@ -1,5 +1,6 @@
-﻿using Archipelago.Core.Util;
-using VagrantStoryArchipelago.Models;
+﻿using Archipelago.Core.Models;
+using Archipelago.Core.Util;
+using VagrantStoryArchipelago.Models.Inventory;
 
 namespace VagrantStoryArchipelago.Helpers
 {
@@ -31,7 +32,6 @@ namespace VagrantStoryArchipelago.Helpers
                 {
                     break;
                 }
-                //Console.WriteLine($"{bytes[0]},{bytes[1]},{bytes[2]},{bytes[3]}");
                 string itemName = ItemReference.ContainsKey(bytes[3]) ? ItemReference[bytes[3]] : "Unknown Item";
                 var itemData = new InventoryItemData(itemName, bytes[0], bytes[1], bytes[2], bytes[3]);
                 itemList.Add(itemData);
@@ -40,7 +40,33 @@ namespace VagrantStoryArchipelago.Helpers
             return itemList;
         }
 
-        public static int GetNextFreeInventorySlot()
+        public static List<InventoryGemData> GetInventoryGemSlots()
+        {
+            var slots = InventoryGemSlotReference;
+            var gemList = new List<InventoryGemData>();
+
+            foreach (var slot in slots)
+            {
+                ulong slotData = Memory.ReadUInt(slot.Value + 0x04);
+
+                Console.WriteLine($"{slotData:X}");
+
+                byte[] bytes = BitConverter.GetBytes(slotData);
+                Array.Reverse(bytes);
+
+                if (bytes[7] == 0x00)
+                {
+                    break;
+                }
+                string gemName = GemReference.ContainsKey(bytes[7]) ? GemReference[bytes[7]] : "Unknown Gem";
+                var gemData = GemDatabase.Gems.FirstOrDefault(gem => gem.Key == gemName);
+                gemList.Add(gemData.Value);
+            }
+
+            return gemList;
+        }
+
+        public static int GetNextFreeInventoryItemSlot()
         {
             var listOfSlots = ItemHelpers.GetInventoryItemSlots();
 
@@ -50,8 +76,40 @@ namespace VagrantStoryArchipelago.Helpers
             }
             return listOfSlots.Count;
         }
+        public static void handleInventoryItem(ItemReceivedEventArgs args)
+        {
+            // Specifically only for inventory items. Does not include weapons/armour/etc
 
-        public static void SetInventorySlot(InventoryItemData item, int slot)
+            var listOfSlots = GetInventoryItemSlots();
+
+            Console.WriteLine($"{listOfSlots.Count} slots found");
+
+            if (listOfSlots.Count >= 64)
+            {
+                Console.WriteLine($"Inventory full. Delaying {args.Item.Name}");
+                App.delayedItems.Add(args);
+                return;
+            }
+
+            InventoryItemData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.Name == args.Item.Name, null);
+
+
+            InventoryItemData itemData;
+
+            if (matchingItem is not null && matchingItem.Name != "Unknown Item")
+            {
+                Console.WriteLine($"{matchingItem.Name} has been found: Adding 5 to the quantity in slot {matchingItem.ItemSlot}");
+                itemData = new InventoryItemData(matchingItem.Name, matchingItem.ItemSlot, (byte)(matchingItem.Quantity + 0x05), matchingItem.FreeSlot, matchingItem.ItemID);
+            }
+            else
+            {
+                Console.WriteLine($"No Item has been found: Adding 5 of the item to the quantity in slot {listOfSlots.Count + 1}");
+                byte itemID = ItemReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
+                itemData = new InventoryItemData(args.Item.Name, (byte)(listOfSlots.Count + 1), 0x05, 0x01, itemID);
+            }
+        }
+
+        public static void SetInventoryItemSlot(InventoryItemData item, int slot)
         {
             if (slot != 0xff)
             {
@@ -59,15 +117,55 @@ namespace VagrantStoryArchipelago.Helpers
             }
         }
 
-        public static void SetNextFreeInventorySlot(InventoryItemData item)
+        public static void SetNextFreeInventoryItemSlot(InventoryItemData item)
         {
-            var slot = GetNextFreeInventorySlot();
+            var slot = GetNextFreeInventoryItemSlot();
 
             if (slot != 0xff)
             {
                 Memory.Write(InventoryItemSlotReference[slot], item.UseFullAddress());
             }
 
+        }
+
+
+        public static void handleInventoryGem(ItemReceivedEventArgs args)
+        {
+            // Specifically only for gems
+
+            var listOfSlots = ItemHelpers.GetInventoryGemSlots();
+
+            Console.WriteLine($"{listOfSlots.Count} gem slots found");
+
+            if (listOfSlots.Count >= 48)
+            {
+                Console.WriteLine($"Inventory full. Delaying {args.Item.Name}");
+                App.delayedItems.Add(args);
+                return;
+            }
+
+            InventoryGemData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.GemName == args.Item.Name, null);
+
+
+            InventoryGemData itemData;
+
+            if (matchingItem is not null && matchingItem.GemName != "Unknown Gem")
+            {
+                Console.WriteLine($"{matchingItem.GemName} has been found already: Ignoring Gem {matchingItem.GemInventorySlot}");
+                return;
+            }
+            else
+            {
+                byte itemID = ItemHelpers.GemReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
+
+                InventoryGemData gem = GemDatabase.Gems[args.Item.Name];
+
+                gem.GemInventorySlot = (byte)(listOfSlots.Count);
+
+                Console.WriteLine($"No Gem has been found: Adding {gem.GemName} with Agi {gem.GemAgiStat} to slot {listOfSlots.Count}");
+
+                Memory.WriteObject<InventoryGemData>(InventoryGemSlotReference[listOfSlots.Count], GemDatabase.Gems[args.Item.Name]);
+            }
         }
 
 
@@ -138,6 +236,59 @@ namespace VagrantStoryArchipelago.Helpers
             [62] = Addresses.InventoryItemSlot63,
             [63] = Addresses.InventoryItemSlot64,
         };
+
+        public static Dictionary<int, uint> InventoryGemSlotReference = new Dictionary<int, uint>()
+        {
+            [0] = Addresses.InventoryGemSlot01,
+            [1] = Addresses.InventoryGemSlot02,
+            [2] = Addresses.InventoryGemSlot03,
+            [3] = Addresses.InventoryGemSlot04,
+            [4] = Addresses.InventoryGemSlot05,
+            [5] = Addresses.InventoryGemSlot06,
+            [6] = Addresses.InventoryGemSlot07,
+            [7] = Addresses.InventoryGemSlot08,
+            [8] = Addresses.InventoryGemSlot09,
+            [9] = Addresses.InventoryGemSlot10,
+            [10] = Addresses.InventoryGemSlot11,
+            [11] = Addresses.InventoryGemSlot12,
+            [12] = Addresses.InventoryGemSlot13,
+            [13] = Addresses.InventoryGemSlot14,
+            [14] = Addresses.InventoryGemSlot15,
+            [15] = Addresses.InventoryGemSlot16,
+            [16] = Addresses.InventoryGemSlot17,
+            [17] = Addresses.InventoryGemSlot18,
+            [18] = Addresses.InventoryGemSlot19,
+            [19] = Addresses.InventoryGemSlot20,
+            [20] = Addresses.InventoryGemSlot21,
+            [21] = Addresses.InventoryGemSlot22,
+            [22] = Addresses.InventoryGemSlot23,
+            [23] = Addresses.InventoryGemSlot24,
+            [24] = Addresses.InventoryGemSlot25,
+            [25] = Addresses.InventoryGemSlot26,
+            [26] = Addresses.InventoryGemSlot27,
+            [27] = Addresses.InventoryGemSlot28,
+            [28] = Addresses.InventoryGemSlot29,
+            [29] = Addresses.InventoryGemSlot30,
+            [30] = Addresses.InventoryGemSlot31,
+            [31] = Addresses.InventoryGemSlot32,
+            [32] = Addresses.InventoryGemSlot33,
+            [33] = Addresses.InventoryGemSlot34,
+            [34] = Addresses.InventoryGemSlot35,
+            [35] = Addresses.InventoryGemSlot36,
+            [36] = Addresses.InventoryGemSlot37,
+            [37] = Addresses.InventoryGemSlot38,
+            [38] = Addresses.InventoryGemSlot39,
+            [39] = Addresses.InventoryGemSlot40,
+            [40] = Addresses.InventoryGemSlot41,
+            [41] = Addresses.InventoryGemSlot42,
+            [42] = Addresses.InventoryGemSlot43,
+            [43] = Addresses.InventoryGemSlot44,
+            [44] = Addresses.InventoryGemSlot45,
+            [45] = Addresses.InventoryGemSlot46,
+            [46] = Addresses.InventoryGemSlot47,
+            [47] = Addresses.InventoryGemSlot48
+        };
+
 
         public static Dictionary<int, Dictionary<string, uint>> InventoryWeaponSlotReference = new Dictionary<int, Dictionary<string, uint>>()
         {
