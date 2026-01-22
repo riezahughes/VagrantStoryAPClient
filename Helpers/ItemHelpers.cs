@@ -1,5 +1,6 @@
 ﻿using Archipelago.Core.Models;
 using Archipelago.Core.Util;
+using VagrantStoryArchipelago.Helpers.EntityLists;
 using VagrantStoryArchipelago.Models.Inventory;
 
 namespace VagrantStoryArchipelago.Helpers
@@ -64,6 +65,43 @@ namespace VagrantStoryArchipelago.Helpers
             }
 
             return gemList;
+        }
+
+        public static List<InventoryArmorData> GetInventoryArmorSlots()
+        {
+            var slots = InventoryArmorSlotReference;
+            var armorList = new List<InventoryArmorData>();
+
+            foreach (var slot in slots)
+            {
+                ulong slotData = Memory.ReadUInt(slot.Value);
+
+                byte[] bytes = BitConverter.GetBytes(slotData);
+                Array.Reverse(bytes);
+
+                if (bytes[7] == 0x00)
+                {
+                    break;
+                }
+
+
+                string armorName = ArmorReference.ContainsKey(bytes[7]) ? ArmorReference[bytes[7]] : "Unknown Armor";
+
+                //ArmorType armorType = 0;
+                InventoryArmorData armorData = null;
+
+
+                //switch (armorType)
+                //{
+                //case ArmorType.HELM:
+                HelmetDatabase.Helmets.TryGetValue(armorName, out armorData);
+                armorList.Add(armorData);
+                Console.WriteLine(armorData.ArmorName);
+                //break;
+                //}
+            }
+
+            return armorList;
         }
 
         public static int GetNextFreeInventoryItemSlot()
@@ -147,8 +185,6 @@ namespace VagrantStoryArchipelago.Helpers
             InventoryGemData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.GemName == args.Item.Name, null);
 
 
-            InventoryGemData itemData;
-
             if (matchingItem is not null && matchingItem.GemName != "Unknown Gem")
             {
                 Console.WriteLine($"{matchingItem.GemName} has been found already: Ignoring Gem {matchingItem.GemInventorySlot}");
@@ -165,6 +201,47 @@ namespace VagrantStoryArchipelago.Helpers
                 Console.WriteLine($"No Gem has been found: Adding {gem.GemName} with Agi {gem.GemAgiStat} to slot {listOfSlots.Count}");
 
                 Memory.WriteObject<InventoryGemData>(InventoryGemSlotReference[listOfSlots.Count], GemDatabase.Gems[args.Item.Name]);
+            }
+        }
+
+        public static void handleInventoryArmor(ItemReceivedEventArgs args)
+        {
+            // Specifically only for gems
+
+            var listOfSlots = ItemHelpers.GetInventoryArmorSlots();
+
+            Console.WriteLine($"{listOfSlots.Count} gem slots found");
+
+            if (listOfSlots.Count >= 16)
+            {
+                Console.WriteLine($"Inventory full. Delaying {args.Item.Name}");
+                App.delayedItems.Add(args);
+                return;
+            }
+
+            InventoryArmorData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.ArmorName == args.Item.Name, null);
+
+            InventoryArmorData armorData = null;
+
+
+            if (matchingItem is not null && matchingItem.ArmorName != "Unknown Armor")
+            {
+                //Console.WriteLine($"{matchingItem.ArmorName} has been found already: Adding to Newer slot {matchingItem.ArmorInventorySlot}");
+                //armorData = new InventoryItemData(matchingItem.Name, matchingItem.ItemSlot, (byte)(matchingItem.Quantity + 0x05), matchingItem.FreeSlot, matchingItem.ItemID);
+
+            }
+            else
+            {
+                //armorID = 
+                //byte itemID = ItemHelpers.GemReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
+
+                InventoryArmorData armor = HelmetDatabase.Helmets[args.Item.Name];
+
+                //armor.GemInventorySlot = (byte)(listOfSlots.Count);
+
+                //Console.WriteLine($"No Gem has been found: Adding {gem.GemName} with Agi {gem.GemAgiStat} to slot {listOfSlots.Count}");
+
+                Memory.WriteObject<InventoryArmorData>(InventoryArmorSlotReference[listOfSlots.Count], HelmetDatabase.Helmets[args.Item.Name]);
             }
         }
 
@@ -287,6 +364,26 @@ namespace VagrantStoryArchipelago.Helpers
             [45] = Addresses.InventoryGemSlot46,
             [46] = Addresses.InventoryGemSlot47,
             [47] = Addresses.InventoryGemSlot48
+        };
+
+        public static Dictionary<int, uint> InventoryArmorSlotReference = new Dictionary<int, uint>()
+        {
+            [0] = Addresses.InventoryArmorSlot01,
+            [1] = Addresses.InventoryArmorSlot02,
+            [2] = Addresses.InventoryArmorSlot03,
+            [3] = Addresses.InventoryArmorSlot04,
+            [4] = Addresses.InventoryArmorSlot05,
+            [5] = Addresses.InventoryArmorSlot06,
+            [6] = Addresses.InventoryArmorSlot07,
+            [7] = Addresses.InventoryArmorSlot08,
+            [8] = Addresses.InventoryArmorSlot09,
+            [9] = Addresses.InventoryArmorSlot10,
+            [10] = Addresses.InventoryArmorSlot11,
+            [11] = Addresses.InventoryArmorSlot12,
+            [12] = Addresses.InventoryArmorSlot13,
+            [13] = Addresses.InventoryArmorSlot14,
+            [14] = Addresses.InventoryArmorSlot15,
+            [15] = Addresses.InventoryArmorSlot16,
         };
 
 

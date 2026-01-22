@@ -138,7 +138,7 @@ namespace VagrantStoryArchipelago
         public const uint BreakRetributionUnlock = 0x0004e735;
 
 
-        // Word
+        // Regular Consumables
         public const uint InventoryItemSlot1 = 0x00060f68;
         public const uint InventoryItemSlot2 = 0x00060f6c;
         public const uint InventoryItemSlot3 = 0x00060f70;
@@ -205,7 +205,6 @@ namespace VagrantStoryArchipelago
         public const uint InventoryItemSlot64 = 0x00061064;
 
         // Weapon Slots
-
         public const uint InventoryWeaponSlot1_BladeSlot = 0x00060169;
         public const uint InventoryWeaponSlot1_GripSlot = 0x0006016a;
         public const uint InventoryWeaponSlot1_Equipped = 0x0006016b;
@@ -277,6 +276,26 @@ namespace VagrantStoryArchipelago
         public const uint InventoryWeaponSlot8_Gem3 = 0x0006024e;
         public const uint InventoryWeaponSlot8_FirstNameStart = 0x00060250;
         public const uint InventoryWeaponSlot8_LastNameStart = 0x00060264;
+
+        // Armor Inventory Slots
+
+        public const uint InventoryArmorSlot01 = 0x000607a9;
+        public const uint InventoryArmorSlot02 = 0x000607d1;
+        public const uint InventoryArmorSlot03 = 0x000607f9;
+        public const uint InventoryArmorSlot04 = 0x00060821;
+        public const uint InventoryArmorSlot05 = 0x00060849;
+        public const uint InventoryArmorSlot06 = 0x00060871;
+        public const uint InventoryArmorSlot07 = 0x00060899;
+        public const uint InventoryArmorSlot08 = 0x000608c1;
+        public const uint InventoryArmorSlot09 = 0x000608e9;
+        public const uint InventoryArmorSlot10 = 0x00060911;
+        public const uint InventoryArmorSlot11 = 0x00060939;
+        public const uint InventoryArmorSlot12 = 0x00060961;
+        public const uint InventoryArmorSlot13 = 0x00060989;
+        public const uint InventoryArmorSlot14 = 0x000609b1;
+        public const uint InventoryArmorSlot15 = 0x000609d9;
+        public const uint InventoryArmorSlot16 = 0x00060a01;
+
 
         // Gem Inventory Slots
         public const uint InventoryGemSlot01 = 0x00060a24;

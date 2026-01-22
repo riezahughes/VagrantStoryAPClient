@@ -36,7 +36,7 @@ namespace VagrantStoryArchipelago.Models.Inventory
         [MemoryOffset(0x15)]
         public byte GemAirStat { get; set; }
         [MemoryOffset(0x16)]
-        public byte GemFireStat { get; set; } // this is correct
+        public byte GemFireStat { get; set; }
         [MemoryOffset(0x17)]
         public byte GemEarthStat { get; set; }
         [MemoryOffset(0x18)]
