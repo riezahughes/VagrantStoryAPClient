@@ -3,6 +3,7 @@ using Archipelago.Core.Util;
 
 namespace VagrantStoryArchipelago.Models.Inventory
 {
+    // Offset are counted right to left, 1 each pair of bits.
     public class InventoryGemData
     {
         public string GemName { get; set; }
@@ -12,25 +13,25 @@ namespace VagrantStoryArchipelago.Models.Inventory
         public byte GemID { get; set; }
         [MemoryOffset(0x05)]
         public byte GemTextCategory { get; set; }
-        [MemoryOffset(0x10)]
-        public byte GemStrStat { get; set; }
         [MemoryOffset(0x09)]
-        public byte GemIntStat { get; set; }
+        public byte GemStrStat { get; set; }
         [MemoryOffset(0x0a)]
-        public byte GemAgiStat { get; set; }
+        public byte GemIntStat { get; set; }
         [MemoryOffset(0x0b)]
-        public byte GemHumanStat { get; set; }
+        public byte GemAgiStat { get; set; }
         [MemoryOffset(0x0c)]
-        public byte GemBeastStat { get; set; }
+        public byte GemHumanStat { get; set; }
         [MemoryOffset(0x0d)]
-        public byte GemUndeadStat { get; set; }
+        public byte GemBeastStat { get; set; }
         [MemoryOffset(0x0e)]
-        public byte GemPhantomStat { get; set; }
+        public byte GemUndeadStat { get; set; }
         [MemoryOffset(0x0f)]
-        public byte GemDragonStat { get; set; }
+        public byte GemPhantomStat { get; set; }
         [MemoryOffset(0x10)]
-        public byte GemEvilStat { get; set; }
+        public byte GemDragonStat { get; set; }
         [MemoryOffset(0x11)]
+        public byte GemEvilStat { get; set; }
+        [MemoryOffset(0x14)]
         public byte GemPhysicalStat { get; set; }
         [MemoryOffset(0x15)]
         public byte GemAirStat { get; set; }
