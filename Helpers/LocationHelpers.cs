@@ -375,7 +375,6 @@ namespace Helpers
                 "Bandit's Hollow",
                 "Delusions of Happiness",
                 "Work, Then Die",
-                "Rock Bottom",
                 "Senses Lost",
                 "The Lunatic Veins",
                 "Tomb of the Reborn",
@@ -761,7 +760,6 @@ namespace Helpers
             allLevelLocations.Add("Bandit's Hollow", GetBanditsHollowData());
             allLevelLocations.Add("Delusions of Happiness", GetDelusionsOfHappinessData());
             allLevelLocations.Add("Work, Then Die", GetWorkThenDieData());
-            allLevelLocations.Add("Rock Bottom", GetRockBottomData());
             allLevelLocations.Add("Senses Lost", GetSensesLostData());
             allLevelLocations.Add("The Lunatic Veins", GetTheLunaticVeinsData());
             allLevelLocations.Add("Tomb of the Reborn", GetTombOfTheRebornData());
@@ -978,7 +976,7 @@ namespace Helpers
         {
             List<GenericLocationData> workersBreakroomLocations = new List<GenericLocationData>() {
                 new GenericLocationData("WC - Worker's Breakroom - Chest", Addresses.WC_WorkersBreakroomChest, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("WC - Worker's Breakroom Entered", Addresses.WC_WorkersBreakroomEntered, "0", "4361", LocationCheckType.UShort)
+                    new GenericLocationData("WC - Worker's Breakroom Entered", Addresses.WC_WorkersBreakroomEntered, "0", "4105", LocationCheckType.UShort)
             };
             return workersBreakroomLocations;
         }
@@ -3963,13 +3961,6 @@ namespace Helpers
             return workThenDieLocations;
         }
 
-        private static List<GenericLocationData> GetRockBottomData()
-        {
-            List<GenericLocationData> rockBottomLocations = new List<GenericLocationData>() {
-                new GenericLocationData("AM2 - Rock Bottom Entered", Addresses.AM2_RockBottomEntered, "0", "160", LocationCheckType.Byte)
-            };
-            return rockBottomLocations;
-        }
 
         private static List<GenericLocationData> GetTheLunaticVeinsData()
         {

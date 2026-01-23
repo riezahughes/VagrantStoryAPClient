@@ -228,8 +228,7 @@ public class App
             Console.WriteLine("Listening...");
             try
             {
-                Thread.Sleep(2000);
-                await archipelagoClient.MonitorLocations(GameLocations);
+                _ = archipelagoClient.MonitorLocations(GameLocations);
             }
             catch (Exception ex)
             {
