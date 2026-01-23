@@ -97,6 +97,10 @@ namespace VagrantStoryArchipelago.Helpers
                 HelmetDatabase.Helmets.TryGetValue(armorName, out armorData);
                 armorList.Add(armorData);
                 Console.WriteLine(armorData.ArmorName);
+                // YOU WERE TRYING TO SEE WHAT THE DATA ACTUALLY LOOKED LIKE IN THE GAME AND CORRECTLY READ WHAT THE FUCK YOU SHOULD BE DOING
+                // BASED ON THE PATTERNS BETWEEN A FULL SLOT AND AN EMPTY SLOT.
+                // GOOD LUCK, CUNT.
+
                 //break;
                 //}
             }
