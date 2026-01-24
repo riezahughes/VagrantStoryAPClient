@@ -4,16 +4,16 @@ using VagrantStoryArchipelago.Models.Inventory;
 
 namespace VagrantStoryArchipelago.Helpers.EntityLists
 {
-    internal class HelmetDatabase
-    {
+    public class HelmetDatabase
 
+    {
 
         public static readonly Dictionary<string, InventoryArmorData> Helmets = new Dictionary<string, InventoryArmorData>
         {
             // ===== HELMS =====
             // Bandana (ID 0x00) - Base: STR 1, INT 3, AGI 0, Blunt 0, Edged 0, Piercing 0
-            ["Leather Bandana"] = new InventoryArmorData("Leather Bandana", 0x00, ArmorType.HELM, 0x64, 0x64, 0x02, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x05, 0x05, 0xFE, 0xFE, 0xFA, 0xFA, ArmorMaterials.LEATHER, 0x00),
-            ["Wood Bandana"] = new InventoryArmorData("Wood Bandana", 0x00, ArmorType.HELM, 0x64, 0x64, 0x06, 0x0B, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x06, 0x08, 0x08, 0x06, 0x04, 0x04, ArmorMaterials.WOOD, 0x00),
+            ["Leather Bandana"] = new InventoryArmorData("Leather Bandana", HelmetID.BANDANA, ArmorType.HELM, 0x64, 0x64, 0x02, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x05, 0x05, 0xFE, 0xFE, 0xFA, 0xFA, ArmorMaterials.LEATHER, 0x00),
+            ["Wood Bandana"] = new InventoryArmorData("Wood Bandana", HelmetID.BANDANA, ArmorType.HELM, 0x64, 0x64, 0x06, 0x0B, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x06, 0x08, 0x08, 0x06, 0x04, 0x04, ArmorMaterials.WOOD, 0x00),
             //    ["Bronze Bandana"] = new InventoryArmorData("Bronze Bandana", 0x00, ArmorType.HELM, 100, 100, 4, 5, -2, 0, 0, 0, 1, 1, 2, 1, 1, 5, 8, 5, 5, 3, 3, 2, 2, 0x02, 0x00),
             //    ["Iron Bandana"] = new InventoryArmorData("Iron Bandana", 0x00, ArmorType.HELM, 100, 100, 6, 5, -2, 0, 0, 0, -1, -1, 2, -1, -1, 0, 10, 0, 4, 4, 0, 1, 1, 0x03, 0x00),
             //    ["Hagane Bandana"] = new InventoryArmorData("Hagane Bandana", 0x00, ArmorType.HELM, 100, 100, 7, 6, -1, 0, 0, 0, -5, -5, -1, 0, -5, -5, 14, 3, 3, 5, 5, 5, 5, 0x04, 0x00),
@@ -100,6 +100,7 @@ namespace VagrantStoryArchipelago.Helpers.EntityLists
             //    ["Hagane Basinet"] = new InventoryArmorData("Hagane Basinet", 0x09, ArmorType.HELM, 100, 100, 13, 11, -2, 7, 3, 5, -5, -5, -1, 0, -5, -5, 14, 3, 3, 5, 5, 5, 5, 0x04, 0x00),
             //    ["Silver Basinet"] = new InventoryArmorData("Silver Basinet", 0x09, ArmorType.HELM, 100, 100, 11, 10, -2, 7, 3, 5, 0, 0, -20, -15, 0, -5, 5, 5, 5, 5, 5, 5, -20, 0x05, 0x00),
             //    ["Damascus Basinet"] = new InventoryArmorData("Damascus Basinet", 0x09, ArmorType.HELM, 100, 100, 16, 12, -2, 7, 3, 5, -10, -10, 2, 0, -10, -10, 20, 5, 5, 5, 5, -20, 20, 0x06, 0x00),
+
             //    // Armet (ID 0x0A) - Base: STR 8, INT 9, AGI -2, Blunt 4, Edged 6, Piercing 4
             //    ["Leather Armet"] = new InventoryArmorData("Leather Armet", 0x0A, ArmorType.HELM, 100, 100, 9, 15, -2, 4, 6, 4, 0, 0, 0, 0, 0, 0, 2, 5, 5, 1, 1, 5, 5, 0x00, 0x00),
             //    ["Wood Armet"] = new InventoryArmorData("Wood Armet", 0x0A, ArmorType.HELM, 100, 100, 13, 17, -2, 4, 6, 4, 0, 0, 0, 0, 0, 0, 4, 6, 8, 8, 6, 4, 4, 0x01, 0x00),

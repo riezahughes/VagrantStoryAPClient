@@ -356,7 +356,7 @@ namespace VagrantStoryArchipelago
         public const uint WC_EntranceToDarknessEntered = 0x000f1ab0;
 
         // Worker's Breakroom
-        public const uint WC_WorkersBreakroomChest = 0x0;
+        public const uint WC_WorkersBreakroomChest = 0x0006196C;
         public const uint WC_WorkersBreakroomEntered = 0x000f1ab0;
 
         // Hall of Struggle
@@ -381,7 +381,7 @@ namespace VagrantStoryArchipelago
         public const uint WC_ChamberOfFearEntered = 0x000f1ab0;
 
         // The Reckoning Room
-        public const uint WC_TheReckoningRoomChest = 0x0;
+        public const uint WC_TheReckoningRoomChest = 0x00061964;
         public const uint WC_TheReckoningRoom = 0x0;
 
         // A Laborer's Thirst
@@ -396,15 +396,15 @@ namespace VagrantStoryArchipelago
         public const uint WC_RoomOfRottenGrapesEntered = 0x000f1ab0;
 
         // Blackmarket of Wines
-        public const uint WC_BlackmarketOfWinesChest = 0x0;
+        public const uint WC_BlackmarketOfWinesChest = 0x00061987;
         public const uint WC_BlackmarketOfWinesStockSigilUnlock = 0x0;
         public const uint WC_BlackmarketOfWinesEntered = 0x000f1ab0;
 
         // The Gallows
-        public const uint WC_TheGallowsMinotaurBossDefeat = 0x0;
-        public const uint WC_TheGallowsAgainMinotaurZombieBossDefeat = 0x0;
-        public const uint WC_TheGallowsAgainChest = 0x0;
-        public const uint WC_TheGallowsChest = 0x0;
+        public const uint WC_TheGallowsMinotaurBossDefeat = 0x00180bd8;
+        public const uint WC_TheGallowsAgainMinotaurZombieBossDefeat = 0x00180c68;
+        public const uint WC_TheGallowsAgainChest = 0x00061977;
+        public const uint WC_TheGallowsChest = 0x0006195A;
         public const uint WC_TheGallowsEntered = 0x000f1ab0;
 
         // Room of Cheap Red Wine
@@ -422,8 +422,8 @@ namespace VagrantStoryArchipelago
         public const uint WC_TheGreedyOnesDenEntered = 0x000f1ab0;
 
         // The Hero's Winehall
-        public const uint WC_TheHerosWinehallDullahanBossDefeat = 0x0;
-        public const uint WC_TheHerosWinehallChest = 0x0;
+        public const uint WC_TheHerosWinehallDullahanBossDefeat = 0x00181338;
+        public const uint WC_TheHerosWinehallChest = 0x00061959;
         public const uint WC_TheHerosWinehallEntered = 0x000f1ab0;
 
         // The Bread Peddler's Way
@@ -437,7 +437,7 @@ namespace VagrantStoryArchipelago
         public const uint UW_SewerOfRavenousRatsEntered = 0x000f1ab0;
 
         // Underdark Fishmarket
-        public const uint UW_UnderdarkFishmarketGiantCrabBossDefeat = 0x0;
+        public const uint UW_UnderdarkFishmarketGiantCrabBossDefeat = 0x001875d8;
         public const uint UW_UnderdarkFishmarketEntered = 0x000f1ab0;
 
         // The Sunless Way
@@ -449,7 +449,7 @@ namespace VagrantStoryArchipelago
         public const uint UW_RememberingDaysOfYoreEntered = 0x000f1ab0;
 
         // Larder for a Lean Winter
-        public const uint UW_LarderForALeanWinterChest = 0x0;
+        public const uint UW_LarderForALeanWinterChest = 0x00061988;
         public const uint UW_LarderForALeanWinterEntered = 0x000f1ab0;
 
         // Where the Hunter Climbed
@@ -472,11 +472,11 @@ namespace VagrantStoryArchipelago
         public const uint UW_SinnersCornerEntered = 0x000f1ab0;
 
         // Fear of the Fall
-        public const uint UW_FearOfTheFallDarkElementalBossDefeat = 0x0;
+        public const uint UW_FearOfTheFallDarkElementalBossDefeat = 0x00187548;
         public const uint UW_FearOfTheFallEntered = 0x000f1ab0;
 
         // The Children's Hideout
-        public const uint UW_TheChildrensHideoutChest = 0x0;
+        public const uint UW_TheChildrensHideoutChest = 0x0006198D;
         public const uint UW_TheChildrensHideoutEntered = 0x000f1ab0;
 
         // Corner of Prayers
@@ -523,7 +523,7 @@ namespace VagrantStoryArchipelago
         public const uint UW_TheCrumblingMarketSouthEntered = 0x000f1ab0;
 
         // The Crumbling Market (North)
-        public const uint UW_TheCrumblingMarketNorthChest = 0x0;
+        public const uint UW_TheCrumblingMarketNorthChest = 0x00061992;
         public const uint UW_TheCrumblingMarketNorthEruptionFloorTrap = 0x0;
         public const uint UW_TheCrumblingMarketNorthFreezeFloorTrap = 0x0;
         public const uint UW_TheCrumblingMarketNorthGustFloorTrap = 0x0;
@@ -541,7 +541,7 @@ namespace VagrantStoryArchipelago
         public const uint UE_HallToANewWorldEntered = 0x000f1ab0;
 
         // Place of Free Words
-        public const uint UE_PlaceOfFreeWordsHarpyBossDefeat = 0x0;
+        public const uint UE_PlaceOfFreeWordsHarpyBossDefeat = 0x001829d8;
         public const uint UE_PlaceOfFreeWordsEntered = 0x000f1ab0;
 
         // Bazaar of the Bizarre
@@ -553,26 +553,26 @@ namespace VagrantStoryArchipelago
         public const uint UE_NobleGoldAndSilkEntered = 0x000f1ab0;
 
         // Weapons Not Allowed
-        public const uint UE_WeaponsNotAllowedChest = 0x0;
+        public const uint UE_WeaponsNotAllowedChest = 0x0006198E;
         public const uint UE_WeaponsNotAllowedEntered = 0x000f1ab0;
 
         // A Knight Sells his Sword
         public const uint UE_AKnightSellsHisSwordEntered = 0x000f1ab0;
 
         // Gemsword Blackmarket
-        public const uint UE_GemswordBlackmarketNightstalkerBossDefeat = 0x0;
+        public const uint UE_GemswordBlackmarketNightstalkerBossDefeat = 0x001829e8;
         public const uint UE_GemswordBlackmarketEntered = 0x000f1ab0;
 
         // The Pirate's Son
         public const uint UE_ThePiratesSonEntered = 0x000f1ab0;
 
         // Sale of the Sword
-        public const uint UE_SaleOfTheSwordChest = 0x0;
+        public const uint UE_SaleOfTheSwordChest = 0x0006198F;
         public const uint UE_SaleOfTheSwordEntered = 0x000f1ab0;
 
         // The Greengrocer's Stair
-        public const uint UEN_TheGreengrocersStairNeesaBossDefeat = 0x0;
-        public const uint UEN_TheGreengrocersStairTiegerBossDefeat = 0x0;
+        public const uint UEN_TheGreengrocersStairNeesaBossDefeat = 0x00182b48;
+        public const uint UEN_TheGreengrocersStairTiegerBossDefeat = 0x001913b8;
         public const uint UEN_TheGreengrocersStairEntered = 0x000f1ab0;
 
         // Where Black Waters Ran
@@ -584,7 +584,7 @@ namespace VagrantStoryArchipelago
         // Catspaw Blackmarket
         public const uint UEN_CatspawBlackmarketDiabolosFloorTrap = 0x0;
         public const uint UEN_CatspawBlackmarketTrapClearFloorTrap = 0x0;
-        public const uint UEN_CatspawBlackmarketChest = 0x0;
+        public const uint UEN_CatspawBlackmarketChest = 0x00061989;
         public const uint UEN_CatspawBlackmarketEntered = 0x000f1ab0;
 
         // Forcas Rise
@@ -597,7 +597,7 @@ namespace VagrantStoryArchipelago
         public const uint TCS_RueAlianoMandrakeSigilUnlock = 0x0;
 
         // The House Khazabas
-        public const uint TCS_TheHouseKhazabasChest = 0x0;
+        public const uint TCS_TheHouseKhazabasChest = 0x00061994;
 
         // Zebel's Walk
         public const uint TCS_ZebelsWalkEntered = 0x000f1ab0;
@@ -636,11 +636,11 @@ namespace VagrantStoryArchipelago
         public const uint TCE_ShasrasHillParkEntered = 0x000f1ab0;
 
         // The House Gilgitte
-        public const uint TCE_TheHouseGilgitteChest = 0x0;
+        public const uint TCE_TheHouseGilgitteChest = 0x0006197E;
         public const uint TCE_TheHouseGilgitteEntered = 0x000f1ab0;
 
         // Gharmes Walk
-        public const uint TCE_GharmesWalkChest = 0x0;
+        public const uint TCE_GharmesWalkChest = 0x00061978;
         public const uint TCE_GharmesWalkEntered = 0x000f1ab0;
 
         // Plateia Lumitar
@@ -663,7 +663,7 @@ namespace VagrantStoryArchipelago
         public const uint TCW_RueMalFalldeEntered = 0x000f1ab0;
 
         // Tircolas Flow (North)
-        public const uint TCW_TircolasFlowNorthDuaneBossDefeat = 0x0;
+        public const uint TCW_TircolasFlowNorthDuaneBossDefeat = 0x0018a0e8;
         public const uint TCW_TircolasFlowNorthEntered = 0x000f1ab0;
 
         // Tircolas Flow (South)
@@ -708,11 +708,11 @@ namespace VagrantStoryArchipelago
         public const uint KEP_UrgeTheBoyOnEntered = 0x000f1ab0;
 
         // Time Trial (Earth Dragon)
-        public const uint KEP_TimeTrialEarthDragonEarthDragonBossDefeat = 0x0;
+        public const uint KEP_TimeTrialEarthDragonEarthDragonBossDefeat = 0x001800b8;
         public const uint KEP_TimeTrialEarthDragonEntered = 0x000f1ab0;
 
         // Time Trial (Snow Dragon)
-        public const uint KEP_TimeTrialSnowDragonSnowDragonBossDefeat = 0x0;
+        public const uint KEP_TimeTrialSnowDragonSnowDragonBossDefeat = 0x00183f98;
         public const uint KEP_TimeTrialSnowDragonEntered = 0x000f1ab0;
 
         // A Taste of the Spoils
@@ -734,8 +734,8 @@ namespace VagrantStoryArchipelago
         public const uint KEP_WipingBloodFromBladesEntered = 0x000f1ab0;
 
         // Time Trial (Death + Ogre Zombie)
-        public const uint KEP_TimeTrialDeathOgreZombieDeathBossDefeat = 0x0;
-        public const uint KEP_TimeTrialDeathOgreZombieOgreZombieBossDefeat = 0x0;
+        public const uint KEP_TimeTrialDeathOgreZombieDeathBossDefeat = 0x00192fb8;
+        public const uint KEP_TimeTrialDeathOgreZombieOgreZombieBossDefeat = 0x00185c38; // 
         public const uint KEP_TimeTrialDeathOgreZombieEntered = 0x000f1ab0;
 
         // Time Trial (Asura)
@@ -743,8 +743,8 @@ namespace VagrantStoryArchipelago
         public const uint KEP_TimeTrialAsuraEntered = 0x000f1ab0;
 
         // The Warrior's Rest
-        public const uint KEP_TheWarriorsRestRosencrantzBossDefeat = 0x0;
-        public const uint KEP_TheWarriorsRestChest = 0x0;
+        public const uint KEP_TheWarriorsRestRosencrantzBossDefeat = 0x0017f9a8;
+        public const uint KEP_TheWarriorsRestChest = 0x00061997;
         public const uint KEP_TheWarriorsRestEntered = 0x000f1ab0;
 
         // Workshop 'Keane's Crafts'
@@ -756,7 +756,7 @@ namespace VagrantStoryArchipelago
         public const uint TOK_TheDarkCoastEntered = 0x000f1ab0;
 
         // Hall of Prayer
-        public const uint TOK_HallOfPrayerLastCrusaderBossDefeat = 0x0;
+        public const uint TOK_HallOfPrayerLastCrusaderBossDefeat = 0x00181458;
         public const uint TOK_HallOfPrayerEntered = 0x000f1ab0;
 
         // Those who Drink the Dark
@@ -764,7 +764,7 @@ namespace VagrantStoryArchipelago
         public const uint TOK_ThoseWhoDrinkTheDarkEntered = 0x000f1ab0;
 
         // The Chapel of Meschaunce
-        public const uint TOK_TheChapelOfMeschaunceMinotaurLordBossDefeat = 0x0;
+        public const uint TOK_TheChapelOfMeschaunceMinotaurLordBossDefeat = 0x00180738;
         public const uint TOK_TheChapelOfMeschaunceEntered = 0x000f1ab0;
 
         // The Resentful Ones
@@ -775,7 +775,7 @@ namespace VagrantStoryArchipelago
         public const uint TOK_ThoseWhoFearTheLightEntered = 0x000f1ab0;
 
         // Chamber of Reason
-        public const uint TOK_ChamberOfReasonKaliBossDefeat = 0x0;
+        public const uint TOK_ChamberOfReasonKaliBossDefeat = 0x0017e8a8;
         public const uint TOK_ChamberOfReasonEntered = 0x000f1ab0;
 
         // Exit to City Center
@@ -825,7 +825,7 @@ namespace VagrantStoryArchipelago
 
         // Forest River
         public const uint SFF_ForestRiverCurePanelFloorTrap = 0x0;
-        public const uint SFF_ForestRiverChest = 0x0;
+        public const uint SFF_ForestRiverChest = 0x0006196B;
         public const uint SFF_ForestRiverEntered = 0x000f1ab0;
 
         // Lamenting to the Moon
@@ -841,9 +841,9 @@ namespace VagrantStoryArchipelago
         public const uint SFF_TheSecretPathEntered = 0x000f1ab0;
 
         // Hewn from Nature
-        public const uint SFF_HewnFromNatureGrissomBossDefeat = 0x0;
+        public const uint SFF_HewnFromNatureGrissomBossDefeat = 0x00181528;
         public const uint SFF_HewnFromNatureDarkCrusaderBossDefeat = 0x0;
-        public const uint SFF_HewnFromNatureChest = 0x0;
+        public const uint SFF_HewnFromNatureChest = 0x0006195D;
         public const uint SFF_HewnFromNatureEntered = 0x000f1ab0;
 
         // The Wood Gate
@@ -885,7 +885,7 @@ namespace VagrantStoryArchipelago
         public const uint SNC_PriestsConfinementEntered = 0x000f1ab0;
 
         // Alchemists' Laboratory
-        public const uint SNC_AlchemistsLaboratoryChest = 0x0;
+        public const uint SNC_AlchemistsLaboratoryChest = 0x0006195B;
         public const uint SNC_AlchemistsLaboratoryEntered = 0x000f1ab0;
 
         // The Academia Corridor
@@ -901,7 +901,7 @@ namespace VagrantStoryArchipelago
         public const uint SNC_HallowedHopeEntered = 0x000f1ab0;
 
         // Hall of Sacrilege
-        public const uint SNC_HallOfSacrilegeGolemBossDefeat = 0x0;
+        public const uint SNC_HallOfSacrilegeGolemBossDefeat = 0x00017da18;
         public const uint SNC_HallOfSacrilegeEntered = 0x000f1ab0;
 
         // Advent Ground (South)
@@ -918,7 +918,7 @@ namespace VagrantStoryArchipelago
         public const uint SNC_AdventGroundNorthEntered = 0x000f1ab0;
 
         // The Cleansing Chantry
-        public const uint SNC_TheCleansingChantryDragonBossDefeat = 0x0;
+        public const uint SNC_TheCleansingChantryDragonBossDefeat = 0x0017e878;
         public const uint SNC_TheCleansingChantryEntered = 0x000f1ab0;
 
         // Stairway to the Light
@@ -928,7 +928,7 @@ namespace VagrantStoryArchipelago
         public const uint LQ_DarkAbhorsLightEntered = 0x000f1ab0;
 
         // Dream of the Holy Land
-        public const uint LQ_DreamOfTheHolyLandWaterElementalBossDefeat = 0x0;
+        public const uint LQ_DreamOfTheHolyLandWaterElementalBossDefeat = 0x00183e28;
         public const uint LQ_DreamOfTheHolyLandAsterSigilUnlock = 0x0;
         public const uint LQ_DreamOfTheHolyLandEntered = 0x000f1ab0;
 
@@ -940,7 +940,7 @@ namespace VagrantStoryArchipelago
         public const uint LQ_TheAirStirsEntered = 0x000f1ab0;
 
         // Bonds of Friendship
-        public const uint LQ_BondsOfFriendshipChest = 0x0;
+        public const uint LQ_BondsOfFriendshipChest = 0x0006196F;
         public const uint LQ_BondsOfFriendshipEntered = 0x000f1ab0;
 
         // Atone for Eternity
@@ -979,7 +979,7 @@ namespace VagrantStoryArchipelago
         public const uint LQ_TheTimelyDewOfSleepEntered = 0x000f1ab0;
 
         // Companions in Arms
-        public const uint LQ_CompanionsInArmsChest = 0x0;
+        public const uint LQ_CompanionsInArmsChest = 0x00061966;
         public const uint LQ_CompanionsInArmsEntered = 0x000f1ab0;
 
         // The Auction Block
@@ -993,7 +993,7 @@ namespace VagrantStoryArchipelago
         public const uint LQ_WhereTheSerpentHuntsEntered = 0x000f1ab0;
 
         // Drowned in Fleeting Joy
-        public const uint LQ_DrownedInFleetingJoyChest = 0x0;
+        public const uint LQ_DrownedInFleetingJoyChest = 0x00061970;
         public const uint LQ_DrownedInFleetingJoyEntered = 0x000f1ab0;
 
         // Ants Prepare for Winter
@@ -1005,18 +1005,18 @@ namespace VagrantStoryArchipelago
         public const uint LQ_TheLaborersBonfireEntered = 0x000f1ab0;
 
         // Stone and Sulfurous Fire
-        public const uint LQ_StoneAndSulfurousFireChest = 0x0;
+        public const uint LQ_StoneAndSulfurousFireChest = 0x00061965;
         public const uint LQ_StoneAndSulfurousFireEntered = 0x000f1ab0;
 
         // Torture Without End
-        public const uint LQ_TortureWithoutEndOgreLordBossDefeat = 0x0;
+        public const uint LQ_TortureWithoutEndOgreLordBossDefeat = 0x00183f78;
         public const uint LQ_TortureWithoutEndEntered = 0x000f1ab0;
 
         // Way Down
         public const uint LQ_WayDownEntered = 0x000f1ab0;
 
         // Excavated Hollow
-        public const uint LQ_ExcavatedHollowChest = 0x0;
+        public const uint LQ_ExcavatedHollowChest = 0x0006196E;
         public const uint LQ_ExcavatedHollowEntered = 0x000f1ab0;
 
         // Parting Regrets
@@ -1029,7 +1029,7 @@ namespace VagrantStoryArchipelago
         public const uint LQ_DustShallEatTheDaysEntered = 0x000f1ab0;
 
         // Hall of the Wage-Paying
-        public const uint LQ_HallOfTheWagePayingSnowDragonBossDefeat = 0x0;
+        public const uint LQ_HallOfTheWagePayingSnowDragonBossDefeat = 0x00183f98;
         public const uint LQ_HallOfTheWagePayingEntered = 0x000f1ab0;
 
         // Tunnel of the Heartless
@@ -1056,25 +1056,25 @@ namespace VagrantStoryArchipelago
         public const uint IM1_TheBreastRipperEntered = 0x000f1ab0;
 
         // The Wheel
-        public const uint IM1_TheWheelChest = 0x0;
+        public const uint IM1_TheWheelChest = 0x00061971;
         public const uint IM1_TheWheelEntered = 0x000f1ab0;
 
         // The Branks
-        public const uint IM1_TheBranksChest = 0x0;
+        public const uint IM1_TheBranksChest = 0x00061973;
         public const uint IM1_TheBranksEntered = 0x000f1ab0;
 
         // The Pear
         public const uint IM1_ThePearEntered = 0x000f1ab0;
 
         // The Judas Cradle
-        public const uint IM1_TheJudasCradleChest = 0x0;
+        public const uint IM1_TheJudasCradleChest = 0x00061972;
         public const uint IM1_TheJudasCradleEntered = 0x000f1ab0;
 
         // The Whirlygig
         public const uint IM1_TheWhirlygigEntered = 0x000f1ab0;
 
         // Spanish Tickler
-        public const uint IM1_SpanishTicklerWyvernKnightBossDefeat = 0x0;
+        public const uint IM1_SpanishTicklerWyvernKnightBossDefeat = 0x001845a8;
         public const uint IM1_SpanishTicklerEntered = 0x000f1ab0;
 
         // Heretic's Fork
@@ -1094,7 +1094,7 @@ namespace VagrantStoryArchipelago
         public const uint IM1_BootikensEntered = 0x000f1ab0;
 
         // Burial
-        public const uint IM1_BurialIronGolemBossDefeat = 0x0;
+        public const uint IM1_BurialIronGolemBossDefeat = 0x00184538;
         public const uint IM1_BurialEntered = 0x000f1ab0;
 
         // Burning
@@ -1106,7 +1106,7 @@ namespace VagrantStoryArchipelago
         public const uint IM1_CleansingTheSoulEntered = 0x000f1ab0;
 
         // The Ducking Stool
-        public const uint IM1_TheDuckingStoolChest = 0x0;
+        public const uint IM1_TheDuckingStoolChest = 0x00061990;
         public const uint IM1_TheDuckingStoolEntered = 0x000f1ab0;
 
         // The Garotte
@@ -1121,21 +1121,21 @@ namespace VagrantStoryArchipelago
         public const uint IM1_ImpalementEntered = 0x000f1ab0;
 
         // Knotting
-        public const uint IM1_KnottingWyvernQueenBossDefeat = 0x0;
+        public const uint IM1_KnottingWyvernQueenBossDefeat = 0x00184428;
         public const uint IM1_KnottingEntered = 0x000f1ab0;
 
         // The Eunics' Lot
         public const uint IM2_TheEunicsLotEntered = 0x000f1ab0;
 
         // Ordeal By Fire
-        public const uint IM2_OrdealByFireDarkDragonBossDefeat = 0x0;
+        public const uint IM2_OrdealByFireDarkDragonBossDefeat = 0x00185a08;
         public const uint IM2_OrdealByFireEntered = 0x000f1ab0;
 
         // The Oven at Neisse
         public const uint IM2_TheOvenAtNeisseEntered = 0x000f1ab0;
 
         // Pressing
-        public const uint IM2_PressingRavanaBossDefeat = 0x0;
+        public const uint IM2_PressingRavanaBossDefeat = 0x00185a28;
         public const uint IM2_PressingEntered = 0x000f1ab0;
 
         // The Mind Burns
@@ -1147,7 +1147,7 @@ namespace VagrantStoryArchipelago
         public const uint IM2_TheRackEntered = 0x000f1ab0;
 
         // The Saw
-        public const uint IM2_TheSawDragonZombieBossDefeat = 0x0;
+        public const uint IM2_TheSawDragonZombieBossDefeat = 0x00185a28;
         public const uint IM2_TheSawEntered = 0x000f1ab0;
 
         // The Cold's Bridle
@@ -1157,20 +1157,20 @@ namespace VagrantStoryArchipelago
         public const uint IM2_TheColdsBridleEntered = 0x000f1ab0;
 
         // The Shin-Vice
-        public const uint IM2_TheShinViceOgreZombieBossDefeat = 0x0;
-        public const uint IM2_TheShinViceDeathBossDefeat = 0x0;
+        public const uint IM2_TheShinViceOgreZombieBossDefeat = 0x00185c38;
+        public const uint IM2_TheShinViceDeathBossDefeat = 0x00192fb8;
         public const uint IM2_TheShinViceEntered = 0x000f1ab0;
 
         // The Spider
         public const uint IM2_TheSpiderEntered = 0x000f1ab0;
 
         // Lead Sprinkler
-        public const uint IM2_LeadSprinklerChest = 0x0;
+        public const uint IM2_LeadSprinklerChest = 0x00061975;
         public const uint IM2_LeadSprinklerParalysisPanelFloorTrap = 0x0;
         public const uint IM2_LeadSprinklerEntered = 0x000f1ab0;
 
         // Squassation
-        public const uint IM2_SquassationChest = 0x0;
+        public const uint IM2_SquassationChest = 0x00061974;
         public const uint IM2_SquassationPoisonPanelFloorTrap = 0x0;
         public const uint IM2_SquassationTerraThrustFloorTrap = 0x0;
         public const uint IM2_SquassationEntered = 0x000f1ab0;
@@ -1209,17 +1209,17 @@ namespace VagrantStoryArchipelago
 
         // The Iron Maiden
         public const uint IM3_TheIronMaidenEntered = 0x000f1ab0;
-        public const uint IM3_TheIronMaidenAsuraBossDefeat = 0x0;
+        public const uint IM3_TheIronMaidenAsuraBossDefeat = 0x00186338;
 
         // Judgement
         public const uint IM3_JudgementEntered = 0x000f1ab0;
 
         // Saint Elmos Belt
-        public const uint IM3_SaintElmosBeltChest = 0x0;
+        public const uint IM3_SaintElmosBeltChest = 0x00061995;
         public const uint IM3_SaintElmosBeltEntered = 0x000f1ab0;
 
         // Dunking The Witch
-        public const uint IM3_DunkingTheWitchChest = 0x0;
+        public const uint IM3_DunkingTheWitchChest = 0x00061976;
         public const uint IM3_DunkingTheWitchEntered = 0x000f1ab0;
 
         // Into Holy Battle
@@ -1236,25 +1236,25 @@ namespace VagrantStoryArchipelago
 
         // A Light in the Dark
         public const uint GC1_ALightInTheDarkEntered = 0x000f1ab0;
-        public const uint GC1_ALightInTheDarkArchDragonBossDefeat = 0x0;
+        public const uint GC1_ALightInTheDarkArchDragonBossDefeat = 0x00181128;
 
         // Monk's Leap
         public const uint GC1_MonksLeapEntered = 0x000f1ab0;
-        public const uint GC1_MonksLeapLichBossDefeat = 0x0;
+        public const uint GC1_MonksLeapLichBossDefeat = 0x00182a08;
 
         // Hieratic Recollections
         public const uint GC1_HieraticRecollectionsEntered = 0x000f1ab0;
 
         // The Flayed Confessional
-        public const uint GC1_TheFlayedConfessionalDjinnBossDefeat = 0x0;
-        public const uint GC1_TheFlayedConfessionalChest = 0x0;
+        public const uint GC1_TheFlayedConfessionalDjinnBossDefeat = 0x0017ce38;
+        public const uint GC1_TheFlayedConfessionalChest = 0x0006196D;
         public const uint GC1_TheFlayedConfessionalEntered = 0x000f1ab0;
 
         // Cracked Pleasures
         public const uint GC1_CrackedPleasuresEntered = 0x000f1ab0;
 
         // Where Darkness Spreads
-        public const uint GC1_WhereDarknessSpreadsChest = 0x0;
+        public const uint GC1_WhereDarknessSpreadsChest = 0x0006197F;
         public const uint GC1_WhereDarknessSpreadsEntered = 0x000f1ab0;
 
         // Struggle for the Soul
@@ -1262,18 +1262,18 @@ namespace VagrantStoryArchipelago
         public const uint GCB_StruggleForTheSoulEntered = 0x000f1ab0;
 
         // Order and Chaos
-        public const uint GCB_OrderAndChaosMaridBossDefeat = 0x0;
+        public const uint GCB_OrderAndChaosMaridBossDefeat = 0x0017daa8;
         public const uint GCB_OrderAndChaosEntered = 0x000f1ab0;
 
         // An Offering of Souls
         public const uint GCB_AnOfferingOfSoulsEntered = 0x000f1ab0;
 
         // Truth and Lies
-        public const uint GCB_TruthAndLiesIfritBossDefeat = 0x0;
+        public const uint GCB_TruthAndLiesIfritBossDefeat = 0x0017ef28;
         public const uint GCB_TruthAndLiesEntered = 0x000f1ab0;
 
         // Sanity and Madness
-        public const uint GCB_SanityandMadnessIronCrabBossDefeat = 0x0;
+        public const uint GCB_SanityandMadnessIronCrabBossDefeat = 0x0017eb28;
         public const uint GCB_SanityandMadnessEntered = 0x000f1ab0;
 
         // The Victor's Laurels
@@ -1293,14 +1293,14 @@ namespace VagrantStoryArchipelago
 
         // The Hall of Broken Vows
         public const uint GC2_TheHallofBrokenVowsAcaciaSigilUnlock = 0x0;
-        public const uint GC2_TheHallofBrokenVowsFlameDragonBossDefeat = 0x0;
+        public const uint GC2_TheHallofBrokenVowsFlameDragonBossDefeat = 0x001815e8;
         public const uint GC2_TheHallofBrokenVowsEntered = 0x000f1ab0;
 
         // Light and Dark Wage War
         public const uint GC2_LightandDarkWageWarEntered = 0x000f1ab0;
 
         // An Arrow into Darkness
-        public const uint GC2_AnArrowintoDarknessChest = 0x0;
+        public const uint GC2_AnArrowintoDarknessChest = 0x0006195C;
         public const uint GC2_AnArrowintoDarknessEntered = 0x000f1ab0;
 
         // He Screams for Mercy
@@ -1320,7 +1320,7 @@ namespace VagrantStoryArchipelago
         public const uint GC2_TheMelodicsOfMadnessEntered = 0x000f1ab0;
 
         // What Ails You, Kills You
-        public const uint GC2_WhatAilsYouKillsYouNightmareBossDefeat = 0x0;
+        public const uint GC2_WhatAilsYouKillsYouNightmareBossDefeat = 0x0017e878;
         public const uint GC2_WhatAilsYouKillsYouEntered = 0x000f1ab0;
 
         // The Wine-Lecher's Fall
@@ -1337,7 +1337,7 @@ namespace VagrantStoryArchipelago
         public const uint GC3_DespairOfTheFallenEntered = 0x000f1ab0;
 
         // Hopes of the Idealist
-        public const uint GC3_HopesOfTheIdealistDaoBossDefeat = 0x0;
+        public const uint GC3_HopesOfTheIdealistDaoBossDefeat = 0x0017cfb8;
         public const uint GC3_HopesOfTheIdealistEntered = 0x000f1ab0;
 
         // Where the Soul Rots
@@ -1347,11 +1347,11 @@ namespace VagrantStoryArchipelago
         public const uint GC4_TheAtriumEntered = 0x000f1ab0;
 
         // Dome
-        public const uint GCD_DomeGuildesternBossDefeat = 0x0;
+        public const uint GCD_DomeGuildesternBossDefeat = 0x00180b18;
         public const uint GCD_DomeEntered = 0x000f1ab0;
 
         // Paling
-        public const uint GCD_PalingGuildesternApotheosBossDefeat = 0x0;
+        public const uint GCD_PalingGuildesternApotheosBossDefeat = 0x0017cd08;
         public const uint GCD_PalingEntered = 0x000f1ab0;
 
         // Stair to the Sinners
@@ -1367,11 +1367,11 @@ namespace VagrantStoryArchipelago
         public const uint FP_TheOracleSinsNoMoreEntered = 0x000f1ab0;
 
         // The Fallen Knight
-        public const uint FP_TheFallenKnightChest = 0x0;
+        public const uint FP_TheFallenKnightChest = 0x0006198C;
         public const uint FP_TheFallenKnightEntered = 0x000f1ab0;
 
         // Awaiting Retribution
-        public const uint FP_AwaitingRetributionChest = 0x0;
+        public const uint FP_AwaitingRetributionChest = 0x00061985;
         public const uint FP_AwaitingRetributionEntered = 0x000f1ab0;
 
         // Shelter From the Quake
@@ -1380,7 +1380,7 @@ namespace VagrantStoryArchipelago
         public const uint ESC_ShelterFromTheQuakeEntered = 0x000f1ab0;
 
         // Buried Alive
-        public const uint ESC_BuriedAliveChest = 0x0;
+        public const uint ESC_BuriedAliveChest = 0x00061986;
         public const uint ESC_BuriedAliveEntered = 0x000f1ab0;
 
         // Movement of Fear
@@ -1403,7 +1403,7 @@ namespace VagrantStoryArchipelago
         public const uint ESC_BloodAndTheBeastEntered = 0x000f1ab0;
 
         // Where Body and Soul Part
-        public const uint ESC_WhereBodyAndSoulPartChest = 0x0;
+        public const uint ESC_WhereBodyAndSoulPartChest = 0x00061996;
         public const uint ESC_WhereBodyAndSoulPartEntered = 0x000f1ab0;
 
         // Students of Death
@@ -1483,7 +1483,7 @@ namespace VagrantStoryArchipelago
         public const uint CAT_PersecutionHallEntered = 0x000f1ab0;
 
         // Rodent-Ridden Chamber
-        public const uint CAT_RodentRiddenChamberChest = 0x0;
+        public const uint CAT_RodentRiddenChamberChest = 0x00061968;
         public const uint CAT_RodentRiddenChamberEntered = 0x000f1ab0;
 
         // Shrine to the Martyrs
@@ -1494,14 +1494,14 @@ namespace VagrantStoryArchipelago
         public const uint CAT_TheLamentingMotherWestEntered = 0x000f1ab0;
 
         // The Lamenting Mother (East)
-        public const uint CAT_TheLamentingMotherEastChest = 0x0;
+        public const uint CAT_TheLamentingMotherEastChest = 0x0006196A;
         public const uint CAT_TheLamentingMotherEastEntered = 0x000f1ab0;
 
         // Hall of Dying Hope
         public const uint CAT_HallofDyingHopeEntered = 0x000f1ab0;
 
         // Bandits' Hideout
-        public const uint CAT_BanditsHideoutChest = 0x0;
+        public const uint CAT_BanditsHideoutChest = 0x00061969;
         public const uint CAT_BanditsHideoutEntered = 0x000f1ab0;
 
         // The Bloody Hallway
@@ -1541,7 +1541,7 @@ namespace VagrantStoryArchipelago
         public const uint AM1_TheCrossingEntered = 0x000f1ab0;
 
         // Miners Resting Hall
-        public const uint AM1_MinersRestingHallChest = 0x0;
+        public const uint AM1_MinersRestingHallChest = 0x00061980;
         public const uint AM1_MinersRestingHallEntered = 0x000f1ab0;
 
         // Conflict and Accord
@@ -1556,7 +1556,7 @@ namespace VagrantStoryArchipelago
         public const uint AM1_TheEarthquakesMarkEntered = 0x000f1ab0;
 
         // Coal Mine Storage
-        public const uint AM1_CoalMineStorageChest = 0x0;
+        public const uint AM1_CoalMineStorageChest = 0x00061993;
         public const uint AM1_CoalMineStoragePoisonPanelFloorTrap = 0x0;
         public const uint AM1_CoalMineStorageTrapClearFloorTrap = 0x0;
         public const uint AM1_CoalMineStorageEntered = 0x000f1ab0;
@@ -1565,7 +1565,7 @@ namespace VagrantStoryArchipelago
         public const uint AM1_TheSuicideKingEntered = 0x000f1ab0;
 
         // The Battle's Beginning
-        public const uint AM1_TheBattlesBeginningWyvernBossDefeat = 0x0;
+        public const uint AM1_TheBattlesBeginningWyvernBossDefeat = 0x001810f8;
         public const uint AM1_TheBattlesBeginningEntered = 0x000f1ab0;
 
         // What Lies Ahead?
@@ -1590,16 +1590,16 @@ namespace VagrantStoryArchipelago
         public const uint AM1_EverwantPassageEntered = 0x000f1ab0;
 
         // Mining Regrets
-        public const uint AM1_MiningRegretsChest = 0x0;
+        public const uint AM1_MiningRegretsChest = 0x00061982;
         public const uint AM1_MiningRegretsDeathVaporFloorTrap = 0x0;
         public const uint AM1_MiningRegretsEntered = 0x000f1ab0;
 
         // Rust in Peace
-        public const uint AM1_RustinPeaceChest = 0x0;
+        public const uint AM1_RustinPeaceChest = 0x00061967;
         public const uint AM1_RustinPeaceEntered = 0x000f1ab0;
 
         // The Smeltry
-        public const uint AM1_TheSmeltryFireElementalBossDefeat = 0x0;
+        public const uint AM1_TheSmeltryFireElementalBossDefeat = 0x00181cc8;
         public const uint AM1_TheSmeltryEntered = 0x000f1ab0;
 
         // Clash of Hyaenas
@@ -1617,7 +1617,7 @@ namespace VagrantStoryArchipelago
         public const uint AM1_PrayToTheMineralGodsEntered = 0x000f1ab0;
 
         // Traitor's Parting
-        public const uint AM1_TraitorsPartingOgreBossDefeat = 0x0;
+        public const uint AM1_TraitorsPartingOgreBossDefeat = 0x00181368;
         public const uint AM1_TraitorsPartingEntered = 0x000f1ab0;
 
         // Escapeway
@@ -1627,7 +1627,7 @@ namespace VagrantStoryArchipelago
         public const uint AM2_SubtellurianHorrorsEntered = 0x000f1ab0;
 
         // Dining in Darkness
-        public const uint AM2_DiningInDarknessSkyDragonBossDefeat = 0x0;
+        public const uint AM2_DiningInDarknessSkyDragonBossDefeat = 0x00185dd8;
         public const uint AM2_DiningInDarknessEntered = 0x000f1ab0;
 
         // Bandit's Hollow
@@ -1635,7 +1635,7 @@ namespace VagrantStoryArchipelago
         public const uint AM2_BanditsHollowEntered = 0x000f1ab0;
 
         // Delusions of Happiness
-        public const uint AM2_DelusionsOfHappinessChest = 0x0;
+        public const uint AM2_DelusionsOfHappinessChest = 0x0006198B;
         public const uint AM2_DelusionsOfHappinessEntered = 0x000f1ab0;
 
         // Work, Then Die
@@ -1648,7 +1648,7 @@ namespace VagrantStoryArchipelago
         public const uint AM2_TheLunaticVeinsEntered = 0x000f1ab0;
 
         // Tomb of the Reborn
-        public const uint AM2_TombOfTheRebornEarthElementalBossDefeat = 0x0;
+        public const uint AM2_TombOfTheRebornEarthElementalBossDefeat = 0x00185738;
         public const uint AM2_TombOfTheRebornEntered = 0x000f1ab0;
 
         // Fool's Gold, Fool's Loss
@@ -1669,7 +1669,7 @@ namespace VagrantStoryArchipelago
         public const uint AM2_TheOreOfLegendEntered = 0x000f1ab0;
 
         // Suicidal Desires
-        public const uint AM2_SuicidalDesiresChest = 0x0;
+        public const uint AM2_SuicidalDesiresChest = 0x00061979;
         public const uint AM2_SuicidalDesiresDeathVaporFloorTrap = 0x0;
         public const uint AM2_SuicidalDesiresParalysisPanelFloorTrap = 0x0;
         public const uint AM2_SuicidalDesiresHolyLightFloorTrap = 0x0;
@@ -1694,7 +1694,7 @@ namespace VagrantStoryArchipelago
         public const uint AM2_HallOfTheEmptySconceEntered = 0x000f1ab0;
 
         // Acolyte's Burial Vault
-        public const uint AM2_AcolytesBurialVaultChest = 0x0;
+        public const uint AM2_AcolytesBurialVaultChest = 0x0006197A;
         public const uint AM2_AcolytesBurialVaultEntered = 0x000f1ab0;
 
         // The Abandoned Catspaw
@@ -1718,14 +1718,14 @@ namespace VagrantStoryArchipelago
         public const uint AM2_WayOfLostChildrenEntered = 0x000f1ab0;
 
         // Hidden Resources
-        public const uint AM2_HiddenResourcesChest = 0x0;
+        public const uint AM2_HiddenResourcesChest = 0x00061963;
         public const uint AM2_HiddenResourcesEntered = 0x000f1ab0;
 
         // Treaty Room
         public const uint AM2_TreatyRoomEntered = 0x000f1ab0;
 
         // The Miner's End
-        public const uint AM2_TheMinersEndAirElementalBossDefeat = 0x0;
+        public const uint AM2_TheMinersEndAirElementalBossDefeat = 0x00185318;
         public const uint AM2_TheMinersEndEntered = 0x000f1ab0;
 
         // Gambler's Passage
