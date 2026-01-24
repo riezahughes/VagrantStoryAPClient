@@ -12,6 +12,8 @@ namespace VagrantStoryArchipelago
         public const uint CurrentRoomID = 0x000f1a0;
         public const uint CurrentMapID = 0x000f1a0;
 
+        public const uint CurrentMapandRoomID = 0x000f1ab0;
+
         // Ashleys Stats And Abilities
         public const uint AshleyHealth = 0x0011fa58;
         // Risk Skills

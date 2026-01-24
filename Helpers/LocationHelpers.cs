@@ -796,27 +796,69 @@ namespace Helpers
                     {
                         int locationId = (int)currentRegionBaseId + location_index;
 
-                        locations.Add(new Location()
+                        if (loc.Name.Contains("Boss"))
                         {
-                            Id = locationId,
-                            Name = loc.Name,
-                            Address = loc.Address,
-                            CheckType = loc.CheckType,
-                            CompareType = LocationCheckCompareType.Match,
-                            CheckValue = loc.Check
+                            List<ILocation> conditionalChoice = new List<ILocation>();
 
-                        });
+                            conditionalChoice.Add(new Location()
+                            {
+                                Id = -1,
+                                Name = "Level Check",
+                                Address = Addresses.CurrentMapandRoomID,
+                                CheckType = LocationCheckType.UShort,
+                                CompareType = LocationCheckCompareType.Match,
+                                CheckValue = loc.LevelId
+                            });
 
-                        location_index++;
+                            conditionalChoice.Add(new Location()
+                            {
+                                Id = -1,
+                                Name = "Boss HP Check",
+                                Address = loc.Address,
+                                CheckType = loc.CheckType,
+                                CompareType = LocationCheckCompareType.Match,
+                                CheckValue = loc.Check
+
+                            });
+
+                            CompositeLocation location = new CompositeLocation()
+                            {
+                                Name = loc.Name,
+                                Id = locationId,
+                                CheckType = LocationCheckType.AND,
+                                Conditions = conditionalChoice,
+                            };
+
+                            locations.Add(location);
+                            location_index++;
+                            continue;
+                        }
+                        else
+                        {
+
+
+                            locations.Add(new Location()
+                            {
+                                Id = locationId,
+                                Name = loc.Name,
+                                Address = loc.Address,
+                                CheckType = loc.CheckType,
+                                CompareType = LocationCheckCompareType.Match,
+                                CheckValue = loc.Check
+
+                            });
+
+                            location_index++;
+                        }
                     }
                 }
                 regional_index++;
             }
 #if DEBUG
-            //foreach (var loc in locations)
-            //{
-            //    Console.WriteLine($"{loc.Name}, {loc.Id}");
-            //}
+            foreach (var loc in locations)
+            {
+                Console.WriteLine($"{loc.Name}, {loc.Id}");
+            }
 #endif
             return locations;
         }
