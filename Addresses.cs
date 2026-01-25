@@ -281,22 +281,25 @@ namespace VagrantStoryArchipelago
 
         // Armor Inventory Slots
 
-        public const uint InventoryArmorSlot01 = 0x000607a9;
-        public const uint InventoryArmorSlot02 = 0x000607d1;
-        public const uint InventoryArmorSlot03 = 0x000607f9;
-        public const uint InventoryArmorSlot04 = 0x00060821;
-        public const uint InventoryArmorSlot05 = 0x00060849;
-        public const uint InventoryArmorSlot06 = 0x00060871;
-        public const uint InventoryArmorSlot07 = 0x00060899;
-        public const uint InventoryArmorSlot08 = 0x000608c1;
-        public const uint InventoryArmorSlot09 = 0x000608e9;
-        public const uint InventoryArmorSlot10 = 0x00060911;
-        public const uint InventoryArmorSlot11 = 0x00060939;
-        public const uint InventoryArmorSlot12 = 0x00060961;
-        public const uint InventoryArmorSlot13 = 0x00060989;
-        public const uint InventoryArmorSlot14 = 0x000609b1;
-        public const uint InventoryArmorSlot15 = 0x000609d9;
-        public const uint InventoryArmorSlot16 = 0x00060a01;
+        public const uint InventoryArmorSlot01 = 0x000607a7;
+        public const uint InventoryArmorSlot02 = 0x000607cf;
+        public const uint InventoryArmorSlot03 = 0x000607f7;
+        public const uint InventoryArmorSlot04 = 0x0006081f;
+        public const uint InventoryArmorSlot05 = 0x00060847;
+        public const uint InventoryArmorSlot06 = 0x0006086f;
+        public const uint InventoryArmorSlot07 = 0x00060897;
+        public const uint InventoryArmorSlot08 = 0x000608bf;
+        public const uint InventoryArmorSlot09 = 0x000608e7;
+        public const uint InventoryArmorSlot10 = 0x0006090f;
+        public const uint InventoryArmorSlot11 = 0x00060937;
+        public const uint InventoryArmorSlot12 = 0x0006095f;
+        public const uint InventoryArmorSlot13 = 0x00060987;
+        public const uint InventoryArmorSlot14 = 0x000609af;
+        public const uint InventoryArmorSlot15 = 0x000609d7;
+        public const uint InventoryArmorSlot16 = 0x000609ff;
+
+
+        // Equipped Armour Slots
 
 
         // Gem Inventory Slots

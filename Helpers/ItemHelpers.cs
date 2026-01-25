@@ -11,6 +11,7 @@ namespace VagrantStoryArchipelago.Helpers
 
         public static InventoryItemData CheckInventoryItemSlot(int slot)
         {
+            // needs rewritten
             var slots = InventoryItemSlotReference;
             var slotData = Memory.ReadULong(slots[slot]);
             byte[] bytes = BitConverter.GetBytes(slotData);
@@ -29,11 +30,11 @@ namespace VagrantStoryArchipelago.Helpers
                 var slotData = Memory.ReadUInt(slot.Value);
                 byte[] bytes = BitConverter.GetBytes(slotData);
 
-                if (bytes[0] == 0x00)
+                if (bytes[1] == 0x00)
                 {
                     break;
                 }
-                string itemName = ItemReference.ContainsKey(bytes[0]) ? ItemReference[bytes[0]] : "Unknown Item";
+                string itemName = ItemReference.ContainsKey(bytes[1]) ? ItemReference[bytes[1]] : "Unknown Item";
                 var itemData = ItemDatabase.Items[itemName];
                 itemList.Add(itemData);
             }
@@ -75,17 +76,29 @@ namespace VagrantStoryArchipelago.Helpers
             foreach (var slot in slots)
             {
                 ulong slotData = Memory.ReadUInt(slot.Value);
+                byte weaponMaterial = Memory.ReadByte(slot.Value + 0x25);
 
                 byte[] bytes = BitConverter.GetBytes(slotData);
-                Array.Reverse(bytes);
 
-                if (bytes[7] == 0x00)
+                Console.WriteLine($"{bytes[1]:X}, {bytes[2]:X}");
+                Console.WriteLine($"{weaponMaterial:X}");
+
+                if (bytes[1] == 0x00 && bytes[2] == 0x00)
                 {
                     break;
                 }
 
 
-                string armorName = ArmorReference.ContainsKey(bytes[7]) ? ArmorReference[bytes[7]] : "Unknown Armor";
+                string armorName = ArmorReference.ContainsKey(bytes[2]) ? ArmorReference[bytes[2]] : "Unknown Armor";
+
+                if (armorName is null || armorName == "Unknown Armor")
+                {
+                    Console.WriteLine("Could not find armour reference");
+                    armorList.Add(HelmetDatabase.Helmets["Leather Bandana"]);
+                    continue;
+                }
+
+                string fullArmorPieceName = MaterialReference[weaponMaterial] + " " + armorName;
 
                 //ArmorType armorType = 0;
                 InventoryArmorData armorData = null;
@@ -94,9 +107,19 @@ namespace VagrantStoryArchipelago.Helpers
                 //switch (armorType)
                 //{
                 //case ArmorType.HELM:
-                HelmetDatabase.Helmets.TryGetValue(armorName, out armorData);
-                armorList.Add(armorData);
-                Console.WriteLine(armorData.ArmorName);
+                HelmetDatabase.Helmets.TryGetValue(fullArmorPieceName, out armorData);
+                if (armorData is null)
+                {
+                    Console.WriteLine("Armour type not set up yet");
+                    armorData = HelmetDatabase.Helmets["Leather Bandana"];
+                    armorData.ArmorInventorySlot = bytes[0];
+                    armorList.Add(armorData);
+                }
+                else
+                {
+                    armorData.ArmorInventorySlot = bytes[0];
+                    armorList.Add(armorData);
+                }
                 // YOU WERE TRYING TO SEE WHAT THE DATA ACTUALLY LOOKED LIKE IN THE GAME AND CORRECTLY READ WHAT THE FUCK YOU SHOULD BE DOING
                 // BASED ON THE PATTERNS BETWEEN A FULL SLOT AND AN EMPTY SLOT.
                 // GOOD LUCK, CUNT.
@@ -219,7 +242,7 @@ namespace VagrantStoryArchipelago.Helpers
 
             var listOfSlots = ItemHelpers.GetInventoryArmorSlots();
 
-            Console.WriteLine($"{listOfSlots.Count} gem slots found");
+            Console.WriteLine($"{listOfSlots.Count} armor slots found");
 
             if (listOfSlots.Count >= 16)
             {
@@ -228,15 +251,17 @@ namespace VagrantStoryArchipelago.Helpers
                 return;
             }
 
-            InventoryArmorData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.ArmorName == args.Item.Name, null);
+            InventoryArmorData matchingArmor = listOfSlots.FirstOrDefault(inGameItem => inGameItem.ArmorName == args.Item.Name, null);
 
             InventoryArmorData armorData = null;
 
 
-            if (matchingItem is not null && matchingItem.ArmorName != "Unknown Armor")
+            if (matchingArmor is not null)
             {
-                //Console.WriteLine($"{matchingItem.ArmorName} has been found already: Adding to Newer slot {matchingItem.ArmorInventorySlot}");
-                //armorData = new InventoryItemData(matchingItem.Name, matchingItem.ItemSlot, (byte)(matchingItem.Quantity + 0x05), matchingItem.FreeSlot, matchingItem.ItemID);
+                Console.WriteLine($"{matchingArmor.ArmorName} has been found already: Adding to Newer slot {listOfSlots.Count + 1}");
+                InventoryArmorData armor = HelmetDatabase.Helmets[args.Item.Name];
+                armor.ArmorInventorySlot = (byte)(listOfSlots.Count);
+                Memory.WriteObject<InventoryArmorData>(InventoryArmorSlotReference[listOfSlots.Count], armor);
 
             }
             else
@@ -246,11 +271,11 @@ namespace VagrantStoryArchipelago.Helpers
 
                 InventoryArmorData armor = HelmetDatabase.Helmets[args.Item.Name];
 
-                //armor.GemInventorySlot = (byte)(listOfSlots.Count);
+                armor.ArmorInventorySlot = (byte)(listOfSlots.Count + 1);
 
-                //Console.WriteLine($"No Gem has been found: Adding {gem.GemName} with Agi {gem.GemAgiStat} to slot {listOfSlots.Count}");
+                Console.WriteLine($"Armor does not exist: Adding {armor.ArmorName} with material of {armor.ArmorMaterial} to slot {listOfSlots.Count + 1}");
 
-                Memory.WriteObject<InventoryArmorData>(InventoryArmorSlotReference[listOfSlots.Count], HelmetDatabase.Helmets[args.Item.Name]);
+                Memory.WriteObject<InventoryArmorData>(InventoryArmorSlotReference[listOfSlots.Count + 1], HelmetDatabase.Helmets[args.Item.Name]);
             }
         }
 
@@ -723,6 +748,18 @@ namespace VagrantStoryArchipelago.Helpers
             { 0x31, "Dark Queen" },
             { 0x32, "Death Queen" },
             { 0x33, "White Queen" }
+        };
+
+        public static Dictionary<byte, string> MaterialReference = new Dictionary<byte, string>()
+        {
+            {0x00, "None" },
+            {0x01, "Wood" },
+            {0x02, "Leather" },
+            {0x03, "Bronze" },
+            {0x04, "Iron" },
+            {0x05, "Hagane" },
+            {0x06, "Silver" },
+            {0x07, "Damascus" }
         };
 
 

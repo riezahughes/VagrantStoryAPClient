@@ -8,7 +8,7 @@
 //        {
 //            // ===== GLOVES (ARM) =====
 //            // Bandage (ID 0x20) - Base: STR 1, INT 8, AGI 0, Blunt 1, Edged 0, Piercing 0
-//            ["Leather Bandage"] = new InventoryArmorData("Leather Bandage", 0x20, ArmorType.ARM, 100, 100, 2, 14, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 5, 5, 1, 1, 5, 5, 0x00, 0x00),
+//["Leather Bandage"] = new InventoryArmorData("Leather Bandage", 0x20, ArmorType.ARM, 100, 100, 2, 14, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 5, 5, 1, 1, 5, 5, 0x00, 0x00),
 //            ["Wood Bandage"] = new InventoryArmorData("Wood Bandage", 0x20, ArmorType.ARM, 100, 100, 6, 16, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 6, 8, 8, 6, 4, 4, 0x01, 0x00),
 //            ["Bronze Bandage"] = new InventoryArmorData("Bronze Bandage", 0x20, ArmorType.ARM, 100, 100, 4, 10, -2, 1, 0, 0, 1, 1, 2, 1, 1, 5, 8, 5, 5, 3, 3, 2, 2, 0x02, 0x00),
 //            ["Iron Bandage"] = new InventoryArmorData("Iron Bandage", 0x20, ArmorType.ARM, 100, 100, 6, 10, -2, 1, 0, 0, -1, -1, 2, -1, -1, 0, 10, 0, 4, 4, 0, 1, 1, 0x03, 0x00),
