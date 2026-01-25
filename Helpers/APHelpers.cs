@@ -61,12 +61,14 @@ namespace Helpers
                 return;
             }
 
-            if (!isInTheGame())
-            {
-                Console.WriteLine($"Player is not in a valid location. Delaying {args.Item.Name}");
-                App.delayedItems.Add(args);
-                return;
-            }
+            // turn back on later when you can differentiate the menu's being open.
+
+            //if (!isInTheGame())
+            //{
+            //    Console.WriteLine($"Player is not in a valid location. Delaying {args.Item.Name}");
+            //    App.delayedItems.Add(args);
+            //    return;
+            //}
 
 #if DEBUG
             Console.WriteLine($"ItemReceived Firing. Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");

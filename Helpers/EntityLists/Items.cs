@@ -1,0 +1,141 @@
+﻿using VagrantStoryArchipelago.Models.Inventory;
+
+namespace VagrantStoryArchipelago.Data
+{
+    public static class ItemDatabase
+    {
+        public static readonly Dictionary<string, InventoryItemData> Items = new Dictionary<string, InventoryItemData>
+        {
+            // Cure Items (0x43-0x46)
+            ["Cure Root"] = new InventoryItemData("Cure Root", 0x43, 0x01, 5, 0x00),
+            ["Cure Bulb"] = new InventoryItemData("Cure Bulb", 0x44, 0x01, 5, 0x00),
+            ["Cure Tonic"] = new InventoryItemData("Cure Tonic", 0x45, 0x01, 5, 0x00),
+            ["Cure Potion"] = new InventoryItemData("Cure Potion", 0x46, 0x01, 5, 0x00),
+
+            // Mana Items (0x47-0x4A)
+            ["Mana Root"] = new InventoryItemData("Mana Root", 0x47, 0x01, 5, 0x00),
+            ["Mana Bulb"] = new InventoryItemData("Mana Bulb", 0x48, 0x01, 5, 0x00),
+            ["Mana Tonic"] = new InventoryItemData("Mana Tonic", 0x49, 0x01, 5, 0x00),
+            ["Mana Potion"] = new InventoryItemData("Mana Potion", 0x4A, 0x01, 5, 0x00),
+
+            // Vera Items (0x4B-0x4E)
+            ["Vera Root"] = new InventoryItemData("Vera Root", 0x4B, 0x01, 5, 0x00),
+            ["Vera Bulb"] = new InventoryItemData("Vera Bulb", 0x4C, 0x01, 5, 0x00),
+            ["Vera Tonic"] = new InventoryItemData("Vera Tonic", 0x4D, 0x01, 5, 0x00),
+            ["Vera Potion"] = new InventoryItemData("Vera Potion", 0x4E, 0x01, 5, 0x00),
+
+            // Special Potions (0x4F-0x5E)
+            ["Acolyte´s Nostrum"] = new InventoryItemData("Acolyte´s Nostrum", 0x4F, 0x01, 5, 0x00),
+            ["Saint´s Nostrum"] = new InventoryItemData("Saint´s Nostrum", 0x50, 0x01, 5, 0x00),
+            ["Alchemist´s Reagent"] = new InventoryItemData("Alchemist´s Reagent", 0x51, 0x01, 5, 0x00),
+            ["Sorcerer´s Reagent"] = new InventoryItemData("Sorcerer´s Reagent", 0x52, 0x01, 5, 0x00),
+            ["Yggdrasill´s Tears"] = new InventoryItemData("Yggdrasill´s Tears", 0x53, 0x01, 5, 0x00),
+            ["Faerie Chortle"] = new InventoryItemData("Faerie Chortle", 0x54, 0x01, 5, 0x00),
+            ["Spirit Orison"] = new InventoryItemData("Spirit Orison", 0x55, 0x01, 5, 0x00),
+            ["Angelic Paean"] = new InventoryItemData("Angelic Paean", 0x56, 0x01, 5, 0x00),
+            ["Panacea"] = new InventoryItemData("Panacea", 0x57, 0x01, 5, 0x00),
+            ["Snowfly Draught"] = new InventoryItemData("Snowfly Draught", 0x58, 0x01, 5, 0x00),
+            ["Faerie Wing"] = new InventoryItemData("Faerie Wing", 0x59, 0x01, 5, 0x00),
+            ["Elixir of Kings"] = new InventoryItemData("Elixir of Kings", 0x5A, 0x01, 5, 0x00),
+            ["Elixir of Sages"] = new InventoryItemData("Elixir of Sages", 0x5B, 0x01, 5, 0x00),
+            ["Elixir of Dragons"] = new InventoryItemData("Elixir of Dragons", 0x5C, 0x01, 5, 0x00),
+            ["Elixir of Queens"] = new InventoryItemData("Elixir of Queens", 0x5D, 0x01, 5, 0x00),
+            ["Elixir of Mages"] = new InventoryItemData("Elixir of Mages", 0x5E, 0x01, 5, 0x00),
+
+            // Wines (0x5F-0x64)
+            ["Valens (Wine)"] = new InventoryItemData("Valens (Wine)", 0x5F, 0x01, 5, 0x00),
+            ["Prudens (Wine)"] = new InventoryItemData("Prudens (Wine)", 0x60, 0x01, 5, 0x00),
+            ["Volare (Wine)"] = new InventoryItemData("Volare (Wine)", 0x61, 0x01, 5, 0x00),
+            ["Audentia (Wine)"] = new InventoryItemData("Audentia (Wine)", 0x62, 0x01, 5, 0x00),
+            ["Virtus (Wine)"] = new InventoryItemData("Virtus (Wine)", 0x63, 0x01, 5, 0x00),
+            ["Eye of Argon"] = new InventoryItemData("Eye of Argon", 0x64, 0x01, 5, 0x00),
+
+            // Grimoire Spells (0x82-0xC8)
+            ["Grimoire Zephyr"] = new InventoryItemData("Grimoire Zephyr", 0x82, 0x01, 5, 0x00),
+            ["Grimoire Teslae"] = new InventoryItemData("Grimoire Teslae", 0x83, 0x01, 5, 0x00),
+            ["Grimoire Incendie"] = new InventoryItemData("Grimoire Incendie", 0x84, 0x01, 5, 0x00),
+            ["Grimoire Terre"] = new InventoryItemData("Grimoire Terre", 0x85, 0x01, 5, 0x00),
+            ["Grimoire Glace"] = new InventoryItemData("Grimoire Glace", 0x86, 0x01, 5, 0x00),
+            ["Grimoire Lux"] = new InventoryItemData("Grimoire Lux", 0x87, 0x01, 5, 0x00),
+            ["Grimoire Patir"] = new InventoryItemData("Grimoire Patir", 0x88, 0x01, 5, 0x00),
+            ["Grimoire Exsorcer"] = new InventoryItemData("Grimoire Exsorcer", 0x89, 0x01, 5, 0x00),
+            ["Grimoire Banish"] = new InventoryItemData("Grimoire Banish", 0x8A, 0x01, 5, 0x00),
+            ["Grimoire Demolir"] = new InventoryItemData("Grimoire Demolir", 0x8B, 0x01, 5, 0x00),
+            ["Grimoire Flamme"] = new InventoryItemData("Grimoire Flamme", 0x93, 0x01, 5, 0x00),
+            ["Grimoire Gaea"] = new InventoryItemData("Grimoire Gaea", 0x97, 0x01, 5, 0x00),
+            ["Grimoire Avalanche"] = new InventoryItemData("Grimoire Avalanche", 0x9B, 0x01, 5, 0x00),
+            ["Grimoire Radius"] = new InventoryItemData("Grimoire Radius", 0x9F, 0x01, 5, 0x00),
+            ["Grimoire Meteore"] = new InventoryItemData("Grimoire Meteore", 0xA1, 0x01, 5, 0x00),
+            ["Grimoire Egout"] = new InventoryItemData("Grimoire Egout", 0xA7, 0x01, 5, 0x00),
+            ["Grimoire Demance"] = new InventoryItemData("Grimoire Demance", 0xA8, 0x01, 5, 0x00),
+            ["Grimoire Guerir"] = new InventoryItemData("Grimoire Guerir", 0xA9, 0x01, 5, 0x00),
+            ["Grimoire Mollesse"] = new InventoryItemData("Grimoire Mollesse", 0xAA, 0x01, 5, 0x00),
+            ["Grimoire Antidote"] = new InventoryItemData("Grimoire Antidote", 0xAB, 0x01, 5, 0x00),
+            ["Grimoire Benir"] = new InventoryItemData("Grimoire Benir", 0xAC, 0x01, 5, 0x00),
+            ["Grimoire Purifier"] = new InventoryItemData("Grimoire Purifier", 0xAD, 0x01, 5, 0x00),
+            ["Grimoire Vie"] = new InventoryItemData("Grimoire Vie", 0xAE, 0x01, 5, 0x00),
+            ["Grimoire Intensite"] = new InventoryItemData("Grimoire Intensite", 0xAF, 0x01, 5, 0x00),
+            ["Grimoire Debile"] = new InventoryItemData("Grimoire Debile", 0xB0, 0x01, 5, 0x00),
+            ["Grimoire Eclairer"] = new InventoryItemData("Grimoire Eclairer", 0xB1, 0x01, 5, 0x00),
+            ["Grimoire Nuageux"] = new InventoryItemData("Grimoire Nuageux", 0xB2, 0x01, 5, 0x00),
+            ["Grimoire Agilite"] = new InventoryItemData("Grimoire Agilite", 0xB3, 0x01, 5, 0x00),
+            ["Grimoire Tardif"] = new InventoryItemData("Grimoire Tardif", 0xB4, 0x01, 5, 0x00),
+            ["Grimoire Ameliorer"] = new InventoryItemData("Grimoire Ameliorer", 0xB5, 0x01, 5, 0x00),
+            ["Grimoire Deterior"] = new InventoryItemData("Grimoire Deterior", 0xB6, 0x01, 5, 0x00),
+            ["Grimoire Muet"] = new InventoryItemData("Grimoire Muet", 0xB7, 0x01, 5, 0x00),
+            ["Grimoire Annuler"] = new InventoryItemData("Grimoire Annuler", 0xB8, 0x01, 5, 0x00),
+            ["Grimoire Paralysie"] = new InventoryItemData("Grimoire Paralysie", 0xB9, 0x01, 5, 0x00),
+            ["Grimoire Venin"] = new InventoryItemData("Grimoire Venin", 0xBA, 0x01, 5, 0x00),
+            ["Grimoire Fleau"] = new InventoryItemData("Grimoire Fleau", 0xBB, 0x01, 5, 0x00),
+            ["Grimoire Halte"] = new InventoryItemData("Grimoire Halte", 0xBC, 0x01, 5, 0x00),
+            ["Grimoire Dissiper"] = new InventoryItemData("Grimoire Dissiper", 0xBD, 0x01, 5, 0x00),
+            ["Grimoire Clef"] = new InventoryItemData("Grimoire Clef", 0xBE, 0x01, 5, 0x00),
+            ["Grimoire Visual"] = new InventoryItemData("Grimoire Visual", 0xBF, 0x01, 5, 0x00),
+            ["Grimoire Snalyse"] = new InventoryItemData("Grimoire Snalyse", 0xC0, 0x01, 5, 0x00),
+            ["Grimoire Sylphe"] = new InventoryItemData("Grimoire Sylphe", 0xC1, 0x01, 5, 0x00),
+            ["Grimoire Salamander"] = new InventoryItemData("Grimoire Salamander", 0xC2, 0x01, 5, 0x00),
+            ["Grimoire Gnome"] = new InventoryItemData("Grimoire Gnome", 0xC3, 0x01, 5, 0x00),
+            ["Grimoire Undine"] = new InventoryItemData("Grimoire Undine", 0xC4, 0x01, 5, 0x00),
+            ["Grimoire Parebrise"] = new InventoryItemData("Grimoire Parebrise", 0xC5, 0x01, 5, 0x00),
+            ["Grimoire Ignifuge"] = new InventoryItemData("Grimoire Ignifuge", 0xC6, 0x01, 5, 0x00),
+            ["Grimoire Rempart"] = new InventoryItemData("Grimoire Rempart", 0xC7, 0x01, 5, 0x00),
+            ["Grimoire Barrer"] = new InventoryItemData("Grimoire Barrer", 0xC8, 0x01, 5, 0x00),
+
+            // Keys (0xCA-0xD1)
+            ["Bronze Key"] = new InventoryItemData("Bronze Key", 0xCA, 0x01, 5, 0x00),
+            ["Iron Key"] = new InventoryItemData("Iron Key", 0xCB, 0x01, 5, 0x00),
+            ["Silver Key"] = new InventoryItemData("Silver Key", 0xCC, 0x01, 5, 0x00),
+            ["Gold Key"] = new InventoryItemData("Gold Key", 0xCD, 0x01, 5, 0x00),
+            ["Platinum Key"] = new InventoryItemData("Platinum Key", 0xCE, 0x01, 5, 0x00),
+            ["Steel Key"] = new InventoryItemData("Steel Key", 0xCF, 0x01, 5, 0x00),
+            ["Crimson Key"] = new InventoryItemData("Crimson Key", 0xD0, 0x01, 5, 0x00),
+            ["Chest Key"] = new InventoryItemData("Chest Key", 0xD1, 0x01, 5, 0x00),
+
+            // Sigils (0xD2-0xE9)
+            ["Chamomile Sigil"] = new InventoryItemData("Chamomile Sigil", 0xD2, 0x01, 5, 0x00),
+            ["Lily Sigil"] = new InventoryItemData("Lily Sigil", 0xD3, 0x01, 5, 0x00),
+            ["Tearose Sigil"] = new InventoryItemData("Tearose Sigil", 0xD4, 0x01, 5, 0x00),
+            ["Clematis Sigil"] = new InventoryItemData("Clematis Sigil", 0xD5, 0x01, 5, 0x00),
+            ["Hyacinth Sigil"] = new InventoryItemData("Hyacinth Sigil", 0xD6, 0x01, 5, 0x00),
+            ["Fern Sigil"] = new InventoryItemData("Fern Sigil", 0xD7, 0x01, 5, 0x00),
+            ["Aster Sigil"] = new InventoryItemData("Aster Sigil", 0xD8, 0x01, 5, 0x00),
+            ["Eulelia Sigil"] = new InventoryItemData("Eulelia Sigil", 0xD9, 0x01, 5, 0x00),
+            ["Melissa Sigil"] = new InventoryItemData("Melissa Sigil", 0xDA, 0x01, 5, 0x00),
+            ["Calla Sigil"] = new InventoryItemData("Calla Sigil", 0xDB, 0x01, 5, 0x00),
+            ["Laurel Sigil"] = new InventoryItemData("Laurel Sigil", 0xDC, 0x01, 5, 0x00),
+            ["Acacia Sigil"] = new InventoryItemData("Acacia Sigil", 0xDD, 0x01, 5, 0x00),
+            ["Palm Sigil"] = new InventoryItemData("Palm Sigil", 0xDE, 0x01, 5, 0x00),
+            ["Kalmia Sigil"] = new InventoryItemData("Kalmia Sigil", 0xDF, 0x01, 5, 0x00),
+            ["Colombine Sigil"] = new InventoryItemData("Colombine Sigil", 0xE0, 0x01, 5, 0x00),
+            ["Anemone Sigil"] = new InventoryItemData("Anemone Sigil", 0xE1, 0x01, 5, 0x00),
+            ["Verbena Sigil"] = new InventoryItemData("Verbena Sigil", 0xE2, 0x01, 5, 0x00),
+            ["Schirra Sigil"] = new InventoryItemData("Schirra Sigil", 0xE3, 0x01, 5, 0x00),
+            ["Marigold Sigil"] = new InventoryItemData("Marigold Sigil", 0xE4, 0x01, 5, 0x00),
+            ["Azalea Sigil"] = new InventoryItemData("Azalea Sigil", 0xE5, 0x01, 5, 0x00),
+            ["Tigertail Sigil"] = new InventoryItemData("Tigertail Sigil", 0xE6, 0x01, 5, 0x00),
+            ["Stock Sigil"] = new InventoryItemData("Stock Sigil", 0xE7, 0x01, 5, 0x00),
+            ["Cattleya Sigil"] = new InventoryItemData("Cattleya Sigil", 0xE8, 0x01, 5, 0x00),
+            ["Mandrake Sigil"] = new InventoryItemData("Mandrake Sigil", 0xE9, 0x01, 5, 0x00)
+        };
+    }
+}

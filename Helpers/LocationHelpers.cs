@@ -855,10 +855,10 @@ namespace Helpers
                 regional_index++;
             }
 #if DEBUG
-            foreach (var loc in locations)
-            {
-                Console.WriteLine($"{loc.Name}, {loc.Id}");
-            }
+            //foreach (var loc in locations)
+            //{
+            //    Console.WriteLine($"{loc.Name}, {loc.Id}");
+            //}
 #endif
             return locations;
         }

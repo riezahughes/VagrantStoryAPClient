@@ -1,5 +1,6 @@
 ﻿using Archipelago.Core.Models;
 using Archipelago.Core.Util;
+using VagrantStoryArchipelago.Data;
 using VagrantStoryArchipelago.Helpers.EntityLists;
 using VagrantStoryArchipelago.Models.Inventory;
 
@@ -27,14 +28,13 @@ namespace VagrantStoryArchipelago.Helpers
             {
                 var slotData = Memory.ReadUInt(slot.Value);
                 byte[] bytes = BitConverter.GetBytes(slotData);
-                Array.Reverse(bytes);
 
-                if (bytes[3] == 0x00)
+                if (bytes[0] == 0x00)
                 {
                     break;
                 }
-                string itemName = ItemReference.ContainsKey(bytes[3]) ? ItemReference[bytes[3]] : "Unknown Item";
-                var itemData = new InventoryItemData(itemName, bytes[0], bytes[1], bytes[2], bytes[3]);
+                string itemName = ItemReference.ContainsKey(bytes[0]) ? ItemReference[bytes[0]] : "Unknown Item";
+                var itemData = ItemDatabase.Items[itemName];
                 itemList.Add(itemData);
             }
 
@@ -118,38 +118,6 @@ namespace VagrantStoryArchipelago.Helpers
             }
             return listOfSlots.Count;
         }
-        public static void handleInventoryItem(ItemReceivedEventArgs args)
-        {
-            // Specifically only for inventory items. Does not include weapons/armour/etc
-
-            var listOfSlots = GetInventoryItemSlots();
-
-            Console.WriteLine($"{listOfSlots.Count} slots found");
-
-            if (listOfSlots.Count >= 64)
-            {
-                Console.WriteLine($"Inventory full. Delaying {args.Item.Name}");
-                App.delayedItems.Add(args);
-                return;
-            }
-
-            InventoryItemData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.Name == args.Item.Name, null);
-
-
-            InventoryItemData itemData;
-
-            if (matchingItem is not null && matchingItem.Name != "Unknown Item")
-            {
-                Console.WriteLine($"{matchingItem.Name} has been found: Adding 5 to the quantity in slot {matchingItem.ItemSlot}");
-                itemData = new InventoryItemData(matchingItem.Name, matchingItem.ItemSlot, (byte)(matchingItem.Quantity + 0x05), matchingItem.FreeSlot, matchingItem.ItemID);
-            }
-            else
-            {
-                Console.WriteLine($"No Item has been found: Adding 5 of the item to the quantity in slot {listOfSlots.Count + 1}");
-                byte itemID = ItemReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
-                itemData = new InventoryItemData(args.Item.Name, (byte)(listOfSlots.Count + 1), 0x05, 0x01, itemID);
-            }
-        }
 
         public static void SetInventoryItemSlot(InventoryItemData item, int slot)
         {
@@ -168,6 +136,43 @@ namespace VagrantStoryArchipelago.Helpers
                 Memory.Write(InventoryItemSlotReference[slot], item.UseFullAddress());
             }
 
+        }
+
+        public static void handleInventoryItem(ItemReceivedEventArgs args)
+        {
+            // Specifically only for inventory items. Does not include weapons/armour/etc
+
+            var listOfSlots = GetInventoryItemSlots();
+
+            Console.WriteLine($"{listOfSlots.Count} slots found");
+
+            if (listOfSlots.Count >= 64)
+            {
+                Console.WriteLine($"Inventory full. Delaying {args.Item.Name}");
+                App.delayedItems.Add(args);
+                return;
+            }
+
+            InventoryItemData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.Name == args.Item.Name, null);
+
+
+            if (matchingItem is not null && matchingItem.Name != "Unknown Item")
+            {
+                Console.WriteLine($"{matchingItem.Name} has been found: Adding 5 to the quantity in slot {matchingItem.ItemSlot}");
+                byte itemID = ItemHelpers.ItemReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
+                InventoryItemData item = ItemDatabase.Items[args.Item.Name];
+                item.ItemSlot = matchingItem.ItemSlot;
+                item.Quantity = (byte)(matchingItem.Quantity + 0x05);
+                Memory.WriteObject<InventoryItemData>(InventoryItemSlotReference[matchingItem.ItemSlot - 1], item);
+            }
+            else
+            {
+                Console.WriteLine($"No Item has been found: Adding 5 of the item to the quantity in slot {listOfSlots.Count + 1}");
+                byte itemID = ItemReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
+                InventoryItemData item = ItemDatabase.Items[args.Item.Name];
+                item.ItemSlot = (byte)(listOfSlots.Count + 1);
+                Memory.WriteObject<InventoryItemData>(InventoryItemSlotReference[listOfSlots.Count], item);
+            }
         }
 
 
