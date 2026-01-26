@@ -1,6 +1,7 @@
 ﻿using Archipelago.Core.Models;
 using Archipelago.Core.Util;
 using VagrantStoryArchipelago.Data;
+using VagrantStoryArchipelago.Enums;
 using VagrantStoryArchipelago.Helpers.EntityLists;
 using VagrantStoryArchipelago.Models.Inventory;
 
@@ -30,11 +31,12 @@ namespace VagrantStoryArchipelago.Helpers
                 var slotData = Memory.ReadUInt(slot.Value);
                 byte[] bytes = BitConverter.GetBytes(slotData);
 
-                if (bytes[1] == 0x00)
+                if (bytes[0] == 0x00)
                 {
                     break;
                 }
-                string itemName = ItemReference.ContainsKey(bytes[1]) ? ItemReference[bytes[1]] : "Unknown Item";
+
+                string itemName = ItemReference.ContainsKey(bytes[0]) ? ItemReference[bytes[0]] : "Unknown Item";
                 var itemData = ItemDatabase.Items[itemName];
                 itemList.Add(itemData);
             }
@@ -76,12 +78,13 @@ namespace VagrantStoryArchipelago.Helpers
             foreach (var slot in slots)
             {
                 ulong slotData = Memory.ReadUInt(slot.Value);
-                byte weaponMaterial = Memory.ReadByte(slot.Value + 0x25);
+                byte type = Memory.ReadByte(slot.Value + 0x04);
+                byte armorMaterial = Memory.ReadByte(slot.Value + 0x25);
 
                 byte[] bytes = BitConverter.GetBytes(slotData);
 
                 Console.WriteLine($"{bytes[1]:X}, {bytes[2]:X}");
-                Console.WriteLine($"{weaponMaterial:X}");
+                Console.WriteLine($"{armorMaterial:X}");
 
                 if (bytes[1] == 0x00 && bytes[2] == 0x00)
                 {
@@ -98,34 +101,49 @@ namespace VagrantStoryArchipelago.Helpers
                     continue;
                 }
 
-                string fullArmorPieceName = MaterialReference[weaponMaterial] + " " + armorName;
+                string fullArmorPieceName = armorMaterial == 0x00 ? armorName : MaterialReference[armorMaterial] + " " + armorName;
 
-                //ArmorType armorType = 0;
                 InventoryArmorData armorData = null;
 
 
-                //switch (armorType)
-                //{
-                //case ArmorType.HELM:
-                HelmetDatabase.Helmets.TryGetValue(fullArmorPieceName, out armorData);
-                if (armorData is null)
+                switch ((ArmorType)type)
                 {
-                    Console.WriteLine("Armour type not set up yet");
-                    armorData = HelmetDatabase.Helmets["Leather Bandana"];
-                    armorData.ArmorInventorySlot = bytes[0];
-                    armorList.Add(armorData);
-                }
-                else
-                {
-                    armorData.ArmorInventorySlot = bytes[0];
-                    armorList.Add(armorData);
-                }
-                // YOU WERE TRYING TO SEE WHAT THE DATA ACTUALLY LOOKED LIKE IN THE GAME AND CORRECTLY READ WHAT THE FUCK YOU SHOULD BE DOING
-                // BASED ON THE PATTERNS BETWEEN A FULL SLOT AND AN EMPTY SLOT.
-                // GOOD LUCK, CUNT.
+                    case 0x00:
+                        Console.WriteLine("Armour type not set up yet");
+                        armorData = HelmetDatabase.Helmets["Leather Bandana"]; // just adding a slot for the sake of it. Way less hassle if i do this.
+                        armorData.ArmorInventorySlot = bytes[0];
+                        armorList.Add(armorData);
+                        break;
+                    case ArmorType.HELM:
+                        HelmetDatabase.Helmets.TryGetValue(fullArmorPieceName, out armorData);
+                        armorData.ArmorInventorySlot = bytes[0];
+                        armorList.Add(armorData);
+                        break;
+                    case ArmorType.ARM:
+                        GloveDatabase.Gloves.TryGetValue(fullArmorPieceName, out armorData);
+                        armorList.Add(armorData);
+                        break;
+                    case ArmorType.CHEST:
+                        ChestpieceDatabase.Chestpieces.TryGetValue(fullArmorPieceName, out armorData);
+                        armorList.Add(armorData);
+                        break;
+                    case ArmorType.LEG:
+                        LeggingDatabase.Leggings.TryGetValue(fullArmorPieceName, out armorData);
+                        armorList.Add(armorData);
+                        break;
+                    case ArmorType.ACCESSORY:
+                        AccessoriesDatabase.Accessories.TryGetValue(fullArmorPieceName, out armorData);
+                        armorList.Add(armorData);
+                        break;
+                    default:
+                        Console.WriteLine("Armour type not set up yet");
+                        armorData = HelmetDatabase.Helmets["Leather Bandana"]; // just adding a slot for the sake of it. Way less hassle if i do this.
+                        armorData.ArmorInventorySlot = bytes[0];
+                        armorList.Add(armorData);
+                        break;
 
-                //break;
-                //}
+
+                }
             }
 
             return armorList;
@@ -255,27 +273,66 @@ namespace VagrantStoryArchipelago.Helpers
 
             InventoryArmorData armorData = null;
 
-
             if (matchingArmor is not null)
             {
+
+                switch ((ArmorType)matchingArmor.ArmorType)
+                {
+                    case 0x00:
+                        Console.WriteLine("Armour type not set up yet");
+                        armorData = HelmetDatabase.Helmets["Leather Bandana"]; // just adding a slot for the sake of it. Way less hassle if i do this.
+                        break;
+                    case ArmorType.HELM:
+                        HelmetDatabase.Helmets.TryGetValue(args.Item.Name, out armorData);
+                        break;
+                    case ArmorType.ARM:
+                        GloveDatabase.Gloves.TryGetValue(args.Item.Name, out armorData);
+                        break;
+                    case ArmorType.CHEST:
+                        ChestpieceDatabase.Chestpieces.TryGetValue(args.Item.Name, out armorData);
+                        break;
+                    case ArmorType.LEG:
+                        LeggingDatabase.Leggings.TryGetValue(args.Item.Name, out armorData);
+                        break;
+                    case ArmorType.ACCESSORY:
+                        AccessoriesDatabase.Accessories.TryGetValue(args.Item.Name, out armorData);
+                        break;
+                }
+
                 Console.WriteLine($"{matchingArmor.ArmorName} has been found already: Adding to Newer slot {listOfSlots.Count + 1}");
-                InventoryArmorData armor = HelmetDatabase.Helmets[args.Item.Name];
-                armor.ArmorInventorySlot = (byte)(listOfSlots.Count);
-                Memory.WriteObject<InventoryArmorData>(InventoryArmorSlotReference[listOfSlots.Count], armor);
+                armorData.ArmorInventorySlot = (byte)(listOfSlots.Count);
+                Memory.WriteObject<InventoryArmorData>(InventoryArmorSlotReference[listOfSlots.Count], armorData);
 
             }
             else
             {
-                //armorID = 
-                //byte itemID = ItemHelpers.GemReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
+                InventoryArmorData foundArmor = null;
 
-                InventoryArmorData armor = HelmetDatabase.Helmets[args.Item.Name];
+                // Define the list using your specific Armor Data type
+                var allDicts = new List<Dictionary<string, InventoryArmorData>>
+                {
+                    HelmetDatabase.Helmets,
+                    GloveDatabase.Gloves,
+                    ChestpieceDatabase.Chestpieces,
+                    LeggingDatabase.Leggings,
+                    AccessoriesDatabase.Accessories
+                };
 
-                armor.ArmorInventorySlot = (byte)(listOfSlots.Count + 1);
+                foreach (var dict in allDicts)
+                {
+                    // TryGetValue is more efficient as it checks and grabs the item in one go
+                    if (dict.TryGetValue(args.Item.Name, out var armorDictData))
+                    {
+                        foundArmor = armorDictData;
+                        break;
+                    }
+                }
 
-                Console.WriteLine($"Armor does not exist: Adding {armor.ArmorName} with material of {armor.ArmorMaterial} to slot {listOfSlots.Count + 1}");
+                foundArmor.ArmorInventorySlot = (byte)(listOfSlots.Count);
 
-                Memory.WriteObject<InventoryArmorData>(InventoryArmorSlotReference[listOfSlots.Count + 1], HelmetDatabase.Helmets[args.Item.Name]);
+                Console.WriteLine($"Armor does not exist: Adding {foundArmor.ArmorName} with material of {foundArmor.ArmorMaterial} to slot {listOfSlots.Count + 1}");
+
+                Memory.WriteObject<InventoryArmorData>(InventoryArmorSlotReference[listOfSlots.Count], foundArmor);
             }
         }
 
@@ -654,13 +711,13 @@ namespace VagrantStoryArchipelago.Helpers
             { 0x27, "Chain Mail" },
             { 0x28, "Breastplate" },
             { 0x29, "Segmentata" },
-            { 0x2A, "Scale Armor" },
+            { 0x2A, "Scale Armour" },
             { 0x2B, "Brigandine" },
             { 0x2C, "Plate Mail" },
-            { 0x2D, "Fluted Armor" },
-            { 0x2E, "Hoplite Armor" },
-            { 0x2F, "Jazeraint Armor" },
-            { 0x30, "Dread Armor" },
+            { 0x2D, "Fluted Armour" },
+            { 0x2E, "Hoplite Armour" },
+            { 0x2F, "Jazeraint Armour" },
+            { 0x30, "Dread Armour" },
             { 0x31, "Sandals" },
             { 0x32, "Boots" },
             { 0x33, "Long Boots" },
@@ -692,7 +749,38 @@ namespace VagrantStoryArchipelago.Helpers
             { 0x4D, "Fluted Glove" },
             { 0x4E, "Hoplite Glove" },
             { 0x4F, "Jazeraint Glove" },
-            { 0x50, "Dread Glove" }
+            { 0x50, "Dread Glove" },
+            { 0x61, "Rood Necklace"},
+            { 0x62, "Rune Earrings"},
+            { 0x63, "Lionhead"},
+            { 0x64, "Rusted Nails"},
+            { 0x65, "Sylphid Ring"},
+            { 0x66, "Marduk"},
+            { 0x67, "Salamander Ring"},
+            { 0x68, "Tamulis Tongue"},
+            { 0x69, "Gnome Bracelet"},
+            { 0x6A, "Palolos Ring"},
+            { 0x6B, "Undine Bracelet"},
+            { 0x6C, "Talian Ring"},
+            { 0x6D, "Agriass Balm"},
+            { 0x6E, "Kadesh Ring"},
+            { 0x6F, "Agrippas Choker"},
+            { 0x70, "Diadras Earring"},
+            { 0x71, "Titans Ring"},
+            { 0x72, "Lau Feis Armlet"},
+            { 0x73, "Swan Song"},
+            { 0x74, "Pushpaka"},
+            { 0x75, "Edgars Earrings"},
+            { 0x76, "Cross Choker"},
+            { 0x77, "Ghost Hound"},
+            { 0x78, "Beaded Anklet"},
+            { 0x79, "Dragonhead"},
+            { 0x7A, "Faufnirs Tear"},
+            { 0x7B, "Agaless Chain"},
+            { 0x7C, "Balam Ring"},
+            { 0x7D, "Nimje Coif"},
+            { 0x7E, "Morgans Nails"},
+            { 0x7F, "Marlenes Ring" },
         };
 
         public static Dictionary<byte, string> GemReference = new Dictionary<byte, string>

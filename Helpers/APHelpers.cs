@@ -73,9 +73,27 @@ namespace Helpers
 #if DEBUG
             Console.WriteLine($"ItemReceived Firing. Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");
 #endif
-            // retrieve the item name from the full type, keeping the reference dictionary simpler.
-            string[] parts = args.Item.Name.Split(' ', 2);
-            string result = parts.Length > 1 ? parts[1] : "";
+
+            string firstWord = args.Item.Name.Split(' ')[0];
+
+            // 2. Check if any value in the dictionary matches that word
+            // We use StringComparison.OrdinalIgnoreCase to be user-friendly with casing
+            var materialExists = ItemHelpers.MaterialReference.FirstOrDefault(x =>
+                string.Equals(x.Value, firstWord, StringComparison.OrdinalIgnoreCase));
+
+            // 3. If the key is not default (or if we found a match), return it
+
+            string result = null;
+
+            if (materialExists.Value is not null)
+            {
+                string[] parts = args.Item.Name.Split(' ', 2);
+                result = parts.Length > 1 ? parts[1] : "";
+            }
+            else
+            {
+                result = args.Item.Name;
+            }
 
             switch (args.Item)
             {

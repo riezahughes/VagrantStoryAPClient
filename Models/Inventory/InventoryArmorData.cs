@@ -88,7 +88,7 @@ namespace VagrantStoryArchipelago.Models.Inventory
         public InventoryArmorData(
             string name,
             byte armorInventorySlot,
-            HelmetID armorID,
+            object armorID,
             ArmorType armorType,
             ushort armorMaxDP,
             byte armorCurrentDP,
@@ -117,7 +117,7 @@ namespace VagrantStoryArchipelago.Models.Inventory
         {
             ArmorName = name;
             ArmorInventorySlot = armorInventorySlot;
-            ArmorID = (byte)armorID;
+            ArmorID = Convert.ToByte(armorID);
             ArmorType = (byte)armorType;
             ArmorMaxDP = armorMaxDP;
             ArmorCurrentDP = armorCurrentDP;
