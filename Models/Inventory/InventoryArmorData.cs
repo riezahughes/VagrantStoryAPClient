@@ -111,7 +111,7 @@ namespace VagrantStoryArchipelago.Models.Inventory
             byte armorWaterStat,
             byte armorLightStat,
             byte armorDarkStat,
-            ArmorMaterials armorMaterial,
+            ItemMaterials armorMaterial,
             byte armorEquipStatus
         )
         {

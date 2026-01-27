@@ -1,6 +1,6 @@
 ﻿namespace VagrantStoryArchipelago.Enums
 {
-    public enum ArmorMaterials : byte
+    public enum ItemMaterials : byte
     {
         NONE = 0x00,
         WOOD = 0x01,
