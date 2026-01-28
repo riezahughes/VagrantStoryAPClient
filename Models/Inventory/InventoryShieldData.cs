@@ -13,31 +13,31 @@ namespace VagrantStoryArchipelago.Models.Inventory
         [MemoryOffset(0x01)]  // 0x607f6 - Equip Status
         public byte ShieldEquipStatus { get; set; }
 
-        [MemoryOffset(0x05)]  // 0x607d1 - Item ID (note: 16-bit, spans 0x02-0x03)
+        [MemoryOffset(0x04)]  // 0x607d1 - Item ID (note: 16-bit, spans 0x02-0x03)
         public uint ShieldID { get; set; }
 
-        [MemoryOffset(0x09)]  // 0x607d4 - Max DP start (16-bit)
+        [MemoryOffset(0x07)]  // 0x607d4 - Max DP start (16-bit)
         public ushort ShieldMaxDP { get; set; }
 
-        [MemoryOffset(0x0a)]  // 0x607d4 - Max DP start (16-bit)
+        [MemoryOffset(0x09)]  // 0x607d4 - Max DP start (16-bit)
         public ushort ShieldMaxPP { get; set; }
 
-        [MemoryOffset(0x0c)]  // 0x607d8 - Current DP
+        [MemoryOffset(0x0b)]  // 0x607d8 - Current DP
         public ushort ShieldCurrentPP { get; set; }
 
-        [MemoryOffset(0x0e)]  // 0x607d8 - Current DP
+        [MemoryOffset(0x0d)]  // 0x607d8 - Current DP
         public ushort ShieldCurrentDP { get; set; }
 
-        [MemoryOffset(0x0f)]  // 0x607dd - STR
+        [MemoryOffset(0x10)]  // 0x607dd - STR
         public byte ShieldGemSlotQuantity { get; set; }
 
-        [MemoryOffset(0x10)]  // 0x607dd - STR
+        [MemoryOffset(0x11)]  // 0x607dd - STR
         public byte ShieldStrStat { get; set; }
 
-        [MemoryOffset(0x11)]  // 0x607de - INT
+        [MemoryOffset(0x12)]  // 0x607de - INT
         public byte ShieldIntStat { get; set; }
 
-        [MemoryOffset(0x12)]  // 0x607df - AGI
+        [MemoryOffset(0x13)]  // 0x607df - AGI
         public byte ShieldAgiStat { get; set; }
 
         [MemoryOffset(0x14)]  // 0x607e1 - Blunt
@@ -88,14 +88,14 @@ namespace VagrantStoryArchipelago.Models.Inventory
         [MemoryOffset(0x25)]  // 0x607f2 - Dark
         public byte ShieldDarkStat { get; set; }
 
-        [MemoryOffset(0x25)]  // 0x607f4 - Material
+        [MemoryOffset(0x28)]  // 0x607f4 - Material
         public byte ShieldMaterial { get; set; }
 
-        [MemoryOffset(0x29)]  // 0x607f4 - Gem slot reference 1
+        [MemoryOffset(0x2c)]  // 0x607f4 - Gem slot reference 1
         public byte InventoryGemSlotReference1 { get; set; }
-        [MemoryOffset(0x2a)]  // 0x607f4 - Gem slot reference 2
+        [MemoryOffset(0x2d)]  // 0x607f4 - Gem slot reference 2
         public byte InventoryGemSlotReference2 { get; set; }
-        [MemoryOffset(0x2b)]  // 0x607f4 - Gem slot reference 3
+        [MemoryOffset(0x2e)]  // 0x607f4 - Gem slot reference 3
         public byte InventoryGemSlotReference3 { get; set; }
 
         public InventoryShieldData(

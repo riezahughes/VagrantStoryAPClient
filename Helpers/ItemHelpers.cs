@@ -70,6 +70,37 @@ namespace VagrantStoryArchipelago.Helpers
             return gemList;
         }
 
+        public static List<InventoryShieldData> GetInventoryShieldSlots()
+        {
+            var slots = InventoryShieldSlotReference;
+            var shieldList = new List<InventoryShieldData>();
+
+            foreach (var slot in slots)
+            {
+                ulong slotData = Memory.ReadUInt(slot.Value + 0x04);
+                byte shieldMaterial = Memory.ReadByte(slot.Value + 0x28);
+
+                Console.WriteLine($"{slotData:X}");
+
+                byte[] bytes = BitConverter.GetBytes(slotData);
+
+                if (bytes[0] == 0x00)
+                {
+                    break;
+                }
+
+                string shieldName = ShieldReference.ContainsKey(bytes[0]) ? ShieldReference[bytes[0]] : "Unknown Helmet"; // this is wrong.
+
+                string fullShieldPieceName = shieldMaterial == 0x00 ? shieldName : MaterialReference[shieldMaterial] + " " + shieldName;
+
+                var shieldData = ShieldDatabase.Shields.FirstOrDefault(shield => shield.Key == fullShieldPieceName);
+
+                shieldList.Add(shieldData.Value);
+            }
+
+            return shieldList;
+        }
+
         public static List<InventoryArmorData> GetInventoryArmorSlots()
         {
             var slots = InventoryArmorSlotReference;
@@ -251,6 +282,42 @@ namespace VagrantStoryArchipelago.Helpers
                 Console.WriteLine($"No Gem has been found: Adding {gem.GemName} with Agi {gem.GemAgiStat} to slot {listOfSlots.Count}");
 
                 Memory.WriteObject<InventoryGemData>(InventoryGemSlotReference[listOfSlots.Count], GemDatabase.Gems[args.Item.Name]);
+            }
+        }
+
+        public static void handleInventoryShield(ItemReceivedEventArgs args)
+        {
+            // Specifically only for gems
+
+            var listOfSlots = ItemHelpers.GetInventoryShieldSlots();
+
+            Console.WriteLine($"{listOfSlots.Count} shield slots found");
+
+            if (listOfSlots.Count >= 8)
+            {
+                Console.WriteLine($"Inventory full. Delaying {args.Item.Name}");
+                App.delayedItems.Add(args);
+                return;
+            }
+
+            InventoryShieldData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.ShieldName == args.Item.Name, null);
+
+
+            if (matchingItem is not null && matchingItem.ShieldName != "Unknown Shield")
+            {
+                Console.WriteLine($"{matchingItem.ShieldName} has been found already: Ignoring Shield {matchingItem.ShieldInventorySlot}");
+                return;
+            }
+            else
+            {
+                byte itemID = ItemHelpers.ShieldReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
+
+                InventoryShieldData shield = ShieldDatabase.Shields[args.Item.Name];
+
+                shield.ShieldInventorySlot = (byte)(listOfSlots.Count + 1);
+
+                Console.WriteLine($"No Shields has been found: Adding {shield.ShieldName} with Agi {shield.ShieldAgiStat} to slot {listOfSlots.Count}");
+                Memory.WriteObject<InventoryShieldData>(InventoryShieldSlotReference[listOfSlots.Count], ShieldDatabase.Shields[args.Item.Name]);
             }
         }
 
@@ -477,6 +544,18 @@ namespace VagrantStoryArchipelago.Helpers
             [15] = Addresses.InventoryArmorSlot16,
         };
 
+        public static Dictionary<int, uint> InventoryShieldSlotReference = new Dictionary<int, uint>()
+        {
+            [0] = Addresses.InventoryShieldSlot01,
+            [1] = Addresses.InventoryShieldSlot02,
+            [2] = Addresses.InventoryShieldSlot03,
+            [3] = Addresses.InventoryShieldSlot04,
+            [4] = Addresses.InventoryShieldSlot05,
+            [5] = Addresses.InventoryShieldSlot06,
+            [6] = Addresses.InventoryShieldSlot07,
+            [7] = Addresses.InventoryShieldSlot08
+        };
+
 
         public static Dictionary<int, Dictionary<string, uint>> InventoryWeaponSlotReference = new Dictionary<int, Dictionary<string, uint>>()
         {
@@ -666,22 +745,22 @@ namespace VagrantStoryArchipelago.Helpers
 
         public static Dictionary<byte, string> ShieldReference = new Dictionary<byte, string>
         {
-            { 0x01, "Buckler" },
-            { 0x02, "Pelta Shield" },
-            { 0x03, "Targe" },
-            { 0x04, "Quad Shield" },
-            { 0x05, "Circle Shield" },
-            { 0x06, "Tower Shield" },
-            { 0x07, "Spiked Shield" },
-            { 0x08, "Round Shield" },
-            { 0x09, "Kite Shield" },
-            { 0x0A, "Casserole Shield" },
-            { 0x0B, "Heater Shield" },
-            { 0x0C, "Oval Shield" },
-            { 0x0D, "Knight Shield" },
-            { 0x0E, "Hoplite Shield" },
-            { 0x0F, "Jazeraint Shield" },
-            { 0x10, "Dread Shield" }
+            { 0x7f, "Buckler" },
+            { 0x80, "Pelta Shield" },
+            { 0x81, "Targe" },
+            { 0x82, "Quad Shield" },
+            { 0x83, "Circle Shield" },
+            { 0x84, "Tower Shield" },
+            { 0x85, "Spiked Shield" },
+            { 0x86, "Round Shield" },
+            { 0x87, "Kite Shield" },
+            { 0x88, "Casserole Shield" },
+            { 0x89, "Heater Shield" },
+            { 0x8a, "Oval Shield" },
+            { 0x8b, "Knight Shield" },
+            { 0x8c, "Hoplite Shield" },
+            { 0x8d, "Jazeraint Shield" },
+            { 0x8e, "Dread Shield" }
         };
 
         public static Dictionary<byte, string> ArmorReference = new Dictionary<byte, string>

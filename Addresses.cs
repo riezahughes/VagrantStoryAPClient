@@ -299,6 +299,18 @@ namespace VagrantStoryArchipelago
         public const uint InventoryArmorSlot16 = 0x000609ff;
 
 
+        // Shield Inventory Slots
+
+        public const uint InventoryShieldSlot01 = 0x00060268;
+        public const uint InventoryShieldSlot02 = 0x00060298;
+        public const uint InventoryShieldSlot03 = 0x000602c8;
+        public const uint InventoryShieldSlot04 = 0x000602fd;
+        public const uint InventoryShieldSlot05 = 0x00060328;
+        public const uint InventoryShieldSlot06 = 0x00060358;
+        public const uint InventoryShieldSlot07 = 0x00060388;
+        public const uint InventoryShieldSlot08 = 0x000603bd;
+
+
         // Equipped Armour Slots
 
 

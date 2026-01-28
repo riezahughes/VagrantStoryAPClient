@@ -95,12 +95,14 @@ namespace Helpers
                 result = args.Item.Name;
             }
 
+            Console.WriteLine(result);
+
             switch (args.Item)
             {
                 case var x when ItemHelpers.ItemReference.Any(itm => itm.Value == x.Name): ItemHelpers.handleInventoryItem(args); break;
                 case var x when ItemHelpers.GemReference.Any(itm => itm.Value == x.Name): ItemHelpers.handleInventoryGem(args); break;
                 case var x when ItemHelpers.ArmorReference.Any(itm => itm.Value == result): ItemHelpers.handleInventoryArmor(args); break;
-                //case var x when x.Name.ContainsAny("Ammo:"): ItemHandlers.ReceiveCountType(x, breakAmmoLimitOption); break;
+                case var x when ItemHelpers.ShieldReference.Any(itm => itm.Value == result): ItemHelpers.handleInventoryShield(args); break;
                 //case var x when x.Name.ContainsAny("Charge:"): ItemHandlers.ReceiveChargeType(x, breakChargeLimitOption); break;
                 //case var x when ItemHandlers.ListOfWeaponStrings.Any(wpn => wpn == x.Name) || ItemHandlers.ListOfShieldStrings.Any(wpn => wpn == x.Name): ItemHandlers.ReceiveEquipment(x); break;
                 //case var x when x.Name.ContainsAny("Life Bottle"): ItemHandlers.ReceiveLifeBottle(); break;
