@@ -49,43 +49,43 @@ namespace VagrantStoryArchipelago.Models.Inventory
         [MemoryOffset(0x16)]  // 0x607e3 - Piercing
         public byte ShieldPiercingDefStat { get; set; }
 
-        [MemoryOffset(0x17)]  // 0x607e4 - Human
+        [MemoryOffset(0x18)]  // 0x607e4 - Human
         public byte ShieldHumanStat { get; set; }
 
-        [MemoryOffset(0x18)]  // 0x607e5 - Beast
+        [MemoryOffset(0x19)]  // 0x607e5 - Beast
         public byte ShieldBeastStat { get; set; }
 
-        [MemoryOffset(0x19)]  // 0x607e6 - Undead
+        [MemoryOffset(0x1a)]  // 0x607e6 - Undead
         public byte ShieldUndeadStat { get; set; }
 
-        [MemoryOffset(0x1a)]  // 0x607e7 - Phantom
+        [MemoryOffset(0x1b)]  // 0x607e7 - Phantom
         public byte ShieldPhantomStat { get; set; }
 
-        [MemoryOffset(0x1b)]  // 0x607e8 - Dragon
+        [MemoryOffset(0x1c)]  // 0x607e8 - Dragon
         public byte ShieldDragonStat { get; set; }
 
-        [MemoryOffset(0x1c)]  // 0x607e9 - Evil
+        [MemoryOffset(0x1d)]  // 0x607e9 - Evil
         public byte ShieldEvilStat { get; set; }
 
-        [MemoryOffset(0x1f)]  // 0x607ec - Physical
+        [MemoryOffset(0x20)]  // 0x607ec - Physical
         public byte ShieldPhysicalStat { get; set; }
 
-        [MemoryOffset(0x20)]  // 0x607ed - Air
+        [MemoryOffset(0x21)]  // 0x607ed - Air
         public byte ShieldAirStat { get; set; }
 
-        [MemoryOffset(0x21)]  // 0x607ee - Fire
+        [MemoryOffset(0x22)]  // 0x607ee - Fire
         public byte ShieldFireStat { get; set; }
 
-        [MemoryOffset(0x22)]  // 0x607ef - Earth
+        [MemoryOffset(0x23)]  // 0x607ef - Earth
         public byte ShieldEarthStat { get; set; }
 
-        [MemoryOffset(0x23)]  // 0x607f0 - Water
+        [MemoryOffset(0x24)]  // 0x607f0 - Water
         public byte ShieldWaterStat { get; set; }
 
-        [MemoryOffset(0x24)]  // 0x607f1 - Light
+        [MemoryOffset(0x25)]  // 0x607f1 - Light
         public byte ShieldLightStat { get; set; }
 
-        [MemoryOffset(0x25)]  // 0x607f2 - Dark
+        [MemoryOffset(0x26)]  // 0x607f2 - Dark
         public byte ShieldDarkStat { get; set; }
 
         [MemoryOffset(0x28)]  // 0x607f4 - Material

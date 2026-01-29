@@ -16,6 +16,11 @@ namespace VagrantStoryArchipelago
 
         // Ashleys Stats And Abilities
         public const uint AshleyHealth = 0x0011fa58;
+
+        // Option Settings
+
+        public const uint WeaponStatusToggle = 0x00060020;
+
         // Risk Skills
         public const uint AbilityHeavyShotUnlock = 0x0004be61;
         public const uint AbilityGainLifeUnlock = 0x0004be95;
