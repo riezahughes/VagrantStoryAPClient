@@ -17,9 +17,26 @@ namespace VagrantStoryArchipelago
         // Ashleys Stats And Abilities
         public const uint AshleyHealth = 0x0011fa58;
 
-        // Option Settings
+        // Randomizer Option Settings
 
         public const uint WeaponStatusToggle = 0x00060020;
+        public const uint SaveAnywhere = 0x000109FC6;
+
+        // Map Completion Array
+        public const uint MapStatusAddress01 = 0x0005ffd8;
+        public const uint MapStatusAddress02 = 0x0005ffdc;
+        public const uint MapStatusAddress03 = 0x0005ffe0;
+        public const uint MapStatusAddress04 = 0x0005ffe4;
+        public const uint MapStatusAddress05 = 0x0005ffe8;
+        public const uint MapStatusAddress06 = 0x0005ffec;
+        public const uint MapStatusAddress07 = 0x0005fff0;
+        public const uint MapStatusAddress08 = 0x0005fff4;
+        public const uint MapStatusAddress09 = 0x0005fff8;
+        public const uint MapStatusAddress10 = 0x0005fffc;
+        public const uint MapStatusAddress11 = 0x00060000;
+        public const uint MapStatusAddress12 = 0x00060004;
+        public const uint MapStatusAddress13 = 0x00060008;
+
 
         // Risk Skills
         public const uint AbilityHeavyShotUnlock = 0x0004be61;
