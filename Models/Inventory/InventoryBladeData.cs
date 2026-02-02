@@ -7,15 +7,15 @@ namespace VagrantStoryArchipelago.Models.Inventory
 
         // IMPORTANT NOTE - THESE WON'T UPDATE IF YOU HAVE THE ITEM EQUIPPED. THEY ARE THEN STORED IN DIFFERENT SLOTS TO THIS AND THIS IS JUST A DUPLICATE
         public string BladeName { get; set; }
-        [MemoryOffset(0x00)]  // 0x607cf - Blade Slot
-        public byte BladeInventorySlot { get; set; }
 
-        [MemoryOffset(0x01)]  // 0x607d1 - Item ID (note: 16-bit, spans 0x02-0x03)
+        [MemoryOffset(0x00)]  // 0x607d1 - Item ID (note: 16-bit, spans 0x02-0x03)
         public uint BladeID { get; set; }
 
-        [MemoryOffset(0x01)]  // 0x607f6 - Equip Status
-        public byte BladeEquipStatus { get; set; }
+        [MemoryOffset(0x02)]  // 0x607cf - Blade Slot
+        public byte BladeInventorySlot { get; set; }
 
+        [MemoryOffset(0x03)]  // 0x607f6 - Blade Type
+        public byte BladeType { get; set; }
 
         [MemoryOffset(0x07)]  // 0x607d4 - Max DP start (16-bit)
         public ushort BladeMaxDP { get; set; }
@@ -28,9 +28,6 @@ namespace VagrantStoryArchipelago.Models.Inventory
 
         [MemoryOffset(0x0d)]  // 0x607d8 - Current DP
         public ushort BladeCurrentDP { get; set; }
-
-        [MemoryOffset(0x10)]  // 0x607dd - STR
-        public byte BladeGemSlotQuantity { get; set; }
 
         [MemoryOffset(0x11)]  // 0x607dd - STR
         public byte BladeStrStat { get; set; }
@@ -92,23 +89,18 @@ namespace VagrantStoryArchipelago.Models.Inventory
         [MemoryOffset(0x28)]  // 0x607f4 - Material
         public byte BladeMaterial { get; set; }
 
-        [MemoryOffset(0x2c)]  // 0x607f4 - Gem slot reference 1
-        public byte InventoryGemSlotReference1 { get; set; }
-        [MemoryOffset(0x2d)]  // 0x607f4 - Gem slot reference 2
-        public byte InventoryGemSlotReference2 { get; set; }
-        [MemoryOffset(0x2e)]  // 0x607f4 - Gem slot reference 3
-        public byte InventoryGemSlotReference3 { get; set; }
+        [MemoryOffset(0x30)]  // 0x607f6 - Blade Type
+        public byte BladeEquipStatus { get; set; }
 
         public InventoryBladeData(
             string name,
             byte bladeInventorySlot,
-            byte bladeEquipStatus,
+            BladeType bladeType,
             BladeID bladeID,
             ushort bladeMaxDP,
             ushort bladeMaxPP,
             ushort bladeCurrentPP,
             ushort bladeCurrentDP,
-            byte gemSlotQuantity,
             byte bladeStrStat,
             byte bladeIntStat,
             byte bladeAgiStat,
@@ -129,16 +121,13 @@ namespace VagrantStoryArchipelago.Models.Inventory
             byte bladeLightStat,
             byte bladeDarkStat,
             ItemMaterials bladeMaterial,
-            byte inventoryGemSlotReference1,
-            byte inventoryGemSlotReference2,
-            byte inventoryGemSlotReference3
+            byte bladeEquipStatus
         )
         {
             BladeName = name;
             BladeInventorySlot = bladeInventorySlot;
-            BladeEquipStatus = bladeEquipStatus;
+            BladeType = Convert.ToByte(bladeType);
             BladeID = Convert.ToByte(bladeID);
-            BladeGemSlotQuantity = gemSlotQuantity;
             BladeMaxDP = bladeMaxDP;
             BladeMaxPP = bladeMaxPP;
             BladeCurrentPP = bladeCurrentPP;
@@ -163,9 +152,6 @@ namespace VagrantStoryArchipelago.Models.Inventory
             BladeLightStat = bladeLightStat;
             BladeDarkStat = bladeDarkStat;
             BladeMaterial = (byte)bladeMaterial;
-            InventoryGemSlotReference1 = inventoryGemSlotReference1;
-            InventoryGemSlotReference2 = inventoryGemSlotReference2;
-            InventoryGemSlotReference3 = inventoryGemSlotReference3;
         }
     }
 }

@@ -77,7 +77,7 @@ namespace VagrantStoryArchipelago.Helpers
 
             foreach (var slot in slots)
             {
-                ulong slotData = Memory.ReadUInt(slot.Value + 0x04);
+                ulong slotData = Memory.ReadUInt(slot.Value + 0x03);
                 byte shieldMaterial = Memory.ReadByte(slot.Value + 0x28);
 
                 Console.WriteLine($"{slotData:X}");
@@ -100,6 +100,39 @@ namespace VagrantStoryArchipelago.Helpers
 
             return shieldList;
         }
+
+
+        public static List<InventoryBladeData> GetInventoryBladeSlots()
+        {
+            var slots = InventoryBladeSlotReference;
+            var bladeList = new List<InventoryBladeData>();
+
+            foreach (var slot in slots)
+            {
+                ulong slotData = Memory.ReadUInt(slot.Value);
+                byte bladeMaterial = Memory.ReadByte(slot.Value + 0x28);
+
+                Console.WriteLine($"{slotData:X}");
+
+                byte[] bytes = BitConverter.GetBytes(slotData);
+
+                if (bytes[0] == 0x00 && bytes[1] == 0x00)
+                {
+                    break;
+                }
+
+                string bladeName = CraftingBladeReference.ContainsKey(bytes[0]) ? CraftingBladeReference[bytes[0]] : "Unknown Blade"; // this is wrong.
+
+                string fullBladePieceName = bladeMaterial == 0x00 ? bladeName : MaterialReference[bladeMaterial] + " " + bladeName;
+
+                var bladeData = BladeDatabase.Blades.FirstOrDefault(blade => blade.Key == fullBladePieceName);
+
+                bladeList.Add(bladeData.Value);
+            }
+
+            return bladeList;
+        }
+
 
         public static List<InventoryArmorData> GetInventoryArmorSlots()
         {
@@ -318,6 +351,42 @@ namespace VagrantStoryArchipelago.Helpers
 
                 Console.WriteLine($"No Shields has been found: Adding {shield.ShieldName} with Agi {shield.ShieldAgiStat} to slot {listOfSlots.Count}");
                 Memory.WriteObject<InventoryShieldData>(InventoryShieldSlotReference[listOfSlots.Count], ShieldDatabase.Shields[args.Item.Name]);
+            }
+        }
+
+        public static void handleInventoryCraftingBlade(ItemReceivedEventArgs args)
+        {
+            // Specifically only for gems
+
+            var listOfSlots = ItemHelpers.GetInventoryBladeSlots();
+
+            Console.WriteLine($"{listOfSlots.Count} blade slots found");
+
+            if (listOfSlots.Count >= 8)
+            {
+                Console.WriteLine($"Inventory full. Delaying {args.Item.Name}");
+                App.delayedItems.Add(args);
+                return;
+            }
+
+            InventoryBladeData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.BladeName == args.Item.Name, null);
+
+
+            if (matchingItem is not null && matchingItem.BladeName != "Unknown Blade")
+            {
+                Console.WriteLine($"{matchingItem.BladeName} has been found already: Ignoring Blade {matchingItem.BladeInventorySlot}");
+                return;
+            }
+            else
+            {
+                byte itemID = ItemHelpers.CraftingBladeReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
+
+                InventoryBladeData blade = BladeDatabase.Blades[args.Item.Name];
+
+                blade.BladeInventorySlot = (byte)(listOfSlots.Count + 1);
+
+                Console.WriteLine($"No Blades has been found: Adding {blade.BladeName} with Agi {blade.BladeAgiStat} to slot {listOfSlots.Count}");
+                Memory.WriteObject<InventoryBladeData>(InventoryBladeSlotReference[listOfSlots.Count], BladeDatabase.Blades[args.Item.Name]);
             }
         }
 
@@ -556,6 +625,46 @@ namespace VagrantStoryArchipelago.Helpers
             [7] = Addresses.InventoryShieldSlot08
         };
 
+        public static Dictionary<int, uint> InventoryBladeSlotReference = new Dictionary<int, uint>()
+        {
+            [0] = Addresses.InventoryBladeSlot01,
+            [1] = Addresses.InventoryBladeSlot02,
+            [2] = Addresses.InventoryBladeSlot03,
+            [3] = Addresses.InventoryBladeSlot04,
+            [4] = Addresses.InventoryBladeSlot05,
+            [5] = Addresses.InventoryBladeSlot06,
+            [6] = Addresses.InventoryBladeSlot07,
+            [7] = Addresses.InventoryBladeSlot08,
+            [8] = Addresses.InventoryBladeSlot09,
+            [9] = Addresses.InventoryBladeSlot10,
+            [10] = Addresses.InventoryBladeSlot11,
+            [11] = Addresses.InventoryBladeSlot12,
+            [12] = Addresses.InventoryBladeSlot13,
+            [13] = Addresses.InventoryBladeSlot14,
+            [14] = Addresses.InventoryBladeSlot15,
+            [15] = Addresses.InventoryBladeSlot16,
+        };
+
+        public static Dictionary<int, uint> InventoryGripSlotReference = new Dictionary<int, uint>()
+        {
+            [0] = Addresses.InventoryGripSlot01,
+            [1] = Addresses.InventoryGripSlot02,
+            [2] = Addresses.InventoryGripSlot03,
+            [3] = Addresses.InventoryGripSlot04,
+            [4] = Addresses.InventoryGripSlot05,
+            [5] = Addresses.InventoryGripSlot06,
+            [6] = Addresses.InventoryGripSlot07,
+            [7] = Addresses.InventoryGripSlot08,
+            [8] = Addresses.InventoryGripSlot09,
+            [9] = Addresses.InventoryGripSlot10,
+            [10] = Addresses.InventoryGripSlot11,
+            [11] = Addresses.InventoryGripSlot12,
+            [12] = Addresses.InventoryGripSlot13,
+            [13] = Addresses.InventoryGripSlot14,
+            [14] = Addresses.InventoryGripSlot15,
+            [15] = Addresses.InventoryGripSlot16,
+        };
+
 
         public static Dictionary<int, Dictionary<string, uint>> InventoryWeaponSlotReference = new Dictionary<int, Dictionary<string, uint>>()
         {
@@ -649,12 +758,12 @@ namespace VagrantStoryArchipelago.Helpers
             },
         };
 
-        public static Dictionary<byte, string> CraftingWeaponReference = new Dictionary<byte, string>()
+        public static Dictionary<byte, string> CraftingBladeReference = new Dictionary<byte, string>()
         {
             { 0x01, "BattleKnife" },
             { 0x02, "Scramasax" },
             { 0x03, "Dirk" },
-            { 0x04, "ThrowingKnife" },
+            { 0x04, "Throwing Knife" },
             { 0x05, "Kudi" },
             { 0x06, "Cinquedea" },
             { 0x07, "Kris" },
@@ -666,7 +775,7 @@ namespace VagrantStoryArchipelago.Helpers
             { 0x0D, "Spatha" },
             { 0x0E, "Scimitar" },
             { 0x0F, "Rapier" },
-            { 0x10, "ShortSword" },
+            { 0x10, "Short Sword" },
             { 0x11, "Firangi" },
             { 0x12, "Shamshir" },
             { 0x13, "Falchion" },
@@ -675,17 +784,17 @@ namespace VagrantStoryArchipelago.Helpers
             { 0x16, "Khopesh" },
             { 0x17, "Wakizashi" },
             { 0x18, "Romphaia" },
-            { 0x19, "BroadSword" },
-            { 0x1A, "NorseSword" },
+            { 0x19, "Broad Sword" },
+            { 0x1A, "Norse Sword" },
             { 0x1B, "Katana" },
             { 0x1C, "Executioner" },
             { 0x1D, "Claymore" },
             { 0x1E, "Schiavona" },
-            { 0x1F, "BastardSword" },
+            { 0x1F, "Bastard Sword" },
             { 0x20, "Nodachi" },
-            { 0x21, "RuneBlade" },
-            { 0x22, "HolyWin" },
-            { 0x23, "HandAxe" },
+            { 0x21, "Rune Blade" },
+            { 0x22, "Holy Win" },
+            { 0x23, "Hand Axe" },
             { 0x24, "BattleAxe" },
             { 0x25, "Francisca" },
             { 0x26, "Tabarzin" },
@@ -693,53 +802,53 @@ namespace VagrantStoryArchipelago.Helpers
             { 0x28, "Tabar" },
             { 0x29, "Bullova" },
             { 0x2A, "Crescent" },
-            { 0x2B, "GoblinClub" },
-            { 0x2C, "SpikedClub" },
-            { 0x2D, "BallMace" },
-            { 0x2E, "Footman'sMace" },
-            { 0x2F, "MorningStar" },
-            { 0x30, "WarHammer" },
-            { 0x31, "BecdeCorbin" },
-            { 0x32, "WarMaul" },
+            { 0x2B, "Goblin Club" },
+            { 0x2C, "Spiked Club" },
+            { 0x2D, "Ball Mace" },
+            { 0x2E, "Footman's Mace" },
+            { 0x2F, "Morning Star" },
+            { 0x30, "War Hammer" },
+            { 0x31, "Bec de Corbin" },
+            { 0x32, "War Maul" },
             { 0x33, "Guisarme" },
-            { 0x34, "LargeCrescent" },
-            { 0x35, "SabreHalberd" },
+            { 0x34, "Large Crescent" },
+            { 0x35, "Sabre Halberd" },
             { 0x36, "Balbriggan" },
-            { 0x37, "DoubleBlade" },
+            { 0x37, "Double Blade" },
             { 0x38, "Halberd" },
-            { 0x39, "WizardStaff" },
-            { 0x3A, "ClergyRod" },
-            { 0x3B, "SummonerBaton" },
-            { 0x3C, "ShamanicStaff" },
-            { 0x3D, "Bishop'sCrosier" },
-            { 0x3E, "Sage'sCane" },
+            { 0x39, "Wizard Staff" },
+            { 0x3A, "Clergy Rod" },
+            { 0x3B, "Summoner Baton" },
+            { 0x3C, "Shamanic Staff" },
+            { 0x3D, "Bishop's Crosier" },
+            { 0x3E, "Sage's Cane" },
             { 0x3F, "Langdebeve" },
-            { 0x40, "SabreMace" },
-            { 0x41, "Footman'sMace" },
+            { 0x40, "Sabre Mace" },
+            { 0x41, "Footman's Mace" },
             { 0x42, "Gloomwing" },
-            { 0x43, "Mjolinir" },
+            { 0x43, "Mjolnir" },
             { 0x44, "Griever" },
             { 0x45, "Destroyer" },
-            { 0x46, "HandofLight" },
+            { 0x46, "Hand of Light" },
             { 0x47, "Spear" },
             { 0x48, "Glaive" },
             { 0x49, "Scorpion" },
             { 0x4A, "Corcesca" },
             { 0x4B, "Trident" },
-            { 0x4C, "AwlPike" },
-            { 0x4D, "BoarSpear" },
+            { 0x4C, "Awl Pike" },
+            { 0x4D, "Boar Spear" },
             { 0x4E, "Fauchard" },
             { 0x4F, "Voulge" },
-            { 0x50, "PoleAxe" },
+            { 0x50, "Pole Axe" },
             { 0x51, "Bardysh" },
             { 0x52, "Brandestoc" },
-            { 0x53, "GastraphBow" },
-            { 0x54, "LightCrossbow" },
-            { 0x55, "TargetBow" },
+            { 0x53, "Gastraph Bow" },
+            { 0x54, "Light Crossbow" },
+            { 0x55, "Target Bow" },
             { 0x56, "Windlass" },
             { 0x57, "Cranequin" },
-            { 0x58, "LugCrossbow" },
-            { 0x59, "SiegeBow" },
+            { 0x58, "Lug Crossbow" },
+            { 0x59, "Siege Bow" },
             { 0x5A, "Arbalest" }
         };
 

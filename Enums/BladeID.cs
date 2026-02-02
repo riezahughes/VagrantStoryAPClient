@@ -66,7 +66,6 @@
         SAGES_CANE = 0x003E,
         LANGDEBEVE = 0x003F,
         SABRE_MACE = 0x0040,
-        FOOTMANS_MACE = 0x0041,
         GLOOMWING = 0x0042,
         MJOLNIR = 0x0043,
         GRIEVER = 0x0044,
