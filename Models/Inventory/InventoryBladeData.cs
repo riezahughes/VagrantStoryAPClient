@@ -11,41 +11,35 @@ namespace VagrantStoryArchipelago.Models.Inventory
         [MemoryOffset(0x00)]  // 0x607d1 - Item ID (note: 16-bit, spans 0x02-0x03)
         public uint BladeID { get; set; }
 
-        [MemoryOffset(0x02)]  // 0x607cf - Blade Slot
-        public byte BladeInventorySlot { get; set; }
-
         [MemoryOffset(0x03)]  // 0x607f6 - Blade Type
         public byte BladeType { get; set; }
 
-        [MemoryOffset(0x07)]  // 0x607d4 - Max DP start (16-bit)
+        [MemoryOffset(0x04)]  // 0x607d4 - Max DP start (16-bit)
         public ushort BladeMaxDP { get; set; }
 
-        [MemoryOffset(0x09)]  // 0x607d4 - Max DP start (16-bit)
+        [MemoryOffset(0x06)]  // 0x607d4 - Max DP start (16-bit)
         public ushort BladeMaxPP { get; set; }
 
-        [MemoryOffset(0x0b)]  // 0x607d8 - Current DP
+        [MemoryOffset(0x08)]  // 0x607d8 - Current DP
         public ushort BladeCurrentPP { get; set; }
 
-        [MemoryOffset(0x0d)]  // 0x607d8 - Current DP
+        [MemoryOffset(0x0a)]  // 0x607d8 - Current DP
         public ushort BladeCurrentDP { get; set; }
 
-        [MemoryOffset(0x11)]  // 0x607dd - STR
+        [MemoryOffset(0x0c)]  // 0x607dd - STR
         public byte BladeStrStat { get; set; }
 
-        [MemoryOffset(0x12)]  // 0x607de - INT
+        [MemoryOffset(0x0d)]  // 0x607de - INT
         public byte BladeIntStat { get; set; }
 
-        [MemoryOffset(0x13)]  // 0x607df - AGI
+        [MemoryOffset(0x0e)]  // 0x607df - AGI
         public byte BladeAgiStat { get; set; }
 
-        [MemoryOffset(0x14)]  // 0x607e1 - Blunt
-        public byte BladeBluntDefStat { get; set; }
+        [MemoryOffset(0x0f)]  // 0x607d8 - Current DP
+        public ushort BladeRiskStat { get; set; }
 
-        [MemoryOffset(0x15)]  // 0x607e2 - Edged
-        public byte BladeEdgedDefStat { get; set; }
-
-        [MemoryOffset(0x16)]  // 0x607e3 - Piercing
-        public byte BladePiercingDefStat { get; set; }
+        [MemoryOffset(0x14)]  // 0x607e1 - 
+        public byte BladeRangeStat { get; set; }
 
         [MemoryOffset(0x18)]  // 0x607e4 - Human
         public byte BladeHumanStat { get; set; }
@@ -89,24 +83,25 @@ namespace VagrantStoryArchipelago.Models.Inventory
         [MemoryOffset(0x28)]  // 0x607f4 - Material
         public byte BladeMaterial { get; set; }
 
-        [MemoryOffset(0x30)]  // 0x607f6 - Blade Type
+        [MemoryOffset(0x2a)]  // 0x607f6 - Blade Type
         public byte BladeEquipStatus { get; set; }
+
+        [MemoryOffset(0x2b)]  // 0x607cf - Blade Slot
+        public byte BladeInventorySlot { get; set; }
 
         public InventoryBladeData(
             string name,
-            byte bladeInventorySlot,
             BladeType bladeType,
             BladeID bladeID,
             ushort bladeMaxDP,
             ushort bladeMaxPP,
             ushort bladeCurrentPP,
             ushort bladeCurrentDP,
+            byte bladeRiskStat,
             byte bladeStrStat,
             byte bladeIntStat,
             byte bladeAgiStat,
-            byte bladeBluntDefStat,
-            byte bladeEdgedDefStat,
-            byte bladePiercingDefStat,
+            byte bladeRangeStat,
             byte bladeHumanStat,
             byte bladeBeastStat,
             byte bladeUndeadStat,
@@ -121,23 +116,22 @@ namespace VagrantStoryArchipelago.Models.Inventory
             byte bladeLightStat,
             byte bladeDarkStat,
             ItemMaterials bladeMaterial,
-            byte bladeEquipStatus
+            byte bladeEquipStatus,
+            byte bladeInventorySlot
         )
         {
             BladeName = name;
-            BladeInventorySlot = bladeInventorySlot;
             BladeType = Convert.ToByte(bladeType);
             BladeID = Convert.ToByte(bladeID);
             BladeMaxDP = bladeMaxDP;
             BladeMaxPP = bladeMaxPP;
             BladeCurrentPP = bladeCurrentPP;
             BladeCurrentDP = bladeCurrentDP;
+            BladeRiskStat = bladeRiskStat;
             BladeStrStat = bladeStrStat;
             BladeIntStat = bladeIntStat;
             BladeAgiStat = bladeAgiStat;
-            BladeBluntDefStat = bladeBluntDefStat;
-            BladeEdgedDefStat = bladeEdgedDefStat;
-            BladePiercingDefStat = bladePiercingDefStat;
+            BladeRangeStat = bladeRangeStat;
             BladeHumanStat = bladeHumanStat;
             BladeBeastStat = bladeBeastStat;
             BladeUndeadStat = bladeUndeadStat;
@@ -152,6 +146,8 @@ namespace VagrantStoryArchipelago.Models.Inventory
             BladeLightStat = bladeLightStat;
             BladeDarkStat = bladeDarkStat;
             BladeMaterial = (byte)bladeMaterial;
+            BladeEquipStatus = bladeEquipStatus;
+            BladeInventorySlot = bladeInventorySlot;
         }
     }
 }

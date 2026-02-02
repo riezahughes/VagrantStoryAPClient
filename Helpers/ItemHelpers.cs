@@ -133,6 +133,32 @@ namespace VagrantStoryArchipelago.Helpers
             return bladeList;
         }
 
+        public static List<InventoryGripData> GetInventoryGripSlots()
+        {
+            var slots = InventoryGripSlotReference;
+            var gripList = new List<InventoryGripData>();
+
+            foreach (var slot in slots)
+            {
+                ulong slotData = Memory.ReadUInt(slot.Value);
+
+                Console.WriteLine($"{slotData:X}");
+
+                byte[] bytes = BitConverter.GetBytes(slotData);
+
+                if (bytes[0] == 0x00)
+                {
+                    break;
+                }
+
+                string gripName = CraftingGripReference.ContainsKey(bytes[0]) ? CraftingGripReference[bytes[0]] : "Unknown Grip";
+                var gripData = GripDatabase.Grips.FirstOrDefault(grip => grip.Key == gripName);
+                gripList.Add(gripData.Value);
+            }
+
+            return gripList;
+        }
+
 
         public static List<InventoryArmorData> GetInventoryArmorSlots()
         {
@@ -387,6 +413,42 @@ namespace VagrantStoryArchipelago.Helpers
 
                 Console.WriteLine($"No Blades has been found: Adding {blade.BladeName} with Agi {blade.BladeAgiStat} to slot {listOfSlots.Count}");
                 Memory.WriteObject<InventoryBladeData>(InventoryBladeSlotReference[listOfSlots.Count], BladeDatabase.Blades[args.Item.Name]);
+            }
+        }
+
+        public static void handleInventoryCraftingGrip(ItemReceivedEventArgs args)
+        {
+            // Specifically only for gems
+
+            var listOfSlots = ItemHelpers.GetInventoryGripSlots();
+
+            Console.WriteLine($"{listOfSlots.Count} grip slots found");
+
+            if (listOfSlots.Count >= 8)
+            {
+                Console.WriteLine($"Inventory full. Delaying {args.Item.Name}");
+                App.delayedItems.Add(args);
+                return;
+            }
+
+            InventoryGripData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.GripName == args.Item.Name, null);
+
+
+            if (matchingItem is not null && matchingItem.GripName != "Unknown Grip")
+            {
+                Console.WriteLine($"{matchingItem.GripName} has been found already: Ignoring Blade {matchingItem.GripInventorySlot}");
+                return;
+            }
+            else
+            {
+                byte itemID = ItemHelpers.CraftingGripReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
+
+                InventoryGripData grip = GripDatabase.Grips[args.Item.Name];
+
+                grip.GripInventorySlot = (byte)(listOfSlots.Count + 1);
+
+                Console.WriteLine($"No grips has been found: Adding {grip.GripName} with Agi {grip.GripAgiStat} to slot {listOfSlots.Count}");
+                Memory.WriteObject<InventoryGripData>(InventoryGripSlotReference[listOfSlots.Count], GripDatabase.Grips[args.Item.Name]);
             }
         }
 
@@ -758,9 +820,44 @@ namespace VagrantStoryArchipelago.Helpers
             },
         };
 
+        public static Dictionary<byte, string> CraftingGripReference = new Dictionary<byte, string>()
+        {
+            { 0x60, "Short Hilt" },
+            { 0x61, "Swept Hilt" },
+            { 0x62, "Cross Guard" },
+            { 0x63, "Knuckle Guard" },
+            { 0x64, "Counter Guard" },
+            { 0x65, "Side Ring" },
+            { 0x66, "Power Palm" },
+            { 0x67, "Murderer's Hilt" },
+            { 0x68, "Spiral Hilt" },
+            { 0x69, "Wooden Grip" },
+            { 0x6A, "Sand Face" },
+            { 0x6B, "Czekan Type" },
+            { 0x6C, "Sarissa Grip" },
+            { 0x6D, "Gendarme" },
+            { 0x6E, "Heavy Grip" },
+            { 0x6F, "Runkasyle" },
+            { 0x70, "Bhuj Type" },
+            { 0x71, "Grimoire Grip" },
+            { 0x72, "Elephant" },
+            { 0x73, "Wooden Pole" },
+            { 0x74, "Spiculum Pole" },
+            { 0x75, "Winged Pole" },
+            { 0x76, "Framea Pole" },
+            { 0x77, "Ahlspies" },
+            { 0x78, "Spiral Pole" },
+            { 0x79, "Simple Bolt" },
+            { 0x7A, "Steel Bolt" },
+            { 0x7B, "Javelin Bolt" },
+            { 0x7C, "Falarica Bolt" },
+            { 0x7D, "Stone Bullet" },
+            { 0x7E, "Sonic Bullet" }
+        };
+
         public static Dictionary<byte, string> CraftingBladeReference = new Dictionary<byte, string>()
         {
-            { 0x01, "BattleKnife" },
+            { 0x01, "Battle Knife" },
             { 0x02, "Scramasax" },
             { 0x03, "Dirk" },
             { 0x04, "Throwing Knife" },

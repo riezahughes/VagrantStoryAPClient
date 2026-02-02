@@ -9,7 +9,7 @@
         COUNTER_GUARD = 0x0064,
         SIDE_RING = 0x0065,
         POWER_PALM = 0x0066,
-        MURDERER_S_HILT = 0x0067,
+        MURDERERS_HILT = 0x0067,
         SPIRAL_HILT = 0x0068,
         WOODEN_GRIP = 0x0069,
         SAND_FACE = 0x006A,

@@ -303,22 +303,22 @@ namespace VagrantStoryArchipelago
         public const uint InventoryBladeSlot16 = 0x0006067c;
 
         // Grip Inventory Slots
-        public const uint InventoryGripSlot01 = 0x0000606b6;
-        public const uint InventoryGripSlot02 = 0x0000606c6;
-        public const uint InventoryGripSlot03 = 0x0000606d6;
-        public const uint InventoryGripSlot04 = 0x0000606e6;
-        public const uint InventoryGripSlot05 = 0x0000606f6;
-        public const uint InventoryGripSlot06 = 0x000060706;
-        public const uint InventoryGripSlot07 = 0x000060716;
-        public const uint InventoryGripSlot08 = 0x000060726;
-        public const uint InventoryGripSlot09 = 0x000060736;
-        public const uint InventoryGripSlot10 = 0x000060746;
-        public const uint InventoryGripSlot11 = 0x000060756;
-        public const uint InventoryGripSlot12 = 0x000060766;
-        public const uint InventoryGripSlot13 = 0x000060776;
-        public const uint InventoryGripSlot14 = 0x000060786;
-        public const uint InventoryGripSlot15 = 0x000060796;
-        public const uint InventoryGripSlot16 = 0x0000607a6;
+        public const uint InventoryGripSlot01 = 0x0000606a8;
+        public const uint InventoryGripSlot02 = 0x0000606c8;
+        public const uint InventoryGripSlot03 = 0x0000606d8;
+        public const uint InventoryGripSlot04 = 0x0000606e8;
+        public const uint InventoryGripSlot05 = 0x0000606f8;
+        public const uint InventoryGripSlot06 = 0x000060708;
+        public const uint InventoryGripSlot07 = 0x000060718;
+        public const uint InventoryGripSlot08 = 0x000060728;
+        public const uint InventoryGripSlot09 = 0x000060738;
+        public const uint InventoryGripSlot10 = 0x000060748;
+        public const uint InventoryGripSlot11 = 0x000060758;
+        public const uint InventoryGripSlot12 = 0x000060768;
+        public const uint InventoryGripSlot13 = 0x000060778;
+        public const uint InventoryGripSlot14 = 0x000060788;
+        public const uint InventoryGripSlot15 = 0x000060798;
+        public const uint InventoryGripSlot16 = 0x0000607a8;
 
         // Armor Inventory Slots
         public const uint InventoryArmorSlot01 = 0x000607a7;
