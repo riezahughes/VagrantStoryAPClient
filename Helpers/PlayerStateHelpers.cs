@@ -24,20 +24,16 @@ namespace Helpers
         {
             // Write the current ProcessedItemIndex to a specific memory address
             Memory.Write(Addresses.ItemIndexStorage, (ushort)App.ProcessedItemIndex);
-#if DEBUG
             Console.WriteLine($"Saved item index: {App.ProcessedItemIndex}");
-#endif
         }
 
         public static void OnGameLoaded(ArchipelagoClient client)
         {
             // Read the saved index from memory
+            // Read the saved index from memory
             var index = Memory.ReadUShort(Addresses.ItemIndexStorage);
-            App.ProcessedItemIndex = index == 0 ? 1 : index;
-#if DEBUG
+            App.ProcessedItemIndex = index;
             Console.WriteLine($"Loaded item index: {App.ProcessedItemIndex}");
-#endif
-
             // Immediately try to process any pending items
             UpdatePlayerState(client);
 
