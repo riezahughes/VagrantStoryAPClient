@@ -23,7 +23,6 @@ namespace Helpers
 
             if (goalCondition == PlayerVictoryConditions.DEFEAT_DARK_ANGEL)
             {
-                Console.WriteLine("Cleared 1");
                 return true;
             }
             //else if (goalCondition == PlayerVictoryConditions.VICTORY_2)

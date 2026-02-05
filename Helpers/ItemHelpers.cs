@@ -346,7 +346,7 @@ namespace VagrantStoryArchipelago.Helpers
 
             var listOfSlots = GetInventoryItemSlots();
 
-            Console.WriteLine($"{listOfSlots.Count} slots found");
+            //Console.WriteLine($"{listOfSlots.Count} slots found");
 
             if (listOfSlots.Count >= 64)
             {
@@ -358,7 +358,7 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (matchingItem is not null && matchingItem.Name != "Unknown Item")
             {
-                Console.WriteLine($"{matchingItem.Name} has been found: Adding 5 to the quantity in slot {matchingItem.ItemSlot}");
+                //Console.WriteLine($"{matchingItem.Name} has been found: Adding 5 to the quantity in slot {matchingItem.ItemSlot}");
                 byte itemID = ItemHelpers.ItemReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
                 InventoryItemData itemData = ItemDatabase.Items[item.ItemName];
                 itemData.ItemSlot = matchingItem.ItemSlot;
@@ -368,7 +368,7 @@ namespace VagrantStoryArchipelago.Helpers
             }
             else
             {
-                Console.WriteLine($"No Item has been found: Adding 5 of the item to the quantity in slot {listOfSlots.Count + 1}");
+                //Console.WriteLine($"No Item has been found: Adding 5 of the item to the quantity in slot {listOfSlots.Count + 1}");
                 byte itemID = ItemReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
                 InventoryItemData itemData = ItemDatabase.Items[item.ItemName];
                 itemData.ItemSlot = (byte)(listOfSlots.Count + 1);
@@ -383,7 +383,7 @@ namespace VagrantStoryArchipelago.Helpers
 
             var listOfSlots = ItemHelpers.GetInventoryGemSlots();
 
-            Console.WriteLine($"{listOfSlots.Count} gem slots found");
+            //Console.WriteLine($"{listOfSlots.Count} gem slots found");
 
             if (listOfSlots.Count >= 48)
             {
@@ -395,7 +395,7 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (matchingItem is not null && matchingItem.GemName != "Unknown Gem")
             {
-                Console.WriteLine($"{matchingItem.GemName} has been found already: Ignoring Gem {matchingItem.GemInventorySlot}");
+                //Console.WriteLine($"{matchingItem.GemName} has been found already: Ignoring Gem {matchingItem.GemInventorySlot}");
                 return true;
             }
             else
@@ -403,7 +403,7 @@ namespace VagrantStoryArchipelago.Helpers
                 byte itemID = ItemHelpers.GemReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
                 InventoryGemData gem = GemDatabase.Gems[item.ItemName];
                 gem.GemInventorySlot = (byte)(listOfSlots.Count);
-                Console.WriteLine($"No Gem has been found: Adding {gem.GemName} with Agi {gem.GemAgiStat} to slot {listOfSlots.Count}");
+                //Console.WriteLine($"No Gem has been found: Adding {gem.GemName} with Agi {gem.GemAgiStat} to slot {listOfSlots.Count}");
                 Memory.WriteObject<InventoryGemData>(InventoryGemSlotReference[listOfSlots.Count], GemDatabase.Gems[item.ItemName]);
                 return true;
             }
@@ -415,7 +415,7 @@ namespace VagrantStoryArchipelago.Helpers
 
             var listOfSlots = ItemHelpers.GetInventoryShieldSlots();
 
-            Console.WriteLine($"{listOfSlots.Count} shield slots found");
+            //Console.WriteLine($"{listOfSlots.Count} shield slots found");
 
             if (listOfSlots.Count >= 8)
             {
@@ -427,7 +427,7 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (matchingItem is not null && matchingItem.ShieldName != "Unknown Shield")
             {
-                Console.WriteLine($"{matchingItem.ShieldName} has been found already: Ignoring Shield {matchingItem.ShieldInventorySlot}");
+                //Console.WriteLine($"{matchingItem.ShieldName} has been found already: Ignoring Shield {matchingItem.ShieldInventorySlot}");
                 return true;
             }
             else
@@ -435,7 +435,7 @@ namespace VagrantStoryArchipelago.Helpers
                 byte itemID = ItemHelpers.ShieldReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
                 InventoryShieldData shield = ShieldDatabase.Shields[item.ItemName];
                 shield.ShieldInventorySlot = (byte)(listOfSlots.Count + 1);
-                Console.WriteLine($"No Shields has been found: Adding {shield.ShieldName} with Agi {shield.ShieldAgiStat} to slot {listOfSlots.Count}");
+                //Console.WriteLine($"No Shields has been found: Adding {shield.ShieldName} with Agi {shield.ShieldAgiStat} to slot {listOfSlots.Count}");
                 Memory.WriteObject<InventoryShieldData>(InventoryShieldSlotReference[listOfSlots.Count], ShieldDatabase.Shields[item.ItemName]);
                 return true;
             }
@@ -447,7 +447,7 @@ namespace VagrantStoryArchipelago.Helpers
 
             var listOfSlots = ItemHelpers.GetInventoryBladeSlots();
 
-            Console.WriteLine($"{listOfSlots.Count} blade slots found");
+            //Console.WriteLine($"{listOfSlots.Count} blade slots found");
 
             if (listOfSlots.Count >= 8)
             {
@@ -459,7 +459,7 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (matchingItem is not null && matchingItem.BladeName != "Unknown Blade")
             {
-                Console.WriteLine($"{matchingItem.BladeName} has been found already: Ignoring Blade {matchingItem.BladeInventorySlot}");
+                //Console.WriteLine($"{matchingItem.BladeName} has been found already: Ignoring Blade {matchingItem.BladeInventorySlot}");
                 return true;
             }
             else
@@ -467,7 +467,7 @@ namespace VagrantStoryArchipelago.Helpers
                 byte itemID = ItemHelpers.CraftingBladeReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
                 InventoryBladeData blade = BladeDatabase.Blades[item.ItemName];
                 blade.BladeInventorySlot = (byte)(listOfSlots.Count + 1);
-                Console.WriteLine($"No Blades has been found: Adding {blade.BladeName} with Agi {blade.BladeAgiStat} to slot {listOfSlots.Count}");
+                //Console.WriteLine($"No Blades has been found: Adding {blade.BladeName} with Agi {blade.BladeAgiStat} to slot {listOfSlots.Count}");
                 Memory.WriteObject<InventoryBladeData>(InventoryBladeSlotReference[listOfSlots.Count], BladeDatabase.Blades[item.ItemName]);
                 return true;
             }
@@ -479,7 +479,7 @@ namespace VagrantStoryArchipelago.Helpers
 
             var listOfSlots = ItemHelpers.GetInventoryGripSlots();
 
-            Console.WriteLine($"{listOfSlots.Count} grip slots found");
+            //Console.WriteLine($"{listOfSlots.Count} grip slots found");
 
             if (listOfSlots.Count >= 8)
             {
@@ -491,7 +491,7 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (matchingItem is not null && matchingItem.GripName != "Unknown Grip")
             {
-                Console.WriteLine($"{matchingItem.GripName} has been found already: Ignoring Grip {matchingItem.GripInventorySlot}");
+                //Console.WriteLine($"{matchingItem.GripName} has been found already: Ignoring Grip {matchingItem.GripInventorySlot}");
                 return true;
             }
             else
@@ -499,7 +499,7 @@ namespace VagrantStoryArchipelago.Helpers
                 byte itemID = ItemHelpers.CraftingGripReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
                 InventoryGripData grip = GripDatabase.Grips[item.ItemName];
                 grip.GripInventorySlot = (byte)(listOfSlots.Count + 1);
-                Console.WriteLine($"No grips has been found: Adding {grip.GripName} with Agi {grip.GripAgiStat} to slot {listOfSlots.Count}");
+                //Console.WriteLine($"No grips has been found: Adding {grip.GripName} with Agi {grip.GripAgiStat} to slot {listOfSlots.Count}");
                 Memory.WriteObject<InventoryGripData>(InventoryGripSlotReference[listOfSlots.Count], GripDatabase.Grips[item.ItemName]);
                 return true;
             }
@@ -511,7 +511,7 @@ namespace VagrantStoryArchipelago.Helpers
 
             var listOfSlots = ItemHelpers.GetInventoryArmorSlots();
 
-            Console.WriteLine($"{listOfSlots.Count} armor slots found");
+            //Console.WriteLine($"{listOfSlots.Count} armor slots found");
 
             if (listOfSlots.Count >= 16)
             {
@@ -548,7 +548,7 @@ namespace VagrantStoryArchipelago.Helpers
                         break;
                 }
 
-                Console.WriteLine($"{matchingArmor.ArmorName} has been found already: Adding to newer slot {listOfSlots.Count + 1}");
+                //Console.WriteLine($"{matchingArmor.ArmorName} has been found already: Adding to newer slot {listOfSlots.Count + 1}");
                 armorData.ArmorInventorySlot = (byte)(listOfSlots.Count);
                 Memory.WriteObject<InventoryArmorData>(InventoryArmorSlotReference[listOfSlots.Count], armorData);
                 return true;
@@ -559,13 +559,13 @@ namespace VagrantStoryArchipelago.Helpers
 
                 // Define the list using your specific Armor Data type
                 var allDicts = new List<Dictionary<string, InventoryArmorData>>
-        {
-            HelmetDatabase.Helmets,
-            GloveDatabase.Gloves,
-            ChestpieceDatabase.Chestpieces,
-            LeggingDatabase.Leggings,
-            AccessoriesDatabase.Accessories
-        };
+                {
+                    HelmetDatabase.Helmets,
+                    GloveDatabase.Gloves,
+                    ChestpieceDatabase.Chestpieces,
+                    LeggingDatabase.Leggings,
+                    AccessoriesDatabase.Accessories
+                };
 
                 foreach (var dict in allDicts)
                 {
@@ -579,7 +579,7 @@ namespace VagrantStoryArchipelago.Helpers
 
                 foundArmor.ArmorInventorySlot = (byte)(listOfSlots.Count);
 
-                Console.WriteLine($"Armor does not exist: Adding {foundArmor.ArmorName} with material of {foundArmor.ArmorMaterial} to slot {listOfSlots.Count + 1}");
+                //Console.WriteLine($"Armor does not exist: Adding {foundArmor.ArmorName} with material of {foundArmor.ArmorMaterial} to slot {listOfSlots.Count + 1}");
 
                 Memory.WriteObject<InventoryArmorData>(InventoryArmorSlotReference[listOfSlots.Count], foundArmor);
                 return true;

@@ -1,4 +1,5 @@
-﻿using Archipelago.Core.Util;
+﻿using Archipelago.Core;
+using Archipelago.Core.Util;
 using VagrantStoryArchipelago; // Assuming your Memory class is here
 
 public class MapHelper
@@ -6,6 +7,40 @@ public class MapHelper
     /// <summary>
     /// Sets the bit corresponding to the mapId to 1 (Seen/Visited).
     /// </summary>
+    /// 
+
+    public static Dictionary<int, ushort> StartingLocationAddress = new Dictionary<int, ushort>
+    {
+        { 0, 0x002b },
+        { 1, 0x0005 },
+        { 2, 0x002d },
+        { 3, 0x002f },
+        { 4, 0x002c },
+        { 5, 0x002a }
+    };
+
+    public static void SetStartingLocation(CancellationTokenSource cts, ArchipelagoClient client)
+    {
+        if (cts.Token.IsCancellationRequested) return;
+
+        Memory.MonitorAddressForAction<ushort>(
+            Addresses.CurrentMapandRoomID,
+            () =>
+            {
+
+                int startingLocation = Int32.Parse(client.Options?.GetValueOrDefault("open_world_option", "0").ToString());
+
+                int count = 0;
+                while (count < 10)
+                {
+                    var address = StartingLocationAddress[startingLocation];
+                    Memory.Write(Addresses.CurrentMapandRoomID, address);
+                    count++;
+                }
+            },
+            value => value >= 1);
+    }
+
     public static void MarkMapAsSeen(int mapId)
     {
         // Data Crystal Formula:
@@ -20,7 +55,6 @@ public class MapHelper
         // value: true sets the bit to 1
         Memory.WriteBit(targetAddress, bitNumber, true);
 
-        Console.WriteLine($"Map {mapId}: Bit {bitNumber} set at {targetAddress:X8}.");
     }
 
     /// <summary>

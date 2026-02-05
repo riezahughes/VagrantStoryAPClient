@@ -1025,7 +1025,7 @@ namespace Helpers
         private static List<GenericLocationData> GetSmokebarrelStairData()
         {
             List<GenericLocationData> smokebarrelStairLocations = new List<GenericLocationData>() {
-                new GenericLocationData("WC - Smokebarrel Stair - Heal Panel Floor Trap", Addresses.WC_SmokebarrelStairHealPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("WC - Smokebarrel Stair - Gust Panel Floor Trap", Addresses.WC_SmokebarrelStairHealPanelFloorTrap, "0", "160", LocationCheckType.Byte),
                     new GenericLocationData("WC - Smokebarrel Stair - Chamomile Sigil Unlock", Addresses.WC_SmokebarrelStairChamomileSigilUnlock, "0", "160", LocationCheckType.Byte),
                     new GenericLocationData("WC - Smokebarrel Stair Entered", Addresses.WC_SmokebarrelStairEntered, "0", "1033", LocationCheckType.UShort)
             };
