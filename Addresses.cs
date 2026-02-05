@@ -21,6 +21,8 @@ namespace VagrantStoryArchipelago
 
         public const uint WeaponStatusToggle = 0x00060020;
         public const uint SaveAnywhere = 0x000109FC6;
+        public const uint ItemIndexStorage = 0x00060024; // it's a twobyte value
+        public const uint SaveBannerPercentage = 0x0010ae4c; // it's used to track the percentage and it's also a twobyte value
 
         // Map Completion Array
         public const uint MapStatusAddress01 = 0x0005ffd8;

@@ -1,7 +1,7 @@
 using Archipelago.Core;
 using Archipelago.Core.Util;
-using Archipelago.MultiClient.Net.Models;
 using VagrantStoryArchipelago;
+using VagrantStoryArchipelago.Helpers;
 
 namespace Helpers
 {
@@ -17,7 +17,46 @@ namespace Helpers
         public static void UpdatePlayerState(ArchipelagoClient client)
         {
             //TODO: Player update logic
-            Console.WriteLine("Player Status updated");
+            ItemHelpers.ProcessPendingItems(client);
+        }
+
+        public static void OnSaveMenuDetected(ArchipelagoClient client)
+        {
+            // Write the current ProcessedItemIndex to a specific memory address
+            Memory.Write(Addresses.ItemIndexStorage, (ushort)App.ProcessedItemIndex);
+            Console.WriteLine($"Saved item index: {App.ProcessedItemIndex}");
+        }
+
+        public static void OnGameLoaded(ArchipelagoClient client)
+        {
+            // Read the saved index from memory
+            var index = Memory.ReadUShort(Addresses.ItemIndexStorage);
+            App.ProcessedItemIndex = index == 0 ? 1 : index;
+            Console.WriteLine($"Loaded item index: {App.ProcessedItemIndex}");
+
+            // Immediately try to process any pending items
+            UpdatePlayerState(client);
+
+        }
+
+        public static void SetUpMapListener(CancellationTokenSource cts, ArchipelagoClient client)
+        {
+            if (cts.Token.IsCancellationRequested) return;
+
+            Memory.MonitorAddressForAction<ushort>(
+                Addresses.CurrentMapandRoomID,
+                () =>
+                {
+                    while (APHelpers.isInTheGame() == false)
+                    {
+                        Console.WriteLine("Waiting to return to game...");
+                        Thread.Sleep(2000);
+                    }
+                    OnGameLoaded(client);
+                    UpdatePlayerState(client);
+                    SetUpMapListener(cts, client);
+                },
+                value => value == 0);
         }
     }
 

@@ -9,17 +9,13 @@ namespace Helpers
             return true;
         }
 
-        internal static bool CheckSecondWinCondition(ArchipelagoClient client) {
+        internal static bool CheckSecondWinCondition(ArchipelagoClient client)
+        {
             return true;
         }
 
         public static bool CheckGoalCondition(ArchipelagoClient client)
         {
-
-            if (client?.LocationState?.CompletedLocations == null)
-            {
-                return false;
-            }
 
             // TODO Victory logic goes into each of these goal conditions
 

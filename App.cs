@@ -2,10 +2,9 @@
 
 using System.Text;
 using Archipelago.Core;
-using Archipelago.Core.GameClients;
+using Archipelago.Core.Helpers;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
-using Archipelago.Core.Util.Overlay;
 using Archipelago.MultiClient.Net.Models;
 using Helpers;
 using Microsoft.Extensions.Configuration;
@@ -13,12 +12,13 @@ using Microsoft.Extensions.Configuration;
 public class App
 {
 
-    public static List<ItemReceivedEventArgs> delayedItems = new List<ItemReceivedEventArgs>();
+    public static int ProcessedItemIndex = 0;
 
     private static async Task Main(string[] args)
     {
         Console.OutputEncoding = Encoding.UTF8;
         Console.Title = "Vagrant Story Archipelago Client";
+
 
         // Connection details
         string url;
@@ -39,7 +39,7 @@ public class App
 
         // Make sure the connect is initialised
 
-        DuckstationClient gameClient = null;
+        GameClient gameClient = null;
         bool clientInitializedAndConnected = false; // Renamed for clarity
 
         int retryAttempt = 0;
@@ -52,7 +52,7 @@ public class App
 
             try
             {
-                gameClient = new DuckstationClient();
+                gameClient = new GameClient("duckstation-qt-x64-ReleaseLTCG");
                 clientInitializedAndConnected = true;
             }
             catch (Exception ex)
@@ -83,6 +83,7 @@ public class App
         try
         {
             Memory.GlobalOffset = Memory.GetDuckstationOffset();
+            Console.WriteLine($"Duckstation Memory Offset found at: 0x{Memory.GlobalOffset:X}");
         }
         catch (Exception ex)
         {
@@ -145,27 +146,14 @@ public class App
 
         Console.WriteLine("Got the details! Attempting to connect to Archipelagos main server");
 
-        // Register event handlers
-        archipelagoClient.Connected += (sender, args) => APHelpers.OnConnectedLogic(sender, args, archipelagoClient);
-        archipelagoClient.Disconnected += (sender, args) => APHelpers.OnDisconnectedLogic(sender, args, archipelagoClient);
-        archipelagoClient.ItemReceived += (sender, args) => APHelpers.ItemReceivedLogic(sender, args, archipelagoClient);
-        archipelagoClient.MessageReceived += (sender, args) => APHelpers.Client_MessageReceivedLogic(sender, args, archipelagoClient, slot);
-        archipelagoClient.LocationCompleted += (sender, args) => APHelpers.Client_LocationCompletedLogic(sender, args, archipelagoClient);
-        archipelagoClient.EnableLocationsCondition = () => APHelpers.isInTheGame();
+
 
         try
         {
-
-
-
-            await archipelagoClient.Connect(url + ":" + port, "Vagrant Story", slot);
-
+            await archipelagoClient.Connect(url + ":" + port, gameName);
             Thread.Sleep(1000);
-
             await archipelagoClient?.Login(slot, password);
-
             int retryCount = 0;
-
         }
         catch (Exception ex)
         {
@@ -175,27 +163,10 @@ public class App
 #endif
             Console.ReadKey();
             Environment.Exit(1);
-
         }
 
         try
         {
-
-            var overlayOptions = new OverlayOptions();
-
-            overlayOptions.XOffset = 50;
-            overlayOptions.YOffset = 500;
-            overlayOptions.FontSize = 12;
-            overlayOptions.DefaultTextColor = Archipelago.Core.Util.Overlay.Color.Yellow;
-
-            var gameOverlay = new WindowsOverlayService(overlayOptions);
-
-            //var fontPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "MediEvilFont.ttf");
-            //Console.WriteLine(fontPath)
-            //gameOverlay.CreateFont(fontPath, 12);
-
-            // overlay is turned off till version update of AP Client Library
-            //archipelagoClient.IntializeOverlayService(gameOverlay);
 
             while (archipelagoClient.CurrentSession == null)
             {
@@ -203,32 +174,31 @@ public class App
                 Thread.Sleep(1000);
             }
 
+            // Register event handlers
+            archipelagoClient.Connected += (sender, args) => APHelpers.OnConnectedLogic(sender, args, archipelagoClient);
+            archipelagoClient.Disconnected += (sender, args) => APHelpers.OnDisconnectedLogic(sender, args, archipelagoClient);
+            archipelagoClient.ItemManager.ItemReceived += (sender, args) => APHelpers.ItemReceivedLogic(sender, args, archipelagoClient);
+            archipelagoClient.MessageReceived += (sender, args) => APHelpers.Client_MessageReceivedLogic(sender, args, archipelagoClient, slot);
+            archipelagoClient.LocationManager.LocationCompleted += (sender, args) => APHelpers.Client_LocationCompletedLogic(sender, args, archipelagoClient);
+            archipelagoClient.LocationManager.EnableLocationsCondition = () => APHelpers.isInTheGame();
+
             archipelagoClient.CurrentSession.Locations.CheckedLocationsUpdated += APHelpers.Locations_CheckedLocationsUpdated;
 
             GameLocations = LocationHelpers.BuildLocationList(archipelagoClient.Options);
 
+            while (!APHelpers.isInTheGame())
+            {
+                Console.WriteLine("Waiting to enter game");
+                Thread.Sleep(5000);
+            }
 
-            // Set up GPS
-            //archipelagoClient.GPSHandler = Helpers.APHandlers.Client_GPSHandler();
-            //archipelagoClient.GPSHandler.SetInterval(100);
-            //archipelagoClient.GPSHandler.PositionChanged += (sender, args) => Helpers.APHandlers.Client_GPSPositionChanged(archipelagoClient, GameLocations);
-            //archipelagoClient.GPSHandler.Start();
-
-
-#if DEBUG
-
-            //foreach (var opt in archipelagoClient.Options)
-            //{
-            //    Console.WriteLine($"Option: {opt.Key} - {opt.Value}");
-            //}
-
-#else
-            Console.Clear();
-#endif
             Console.WriteLine("Listening...");
             try
             {
-                _ = archipelagoClient.MonitorLocations(GameLocations);
+                await archipelagoClient.ReceiveReady();
+                PlayerStateHelpers.OnGameLoaded(archipelagoClient);
+                PlayerStateHelpers.SetUpMapListener(_cancellationTokenSource, archipelagoClient);
+                _ = archipelagoClient.MonitorLocationsAsync(GameLocations);
             }
             catch (Exception ex)
             {
@@ -254,22 +224,15 @@ public class App
                     }
                     else if (input?.Trim().ToLower() == "update")
                     {
-                        if (archipelagoClient.LocationState.CompletedLocations != null)
-                        {
-                            PlayerStateHelpers.UpdatePlayerState(archipelagoClient);
-                            Console.WriteLine($"Player state updated. Total Count: {archipelagoClient.CurrentSession.Items.AllItemsReceived.Count}");
+                        PlayerStateHelpers.UpdatePlayerState(archipelagoClient);
+                        Console.WriteLine($"Player state updated. Total Count: {archipelagoClient.CurrentSession.Items.AllItemsReceived.Count}");
 
 #if DEBUG
-                            foreach (ItemInfo item in archipelagoClient.CurrentSession.Items.AllItemsReceived)
-                            {
-                                Console.WriteLine($"id: {item.ItemId} - {item.ItemName}");
-                            }
-#endif
-                        }
-                        else
+                        foreach (ItemInfo item in archipelagoClient.CurrentSession.Items.AllItemsReceived)
                         {
-                            Console.WriteLine("Cannot update player state: GameState or CompletedLocations is null.");
+                            Console.WriteLine($"id: {item.ItemId} - {item.ItemName}");
                         }
+#endif
                     }
                     else if (!string.IsNullOrWhiteSpace(input))
                     {

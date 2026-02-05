@@ -1,5 +1,6 @@
-﻿using Archipelago.Core.Models;
+﻿using Archipelago.Core;
 using Archipelago.Core.Util;
+using Archipelago.MultiClient.Net.Models;
 using VagrantStoryArchipelago.Data;
 using VagrantStoryArchipelago.Enums;
 using VagrantStoryArchipelago.Helpers.EntityLists;
@@ -9,6 +10,77 @@ namespace VagrantStoryArchipelago.Helpers
 {
     public class ItemHelpers
     {
+
+        private static bool TryGiveItem(ItemInfo item, ArchipelagoClient client)
+        {
+            string firstWord = item.ItemName.Split(' ')[0];
+            var materialExists = ItemHelpers.MaterialReference.FirstOrDefault(x =>
+                string.Equals(x.Value, firstWord, StringComparison.OrdinalIgnoreCase));
+
+            string result = null;
+            if (materialExists.Value is not null)
+            {
+                string[] parts = item.ItemName.Split(' ', 2);
+                result = parts.Length > 1 ? parts[1] : "";
+            }
+            else
+            {
+                result = item.ItemName;
+            }
+
+            // Try to handle the item based on type
+            if (ItemHelpers.ItemReference.Any(itm => itm.Value == item.ItemName))
+                return ItemHelpers.handleInventoryItem(item);
+            else if (ItemHelpers.GemReference.Any(itm => itm.Value == item.ItemName))
+                return ItemHelpers.handleInventoryGem(item);
+            else if (ItemHelpers.ArmorReference.Any(itm => itm.Value == result))
+                return ItemHelpers.handleInventoryArmor(item);
+            else if (ItemHelpers.ShieldReference.Any(itm => itm.Value == result))
+                return ItemHelpers.handleInventoryShield(item);
+            else if (ItemHelpers.CraftingBladeReference.Any(itm => itm.Value == result))
+                return ItemHelpers.handleInventoryCraftingBlade(item);
+            else if (ItemHelpers.CraftingGripReference.Any(itm => itm.Value == item.ItemName))
+                return ItemHelpers.handleInventoryCraftingGrip(item);
+            else
+            {
+                Console.WriteLine($"Item not recognised. ({item.ItemName}) Skipping");
+                return true; // Skip unrecognized items
+            }
+        }
+
+
+        public static void ProcessPendingItems(ArchipelagoClient client)
+        {
+            if (client.CurrentSession == null)
+            {
+                return;
+            }
+
+            var allItems = client.CurrentSession.Items.AllItemsReceived;
+
+            // Process items from our last saved index up to what we've received
+            while (App.ProcessedItemIndex < allItems.Count)
+            {
+                var itemToProcess = allItems[App.ProcessedItemIndex];
+
+                // Try to give the item
+                bool success = TryGiveItem(itemToProcess, client);
+
+                if (success)
+                {
+                    // Only increment if we successfully gave the item
+                    App.ProcessedItemIndex++;
+                    Memory.Write(Addresses.ItemIndexStorage, (ushort)App.ProcessedItemIndex);
+                    Console.WriteLine($"Successfully processed item {App.ProcessedItemIndex}/{allItems.Count}");
+                }
+                else
+                {
+                    // Inventory full - stop processing and wait
+                    Console.WriteLine($"Cannot process item {itemToProcess.ItemName} - inventory full. Will retry later.");
+                    break; // Exit the loop, we'll try again later
+                }
+            }
+        }
 
         public static InventoryItemData CheckInventoryItemSlot(int slot)
         {
@@ -53,7 +125,7 @@ namespace VagrantStoryArchipelago.Helpers
             {
                 ulong slotData = Memory.ReadUInt(slot.Value + 0x04);
 
-                Console.WriteLine($"{slotData:X}");
+                //Console.WriteLine($"{slotData:X}");
 
                 byte[] bytes = BitConverter.GetBytes(slotData);
                 Array.Reverse(bytes);
@@ -80,7 +152,7 @@ namespace VagrantStoryArchipelago.Helpers
                 ulong slotData = Memory.ReadUInt(slot.Value + 0x03);
                 byte shieldMaterial = Memory.ReadByte(slot.Value + 0x28);
 
-                Console.WriteLine($"{slotData:X}");
+                //Console.WriteLine($"{slotData:X}");
 
                 byte[] bytes = BitConverter.GetBytes(slotData);
 
@@ -112,7 +184,7 @@ namespace VagrantStoryArchipelago.Helpers
                 ulong slotData = Memory.ReadUInt(slot.Value);
                 byte bladeMaterial = Memory.ReadByte(slot.Value + 0x28);
 
-                Console.WriteLine($"{slotData:X}");
+                //Console.WriteLine($"{slotData:X}");
 
                 byte[] bytes = BitConverter.GetBytes(slotData);
 
@@ -142,7 +214,7 @@ namespace VagrantStoryArchipelago.Helpers
             {
                 ulong slotData = Memory.ReadUInt(slot.Value);
 
-                Console.WriteLine($"{slotData:X}");
+                //Console.WriteLine($"{slotData:X}");
 
                 byte[] bytes = BitConverter.GetBytes(slotData);
 
@@ -173,8 +245,8 @@ namespace VagrantStoryArchipelago.Helpers
 
                 byte[] bytes = BitConverter.GetBytes(slotData);
 
-                Console.WriteLine($"{bytes[1]:X}, {bytes[2]:X}");
-                Console.WriteLine($"{armorMaterial:X}");
+                //Console.WriteLine($"{bytes[1]:X}, {bytes[2]:X}");
+                //Console.WriteLine($"{armorMaterial:X}");
 
                 if (bytes[1] == 0x00 && bytes[2] == 0x00)
                 {
@@ -268,8 +340,7 @@ namespace VagrantStoryArchipelago.Helpers
             }
 
         }
-
-        public static void handleInventoryItem(ItemReceivedEventArgs args)
+        public static bool handleInventoryItem(ItemInfo item)
         {
             // Specifically only for inventory items. Does not include weapons/armour/etc
 
@@ -279,35 +350,34 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (listOfSlots.Count >= 64)
             {
-                Console.WriteLine($"Inventory full. Delaying {args.Item.Name}");
-                App.delayedItems.Add(args);
-                return;
+                Console.WriteLine($"Inventory full. Cannot add {item.ItemName}");
+                return false;
             }
 
-            InventoryItemData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.Name == args.Item.Name, null);
-
+            InventoryItemData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.Name == item.ItemName, null);
 
             if (matchingItem is not null && matchingItem.Name != "Unknown Item")
             {
                 Console.WriteLine($"{matchingItem.Name} has been found: Adding 5 to the quantity in slot {matchingItem.ItemSlot}");
-                byte itemID = ItemHelpers.ItemReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
-                InventoryItemData item = ItemDatabase.Items[args.Item.Name];
-                item.ItemSlot = matchingItem.ItemSlot;
-                item.Quantity = (byte)(matchingItem.Quantity + 0x05);
-                Memory.WriteObject<InventoryItemData>(InventoryItemSlotReference[matchingItem.ItemSlot - 1], item);
+                byte itemID = ItemHelpers.ItemReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
+                InventoryItemData itemData = ItemDatabase.Items[item.ItemName];
+                itemData.ItemSlot = matchingItem.ItemSlot;
+                itemData.Quantity = (byte)(matchingItem.Quantity + 0x05);
+                Memory.WriteObject<InventoryItemData>(InventoryItemSlotReference[matchingItem.ItemSlot - 1], itemData);
+                return true;
             }
             else
             {
                 Console.WriteLine($"No Item has been found: Adding 5 of the item to the quantity in slot {listOfSlots.Count + 1}");
-                byte itemID = ItemReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
-                InventoryItemData item = ItemDatabase.Items[args.Item.Name];
-                item.ItemSlot = (byte)(listOfSlots.Count + 1);
-                Memory.WriteObject<InventoryItemData>(InventoryItemSlotReference[listOfSlots.Count], item);
+                byte itemID = ItemReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
+                InventoryItemData itemData = ItemDatabase.Items[item.ItemName];
+                itemData.ItemSlot = (byte)(listOfSlots.Count + 1);
+                Memory.WriteObject<InventoryItemData>(InventoryItemSlotReference[listOfSlots.Count], itemData);
+                return true;
             }
         }
 
-
-        public static void handleInventoryGem(ItemReceivedEventArgs args)
+        public static bool handleInventoryGem(ItemInfo item)
         {
             // Specifically only for gems
 
@@ -317,36 +387,31 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (listOfSlots.Count >= 48)
             {
-                Console.WriteLine($"Inventory full. Delaying {args.Item.Name}");
-                App.delayedItems.Add(args);
-                return;
+                Console.WriteLine($"Inventory full. Cannot add {item.ItemName}");
+                return false;
             }
 
-            InventoryGemData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.GemName == args.Item.Name, null);
-
+            InventoryGemData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.GemName == item.ItemName, null);
 
             if (matchingItem is not null && matchingItem.GemName != "Unknown Gem")
             {
                 Console.WriteLine($"{matchingItem.GemName} has been found already: Ignoring Gem {matchingItem.GemInventorySlot}");
-                return;
+                return true;
             }
             else
             {
-                byte itemID = ItemHelpers.GemReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
-
-                InventoryGemData gem = GemDatabase.Gems[args.Item.Name];
-
+                byte itemID = ItemHelpers.GemReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
+                InventoryGemData gem = GemDatabase.Gems[item.ItemName];
                 gem.GemInventorySlot = (byte)(listOfSlots.Count);
-
                 Console.WriteLine($"No Gem has been found: Adding {gem.GemName} with Agi {gem.GemAgiStat} to slot {listOfSlots.Count}");
-
-                Memory.WriteObject<InventoryGemData>(InventoryGemSlotReference[listOfSlots.Count], GemDatabase.Gems[args.Item.Name]);
+                Memory.WriteObject<InventoryGemData>(InventoryGemSlotReference[listOfSlots.Count], GemDatabase.Gems[item.ItemName]);
+                return true;
             }
         }
 
-        public static void handleInventoryShield(ItemReceivedEventArgs args)
+        public static bool handleInventoryShield(ItemInfo item)
         {
-            // Specifically only for gems
+            // Specifically only for shields
 
             var listOfSlots = ItemHelpers.GetInventoryShieldSlots();
 
@@ -354,35 +419,31 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (listOfSlots.Count >= 8)
             {
-                Console.WriteLine($"Inventory full. Delaying {args.Item.Name}");
-                App.delayedItems.Add(args);
-                return;
+                Console.WriteLine($"Inventory full. Cannot add {item.ItemName}");
+                return false;
             }
 
-            InventoryShieldData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.ShieldName == args.Item.Name, null);
-
+            InventoryShieldData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.ShieldName == item.ItemName, null);
 
             if (matchingItem is not null && matchingItem.ShieldName != "Unknown Shield")
             {
                 Console.WriteLine($"{matchingItem.ShieldName} has been found already: Ignoring Shield {matchingItem.ShieldInventorySlot}");
-                return;
+                return true;
             }
             else
             {
-                byte itemID = ItemHelpers.ShieldReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
-
-                InventoryShieldData shield = ShieldDatabase.Shields[args.Item.Name];
-
+                byte itemID = ItemHelpers.ShieldReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
+                InventoryShieldData shield = ShieldDatabase.Shields[item.ItemName];
                 shield.ShieldInventorySlot = (byte)(listOfSlots.Count + 1);
-
                 Console.WriteLine($"No Shields has been found: Adding {shield.ShieldName} with Agi {shield.ShieldAgiStat} to slot {listOfSlots.Count}");
-                Memory.WriteObject<InventoryShieldData>(InventoryShieldSlotReference[listOfSlots.Count], ShieldDatabase.Shields[args.Item.Name]);
+                Memory.WriteObject<InventoryShieldData>(InventoryShieldSlotReference[listOfSlots.Count], ShieldDatabase.Shields[item.ItemName]);
+                return true;
             }
         }
 
-        public static void handleInventoryCraftingBlade(ItemReceivedEventArgs args)
+        public static bool handleInventoryCraftingBlade(ItemInfo item)
         {
-            // Specifically only for gems
+            // Specifically only for blades
 
             var listOfSlots = ItemHelpers.GetInventoryBladeSlots();
 
@@ -390,35 +451,31 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (listOfSlots.Count >= 8)
             {
-                Console.WriteLine($"Inventory full. Delaying {args.Item.Name}");
-                App.delayedItems.Add(args);
-                return;
+                Console.WriteLine($"Inventory full. Cannot add {item.ItemName}");
+                return false;
             }
 
-            InventoryBladeData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.BladeName == args.Item.Name, null);
-
+            InventoryBladeData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.BladeName == item.ItemName, null);
 
             if (matchingItem is not null && matchingItem.BladeName != "Unknown Blade")
             {
                 Console.WriteLine($"{matchingItem.BladeName} has been found already: Ignoring Blade {matchingItem.BladeInventorySlot}");
-                return;
+                return true;
             }
             else
             {
-                byte itemID = ItemHelpers.CraftingBladeReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
-
-                InventoryBladeData blade = BladeDatabase.Blades[args.Item.Name];
-
+                byte itemID = ItemHelpers.CraftingBladeReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
+                InventoryBladeData blade = BladeDatabase.Blades[item.ItemName];
                 blade.BladeInventorySlot = (byte)(listOfSlots.Count + 1);
-
                 Console.WriteLine($"No Blades has been found: Adding {blade.BladeName} with Agi {blade.BladeAgiStat} to slot {listOfSlots.Count}");
-                Memory.WriteObject<InventoryBladeData>(InventoryBladeSlotReference[listOfSlots.Count], BladeDatabase.Blades[args.Item.Name]);
+                Memory.WriteObject<InventoryBladeData>(InventoryBladeSlotReference[listOfSlots.Count], BladeDatabase.Blades[item.ItemName]);
+                return true;
             }
         }
 
-        public static void handleInventoryCraftingGrip(ItemReceivedEventArgs args)
+        public static bool handleInventoryCraftingGrip(ItemInfo item)
         {
-            // Specifically only for gems
+            // Specifically only for grips
 
             var listOfSlots = ItemHelpers.GetInventoryGripSlots();
 
@@ -426,35 +483,31 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (listOfSlots.Count >= 8)
             {
-                Console.WriteLine($"Inventory full. Delaying {args.Item.Name}");
-                App.delayedItems.Add(args);
-                return;
+                Console.WriteLine($"Inventory full. Cannot add {item.ItemName}");
+                return false;
             }
 
-            InventoryGripData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.GripName == args.Item.Name, null);
-
+            InventoryGripData matchingItem = listOfSlots.FirstOrDefault(inGameItem => inGameItem.GripName == item.ItemName, null);
 
             if (matchingItem is not null && matchingItem.GripName != "Unknown Grip")
             {
-                Console.WriteLine($"{matchingItem.GripName} has been found already: Ignoring Blade {matchingItem.GripInventorySlot}");
-                return;
+                Console.WriteLine($"{matchingItem.GripName} has been found already: Ignoring Grip {matchingItem.GripInventorySlot}");
+                return true;
             }
             else
             {
-                byte itemID = ItemHelpers.CraftingGripReference.FirstOrDefault(itm => itm.Value == args.Item.Name).Key;
-
-                InventoryGripData grip = GripDatabase.Grips[args.Item.Name];
-
+                byte itemID = ItemHelpers.CraftingGripReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
+                InventoryGripData grip = GripDatabase.Grips[item.ItemName];
                 grip.GripInventorySlot = (byte)(listOfSlots.Count + 1);
-
                 Console.WriteLine($"No grips has been found: Adding {grip.GripName} with Agi {grip.GripAgiStat} to slot {listOfSlots.Count}");
-                Memory.WriteObject<InventoryGripData>(InventoryGripSlotReference[listOfSlots.Count], GripDatabase.Grips[args.Item.Name]);
+                Memory.WriteObject<InventoryGripData>(InventoryGripSlotReference[listOfSlots.Count], GripDatabase.Grips[item.ItemName]);
+                return true;
             }
         }
 
-        public static void handleInventoryArmor(ItemReceivedEventArgs args)
+        public static bool handleInventoryArmor(ItemInfo item)
         {
-            // Specifically only for gems
+            // Specifically only for armor
 
             var listOfSlots = ItemHelpers.GetInventoryArmorSlots();
 
@@ -462,18 +515,16 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (listOfSlots.Count >= 16)
             {
-                Console.WriteLine($"Inventory full. Delaying {args.Item.Name}");
-                App.delayedItems.Add(args);
-                return;
+                Console.WriteLine($"Inventory full. Cannot add {item.ItemName}");
+                return false;
             }
 
-            InventoryArmorData matchingArmor = listOfSlots.FirstOrDefault(inGameItem => inGameItem.ArmorName == args.Item.Name, null);
+            InventoryArmorData matchingArmor = listOfSlots.FirstOrDefault(inGameItem => inGameItem.ArmorName == item.ItemName, null);
 
             InventoryArmorData armorData = null;
 
             if (matchingArmor is not null)
             {
-
                 switch ((ArmorType)matchingArmor.ArmorType)
                 {
                     case 0x00:
@@ -481,26 +532,26 @@ namespace VagrantStoryArchipelago.Helpers
                         armorData = HelmetDatabase.Helmets["Leather Bandana"]; // just adding a slot for the sake of it. Way less hassle if i do this.
                         break;
                     case ArmorType.HELM:
-                        HelmetDatabase.Helmets.TryGetValue(args.Item.Name, out armorData);
+                        HelmetDatabase.Helmets.TryGetValue(item.ItemName, out armorData);
                         break;
                     case ArmorType.ARM:
-                        GloveDatabase.Gloves.TryGetValue(args.Item.Name, out armorData);
+                        GloveDatabase.Gloves.TryGetValue(item.ItemName, out armorData);
                         break;
                     case ArmorType.CHEST:
-                        ChestpieceDatabase.Chestpieces.TryGetValue(args.Item.Name, out armorData);
+                        ChestpieceDatabase.Chestpieces.TryGetValue(item.ItemName, out armorData);
                         break;
                     case ArmorType.LEG:
-                        LeggingDatabase.Leggings.TryGetValue(args.Item.Name, out armorData);
+                        LeggingDatabase.Leggings.TryGetValue(item.ItemName, out armorData);
                         break;
                     case ArmorType.ACCESSORY:
-                        AccessoriesDatabase.Accessories.TryGetValue(args.Item.Name, out armorData);
+                        AccessoriesDatabase.Accessories.TryGetValue(item.ItemName, out armorData);
                         break;
                 }
 
-                Console.WriteLine($"{matchingArmor.ArmorName} has been found already: Adding to Newer slot {listOfSlots.Count + 1}");
+                Console.WriteLine($"{matchingArmor.ArmorName} has been found already: Adding to newer slot {listOfSlots.Count + 1}");
                 armorData.ArmorInventorySlot = (byte)(listOfSlots.Count);
                 Memory.WriteObject<InventoryArmorData>(InventoryArmorSlotReference[listOfSlots.Count], armorData);
-
+                return true;
             }
             else
             {
@@ -508,18 +559,18 @@ namespace VagrantStoryArchipelago.Helpers
 
                 // Define the list using your specific Armor Data type
                 var allDicts = new List<Dictionary<string, InventoryArmorData>>
-                {
-                    HelmetDatabase.Helmets,
-                    GloveDatabase.Gloves,
-                    ChestpieceDatabase.Chestpieces,
-                    LeggingDatabase.Leggings,
-                    AccessoriesDatabase.Accessories
-                };
+        {
+            HelmetDatabase.Helmets,
+            GloveDatabase.Gloves,
+            ChestpieceDatabase.Chestpieces,
+            LeggingDatabase.Leggings,
+            AccessoriesDatabase.Accessories
+        };
 
                 foreach (var dict in allDicts)
                 {
                     // TryGetValue is more efficient as it checks and grabs the item in one go
-                    if (dict.TryGetValue(args.Item.Name, out var armorDictData))
+                    if (dict.TryGetValue(item.ItemName, out var armorDictData))
                     {
                         foundArmor = armorDictData;
                         break;
@@ -531,6 +582,7 @@ namespace VagrantStoryArchipelago.Helpers
                 Console.WriteLine($"Armor does not exist: Adding {foundArmor.ArmorName} with material of {foundArmor.ArmorMaterial} to slot {listOfSlots.Count + 1}");
 
                 Memory.WriteObject<InventoryArmorData>(InventoryArmorSlotReference[listOfSlots.Count], foundArmor);
+                return true;
             }
         }
 
