@@ -41,6 +41,12 @@ namespace VagrantStoryArchipelago.Helpers
                 return ItemHelpers.handleInventoryCraftingBlade(item);
             else if (ItemHelpers.CraftingGripReference.Any(itm => itm.Value == item.ItemName))
                 return ItemHelpers.handleInventoryCraftingGrip(item);
+            else if (ItemHelpers.ChainAbilityUnlockReference.Any(itm => itm.Key == item.ItemName))
+                return ItemHelpers.handleChainAbility(item.ItemName);
+            else if (ItemHelpers.DefenceAbilityUnlockReference.Any(itm => itm.Key == item.ItemName))
+                return ItemHelpers.handleDefenceAbility(item.ItemName);
+            else if (ItemHelpers.BreakArtUnlockReference.Any(itm => itm.Key == item.ItemName))
+                return ItemHelpers.handleBreakArt(item.ItemName);
             else
             {
                 Console.WriteLine($"Item not recognised. ({item.ItemName}) Skipping");
@@ -449,7 +455,7 @@ namespace VagrantStoryArchipelago.Helpers
 
             Console.WriteLine($"{listOfSlots.Count} blade slots found");
 
-            if (listOfSlots.Count >= 8)
+            if (listOfSlots.Count >= 16)
             {
                 Console.WriteLine($"Inventory full. Cannot add {item.ItemName}");
                 return false;
@@ -481,7 +487,7 @@ namespace VagrantStoryArchipelago.Helpers
 
             //Console.WriteLine($"{listOfSlots.Count} grip slots found");
 
-            if (listOfSlots.Count >= 8)
+            if (listOfSlots.Count >= 16)
             {
                 Console.WriteLine($"Inventory full. Cannot add {item.ItemName}");
                 return false;
@@ -584,6 +590,38 @@ namespace VagrantStoryArchipelago.Helpers
                 Memory.WriteObject<InventoryArmorData>(InventoryArmorSlotReference[listOfSlots.Count], foundArmor);
                 return true;
             }
+        }
+
+        public static bool handleChainAbility(string abilityName)
+        {
+            // TryGetValue prevents a KeyNotFoundException if the name is invalid
+            if (ChainAbilityUnlockReference.TryGetValue(abilityName, out uint address))
+            {
+                Memory.WriteByte(address, 0x80);
+                return true;
+            }
+            return false;
+        }
+
+        public static bool handleDefenceAbility(string abilityName)
+        {
+            // Same guard pattern for Defence Abilities
+            if (DefenceAbilityUnlockReference.TryGetValue(abilityName, out uint address))
+            {
+                Memory.WriteByte(address, 0x90);
+                return true;
+            }
+            return false;
+        }
+
+        public static bool handleBreakArt(string breakArtName)
+        {
+            if (BreakArtUnlockReference.TryGetValue(breakArtName, out var info))
+            {
+                Memory.WriteByte(info.Address, info.Value);
+                return true;
+            }
+            return false;
         }
 
 
@@ -778,6 +816,112 @@ namespace VagrantStoryArchipelago.Helpers
             [14] = Addresses.InventoryGripSlot15,
             [15] = Addresses.InventoryGripSlot16,
         };
+
+        public static Dictionary<string, uint> ChainAbilityUnlockReference = new Dictionary<string, uint>()
+        {
+            ["Crimson Pain Chain Ability"] = Addresses.AbilityCrimsonPainUnlock,
+            ["Dulling Impact Chain Ability"] = Addresses.AbilityDullingImpactUnlock,
+            ["Gain Life Chain Ability"] = Addresses.AbilityGainLifeUnlock,
+            ["Gain Magic Chain Ability"] = Addresses.AbilityGainMagicUnlock,
+            ["Heavy Shot Chain Ability"] = Addresses.AbilityHeavyShotUnlock,
+            ["Instill Chain Ability"] = Addresses.AbilityInstillUnlock,
+            ["Mind Ache Chain Ability"] = Addresses.AbilityMindAcheUnlock,
+            ["Mind Assault Chain Ability"] = Addresses.AbilityMindAssaultUnlock,
+            ["Numbing Claw Chain Ability"] = Addresses.AbilityNumbingClawUnlock,
+            ["Paralysis Pulse Chain Ability"] = Addresses.AbilityParalysisPulseUnlock,
+            ["Phantom Pain Chain Ability"] = Addresses.AbilityPhantomPainUnlock,
+            ["Raging Ache Chain Ability"] = Addresses.AbilityRagingAcheUnlock,
+            ["Snake Venom Chain Ability"] = Addresses.AbilitySnakeVenomUnlock,
+            ["Temper Chain Ability"] = Addresses.AbilityTemperUnlock,
+        };
+
+        public static Dictionary<string, uint> DefenceAbilityUnlockReference = new Dictionary<string, uint>()
+        {
+            ["Absorb Damage Defence Ability"] = Addresses.AbilityAbsorbDamageUnlock,
+            ["Absorb Magic Defence Ability"] = Addresses.AbilityAbsorbMagicUnlock,
+            ["Aqua Ward Defence Ability"] = Addresses.AbilityAquaWardUnlock,
+            ["Demonscale Defence Ability"] = Addresses.AbilityDemonscaleUnlock,
+            ["Fireproof Defence Ability"] = Addresses.AbilityFireProofUnlock,
+            ["Impact Guard Defence Ability"] = Addresses.AbilityImpactGuardUnlock,
+            ["Phantom Shield Defence Ability"] = Addresses.AbilityPhantomShieldUnlock,
+            ["Reflect Damage Defence Ability"] = Addresses.AbilityReflectDamageUnlock,
+            ["Reflect Magic Defence Ability"] = Addresses.AbilityReflectMagicUnlock,
+            ["Shadow Guard Defence Ability"] = Addresses.AbilityShadowGuardUnlock,
+            ["Siphon Soul Defence Ability"] = Addresses.AbilitySiphonSoulUnlock,
+            ["Terra Ward Defence Ability"] = Addresses.AbilityTerraWardUnlock,
+            ["Ward Defence Ability"] = Addresses.AbilityWardUnlock,
+            ["Windbreak Defence Ability"] = Addresses.AbilityWindBreakUnlock,
+        };
+
+        public struct BreakArtInfo
+        {
+            public uint Address;
+            public byte Value;
+        }
+
+        public static Dictionary<string, BreakArtInfo> BreakArtUnlockReference = new Dictionary<string, BreakArtInfo>()
+        {
+            // Dagger
+            ["Whistle Sting Break Art"] = new BreakArtInfo { Address = Addresses.BreakWhistleStingUnlock, Value = 0xC0 },
+            ["Shadowweave Break Art"] = new BreakArtInfo { Address = Addresses.BreakShadoweaveUnlock, Value = 0xC0 },
+            ["Double Fang Break Art"] = new BreakArtInfo { Address = Addresses.BreakDoubleFangUnlock, Value = 0x80 },
+            ["Wyrm Scorn Break Art"] = new BreakArtInfo { Address = Addresses.BreakWyrmScornUnlock, Value = 0xA0 },
+
+            // Sword
+            ["Rending Gale Break Art"] = new BreakArtInfo { Address = Addresses.BreakRendingGaleUnlock, Value = 0xC0 },
+            ["Vile Scar Break Art"] = new BreakArtInfo { Address = Addresses.BreakVileScarUnlock, Value = 0xC0 },
+            ["Cherry Ronde Break Art"] = new BreakArtInfo { Address = Addresses.BreakCherryRondeUnlock, Value = 0x80 },
+            ["Papillon Reel Break Art"] = new BreakArtInfo { Address = Addresses.BreakPapillonReelUnlock, Value = 0xA0 },
+
+            // Great Sword
+            ["Sunder Break Art"] = new BreakArtInfo { Address = Addresses.BreakSunderUnlock, Value = 0xC0 },
+            ["Thunderwave Break Art"] = new BreakArtInfo { Address = Addresses.BreakThunderwaveUnlock, Value = 0xC0 },
+            ["Swallow Slash Break Art"] = new BreakArtInfo { Address = Addresses.BreakSwallowSlashUnlock, Value = 0x80 },
+            ["Advent Sign Break Art"] = new BreakArtInfo { Address = Addresses.BreakAdventSignUnlock, Value = 0xA0 },
+
+            // Axe & Mace
+            ["Mistral Edge Break Art"] = new BreakArtInfo { Address = Addresses.BreakMistralEdgeUnlock, Value = 0xC0 },
+            ["Glacial Gale Break Art"] = new BreakArtInfo { Address = Addresses.BreakGlacialGaleUnlock, Value = 0xC0 },
+            ["Killer Mantis Break Art"] = new BreakArtInfo { Address = Addresses.BreakKillerMantisUnlock, Value = 0x80 },
+            ["Black Nebula Break Art"] = new BreakArtInfo { Address = Addresses.BreakBlackNebulaUnlock, Value = 0xA0 },
+
+            // Great Axe
+            ["Bear Claw Break Art"] = new BreakArtInfo { Address = Addresses.BreakBearClawUnlock, Value = 0xC0 },
+            ["Accursed Umbra Break Art"] = new BreakArtInfo { Address = Addresses.BreakAccursedUmbraUnlock, Value = 0xC0 },
+            ["Iron Ripper Break Art"] = new BreakArtInfo { Address = Addresses.BreakIronRipperUnlock, Value = 0x80 },
+            ["Emetic Bomb Break Art"] = new BreakArtInfo { Address = Addresses.BreakEmeticBombUnlock, Value = 0xA0 },
+
+            // Staff
+            ["Sirocco Break Art"] = new BreakArtInfo { Address = Addresses.BreakSiroccoUnlock, Value = 0xC0 },
+            ["Riskbreak Break Art"] = new BreakArtInfo { Address = Addresses.BreakRiskbreakUnlock, Value = 0xC0 },
+            ["Gravis Aether Break Art"] = new BreakArtInfo { Address = Addresses.BreakGravisAetherUnlock, Value = 0x80 },
+            ["Trinity Pulse Break Art"] = new BreakArtInfo { Address = Addresses.BreakTrinityPulseUnlock, Value = 0xA0 },
+
+            // Heavy Mace
+            ["Bonecrusher Break Art"] = new BreakArtInfo { Address = Addresses.BreakBonecrusherUnlock, Value = 0xC0 },
+            ["Quickshock Break Art"] = new BreakArtInfo { Address = Addresses.BreakQuickshockUnlock, Value = 0xC0 },
+            ["Ignis Wheel Break Art"] = new BreakArtInfo { Address = Addresses.BreakIgnisWheelUnlock, Value = 0x80 },
+            ["Hex Flux Break Art"] = new BreakArtInfo { Address = Addresses.BreakHexFluxUnlock, Value = 0xA0 },
+
+            // Polearm
+            ["Ruination Break Art"] = new BreakArtInfo { Address = Addresses.BreakRuinationPolearmUnlock, Value = 0xC0 },
+            ["Scythe Wind Break Art"] = new BreakArtInfo { Address = Addresses.BreakScytheWindUnlock, Value = 0xC0 },
+            ["Giga Tempest Break Art"] = new BreakArtInfo { Address = Addresses.BreakGigaTempestUnlock, Value = 0x80 },
+            ["Spiral Scourge Break Art"] = new BreakArtInfo { Address = Addresses.BreakSpiralScourgeUnlock, Value = 0xA0 },
+
+            // Crossbow
+            ["Brimstone Hail Break Art"] = new BreakArtInfo { Address = Addresses.BreakBrimstoneHailUnlock, Value = 0xC0 },
+            ["Heaven's Scorn Break Art"] = new BreakArtInfo { Address = Addresses.BreakHeavensScornUnlock, Value = 0xC0 },
+            ["Death Wail Break Art"] = new BreakArtInfo { Address = Addresses.BreakDeathWailUnlock, Value = 0xC0 },
+            ["Sanctus Flare Break Art"] = new BreakArtInfo { Address = Addresses.BreakSanctusFlareUnlock, Value = 0xE0 },
+
+            // Bare Hands
+            ["Lotus Palm Break Art"] = new BreakArtInfo { Address = Addresses.BreakLotusPalmUnlock, Value = 0xC0 },
+            ["Vertigo Break Art"] = new BreakArtInfo { Address = Addresses.BreakVertigoUnlock, Value = 0xC0 },
+            ["Vermillion Aura Break Art"] = new BreakArtInfo { Address = Addresses.BreakVermillionAuraUnlock, Value = 0x80 },
+            ["Retribution Break Art"] = new BreakArtInfo { Address = Addresses.BreakRetributionUnlock, Value = 0xA0 }
+        };
+
 
 
         public static Dictionary<int, Dictionary<string, uint>> InventoryWeaponSlotReference = new Dictionary<int, Dictionary<string, uint>>()

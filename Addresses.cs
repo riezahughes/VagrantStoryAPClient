@@ -23,6 +23,49 @@ namespace VagrantStoryArchipelago
         public const uint SaveAnywhere = 0x000109FC6;
         public const uint ItemIndexStorage = 0x00060024; // it's a twobyte value
         public const uint SaveBannerPercentage = 0x0010ae4c; // it's used to track the percentage and it's also a twobyte value
+        public const uint TeleportToggle = 0x0006164d;
+        public const uint TeleportNoMP = 0x000736dc;
+        public const uint MagicMenuUnlock = 0x0004cd6a;
+        public const uint CurrentBP = 0x00060062; // byte
+        public const uint TotalRiskAbilitiesEarned = 0x00060060; // byte
+
+        // Teleport Zone Toggles
+
+        public const uint TeleportWorkerBreakroom = 0x000616EE;
+        public const uint TeleportWineGuildHall = 0x000616EF;
+        public const uint TeleportBlackMarket = 0x000616F0;
+        public const uint TeleportHallOfRevenge = 0x000616F1;
+        public const uint TeleportWitheredSpring = 0x000616F2;
+        public const uint TeleportWorkOfArtWorkshop = 0x000616F3;
+        public const uint TeleportAdventGround = 0x000616F4;
+        public const uint TeleportRueVermillion = 0x000616F5;
+        public const uint TeleportMagicHammerWorkshop = 0x000616F6;
+        public const uint TeleportTheCrossing = 0x000616F7;
+        public const uint TeleportTheDarkTunnel = 0x000616F8;
+        public const uint TeleportRueBouquet = 0x000616F9;
+        public const uint TeleportTheSunlessWay = 0x000616FA;
+        public const uint TeleportTheFaerieCircle = 0x000616FB;
+        public const uint TeleportForestRiver = 0x000616FC;
+        public const uint TeleportTheWoodGate = 0x000616FD;
+        public const uint TeleportValdimanGates = 0x000616FE;
+        public const uint TeleportTheWarriorsRest = 0x000616FF;
+        public const uint TeleportKeanesWorkshop = 0x00061700;
+        public const uint TeleportSinnersCorner = 0x00061701;
+        public const uint TeleportCrumblingMarket = 0x00061702;
+        public const uint TeleportTreatyRoom = 0x00061703;
+        public const uint TeleportBanditsHollow = 0x00061704;
+        public const uint TeleportTheOreRoad = 0x00061705;
+        public const uint TeleportTheAuctionBlock = 0x00061706;
+        public const uint TeleportWayDown = 0x00061707;
+        public const uint TeleportRueLejour = 0x00061708;
+        public const uint TeleportKeschBridge = 0x00061709;
+        public const uint TeleportMetalWorksWorkshop = 0x0006170A;
+        public const uint TeleportJunctionPointWorkshop = 0x0006170B;
+        public const uint TeleportTheDarkCoast = 0x0006170C;
+        public const uint TeleportPlateiaLumitar = 0x0006170D;
+        public const uint TeleportSinAndPunishment = 0x0006170E;
+        public const uint TeleportTheAtrium = 0x0006170F;
+        public const uint TeleportGodsHandsWorkshop = 0x00061710;
 
         // Map Completion Array
         public const uint MapStatusAddress01 = 0x0005ffd8;

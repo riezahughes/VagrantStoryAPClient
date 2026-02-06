@@ -5,7 +5,9 @@ using Archipelago.Core;
 using Archipelago.Core.Helpers;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
+using Archipelago.MultiClient.Net.Models;
 using Helpers;
+using Microsoft.Extensions.Configuration;
 
 public class App
 {
@@ -205,7 +207,7 @@ public class App
                 await archipelagoClient.ReceiveReady();
                 PlayerStateHelpers.OnGameLoaded(archipelagoClient);
                 PlayerStateHelpers.SetUpMapListener(_cancellationTokenSource, archipelagoClient);
-
+                PlayerStateHelpers.EnableTeleportOptions(archipelagoClient);
 
                 _ = archipelagoClient.MonitorLocationsAsync(GameLocations);
             }
