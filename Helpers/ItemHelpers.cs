@@ -1,6 +1,7 @@
 ﻿using Archipelago.Core;
 using Archipelago.Core.Util;
 using Archipelago.MultiClient.Net.Models;
+using Helpers;
 using VagrantStoryArchipelago.Data;
 using VagrantStoryArchipelago.Enums;
 using VagrantStoryArchipelago.Helpers.EntityLists;
@@ -86,6 +87,7 @@ namespace VagrantStoryArchipelago.Helpers
                     break; // Exit the loop, we'll try again later
                 }
             }
+            APHelpers.PROCESSING_ITEM_LIST = false;
         }
 
         public static InventoryItemData CheckInventoryItemSlot(int slot)

@@ -10,6 +10,7 @@ namespace Helpers
 {
     public class APHelpers
     {
+        public static bool PROCESSING_ITEM_LIST = false;
         public static Boolean isInTheGame()
         {
             ulong currentGameStatus = Memory.ReadUInt(Addresses.InGameCheck);
@@ -19,6 +20,11 @@ namespace Helpers
                 return true;
             }
             return false;
+        }
+
+        public static Boolean isProcessingItems()
+        {
+            return PROCESSING_ITEM_LIST == true;
         }
 
         public static async void OnConnectedLogic(object sender, EventArgs args, ArchipelagoClient client)
@@ -85,7 +91,7 @@ namespace Helpers
 
         public static void ItemReceivedLogic(object sender, ItemReceivedEventArgs args, ArchipelagoClient client)
         {
-
+            PROCESSING_ITEM_LIST = true;
             ItemHelpers.ProcessPendingItems(client);
         }
 
