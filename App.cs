@@ -208,6 +208,7 @@ public class App
                 PlayerStateHelpers.OnGameLoaded(archipelagoClient);
                 PlayerStateHelpers.SetUpMapListener(_cancellationTokenSource, archipelagoClient);
                 PlayerStateHelpers.EnableTeleportOptions(archipelagoClient);
+                MapHelper.StartMapListener();
 
                 _ = archipelagoClient.MonitorLocationsAsync(GameLocations);
             }
