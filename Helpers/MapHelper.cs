@@ -15,14 +15,6 @@ public class MapHelper
     private static ushort _lastMapIdChest = 0xFFFF; // Store last known map ID
     private static ushort _lastMapIdBoss = 0xFFFF; // Store last known map ID
 
-
-
-
-
-
-
-
-
     public static void StartMapBossListener()
     {
         Memory.MonitorAddressForAction<ushort>(
@@ -49,14 +41,8 @@ public class MapHelper
             value => value != _lastMapIdBoss);
     }
 
-
-
     public static void UpdateBossInMap(uint currentPointerValue)
     {
-#if DEBUG
-        Console.WriteLine($"Writing to base: 0x{currentPointerValue:X8}");
-#endif
-
         var replacementBossItems = new MapBossData();
         var item1 = ItemDatabase.Items["Cure Root"];
         var item2 = ItemDatabase.Items["Vera Root"];
@@ -71,18 +57,6 @@ public class MapHelper
 
         Memory.WriteObject<MapBossData>(currentPointerValue, replacementBossItems);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
     public static void StartMapChestListener()
     {
@@ -112,10 +86,6 @@ public class MapHelper
 
     public static void UpdateChestsInMap(uint currentPointerValue)
     {
-#if DEBUG
-        Console.WriteLine($"Writing to base: 0x{currentPointerValue:X8}");
-#endif
-
         var replacementChestItems = new MapChestData();
         var item1 = ItemDatabase.Items["Cure Root"];
         var item2 = ItemDatabase.Items["Vera Root"];
@@ -139,7 +109,49 @@ public class MapHelper
 
     public static List<ushort> MapsWithBosses = new List<ushort>
     {
-                0x000C, // The Gallows
+        0x000B, // The Hero's Winehall - Dullahan
+        0x000C, // The Gallows - Minotaur
+        0x0010, // Hall of Sacrilege - Golem
+        0x0011, // The Cleansing Chantry - Dragon
+        0x0016, // Sanity and Madness - Iron Crab
+        0x0018, // The Flayed Confessional - Djinn
+        0x0119, // What Ails You, Kills You - Nightmare
+        0x0135, // Dream of the Holy Land - Water Elemental
+        0x0229, // Nature's Womb - Damascus Crab
+        0x0231, // Bazaar of the Bizarre - Lich
+        0x0233, // The Miner's End - Air Elemental
+        0x0320, // Tircolas Flow - Father Duane, Sarjik and Bejart
+        0x0330, // Underdark Fishmarket - Giant Crab
+        0x0416, // Truth and Lies - Ifrit
+        0x0418, // A Light in the Dark - Arch Dragon
+        0x0531, // Gemsword Blackmarket - Nightstalker
+        0x0632, // The Battle's Beginning - Wyvern
+        0x0633, // Dining in Darkness - Sky Dragon
+        0x0737, // Spanish Tickler - Wyvern Knight
+        0x0B18, // The Hall of Broken Vows - Flame Dragon
+        0x0C37, // Burial - Iron Golem
+        0x0E33, // Tomb of the Reborn - Earth Elemental
+        0x0F18, // Hopes of the Idealist - Dao
+        0x0F30, // Fear of the Fall - Dark Elemental
+        0x1132, // The Smeltry - Fire Elemental
+        0x1628, // Return to the Land - Earth Dragon
+        0x1632, // Traitor's Parting - Ogre
+        0x1638, // The Iron Maiden - Asura
+        0x1735, // Torture Without End - Ogre Lord
+        0x1D35, // Hall of the Wage-Paying - Snow Dragon
+        // NG+
+        0x0136, // Slaugher of the Innocent - Damascus Golem (Evil)
+        0x0138, // Ordeal By Fire - Dark Dragon (Dragon)
+        0x0229, // Nature's Womb - Damascus Crab (Beast) [Also regular boss]
+        0x041D, // Urge the Boy On - Marid and Ifrit (Phantoms) [Time Trial]
+        0x051D, // A Taste of the Spoils - Damascus Crab & Damascus Golem (Beast/Evil) [Time Trial]
+        0x0538, // Pressing - Ravana (Human)
+        0x061D, // Wiping Blood from Blades - Death, Ogre Zombie & Asura (Evil/Undead/Human) [Time Trial]
+        0x0A38, // The Saw - Dragon Zombie (Undead)
+        0x0E38, // The Shin-Vice - Ogre Zombie (Undead)
+        0x1237, // Knotting - Wyvern Queen (Dragon)
+        0x1638, // The Iron Maiden - Asura (Human) [Also regular final boss]
+        0x1A30, // Bite the Master's Wounds - Death (Evil)
     };
 
     public static List<ushort> MapsWithChests = new List<ushort>
