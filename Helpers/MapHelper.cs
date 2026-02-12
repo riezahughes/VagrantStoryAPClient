@@ -63,10 +63,10 @@ public class MapHelper
         var item3 = ItemDatabase.Items["Alchemist´s Reagent"];
 
         replacementBossItems.Item1_Id = item1.ItemID;
-        replacementBossItems.Item1_Qty = 0x01;
-        replacementBossItems.Item2_Id = item1.ItemID;
-        replacementBossItems.Item2_Qty = 0x01;
-        replacementBossItems.Item3_Id = item1.ItemID;
+        replacementBossItems.Item1_Qty = 0x03;
+        replacementBossItems.Item2_Id = item2.ItemID;
+        replacementBossItems.Item2_Qty = 0x02;
+        replacementBossItems.Item3_Id = item3.ItemID;
         replacementBossItems.Item3_Qty = 0x01;
 
         Memory.WriteObject<MapBossData>(currentPointerValue, replacementBossItems);
