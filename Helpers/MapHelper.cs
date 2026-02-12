@@ -12,9 +12,79 @@ public class MapHelper
     /// </summary>
     /// 
 
-    private static ushort _lastMapId = 0xFFFF; // Store last known map ID
+    private static ushort _lastMapIdChest = 0xFFFF; // Store last known map ID
+    private static ushort _lastMapIdBoss = 0xFFFF; // Store last known map ID
 
-    public static void StartMapListener()
+
+
+
+
+
+
+
+
+    public static void StartMapBossListener()
+    {
+        Memory.MonitorAddressForAction<ushort>(
+            Addresses.CurrentMapandRoomID,
+            () =>
+            {
+                ushort mapId = Memory.ReadUShort(Addresses.CurrentMapandRoomID);
+                Console.WriteLine($"Current Map ID: {mapId:X4}");
+                if (APHelpers.isInTheGame() && APHelpers.isProcessingItems() == false && MapsWithBosses.Contains(mapId))
+                {
+#if DEBUG
+                    Thread.Sleep(2000);
+                    Console.WriteLine("Map changed - Updating Boss Drops");
+#endif
+
+                    uint bossPointerLocation = Memory.ReadUInt(Addresses.MapBossDataPointer);
+                    uint bossAddress = (bossPointerLocation & 0x0FFFFFFF);
+                    UpdateBossInMap(bossAddress);
+                    _lastMapIdBoss = mapId;
+                }
+                Thread.Sleep(1000);
+                StartMapBossListener();
+            },
+            value => value != _lastMapIdBoss);
+    }
+
+
+
+    public static void UpdateBossInMap(uint currentPointerValue)
+    {
+#if DEBUG
+        Console.WriteLine($"Writing to base: 0x{currentPointerValue:X8}");
+#endif
+
+        var replacementBossItems = new MapBossData();
+        var item1 = ItemDatabase.Items["Cure Root"];
+        var item2 = ItemDatabase.Items["Vera Root"];
+        var item3 = ItemDatabase.Items["Alchemist´s Reagent"];
+
+        replacementBossItems.Item1_Id = item1.ItemID;
+        replacementBossItems.Item1_Qty = 0x01;
+        replacementBossItems.Item2_Id = item1.ItemID;
+        replacementBossItems.Item2_Qty = 0x01;
+        replacementBossItems.Item3_Id = item1.ItemID;
+        replacementBossItems.Item3_Qty = 0x01;
+
+        Memory.WriteObject<MapBossData>(currentPointerValue, replacementBossItems);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public static void StartMapChestListener()
     {
         Memory.MonitorAddressForAction<ushort>(
             Addresses.CurrentMapandRoomID,
@@ -31,18 +101,13 @@ public class MapHelper
 
                     uint chestPointerLocation = Memory.ReadUInt(Addresses.MapChestDataPointer);
                     uint chestAddress = (chestPointerLocation & 0x0FFFFFFF) + 0x14;
-#if DEBUG
-                    Console.WriteLine($"Map ID: {mapId:X4}");
-                    Console.WriteLine($"Pointer: 0x{chestPointerLocation:X8}, Chest Base: 0x{chestAddress:X8}");
-                    Console.WriteLine($"Misc1 should be at: 0x{chestAddress + 0x214:X8}");
-#endif
                     UpdateChestsInMap(chestAddress);
-                    _lastMapId = mapId;
+                    _lastMapIdChest = mapId;
                 }
                 Thread.Sleep(1000);
-                StartMapListener();
+                StartMapChestListener();
             },
-            value => value != _lastMapId);
+            value => value != _lastMapIdChest);
     }
 
     public static void UpdateChestsInMap(uint currentPointerValue)
@@ -70,13 +135,12 @@ public class MapHelper
         replacementChestItems.Misc3_Confirm = 0x01;
 
         Memory.WriteObject<MapChestData>(currentPointerValue, replacementChestItems);
-
-#if DEBUG
-        // Verify what was written
-        var verify = Memory.ReadObject<MapChestData>(currentPointerValue);
-        Console.WriteLine($"Verified Misc1_Exists at 0x{currentPointerValue + 0x222:X8}: {verify.Misc1_Exists:X2}");
-#endif
     }
+
+    public static List<ushort> MapsWithBosses = new List<ushort>
+    {
+                0x000C, // The Gallows
+    };
 
     public static List<ushort> MapsWithChests = new List<ushort>
     {

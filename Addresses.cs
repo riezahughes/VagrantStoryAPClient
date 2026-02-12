@@ -83,8 +83,8 @@ namespace VagrantStoryArchipelago
         public const uint MapStatusAddress13 = 0x00060008;
 
         // Pointer Locations
+        public const uint MapBossDataPointer = 0x000f18e4;
         public const uint MapChestDataPointer = 0x000f1ca4;
-
 
         // Risk Skills
         public const uint AbilityHeavyShotUnlock = 0x0004be61;
