@@ -15,7 +15,7 @@ public class MapHelper
     private static ushort _lastMapIdChest = 0xFFFF; // Store last known map ID
     private static ushort _lastMapIdBoss = 0xFFFF; // Store last known map ID
 
-    public static void StartMapBossListener()
+    public static void StartMapBossListener(Dictionary<string, object> options)
     {
         Memory.MonitorAddressForAction<ushort>(
             Addresses.CurrentMapandRoomID,
@@ -32,33 +32,48 @@ public class MapHelper
 
                     uint bossPointerLocation = Memory.ReadUInt(Addresses.MapBossDataPointer);
                     uint bossAddress = (bossPointerLocation & 0x0FFFFFFF);
-                    UpdateBossInMap(bossAddress);
+                    UpdateBossInMap(bossAddress, options);
                     _lastMapIdBoss = mapId;
                 }
                 Thread.Sleep(1000);
-                StartMapBossListener();
+                StartMapBossListener(options);
             },
             value => value != _lastMapIdBoss);
     }
 
-    public static void UpdateBossInMap(uint currentPointerValue)
+    public static void UpdateBossInMap(uint currentPointerValue, Dictionary<string, object> options)
     {
+        int dropChoice = Int32.Parse(options?.GetValueOrDefault("chest_tiem_choice", "0").ToString());
         var replacementBossItems = new MapBossData();
         var item1 = ItemDatabase.Items["Cure Root"];
         var item2 = ItemDatabase.Items["Vera Root"];
         var item3 = ItemDatabase.Items["Alchemist´s Reagent"];
 
-        replacementBossItems.Item1_Id = item1.ItemID;
-        replacementBossItems.Item1_Qty = 0x03;
-        replacementBossItems.Item2_Id = item2.ItemID;
-        replacementBossItems.Item2_Qty = 0x02;
-        replacementBossItems.Item3_Id = item3.ItemID;
-        replacementBossItems.Item3_Qty = 0x01;
+        if (dropChoice == DropItemChoice.HEALING_HEAVY)
+        {
+            replacementBossItems.Item1_Id = item1.ItemID;
+            replacementBossItems.Item1_Qty = 0x05;
+            replacementBossItems.Item2_Id = item2.ItemID;
+            replacementBossItems.Item2_Qty = 0x03;
+            replacementBossItems.Item3_Id = item3.ItemID;
+            replacementBossItems.Item3_Qty = 0x01;
+        }
+
+        else if (dropChoice == DropItemChoice.RISK_HEAVY)
+        {
+
+            replacementBossItems.Item1_Id = item1.ItemID;
+            replacementBossItems.Item1_Qty = 0x03;
+            replacementBossItems.Item2_Id = item2.ItemID;
+            replacementBossItems.Item2_Qty = 0x05;
+            replacementBossItems.Item3_Id = item3.ItemID;
+            replacementBossItems.Item3_Qty = 0x01;
+        }
 
         Memory.WriteObject<MapBossData>(currentPointerValue, replacementBossItems);
     }
 
-    public static void StartMapChestListener()
+    public static void StartMapChestListener(Dictionary<string, object> options)
     {
         Memory.MonitorAddressForAction<ushort>(
             Addresses.CurrentMapandRoomID,
@@ -75,34 +90,58 @@ public class MapHelper
 
                     uint chestPointerLocation = Memory.ReadUInt(Addresses.MapChestDataPointer);
                     uint chestAddress = (chestPointerLocation & 0x0FFFFFFF) + 0x14;
-                    UpdateChestsInMap(chestAddress);
+
+
+                    UpdateChestsInMap(chestAddress, options);
                     _lastMapIdChest = mapId;
                 }
                 Thread.Sleep(1000);
-                StartMapChestListener();
+                StartMapChestListener(options);
             },
             value => value != _lastMapIdChest);
     }
 
-    public static void UpdateChestsInMap(uint currentPointerValue)
+    public static void UpdateChestsInMap(uint currentPointerValue, Dictionary<string, object> options)
     {
+
+        int dropChoice = Int32.Parse(options?.GetValueOrDefault("chest_tiem_choice", "0").ToString());
+
         var replacementChestItems = new MapChestData();
         var item1 = ItemDatabase.Items["Cure Root"];
         var item2 = ItemDatabase.Items["Vera Root"];
         var item3 = ItemDatabase.Items["Alchemist´s Reagent"];
 
-        replacementChestItems.Misc1_Exists = 0x03;
-        replacementChestItems.Misc2_Exists = 0x03;
-        replacementChestItems.Misc3_Exists = 0x03;
-        replacementChestItems.Misc1_ID = item1.ItemID;
-        replacementChestItems.Misc2_ID = item2.ItemID;
-        replacementChestItems.Misc3_ID = item3.ItemID;
-        replacementChestItems.Misc1_Qty = 0x03;
-        replacementChestItems.Misc2_Qty = 0x02;
-        replacementChestItems.Misc3_Qty = 0x01;
-        replacementChestItems.Misc1_Confirm = 0x01;
-        replacementChestItems.Misc2_Confirm = 0x01;
-        replacementChestItems.Misc3_Confirm = 0x01;
+        if (dropChoice == DropItemChoice.HEALING_HEAVY)
+        {
+            replacementChestItems.Misc1_Exists = 0x03;
+            replacementChestItems.Misc2_Exists = 0x03;
+            replacementChestItems.Misc3_Exists = 0x03;
+            replacementChestItems.Misc1_ID = item1.ItemID;
+            replacementChestItems.Misc2_ID = item2.ItemID;
+            replacementChestItems.Misc3_ID = item3.ItemID;
+            replacementChestItems.Misc1_Qty = 0x05;
+            replacementChestItems.Misc2_Qty = 0x03;
+            replacementChestItems.Misc3_Qty = 0x01;
+            replacementChestItems.Misc1_Confirm = 0x01;
+            replacementChestItems.Misc2_Confirm = 0x01;
+            replacementChestItems.Misc3_Confirm = 0x01;
+        }
+
+        else if (dropChoice == DropItemChoice.RISK_HEAVY)
+        {
+            replacementChestItems.Misc1_Exists = 0x03;
+            replacementChestItems.Misc2_Exists = 0x03;
+            replacementChestItems.Misc3_Exists = 0x03;
+            replacementChestItems.Misc1_ID = item1.ItemID;
+            replacementChestItems.Misc2_ID = item2.ItemID;
+            replacementChestItems.Misc3_ID = item3.ItemID;
+            replacementChestItems.Misc1_Qty = 0x03;
+            replacementChestItems.Misc2_Qty = 0x05;
+            replacementChestItems.Misc3_Qty = 0x01;
+            replacementChestItems.Misc1_Confirm = 0x01;
+            replacementChestItems.Misc2_Confirm = 0x01;
+            replacementChestItems.Misc3_Confirm = 0x01;
+        }
 
         Memory.WriteObject<MapChestData>(currentPointerValue, replacementChestItems);
     }
