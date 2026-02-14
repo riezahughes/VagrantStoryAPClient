@@ -118,6 +118,7 @@ namespace VagrantStoryArchipelago.Helpers
 
                 string itemName = ItemReference.ContainsKey(bytes[0]) ? ItemReference[bytes[0]] : "Unknown Item";
                 var itemData = ItemDatabase.Items[itemName];
+                itemData.ItemSlot = (byte)slot.Key;
                 itemList.Add(itemData);
             }
 
@@ -370,8 +371,8 @@ namespace VagrantStoryArchipelago.Helpers
                 byte itemID = ItemHelpers.ItemReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
                 InventoryItemData itemData = ItemDatabase.Items[item.ItemName];
                 itemData.ItemSlot = matchingItem.ItemSlot;
-                itemData.Quantity = (byte)(matchingItem.Quantity + 0x05);
-                Memory.WriteObject<InventoryItemData>(InventoryItemSlotReference[matchingItem.ItemSlot - 1], itemData);
+                itemData.Quantity = (byte)(matchingItem.Quantity + 0x01);
+                Memory.WriteObject<InventoryItemData>(InventoryItemSlotReference[matchingItem.ItemSlot], itemData);
                 return true;
             }
             else

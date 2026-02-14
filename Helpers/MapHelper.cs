@@ -22,9 +22,9 @@ public class MapHelper
             () =>
             {
                 ushort mapId = Memory.ReadUShort(Addresses.CurrentMapandRoomID);
-                Console.WriteLine($"Current Map ID: {mapId:X4}");
                 if (APHelpers.isInTheGame() && APHelpers.isProcessingItems() == false && MapsWithBosses.Contains(mapId))
                 {
+                    Console.WriteLine($"Current Map ID: {mapId:X4}");
 #if DEBUG
                     Thread.Sleep(2000);
                     Console.WriteLine("Map changed - Updating Boss Drops");
@@ -35,7 +35,7 @@ public class MapHelper
                     UpdateBossInMap(bossAddress, options);
                     _lastMapIdBoss = mapId;
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(300);
                 StartMapBossListener(options);
             },
             value => value != _lastMapIdBoss);
@@ -43,7 +43,7 @@ public class MapHelper
 
     public static void UpdateBossInMap(uint currentPointerValue, Dictionary<string, object> options)
     {
-        int dropChoice = Int32.Parse(options?.GetValueOrDefault("chest_tiem_choice", "0").ToString());
+        int dropChoice = Int32.Parse(options?.GetValueOrDefault("boss_item_choices", "0").ToString());
         var replacementBossItems = new MapBossData();
         var item1 = ItemDatabase.Items["Cure Root"];
         var item2 = ItemDatabase.Items["Vera Root"];
@@ -52,9 +52,9 @@ public class MapHelper
         if (dropChoice == DropItemChoice.HEALING_HEAVY)
         {
             replacementBossItems.Item1_Id = item1.ItemID;
-            replacementBossItems.Item1_Qty = 0x05;
+            replacementBossItems.Item1_Qty = 0x01;
             replacementBossItems.Item2_Id = item2.ItemID;
-            replacementBossItems.Item2_Qty = 0x03;
+            replacementBossItems.Item2_Qty = 0x01;
             replacementBossItems.Item3_Id = item3.ItemID;
             replacementBossItems.Item3_Qty = 0x01;
         }
@@ -63,9 +63,9 @@ public class MapHelper
         {
 
             replacementBossItems.Item1_Id = item1.ItemID;
-            replacementBossItems.Item1_Qty = 0x03;
+            replacementBossItems.Item1_Qty = 0x01;
             replacementBossItems.Item2_Id = item2.ItemID;
-            replacementBossItems.Item2_Qty = 0x05;
+            replacementBossItems.Item2_Qty = 0x01;
             replacementBossItems.Item3_Id = item3.ItemID;
             replacementBossItems.Item3_Qty = 0x01;
         }
@@ -80,9 +80,9 @@ public class MapHelper
             () =>
             {
                 ushort mapId = Memory.ReadUShort(Addresses.CurrentMapandRoomID);
-                Console.WriteLine($"Current Map ID: {mapId:X4}");
                 if (APHelpers.isInTheGame() && APHelpers.isProcessingItems() == false && MapsWithChests.Contains(mapId))
                 {
+                    Console.WriteLine($"Current Map ID: {mapId:X4}");
 #if DEBUG
                     Thread.Sleep(3000);
                     Console.WriteLine("Map changed - Updating Chests");
@@ -95,7 +95,7 @@ public class MapHelper
                     UpdateChestsInMap(chestAddress, options);
                     _lastMapIdChest = mapId;
                 }
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
                 StartMapChestListener(options);
             },
             value => value != _lastMapIdChest);
@@ -104,12 +104,14 @@ public class MapHelper
     public static void UpdateChestsInMap(uint currentPointerValue, Dictionary<string, object> options)
     {
 
-        int dropChoice = Int32.Parse(options?.GetValueOrDefault("chest_tiem_choice", "0").ToString());
+        int dropChoice = Int32.Parse(options?.GetValueOrDefault("chest_item_choices", "0").ToString());
 
         var replacementChestItems = new MapChestData();
         var item1 = ItemDatabase.Items["Cure Root"];
         var item2 = ItemDatabase.Items["Vera Root"];
         var item3 = ItemDatabase.Items["Alchemist´s Reagent"];
+
+
 
         if (dropChoice == DropItemChoice.HEALING_HEAVY)
         {
