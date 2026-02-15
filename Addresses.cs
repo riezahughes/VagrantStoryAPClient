@@ -504,7 +504,7 @@ namespace VagrantStoryArchipelago
 
         // The Reckoning Room
         public const uint WC_TheReckoningRoomChest = 0x00061964;
-        public const uint WC_TheReckoningRoom = 0x0;
+        public const uint WC_TheReckoningRoom = 0x000f1ab0;
 
         // A Laborer's Thirst
         public const uint WC_ALaborersThirstEntered = 0x000f1ab0;

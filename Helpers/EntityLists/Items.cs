@@ -25,11 +25,11 @@ namespace VagrantStoryArchipelago.Data
             ["Vera Potion"] = new InventoryItemData("Vera Potion", 0x4E, 0x01, 1, 0x00),
 
             // Special Potions (0x4F-0x5E)
-            ["Acolyte´s Nostrum"] = new InventoryItemData("Acolyte´s Nostrum", 0x4F, 0x01, 1, 0x00),
-            ["Saint´s Nostrum"] = new InventoryItemData("Saint´s Nostrum", 0x50, 0x01, 1, 0x00),
-            ["Alchemist´s Reagent"] = new InventoryItemData("Alchemist´s Reagent", 0x51, 0x01, 1, 0x00),
-            ["Sorcerer´s Reagent"] = new InventoryItemData("Sorcerer´s Reagent", 0x52, 0x01, 1, 0x00),
-            ["Yggdrasill´s Tears"] = new InventoryItemData("Yggdrasill´s Tears", 0x53, 0x01, 1, 0x00),
+            ["Acolyte's Nostrum"] = new InventoryItemData("Acolyte´s Nostrum", 0x4F, 0x01, 1, 0x00),
+            ["Saint's Nostrum"] = new InventoryItemData("Saint´s Nostrum", 0x50, 0x01, 1, 0x00),
+            ["Alchemist's Reagent"] = new InventoryItemData("Alchemist´s Reagent", 0x51, 0x01, 1, 0x00),
+            ["Sorcerer's Reagent"] = new InventoryItemData("Sorcerer´s Reagent", 0x52, 0x01, 1, 0x00),
+            ["Yggdrasill's Tears"] = new InventoryItemData("Yggdrasill´s Tears", 0x53, 0x01, 1, 0x00),
             ["Faerie Chortle"] = new InventoryItemData("Faerie Chortle", 0x54, 0x01, 1, 0x00),
             ["Spirit Orison"] = new InventoryItemData("Spirit Orison", 0x55, 0x01, 1, 0x00),
             ["Angelic Paean"] = new InventoryItemData("Angelic Paean", 0x56, 0x01, 1, 0x00),
@@ -38,16 +38,16 @@ namespace VagrantStoryArchipelago.Data
             ["Faerie Wing"] = new InventoryItemData("Faerie Wing", 0x59, 0x01, 1, 0x00),
             ["Elixir of Kings"] = new InventoryItemData("Elixir of Kings", 0x5A, 0x01, 1, 0x00),
             ["Elixir of Sages"] = new InventoryItemData("Elixir of Sages", 0x5B, 0x01, 1, 0x00),
-            ["Elixir of Dragoon"] = new InventoryItemData("Elixir of Dragons", 0x5C, 0x01, 1, 0x00),
+            ["Elixir of Dragoons"] = new InventoryItemData("Elixir of Dragoons", 0x5C, 0x01, 1, 0x00),
             ["Elixir of Queens"] = new InventoryItemData("Elixir of Queens", 0x5D, 0x01, 1, 0x00),
             ["Elixir of Mages"] = new InventoryItemData("Elixir of Mages", 0x5E, 0x01, 1, 0x00),
 
             // Wines (0x5F-0x64)
-            ["Valens (Wine)"] = new InventoryItemData("Valens (Wine)", 0x5F, 0x01, 1, 0x00),
-            ["Prudens (Wine)"] = new InventoryItemData("Prudens (Wine)", 0x60, 0x01, 1, 0x00),
-            ["Volare (Wine)"] = new InventoryItemData("Volare (Wine)", 0x61, 0x01, 1, 0x00),
-            ["Audentia (Wine)"] = new InventoryItemData("Audentia (Wine)", 0x62, 0x01, 1, 0x00),
-            ["Virtus (Wine)"] = new InventoryItemData("Virtus (Wine)", 0x63, 0x01, 1, 0x00),
+            ["Valens"] = new InventoryItemData("Valens", 0x5F, 0x01, 1, 0x00),
+            ["Prudens"] = new InventoryItemData("Prudens", 0x60, 0x01, 1, 0x00),
+            ["Volare"] = new InventoryItemData("Volare", 0x61, 0x01, 1, 0x00),
+            ["Audentia"] = new InventoryItemData("Audentia", 0x62, 0x01, 1, 0x00),
+            ["Virtus"] = new InventoryItemData("Virtus", 0x63, 0x01, 1, 0x00),
             ["Eye of Argon"] = new InventoryItemData("Eye of Argon", 0x64, 0x01, 1, 0x00),
 
             // Grimoire Spells (0x82-0xC8)
