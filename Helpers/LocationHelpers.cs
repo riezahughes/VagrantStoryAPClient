@@ -866,76 +866,97 @@ namespace Helpers
         private static List<GenericLocationData> GetAshleyData()
         {
             List<GenericLocationData> ashleyLocations = new List<GenericLocationData>() {
-                new GenericLocationData("Ability: Heavy Shot", Addresses.AbilityHeavyShotUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Gain Life", Addresses.AbilityGainLifeUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Mind Assault", Addresses.AbilityMindAssaultUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Gain Magic", Addresses.AbilityGainMagicUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Raging Ache", Addresses.AbilityRagingAcheUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Mind Ache", Addresses.AbilityMindAcheUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Temper", Addresses.AbilityTemperUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Crimson Pain", Addresses.AbilityCrimsonPainUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Instill", Addresses.AbilityInstillUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Phantom Pain", Addresses.AbilityPhantomPainUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Paralysis Pulse", Addresses.AbilityParalysisPulseUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Numbing Claw", Addresses.AbilityNumbingClawUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Dulling Impact", Addresses.AbilityDullingImpactUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Snake Venom", Addresses.AbilitySnakeVenomUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Ward", Addresses.AbilityWardUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Siphon Soul", Addresses.AbilitySiphonSoulUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Reflect Magic", Addresses.AbilityReflectMagicUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Reflect Damage", Addresses.AbilityReflectDamageUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Absorb Magic", Addresses.AbilityAbsorbMagicUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Absorb Damage", Addresses.AbilityAbsorbDamageUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Impact Guard", Addresses.AbilityImpactGuardUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Wind Break", Addresses.AbilityWindBreakUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Fire Proof", Addresses.AbilityFireProofUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Terra Ward", Addresses.AbilityTerraWardUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Aqua Ward", Addresses.AbilityAquaWardUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Shadow Guard", Addresses.AbilityShadowGuardUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Demonscale", Addresses.AbilityDemonscaleUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Ability: Phantom Shield", Addresses.AbilityPhantomShieldUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Degenerate", Addresses.GrimoireDegenerateUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Psychodrain", Addresses.GrimoirePsychodrainUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Leadbones", Addresses.GrimoireLeadbonesUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Tarnish", Addresses.GrimoireTarnishUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Analyze", Addresses.GrimoireAnalyzeUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Herakles", Addresses.GrimoireHeraklesUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Enlighten", Addresses.GrimoireEnlightenUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Invigorate", Addresses.GrimoireInvigorateUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Prostasia", Addresses.GrimoireProstasiaUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Luft Fusion", Addresses.GrimoireLuftFusionUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Spark Fusion", Addresses.GrimoireSparkFusionUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Soil Fusion", Addresses.GrimoireSoilFusionUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Frost Fusion", Addresses.GrimoireFrostFusionUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Aero Guard", Addresses.GrimoireAeroGuardUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Pyro Guard", Addresses.GrimoirePyroGuardUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Terra Guard", Addresses.GrimoireTerraGuardUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Silence", Addresses.GrimoireSilenceUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Magic Ward", Addresses.GrimoireMagicWardUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Surging Balm", Addresses.GrimoireSurgingBalmUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Fixate", Addresses.GrimoireFixateUnlock, "0", "176", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Dispel", Addresses.GrimoireDispelUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Stun Cloud", Addresses.GrimoireStunCloudUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Poison Mist", Addresses.GrimoirePoisonMistUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Curse", Addresses.GrimoireCurseUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Restoration", Addresses.GrimoireRestorationUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Antidote", Addresses.GrimoireAntidoteUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Blessing", Addresses.GrimoireBlessingUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Clearance", Addresses.GrimoireClearanceUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Unlock", Addresses.GrimoireUnlockUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Eureka", Addresses.GrimoireEurekaUnlock, "0", "176", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Drain Heart", Addresses.GrimoireDrainHeartUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Drain Mind", Addresses.GrimoireDrainMindUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Heal", Addresses.GrimoireHealUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Solid Shock", Addresses.GrimoireSolidShockUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Lightning Bolt", Addresses.GrimoireLightningBoltUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Fireball", Addresses.GrimoireFireballUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Vulcan Lance", Addresses.GrimoireVulcanLanceUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Aqua Blast", Addresses.GrimoireAquaBlastUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Spirit Surge", Addresses.GrimoireSpiritSurgeUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Dark Chant", Addresses.GrimoireDarkChantUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Exorcism", Addresses.GrimoireExorcismUnlock, "0", "144", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Banish", Addresses.GrimoireBanishUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Heavy Shot", Addresses.AbilityHeavyShotUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Gain Life", Addresses.AbilityGainLifeUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Mind Assault", Addresses.AbilityMindAssaultUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Gain Magic", Addresses.AbilityGainMagicUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Raging Ache", Addresses.AbilityRagingAcheUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Mind Ache", Addresses.AbilityMindAcheUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Temper", Addresses.AbilityTemperUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Crimson Pain", Addresses.AbilityCrimsonPainUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Instill", Addresses.AbilityInstillUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Phantom Pain", Addresses.AbilityPhantomPainUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Paralysis Pulse", Addresses.AbilityParalysisPulseUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Numbing Claw", Addresses.AbilityNumbingClawUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Dulling Impact", Addresses.AbilityDullingImpactUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Snake Venom", Addresses.AbilitySnakeVenomUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Ward", Addresses.AbilityWardUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Siphon Soul", Addresses.AbilitySiphonSoulUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Reflect Magic", Addresses.AbilityReflectMagicUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Reflect Damage", Addresses.AbilityReflectDamageUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Absorb Magic", Addresses.AbilityAbsorbMagicUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Absorb Damage", Addresses.AbilityAbsorbDamageUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Impact Guard", Addresses.AbilityImpactGuardUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Wind Break", Addresses.AbilityWindBreakUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Fire Proof", Addresses.AbilityFireProofUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Terra Ward", Addresses.AbilityTerraWardUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Aqua Ward", Addresses.AbilityAquaWardUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Shadow Guard", Addresses.AbilityShadowGuardUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Demonscale", Addresses.AbilityDemonscaleUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Ability: Phantom Shield", Addresses.AbilityPhantomShieldUnlock, "0", "144", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 1", Addresses.TotalRiskAbilitiesEarned, "0", "1", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 2", Addresses.TotalRiskAbilitiesEarned, "0", "2", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 3", Addresses.TotalRiskAbilitiesEarned, "0", "3", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 4", Addresses.TotalRiskAbilitiesEarned, "0", "4", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 5", Addresses.TotalRiskAbilitiesEarned, "0", "5", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 6", Addresses.TotalRiskAbilitiesEarned, "0", "6", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 7", Addresses.TotalRiskAbilitiesEarned, "0", "7", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 8", Addresses.TotalRiskAbilitiesEarned, "0", "8", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 9", Addresses.TotalRiskAbilitiesEarned, "0", "9", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 11", Addresses.TotalRiskAbilitiesEarned, "0", "10", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 12", Addresses.TotalRiskAbilitiesEarned, "0", "11", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 13", Addresses.TotalRiskAbilitiesEarned, "0", "12", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 14", Addresses.TotalRiskAbilitiesEarned, "0", "13", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 15", Addresses.TotalRiskAbilitiesEarned, "0", "14", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 16", Addresses.TotalRiskAbilitiesEarned, "0", "15", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 17", Addresses.TotalRiskAbilitiesEarned, "0", "16", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 18", Addresses.TotalRiskAbilitiesEarned, "0", "17", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 19", Addresses.TotalRiskAbilitiesEarned, "0", "18", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 20", Addresses.TotalRiskAbilitiesEarned, "0", "19", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 21", Addresses.TotalRiskAbilitiesEarned, "0", "20", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 22", Addresses.TotalRiskAbilitiesEarned, "0", "21", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Degenerate", Addresses.GrimoireDegenerateUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Psychodrain", Addresses.GrimoirePsychodrainUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Leadbones", Addresses.GrimoireLeadbonesUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Tarnish", Addresses.GrimoireTarnishUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Analyze", Addresses.GrimoireAnalyzeUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Herakles", Addresses.GrimoireHeraklesUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Enlighten", Addresses.GrimoireEnlightenUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Invigorate", Addresses.GrimoireInvigorateUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Prostasia", Addresses.GrimoireProstasiaUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Luft Fusion", Addresses.GrimoireLuftFusionUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Spark Fusion", Addresses.GrimoireSparkFusionUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Soil Fusion", Addresses.GrimoireSoilFusionUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Frost Fusion", Addresses.GrimoireFrostFusionUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Aero Guard", Addresses.GrimoireAeroGuardUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Pyro Guard", Addresses.GrimoirePyroGuardUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Terra Guard", Addresses.GrimoireTerraGuardUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Silence", Addresses.GrimoireSilenceUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Magic Ward", Addresses.GrimoireMagicWardUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Surging Balm", Addresses.GrimoireSurgingBalmUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Fixate", Addresses.GrimoireFixateUnlock, "0", "176", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Dispel", Addresses.GrimoireDispelUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Stun Cloud", Addresses.GrimoireStunCloudUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Poison Mist", Addresses.GrimoirePoisonMistUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Curse", Addresses.GrimoireCurseUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Restoration", Addresses.GrimoireRestorationUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Antidote", Addresses.GrimoireAntidoteUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Blessing", Addresses.GrimoireBlessingUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Clearance", Addresses.GrimoireClearanceUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Unlock", Addresses.GrimoireUnlockUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Eureka", Addresses.GrimoireEurekaUnlock, "0", "176", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Drain Heart", Addresses.GrimoireDrainHeartUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Drain Mind", Addresses.GrimoireDrainMindUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Heal", Addresses.GrimoireHealUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Solid Shock", Addresses.GrimoireSolidShockUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Lightning Bolt", Addresses.GrimoireLightningBoltUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Fireball", Addresses.GrimoireFireballUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Vulcan Lance", Addresses.GrimoireVulcanLanceUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Aqua Blast", Addresses.GrimoireAquaBlastUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Spirit Surge", Addresses.GrimoireSpiritSurgeUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Dark Chant", Addresses.GrimoireDarkChantUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Exorcism", Addresses.GrimoireExorcismUnlock, "0", "144", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Banish", Addresses.GrimoireBanishUnlock, "0", "144", LocationCheckType.Byte),
                 new GenericLocationData("Grimoire: Explosion Max Level", Addresses.GrimoireExplosionMaxLevel, "0", "704", LocationCheckType.Byte),
                 new GenericLocationData("Grimoire: Thunderburst Max Level", Addresses.GrimoireThunderburstMaxLevel, "0", "704", LocationCheckType.Byte),
                 new GenericLocationData("Grimoire: Flame Sphere Max Level", Addresses.GrimoireFlameSphereMaxLevel, "0", "704", LocationCheckType.Byte),
@@ -943,46 +964,47 @@ namespace Helpers
                 new GenericLocationData("Grimoire: Avalanche Max Level", Addresses.GrimoireAvalancheMaxLevel, "0", "704", LocationCheckType.Byte),
                 new GenericLocationData("Grimoire: Radial Surge Max Level", Addresses.GrimoireRadialSurgeMaxLevel, "0", "704", LocationCheckType.Byte),
                 new GenericLocationData("Grimoire: Meteor Max Level", Addresses.GrimoireMeteorMaxLevel, "0", "704", LocationCheckType.Byte),
-                new GenericLocationData("Break: Whistle Sting", Addresses.BreakWhistleStingUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Shadoweave", Addresses.BreakShadoweaveUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Double Fang", Addresses.BreakDoubleFangUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Break: Wyrm Scorn", Addresses.BreakWyrmScornUnlock, "0", "160", LocationCheckType.Byte),
-                new GenericLocationData("Break: Rending Gale", Addresses.BreakRendingGaleUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Vile Scar", Addresses.BreakVileScarUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Cherry Ronde", Addresses.BreakCherryRondeUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Break: Papillon Reel", Addresses.BreakPapillonReelUnlock, "0", "160", LocationCheckType.Byte),
-                new GenericLocationData("Break: Sunder", Addresses.BreakSunderUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Thunderwave", Addresses.BreakThunderwaveUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Swallow Slash", Addresses.BreakSwallowSlashUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Break: Advent Sign", Addresses.BreakAdventSignUnlock, "0", "160", LocationCheckType.Byte),
-                new GenericLocationData("Break: Mistral Edge", Addresses.BreakMistralEdgeUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Glacial Gale", Addresses.BreakGlacialGaleUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Killer Mantis", Addresses.BreakKillerMantisUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Break: Black Nebula", Addresses.BreakBlackNebulaUnlock, "0", "160", LocationCheckType.Byte),
-                new GenericLocationData("Break: Bear Claw", Addresses.BreakBearClawUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Accursed Umbra", Addresses.BreakAccursedUmbraUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Iron Ripper", Addresses.BreakIronRipperUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Break: Emetic Bomb", Addresses.BreakEmeticBombUnlock, "0", "160", LocationCheckType.Byte),
-                new GenericLocationData("Break: Sirocco", Addresses.BreakSiroccoUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Riskbreak", Addresses.BreakRiskbreakUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Gravis Aether", Addresses.BreakGravisAetherUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Break: Trinity Pulse", Addresses.BreakTrinityPulseUnlock, "0", "160", LocationCheckType.Byte),
-                new GenericLocationData("Break: Bonecrusher", Addresses.BreakBonecrusherUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Quickshock", Addresses.BreakQuickshockUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Ignis Wheel", Addresses.BreakIgnisWheelUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Break: Hex Flux", Addresses.BreakHexFluxUnlock, "0", "160", LocationCheckType.Byte),
-                new GenericLocationData("Break: Ruination Polearm", Addresses.BreakRuinationPolearmUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Scythe Wind", Addresses.BreakScytheWindUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Giga Tempest", Addresses.BreakGigaTempestUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Break: Spiral Scourge", Addresses.BreakSpiralScourgeUnlock, "0", "160", LocationCheckType.Byte),
-                new GenericLocationData("Break: Brimstone Hail", Addresses.BreakBrimstoneHailUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Heaven's Scorn", Addresses.BreakHeavensScornUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Death Wail", Addresses.BreakDeathWailUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Sanctus Flare", Addresses.BreakSanctusFlareUnlock, "0", "224", LocationCheckType.Byte),
-                new GenericLocationData("Break: Lotus Palm", Addresses.BreakLotusPalmUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Vertigo", Addresses.BreakVertigoUnlock, "0", "192", LocationCheckType.Byte),
-                new GenericLocationData("Break: Vermillion Aura", Addresses.BreakVermillionAuraUnlock, "0", "128", LocationCheckType.Byte),
-                new GenericLocationData("Break: Retribution", Addresses.BreakRetributionUnlock, "0", "160", LocationCheckType.Byte)
+                // removed break locations until we can figure out where the stats are
+                //new GenericLocationData("Break: Whistle Sting", Addresses.BreakWhistleStingUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Shadoweave", Addresses.BreakShadoweaveUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Double Fang", Addresses.BreakDoubleFangUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Wyrm Scorn", Addresses.BreakWyrmScornUnlock, "0", "160", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Rending Gale", Addresses.BreakRendingGaleUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Vile Scar", Addresses.BreakVileScarUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Cherry Ronde", Addresses.BreakCherryRondeUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Papillon Reel", Addresses.BreakPapillonReelUnlock, "0", "160", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Sunder", Addresses.BreakSunderUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Thunderwave", Addresses.BreakThunderwaveUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Swallow Slash", Addresses.BreakSwallowSlashUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Advent Sign", Addresses.BreakAdventSignUnlock, "0", "160", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Mistral Edge", Addresses.BreakMistralEdgeUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Glacial Gale", Addresses.BreakGlacialGaleUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Killer Mantis", Addresses.BreakKillerMantisUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Black Nebula", Addresses.BreakBlackNebulaUnlock, "0", "160", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Bear Claw", Addresses.BreakBearClawUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Accursed Umbra", Addresses.BreakAccursedUmbraUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Iron Ripper", Addresses.BreakIronRipperUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Emetic Bomb", Addresses.BreakEmeticBombUnlock, "0", "160", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Sirocco", Addresses.BreakSiroccoUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Riskbreak", Addresses.BreakRiskbreakUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Gravis Aether", Addresses.BreakGravisAetherUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Trinity Pulse", Addresses.BreakTrinityPulseUnlock, "0", "160", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Bonecrusher", Addresses.BreakBonecrusherUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Quickshock", Addresses.BreakQuickshockUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Ignis Wheel", Addresses.BreakIgnisWheelUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Hex Flux", Addresses.BreakHexFluxUnlock, "0", "160", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Ruination Polearm", Addresses.BreakRuinationPolearmUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Scythe Wind", Addresses.BreakScytheWindUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Giga Tempest", Addresses.BreakGigaTempestUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Spiral Scourge", Addresses.BreakSpiralScourgeUnlock, "0", "160", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Brimstone Hail", Addresses.BreakBrimstoneHailUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Heaven's Scorn", Addresses.BreakHeavensScornUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Death Wail", Addresses.BreakDeathWailUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Sanctus Flare", Addresses.BreakSanctusFlareUnlock, "0", "224", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Lotus Palm", Addresses.BreakLotusPalmUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Vertigo", Addresses.BreakVertigoUnlock, "0", "192", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Vermillion Aura", Addresses.BreakVermillionAuraUnlock, "0", "128", LocationCheckType.Byte),
+                //new GenericLocationData("Break: Retribution", Addresses.BreakRetributionUnlock, "0", "160", LocationCheckType.Byte)
             };
 
             return ashleyLocations;
@@ -1113,6 +1135,8 @@ namespace Helpers
         private static List<GenericLocationData> GetTheGallowsData()
         {
             List<GenericLocationData> theGallowsLocations = new List<GenericLocationData>() {
+                    new GenericLocationData("WC - The Gallows - Minotaur Boss - Grimoire Debile", Addresses.WC_TheGallowsMinotaurBossDefeat, "12", "0", LocationCheckType.UShort),
+                    new GenericLocationData("WC - The Gallows - Minotaur Boss - Grimoire Guerir", Addresses.WC_TheGallowsMinotaurBossDefeat, "12", "0", LocationCheckType.UShort),
                     new GenericLocationData("WC - The Gallows - Minotaur Boss", Addresses.WC_TheGallowsMinotaurBossDefeat, "12", "0", LocationCheckType.UShort),
                     new GenericLocationData("WC - The Gallows (Again) - Minotaur Zombie Boss", Addresses.WC_TheGallowsAgainMinotaurZombieBossDefeat, "12", "0", LocationCheckType.UShort),
                     new GenericLocationData("WC - The Gallows (Again) - Chest", Addresses.WC_TheGallowsAgainChest, "0", "1", LocationCheckType.Byte),
@@ -1154,7 +1178,8 @@ namespace Helpers
         private static List<GenericLocationData> GetTheHerosWinehallData()
         {
             List<GenericLocationData> theHerosWinehallLocations = new List<GenericLocationData>() {
-                new GenericLocationData("WC - The Hero's Winehall - Dullahan Boss", Addresses.WC_TheHerosWinehallDullahanBossDefeat, "11", "0", LocationCheckType.UShort),
+                    new GenericLocationData("WC - The Hero's Winehall - Dullahan Boss - Grimoire Lux", Addresses.WC_TheHerosWinehallDullahanBossDefeat, "20", "0", LocationCheckType.UShort),
+                    new GenericLocationData("WC - The Hero's Winehall - Dullahan Boss", Addresses.WC_TheHerosWinehallDullahanBossDefeat, "11", "0", LocationCheckType.UShort),
                     new GenericLocationData("WC - The Hero's Winehall - Chest", Addresses.WC_TheHerosWinehallChest, "0", "1", LocationCheckType.Byte),
                     new GenericLocationData("WC - The Hero's Winehall Entered", Addresses.WC_TheHerosWinehallEntered, "0", "11", LocationCheckType.UShort)
             };
@@ -1189,8 +1214,9 @@ namespace Helpers
         private static List<GenericLocationData> GetUnderdarkFishmarketData()
         {
             List<GenericLocationData> underdarkFishmarketLocations = new List<GenericLocationData>() {
+                new GenericLocationData("UW - Underdark Fishmarket - Giant Crab Boss - Grimoire Sylphe", Addresses.UW_UnderdarkFishmarketGiantCrabBossDefeat, "816", "0", LocationCheckType.UShort),
                 new GenericLocationData("UW - Underdark Fishmarket - Giant Crab Boss", Addresses.UW_UnderdarkFishmarketGiantCrabBossDefeat, "816", "0", LocationCheckType.UShort),
-                    new GenericLocationData("UW - Underdark Fishmarket Entered", Addresses.UW_UnderdarkFishmarketEntered, "0", "816", LocationCheckType.UShort)
+                new GenericLocationData("UW - Underdark Fishmarket Entered", Addresses.UW_UnderdarkFishmarketEntered, "0", "816", LocationCheckType.UShort)
             };
             return underdarkFishmarketLocations;
         }
@@ -1269,8 +1295,9 @@ namespace Helpers
         private static List<GenericLocationData> GetFearOfTheFallData()
         {
             List<GenericLocationData> fearOfTheFallLocations = new List<GenericLocationData>() {
+                new GenericLocationData("UW - Fear of the Fall - Dark Elemental Boss - Grimoire Meteore", Addresses.UW_FearOfTheFallDarkElementalBossDefeat, "3888", "0", LocationCheckType.UShort),
                 new GenericLocationData("UW - Fear of the Fall - Dark Elemental Boss", Addresses.UW_FearOfTheFallDarkElementalBossDefeat, "3888", "0", LocationCheckType.UShort),
-                    new GenericLocationData("UW - Fear of the Fall Entered", Addresses.UW_FearOfTheFallEntered, "0", "3888", LocationCheckType.UShort)
+                new GenericLocationData("UW - Fear of the Fall Entered", Addresses.UW_FearOfTheFallEntered, "0", "3888", LocationCheckType.UShort)
             };
             return fearOfTheFallLocations;
         }
@@ -1278,8 +1305,9 @@ namespace Helpers
         private static List<GenericLocationData> GetTheChildrensHideoutData()
         {
             List<GenericLocationData> theChildrensHideoutLocations = new List<GenericLocationData>() {
+                new GenericLocationData("UW - The Children's Hideout - Chest - Grimoire Dissiper", Addresses.UW_TheChildrensHideoutChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("UW - The Children's Hideout - Chest", Addresses.UW_TheChildrensHideoutChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("UW - The Children's Hideout Entered", Addresses.UW_TheChildrensHideoutEntered, "0", "5168", LocationCheckType.UShort)
+                new GenericLocationData("UW - The Children's Hideout Entered", Addresses.UW_TheChildrensHideoutEntered, "0", "5168", LocationCheckType.UShort)
             };
             return theChildrensHideoutLocations;
         }
@@ -1425,8 +1453,9 @@ namespace Helpers
         private static List<GenericLocationData> GetPlaceOfFreeWordsData()
         {
             List<GenericLocationData> placeOfFreeWordsLocations = new List<GenericLocationData>() {
+                new GenericLocationData("UE - Place of Free Words - Harpy Boss - Grimoire Intensite", Addresses.UE_PlaceOfFreeWordsHarpyBossDefeat, "305", "0", LocationCheckType.UShort),
                 new GenericLocationData("UE - Place of Free Words - Harpy Boss", Addresses.UE_PlaceOfFreeWordsHarpyBossDefeat, "305", "0", LocationCheckType.UShort),
-                    new GenericLocationData("UE - Place of Free Words Entered", Addresses.UE_PlaceOfFreeWordsEntered, "0", "305", LocationCheckType.UShort)
+                new GenericLocationData("UE - Place of Free Words Entered", Addresses.UE_PlaceOfFreeWordsEntered, "0", "305", LocationCheckType.UShort)
             };
             return placeOfFreeWordsLocations;
         }
@@ -1449,8 +1478,9 @@ namespace Helpers
         private static List<GenericLocationData> GetWeaponsNotAllowedData()
         {
             List<GenericLocationData> weaponsNotAllowedLocations = new List<GenericLocationData>() {
+                new GenericLocationData("UE - Weapons Not Allowed - Chest - Grimoire Nuageux", Addresses.UE_WeaponsNotAllowedChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("UE - Weapons Not Allowed - Chest", Addresses.UE_WeaponsNotAllowedChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("UE - Weapons Not Allowed Entered", Addresses.UE_WeaponsNotAllowedEntered, "0", "2097", LocationCheckType.UShort)
+                new GenericLocationData("UE - Weapons Not Allowed Entered", Addresses.UE_WeaponsNotAllowedEntered, "0", "2097", LocationCheckType.UShort)
             };
             return weaponsNotAllowedLocations;
         }
@@ -1464,8 +1494,9 @@ namespace Helpers
         private static List<GenericLocationData> GetGemswordBlackmarketData()
         {
             List<GenericLocationData> gemswordBlackmarketLocations = new List<GenericLocationData>() {
+                new GenericLocationData("UE - Gemsword Blackmarket - Nightstalker Boss - Grimoire Eclairer", Addresses.UE_GemswordBlackmarketNightstalkerBossDefeat, "1329", "0", LocationCheckType.UShort),
                 new GenericLocationData("UE - Gemsword Blackmarket - Nightstalker Boss", Addresses.UE_GemswordBlackmarketNightstalkerBossDefeat, "1329", "0", LocationCheckType.UShort),
-                    new GenericLocationData("UE - Gemsword Blackmarket Entered", Addresses.UE_GemswordBlackmarketEntered, "0", "1329", LocationCheckType.UShort)
+                new GenericLocationData("UE - Gemsword Blackmarket Entered", Addresses.UE_GemswordBlackmarketEntered, "0", "1329", LocationCheckType.UShort)
             };
             return gemswordBlackmarketLocations;
         }
@@ -1479,8 +1510,9 @@ namespace Helpers
         private static List<GenericLocationData> GetSaleOfTheSwordData()
         {
             List<GenericLocationData> saleOfTheSwordLocations = new List<GenericLocationData>() {
+                new GenericLocationData("UE - Sale of the Sword - Chest - Grimoire Tardif", Addresses.UE_SaleOfTheSwordChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("UE - Sale of the Sword - Chest", Addresses.UE_SaleOfTheSwordChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("UE - Sale of the Sword Entered", Addresses.UE_SaleOfTheSwordEntered, "0", "1841", LocationCheckType.UShort)
+                new GenericLocationData("UE - Sale of the Sword Entered", Addresses.UE_SaleOfTheSwordEntered, "0", "1841", LocationCheckType.UShort)
             };
             return saleOfTheSwordLocations;
         }
@@ -1510,10 +1542,11 @@ namespace Helpers
         private static List<GenericLocationData> GetCatspawBlackmarketData()
         {
             List<GenericLocationData> catspawBlackmarketLocations = new List<GenericLocationData>() {
+                new GenericLocationData("UEN - Catspaw Blackmarket - Chest - Grimoire Paralysie", Addresses.UEN_CatspawBlackmarketChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("UEN - Catspaw Blackmarket - Diabolos Floor Trap", Addresses.UEN_CatspawBlackmarketDiabolosFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("UEN - Catspaw Blackmarket - Trap Clear Floor Trap", Addresses.UEN_CatspawBlackmarketTrapClearFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("UEN - Catspaw Blackmarket - Chest", Addresses.UEN_CatspawBlackmarketChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("UEN - Catspaw Blackmarket Entered", Addresses.UEN_CatspawBlackmarketEntered, "0", "3121", LocationCheckType.UShort)
+                new GenericLocationData("UEN - Catspaw Blackmarket - Trap Clear Floor Trap", Addresses.UEN_CatspawBlackmarketTrapClearFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("UEN - Catspaw Blackmarket - Chest", Addresses.UEN_CatspawBlackmarketChest, "0", "1", LocationCheckType.Byte),
+                new GenericLocationData("UEN - Catspaw Blackmarket Entered", Addresses.UEN_CatspawBlackmarketEntered, "0", "3121", LocationCheckType.UShort)
             };
             return catspawBlackmarketLocations;
         }
@@ -1542,6 +1575,7 @@ namespace Helpers
         private static List<GenericLocationData> GetTheHouseKhazabasData()
         {
             List<GenericLocationData> theHouseKhazabasLocations = new List<GenericLocationData>() {
+                new GenericLocationData("TCS - The House Khazabas - Chest - Grimoire Muet", Addresses.TCS_TheHouseKhazabasChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("TCS - The House Khazabas - Chest", Addresses.TCS_TheHouseKhazabasChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("TCS - The House Khazabas Entered", Addresses.TCS_TheHouseKhazabasChest, "0", "293", LocationCheckType.UShort)
             };
@@ -1684,8 +1718,10 @@ namespace Helpers
         private static List<GenericLocationData> GetTircolasFlowNorthData()
         {
             List<GenericLocationData> tircolasFlowNorthLocations = new List<GenericLocationData>() {
+                new GenericLocationData("TCW - Tircolas Flow (North) - Duane Boss - Grimoire Demolir", Addresses.TCW_TircolasFlowNorthDuaneBossDefeat, "800", "0", LocationCheckType.UShort),
+                new GenericLocationData("TCW - Tircolas Flow (North) - Duane Boss - Grimoire Clef", Addresses.TCW_TircolasFlowNorthDuaneBossDefeat, "800", "0", LocationCheckType.UShort),
                 new GenericLocationData("TCW - Tircolas Flow (North) - Duane Boss", Addresses.TCW_TircolasFlowNorthDuaneBossDefeat, "800", "0", LocationCheckType.UShort),
-                    new GenericLocationData("TCW - Tircolas Flow (North) Entered", Addresses.TCW_TircolasFlowNorthEntered, "0", "800", LocationCheckType.UShort)
+                new GenericLocationData("TCW - Tircolas Flow (North) Entered", Addresses.TCW_TircolasFlowNorthEntered, "0", "800", LocationCheckType.UShort)
             };
             return tircolasFlowNorthLocations;
         }
@@ -1867,7 +1903,9 @@ namespace Helpers
         private static List<GenericLocationData> GetHallOfPrayerData()
         {
             List<GenericLocationData> hallOfPrayerLocations = new List<GenericLocationData>() {
-                new GenericLocationData("TOK - Hall of Prayer - Last Crusader Boss", Addresses.TOK_HallOfPrayerLastCrusaderBossDefeat, "286", "0", LocationCheckType.UShort), new GenericLocationData("TOK - Hall of Prayer Entered", Addresses.TOK_HallOfPrayerEntered, "0", "286", LocationCheckType.UShort)
+                new GenericLocationData("TOK - Hall of Prayer - Last Crusader Boss - Grimoire Purifier", Addresses.TOK_HallOfPrayerLastCrusaderBossDefeat, "286", "0", LocationCheckType.UShort),
+                new GenericLocationData("TOK - Hall of Prayer - Last Crusader Boss", Addresses.TOK_HallOfPrayerLastCrusaderBossDefeat, "286", "0", LocationCheckType.UShort),
+                new GenericLocationData("TOK - Hall of Prayer Entered", Addresses.TOK_HallOfPrayerEntered, "0", "286", LocationCheckType.UShort)
             };
             return hallOfPrayerLocations;
         }
@@ -1995,6 +2033,9 @@ namespace Helpers
         private static List<GenericLocationData> GetReturnToTheLandData()
         {
             List<GenericLocationData> returnToTheLandLocations = new List<GenericLocationData>() {
+                // Need to get the addresses for this!
+                new GenericLocationData("SFF - Return to the Land - Earth Dragon Boss - Grimoire Parebrise", Addresses.SFF_ReturnToTheLandEarthDragonBossDefeat, "0", "0", LocationCheckType.UShort),
+                new GenericLocationData("SFF - Return to the Land - Earth Dragon Boss", Addresses.SFF_ReturnToTheLandEarthDragonBossDefeat, "0", "0", LocationCheckType.UShort),
                 new GenericLocationData("SFF - Return to the Land Entered", Addresses.SFF_ReturnToTheLandEntered, "0", "5672", LocationCheckType.UShort)
             };
             return returnToTheLandLocations;
@@ -2035,6 +2076,7 @@ namespace Helpers
         private static List<GenericLocationData> GetForestRiverData()
         {
             List<GenericLocationData> forestRiverLocations = new List<GenericLocationData>() {
+                new GenericLocationData("SFF - Forest River - Chest - Grimoire Agilite", Addresses.SFF_ForestRiverChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("SFF - Forest River - Cure Panel Floor Trap", Addresses.SFF_ForestRiverCurePanelFloorTrap, "0", "160", LocationCheckType.Byte), new GenericLocationData("SFF - Forest River - Chest", Addresses.SFF_ForestRiverChest, "0", "1", LocationCheckType.Byte), new GenericLocationData("SFF - Forest River Entered", Addresses.SFF_ForestRiverEntered, "0", "5928", LocationCheckType.UShort)
             };
             return forestRiverLocations;
@@ -2075,7 +2117,13 @@ namespace Helpers
         private static List<GenericLocationData> GetHewnFromNatureData()
         {
             List<GenericLocationData> hewnFromNatureLocations = new List<GenericLocationData>() {
-                new GenericLocationData("SFF - Hewn from Nature - Grissom Boss", Addresses.SFF_HewnFromNatureGrissomBossDefeat, "6184", "0", LocationCheckType.UShort), new GenericLocationData("SFF - Hewn from Nature - Dark Crusader Boss", Addresses.SFF_HewnFromNatureDarkCrusaderBossDefeat, "0", "160", LocationCheckType.Byte), new GenericLocationData("SFF - Hewn from Nature - Chest", Addresses.SFF_HewnFromNatureChest, "0", "1", LocationCheckType.Byte), new GenericLocationData("SFF - Hewn from Nature Entered", Addresses.SFF_HewnFromNatureEntered, "0", "6184", LocationCheckType.UShort)
+                new GenericLocationData("SFF - Hewn from Nature - Dark Crusader Boss - Grimoire Deteriorer", Addresses.SFF_HewnFromNatureDarkCrusaderBossDefeat, "160", "0", LocationCheckType.UShort),
+                new GenericLocationData("SFF - Hewn from Nature - Grissom Boss - Grimoire Gnome", Addresses.SFF_HewnFromNatureGrissomBossDefeat, "6184", "0", LocationCheckType.UShort),
+                new GenericLocationData("SFF - Hewn from Nature - Grissom Boss - Grimoire Annuler", Addresses.SFF_HewnFromNatureGrissomBossDefeat, "6184", "0", LocationCheckType.UShort),
+                new GenericLocationData("SFF - Hewn from Nature - Grissom Boss", Addresses.SFF_HewnFromNatureGrissomBossDefeat, "6184", "0", LocationCheckType.UShort),
+                new GenericLocationData("SFF - Hewn from Nature - Dark Crusader Boss", Addresses.SFF_HewnFromNatureDarkCrusaderBossDefeat, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("SFF - Hewn from Nature - Chest", Addresses.SFF_HewnFromNatureChest, "0", "1", LocationCheckType.Byte),
+                new GenericLocationData("SFF - Hewn from Nature Entered", Addresses.SFF_HewnFromNatureEntered, "0", "6184", LocationCheckType.UShort)
             };
             return hewnFromNatureLocations;
         }
@@ -2179,6 +2227,7 @@ namespace Helpers
         private static List<GenericLocationData> GetAlchemistsLaboratoryData()
         {
             List<GenericLocationData> alchemistsLaboratoryLocations = new List<GenericLocationData>() {
+                new GenericLocationData("SNC - Alchemists' Laboratory - Chest - Grimoire Halte", Addresses.SNC_AlchemistsLaboratoryChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("SNC - Alchemists' Laboratory - Chest", Addresses.SNC_AlchemistsLaboratoryChest, "0", "1", LocationCheckType.Byte), new GenericLocationData("SNC - Alchemists' Laboratory Entered", Addresses.SNC_AlchemistsLaboratoryEntered, "0", "783", LocationCheckType.UShort)
             };
             return alchemistsLaboratoryLocations;
@@ -2219,6 +2268,7 @@ namespace Helpers
         private static List<GenericLocationData> GetHallOfSacrilegeData()
         {
             List<GenericLocationData> hallOfSacrilegeLocations = new List<GenericLocationData>() {
+                new GenericLocationData("SNC - Hall of Sacrilege - Golem Boss - Grimoire Ameliorer", Addresses.SNC_HallOfSacrilegeGolemBossDefeat, "16", "0", LocationCheckType.Byte),
                 new GenericLocationData("SNC - Hall of Sacrilege - Golem Boss", Addresses.SNC_HallOfSacrilegeGolemBossDefeat, "16", "0", LocationCheckType.Byte), new GenericLocationData("SNC - Hall of Sacrilege Entered", Addresses.SNC_HallOfSacrilegeEntered, "0", "16", LocationCheckType.UShort)
             };
             return hallOfSacrilegeLocations;
@@ -2259,8 +2309,9 @@ namespace Helpers
         private static List<GenericLocationData> GetTheCleansingChantryData()
         {
             List<GenericLocationData> theCleansingChantryLocations = new List<GenericLocationData>() {
+                new GenericLocationData("SNC - The Cleansing Chantry - Dragon Boss - Grimoire Analyse", Addresses.SNC_TheCleansingChantryDragonBossDefeat, "17", "0", LocationCheckType.UShort),
                 new GenericLocationData("SNC - The Cleansing Chantry - Dragon Boss", Addresses.SNC_TheCleansingChantryDragonBossDefeat, "17", "0", LocationCheckType.UShort),
-                    new GenericLocationData("SNC - The Cleansing Chantry Entered", Addresses.SNC_TheCleansingChantryEntered, "0", "17", LocationCheckType.UShort)
+                new GenericLocationData("SNC - The Cleansing Chantry Entered", Addresses.SNC_TheCleansingChantryEntered, "0", "17", LocationCheckType.UShort)
             };
             return theCleansingChantryLocations;
         }
@@ -2284,9 +2335,10 @@ namespace Helpers
         private static List<GenericLocationData> GetDreamOfTheHolyLandData()
         {
             List<GenericLocationData> dreamOfTheHolyLandLocations = new List<GenericLocationData>() {
+                new GenericLocationData("LQ - Dream of the Holy Land - Water Elemental Boss - Grimoire Avalanche", Addresses.LQ_DreamOfTheHolyLandWaterElementalBossDefeat, "309", "0", LocationCheckType.Byte),
                 new GenericLocationData("LQ - Dream of the Holy Land - Water Elemental Boss", Addresses.LQ_DreamOfTheHolyLandWaterElementalBossDefeat, "309", "0", LocationCheckType.Byte),
-                    new GenericLocationData("LQ - Dream of the Holy Land - Aster Sigil Unlock", Addresses.LQ_DreamOfTheHolyLandAsterSigilUnlock, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("LQ - Dream of the Holy Land Entered", Addresses.LQ_DreamOfTheHolyLandEntered, "0", "309", LocationCheckType.UShort)
+                new GenericLocationData("LQ - Dream of the Holy Land - Aster Sigil Unlock", Addresses.LQ_DreamOfTheHolyLandAsterSigilUnlock, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("LQ - Dream of the Holy Land Entered", Addresses.LQ_DreamOfTheHolyLandEntered, "0", "309", LocationCheckType.UShort)
             };
             return dreamOfTheHolyLandLocations;
         }
@@ -2311,8 +2363,9 @@ namespace Helpers
         private static List<GenericLocationData> GetBondsOfFriendshipData()
         {
             List<GenericLocationData> bondsOfFriendshipLocations = new List<GenericLocationData>() {
+                new GenericLocationData("LQ - Bonds of Friendship - Chest - Grimoire Benir", Addresses.LQ_BondsOfFriendshipChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("LQ - Bonds of Friendship - Chest", Addresses.LQ_BondsOfFriendshipChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("LQ - Bonds of Friendship Entered", Addresses.LQ_BondsOfFriendshipEntered, "0", "1333", LocationCheckType.UShort)
+                new GenericLocationData("LQ - Bonds of Friendship Entered", Addresses.LQ_BondsOfFriendshipEntered, "0", "1333", LocationCheckType.UShort)
             };
             return bondsOfFriendshipLocations;
         }
@@ -2405,8 +2458,9 @@ namespace Helpers
         private static List<GenericLocationData> GetCompanionsInArmsData()
         {
             List<GenericLocationData> companionsInArmsLocations = new List<GenericLocationData>() {
+                new GenericLocationData("LQ - Companions in Arms - Chest - Grimoire Fleau", Addresses.LQ_CompanionsInArmsChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("LQ - Companions in Arms - Chest", Addresses.LQ_CompanionsInArmsChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("LQ - Companions in Arms Entered", Addresses.LQ_CompanionsInArmsEntered, "0", "3893", LocationCheckType.UShort)
+                new GenericLocationData("LQ - Companions in Arms Entered", Addresses.LQ_CompanionsInArmsEntered, "0", "3893", LocationCheckType.UShort)
             };
             return companionsInArmsLocations;
         }
@@ -2466,8 +2520,9 @@ namespace Helpers
         private static List<GenericLocationData> GetStoneAndSulfurousFireData()
         {
             List<GenericLocationData> stoneAndSulfurousFireLocations = new List<GenericLocationData>() {
+                new GenericLocationData("LQ - Stone and Sulfurous Fire - Chest - Grimoire Egout", Addresses.LQ_StoneAndSulfurousFireChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("LQ - Stone and Sulfurous Fire - Chest", Addresses.LQ_StoneAndSulfurousFireChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("LQ - Stone and Sulfurous Fire Entered", Addresses.LQ_StoneAndSulfurousFireEntered, "0", "5685", LocationCheckType.UShort)
+                new GenericLocationData("LQ - Stone and Sulfurous Fire Entered", Addresses.LQ_StoneAndSulfurousFireEntered, "0", "5685", LocationCheckType.UShort)
             };
             return stoneAndSulfurousFireLocations;
         }
@@ -2492,8 +2547,9 @@ namespace Helpers
         private static List<GenericLocationData> GetExcavatedHollowData()
         {
             List<GenericLocationData> excavatedHollowLocations = new List<GenericLocationData>() {
+                new GenericLocationData("LQ - Excavated Hollow - Chest - Grimoire Flamme", Addresses.LQ_ExcavatedHollowChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("LQ - Excavated Hollow - Chest", Addresses.LQ_ExcavatedHollowChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("LQ - Excavated Hollow Entered", Addresses.LQ_ExcavatedHollowEntered, "0", "6453", LocationCheckType.UShort)
+                new GenericLocationData("LQ - Excavated Hollow Entered", Addresses.LQ_ExcavatedHollowEntered, "0", "6453", LocationCheckType.UShort)
             };
             return excavatedHollowLocations;
         }
@@ -2525,8 +2581,9 @@ namespace Helpers
         private static List<GenericLocationData> GetHallOfTheWagePayingData()
         {
             List<GenericLocationData> hallOfTheWagePayingLocations = new List<GenericLocationData>() {
+                new GenericLocationData("LQ - Hall of the Wage-Paying - Snow Dragon Boss - Grimoire Barrer", Addresses.LQ_HallOfTheWagePayingSnowDragonBossDefeat, "7477", "0", LocationCheckType.UShort),
                 new GenericLocationData("LQ - Hall of the Wage-Paying - Snow Dragon Boss", Addresses.LQ_HallOfTheWagePayingSnowDragonBossDefeat, "7477", "0", LocationCheckType.UShort),
-                    new GenericLocationData("LQ - Hall of the Wage-Paying Entered", Addresses.LQ_HallOfTheWagePayingEntered, "0", "7477", LocationCheckType.UShort)
+                new GenericLocationData("LQ - Hall of the Wage-Paying Entered", Addresses.LQ_HallOfTheWagePayingEntered, "0", "7477", LocationCheckType.UShort)
             };
             return hallOfTheWagePayingLocations;
         }
@@ -2550,10 +2607,11 @@ namespace Helpers
         private static List<GenericLocationData> GetTheCauldronData()
         {
             List<GenericLocationData> theCauldronLocations = new List<GenericLocationData>() {
+                new GenericLocationData("IM1 - The Cauldron - Wraith Boss - Grimoire Exsorcer", Addresses.IM1_TheCauldronWraithBossDefeat, "311", "0", LocationCheckType.UShort),
                 new GenericLocationData("IM1 - The Cauldron - Gargoyle Boss", Addresses.IM1_TheCauldronGargoyleBossDefeat, "311", "0", LocationCheckType.UShort), // MISSING ADDRESS
-                    new GenericLocationData("IM1 - The Cauldron - Wraith Boss", Addresses.IM1_TheCauldronWraithBossDefeat, "311", "0", LocationCheckType.UShort), // MISSING ADDRESS
-                    new GenericLocationData("IM1 - The Cauldron - Tearose Sigil Unlock", Addresses.IM1_TheCauldronTearoseSigilUnlock, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("IM1 - The Cauldron Entered", Addresses.IM1_TheCauldronEntered, "0", "311", LocationCheckType.UShort)
+                new GenericLocationData("IM1 - The Cauldron - Wraith Boss", Addresses.IM1_TheCauldronWraithBossDefeat, "311", "0", LocationCheckType.UShort), // MISSING ADDRESS
+                new GenericLocationData("IM1 - The Cauldron - Tearose Sigil Unlock", Addresses.IM1_TheCauldronTearoseSigilUnlock, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("IM1 - The Cauldron Entered", Addresses.IM1_TheCauldronEntered, "0", "311", LocationCheckType.UShort)
             };
             return theCauldronLocations;
         }
@@ -2569,9 +2627,10 @@ namespace Helpers
         private static List<GenericLocationData> GetStarvationData()
         {
             List<GenericLocationData> starvationLocations = new List<GenericLocationData>() {
+                new GenericLocationData("IM1 - Starvation - Wraith Boss - Grimoire Venin", Addresses.IM1_StarvationMummyBossDefeat, "823", "0", LocationCheckType.UShort),
                 new GenericLocationData("IM1 - Starvation - Wraith Boss", Addresses.IM1_StarvationWraithBossDefeat, "823", "0", LocationCheckType.UShort), // MISSING ADDRESS
-                    new GenericLocationData("IM1 - Starvation - Mummy Boss", Addresses.IM1_StarvationMummyBossDefeat, "823", "0", LocationCheckType.UShort), // MISSING ADDRESS
-                    new GenericLocationData("IM1 - Starvation Entered", Addresses.IM1_StarvationEntered, "0", "823", LocationCheckType.UShort)
+                new GenericLocationData("IM1 - Starvation - Mummy Boss", Addresses.IM1_StarvationMummyBossDefeat, "823", "0", LocationCheckType.UShort), // MISSING ADDRESS
+                new GenericLocationData("IM1 - Starvation Entered", Addresses.IM1_StarvationEntered, "0", "823", LocationCheckType.UShort)
             };
             return starvationLocations;
         }
@@ -3028,8 +3087,9 @@ namespace Helpers
         private static List<GenericLocationData> GetMonksLeapData()
         {
             List<GenericLocationData> monksLeapLocations = new List<GenericLocationData>() {
+                new GenericLocationData("GC1 - Monk's Leap - Lich Boss - Grimoire Demolir", Addresses.GC1_MonksLeapLichBossDefeat, "280", "0", LocationCheckType.UShort),
                 new GenericLocationData("GC1 - Monk's Leap - Lich Boss", Addresses.GC1_MonksLeapLichBossDefeat, "280", "0", LocationCheckType.UShort),
-                    new GenericLocationData("GC1 - Monk's Leap Entered", Addresses.GC1_MonksLeapEntered, "0", "280", LocationCheckType.UShort)
+                new GenericLocationData("GC1 - Monk's Leap Entered", Addresses.GC1_MonksLeapEntered, "0", "280", LocationCheckType.UShort)
             };
 
             return monksLeapLocations;
@@ -3046,9 +3106,10 @@ namespace Helpers
         private static List<GenericLocationData> GetTheFlayedConfessionalData()
         {
             List<GenericLocationData> theFlayedConfessionalLocations = new List<GenericLocationData>() {
+                new GenericLocationData("GC1 - The Flayed Confessional - Djinn Boss - Grimoire Foudre", Addresses.GC1_TheFlayedConfessionalDjinnBossDefeat, "24", "0", LocationCheckType.UShort),
                 new GenericLocationData("GC1 - The Flayed Confessional - Djinn Boss", Addresses.GC1_TheFlayedConfessionalDjinnBossDefeat, "24", "0", LocationCheckType.UShort),
-                    new GenericLocationData("GC1 - The Flayed Confessional - Chest", Addresses.GC1_TheFlayedConfessionalChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("GC1 - The Flayed Confessional Entered", Addresses.GC1_TheFlayedConfessionalEntered, "0", "24", LocationCheckType.UShort)
+                new GenericLocationData("GC1 - The Flayed Confessional - Chest", Addresses.GC1_TheFlayedConfessionalChest, "0", "1", LocationCheckType.Byte),
+                new GenericLocationData("GC1 - The Flayed Confessional Entered", Addresses.GC1_TheFlayedConfessionalEntered, "0", "24", LocationCheckType.UShort)
             };
             return theFlayedConfessionalLocations;
         }
@@ -3082,8 +3143,9 @@ namespace Helpers
         private static List<GenericLocationData> GetOrderAndChaosData()
         {
             List<GenericLocationData> orderAndChaosLocations = new List<GenericLocationData>() {
+                new GenericLocationData("GCB - Order and Chaos - Marid Boss - Grimoire Avalanche", Addresses.GCB_OrderAndChaosMaridBossDefeat, "1558", "0", LocationCheckType.UShort),
                 new GenericLocationData("GCB - Order and Chaos - Marid Boss", Addresses.GCB_OrderAndChaosMaridBossDefeat, "1558", "0", LocationCheckType.UShort),
-                    new GenericLocationData("GCB - Order and Chaos Entered", Addresses.GCB_OrderAndChaosEntered, "0", "1558", LocationCheckType.UShort)
+                new GenericLocationData("GCB - Order and Chaos Entered", Addresses.GCB_OrderAndChaosEntered, "0", "1558", LocationCheckType.UShort)
             };
             return orderAndChaosLocations;
         }
@@ -3099,8 +3161,9 @@ namespace Helpers
         private static List<GenericLocationData> GetTruthAndLiesData()
         {
             List<GenericLocationData> truthAndLiesLocations = new List<GenericLocationData>() {
+                new GenericLocationData("GCB - Truth and Lies - Ifrit Boss - Grimoire Flamme", Addresses.GCB_TruthAndLiesIfritBossDefeat, "1046", "0", LocationCheckType.UShort),
                 new GenericLocationData("GCB - Truth and Lies - Ifrit Boss", Addresses.GCB_TruthAndLiesIfritBossDefeat, "1046", "0", LocationCheckType.UShort),
-                    new GenericLocationData("GCB - Truth and Lies Entered", Addresses.GCB_TruthAndLiesEntered, "0", "1046", LocationCheckType.UShort)
+                new GenericLocationData("GCB - Truth and Lies Entered", Addresses.GCB_TruthAndLiesEntered, "0", "1046", LocationCheckType.UShort)
             };
             return truthAndLiesLocations;
         }
@@ -3197,8 +3260,9 @@ namespace Helpers
         private static List<GenericLocationData> GetMaelstromOfMaliceData()
         {
             List<GenericLocationData> maelstromOfMaliceLocations = new List<GenericLocationData>() {
+                new GenericLocationData("GC2 - Maelstrom of Malice - Lich Lord Boss - Grimoire Radius", Addresses.GC2_MaelstromOfMaliceLichLordBossDefeat, "2328", "0", LocationCheckType.UShort),
                 new GenericLocationData("GC2 - Maelstrom of Malice - Lich Lord Boss", Addresses.GC2_MaelstromOfMaliceLichLordBossDefeat, "2328", "0", LocationCheckType.UShort), // MISSING
-                    new GenericLocationData("GC2 - Maelstrom of Malice Entered", Addresses.GC2_MaelstromOfMaliceEntered, "0", "2328", LocationCheckType.UShort)
+                new GenericLocationData("GC2 - Maelstrom of Malice Entered", Addresses.GC2_MaelstromOfMaliceEntered, "0", "2328", LocationCheckType.UShort)
             };
             return maelstromOfMaliceLocations;
         }
@@ -3215,8 +3279,9 @@ namespace Helpers
         private static List<GenericLocationData> GetWhatAilsYouKillsYouData()
         {
             List<GenericLocationData> whatAilsYouKillsYouLocations = new List<GenericLocationData>() {
+                new GenericLocationData("GC2 - What Ails You, Kills You - Nightmare Boss - Grimoire Meteore", Addresses.GC2_WhatAilsYouKillsYouNightmareBossDefeat, "281", "0", LocationCheckType.UShort),
                 new GenericLocationData("GC2 - What Ails You, Kills You - Nightmare Boss", Addresses.GC2_WhatAilsYouKillsYouNightmareBossDefeat, "281", "0", LocationCheckType.UShort),
-                    new GenericLocationData("GC2 - What Ails You, Kills You Entered", Addresses.GC2_WhatAilsYouKillsYouEntered, "0", "281", LocationCheckType.UShort)
+                new GenericLocationData("GC2 - What Ails You, Kills You Entered", Addresses.GC2_WhatAilsYouKillsYouEntered, "0", "281", LocationCheckType.UShort)
             };
             return whatAilsYouKillsYouLocations;
         }
@@ -3257,8 +3322,9 @@ namespace Helpers
         private static List<GenericLocationData> GetHopesOfTheIdealistData()
         {
             List<GenericLocationData> hopesOfTheIdealistLocations = new List<GenericLocationData>() {
+                new GenericLocationData("GC3 - Hopes of the Idealist - Dao Boss - Grimoire Gaea", Addresses.GC3_HopesOfTheIdealistDaoBossDefeat, "3864", "0", LocationCheckType.UShort),
                 new GenericLocationData("GC3 - Hopes of the Idealist - Dao Boss", Addresses.GC3_HopesOfTheIdealistDaoBossDefeat, "3864", "0", LocationCheckType.UShort),
-                    new GenericLocationData("GC3 - Hopes of the Idealist Entered", Addresses.GC3_HopesOfTheIdealistEntered, "0", "3864", LocationCheckType.UShort)
+                new GenericLocationData("GC3 - Hopes of the Idealist Entered", Addresses.GC3_HopesOfTheIdealistEntered, "0", "3864", LocationCheckType.UShort)
             };
             return hopesOfTheIdealistLocations;
         }
@@ -3354,8 +3420,10 @@ namespace Helpers
         private static List<GenericLocationData> GetBuriedAliveData()
         {
             List<GenericLocationData> buriedAliveLocations = new List<GenericLocationData>() {
+                new GenericLocationData("ESC - Buried Alive - Chest - Grimoire Radius", Addresses.ESC_BuriedAliveChest, "0", "1", LocationCheckType.Byte),
+                new GenericLocationData("ESC - Buried Alive - Chest - Grimoire Meteore", Addresses.ESC_BuriedAliveChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("ESC - Buried Alive - Chest", Addresses.ESC_BuriedAliveChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("ESC - Buried Alive Entered", Addresses.ESC_BuriedAliveEntered, "0", "308", LocationCheckType.UShort)
+                new GenericLocationData("ESC - Buried Alive Entered", Addresses.ESC_BuriedAliveEntered, "0", "308", LocationCheckType.UShort)
             };
             return buriedAliveLocations;
         }
@@ -3391,9 +3459,11 @@ namespace Helpers
         private static List<GenericLocationData> GetFearAndLoathingData()
         {
             List<GenericLocationData> fearAndLoathingLocations = new List<GenericLocationData>() {
+                new GenericLocationData("ESC - Fear and Loathing - Ifrit Boss - Grimoire Flamme", Addresses.ESC_FearAndLoathingIfritBossDefeat, "1332", "0", LocationCheckType.UShort),
+                new GenericLocationData("ESC - Fear and Loathing - Marid Boss - Grimoire Avalanche", Addresses.ESC_FearAndLoathingMaridBossDefeat, "1332", "0", LocationCheckType.UShort),
                 new GenericLocationData("ESC - Fear and Loathing - Ifrit Boss", Addresses.ESC_FearAndLoathingIfritBossDefeat, "1332", "160", LocationCheckType.UShort),
-                    new GenericLocationData("ESC - Fear and Loathing - Marid Boss", Addresses.ESC_FearAndLoathingMaridBossDefeat, "1332", "0", LocationCheckType.UShort),
-                    new GenericLocationData("ESC - Fear and Loathing Entered", Addresses.ESC_FearAndLoathingEntered, "0", "1332", LocationCheckType.UShort)
+                new GenericLocationData("ESC - Fear and Loathing - Marid Boss", Addresses.ESC_FearAndLoathingMaridBossDefeat, "1332", "0", LocationCheckType.UShort),
+                new GenericLocationData("ESC - Fear and Loathing Entered", Addresses.ESC_FearAndLoathingEntered, "0", "1332", LocationCheckType.UShort)
             };
 
             return fearAndLoathingLocations;
@@ -3738,8 +3808,9 @@ namespace Helpers
         private static List<GenericLocationData> GetTheBeastsDomainData()
         {
             List<GenericLocationData> theBeastsDomainLocations = new List<GenericLocationData>() {
+                new GenericLocationData("CAT - The Beast's Domain - Lizardman Boss - Grimoire Antidote", Addresses.CAT_TheBeastsDomainLizardmanBossDefeat, "14", "0", LocationCheckType.UShort),
                 new GenericLocationData("CAT - The Beast's Domain - Lizardman Boss", Addresses.CAT_TheBeastsDomainLizardmanBossDefeat, "14", "0", LocationCheckType.UShort), // MISSING
-                    new GenericLocationData("CAT - The Beast's Domain Entered", Addresses.CAT_TheBeastsDomainEntered, "0", "14", LocationCheckType.UShort)
+                new GenericLocationData("CAT - The Beast's Domain Entered", Addresses.CAT_TheBeastsDomainEntered, "0", "14", LocationCheckType.UShort)
             };
             return theBeastsDomainLocations;
         }
@@ -3763,8 +3834,9 @@ namespace Helpers
         private static List<GenericLocationData> GetMinersRestingHallData()
         {
             List<GenericLocationData> minersRestingHallLocations = new List<GenericLocationData>() {
+                new GenericLocationData("AM1 - Miners' Resting Hall - Chest - Grimoire Visible", Addresses.AM1_MinersRestingHallChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("AM1 - Miners' Resting Hall - Chest", Addresses.AM1_MinersRestingHallChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("AM1 - Miners' Resting Hall Entered", Addresses.AM1_MinersRestingHallEntered, "0", "306", LocationCheckType.UShort)
+                new GenericLocationData("AM1 - Miners' Resting Hall Entered", Addresses.AM1_MinersRestingHallEntered, "0", "306", LocationCheckType.UShort)
             };
             return minersRestingHallLocations;
         }
@@ -3817,8 +3889,9 @@ namespace Helpers
         private static List<GenericLocationData> GetTheBattlesBeginningData()
         {
             List<GenericLocationData> theBattlesBeginningLocations = new List<GenericLocationData>() {
+                new GenericLocationData("AM1 - The Battle's Beginning - Wyvern Boss - Grimoire Ignifuge", Addresses.AM1_TheBattlesBeginningWyvernBossDefeat, "1586", "0", LocationCheckType.UShort),
                 new GenericLocationData("AM1 - The Battle's Beginning - Wyvern Boss", Addresses.AM1_TheBattlesBeginningWyvernBossDefeat, "1586", "0", LocationCheckType.UShort),
-                    new GenericLocationData("AM1 - The Battle's Beginning Entered", Addresses.AM1_TheBattlesBeginningEntered, "0", "1586", LocationCheckType.UShort)
+                new GenericLocationData("AM1 - The Battle's Beginning Entered", Addresses.AM1_TheBattlesBeginningEntered, "0", "1586", LocationCheckType.UShort)
             };
             return theBattlesBeginningLocations;
         }
@@ -3887,8 +3960,9 @@ namespace Helpers
         private static List<GenericLocationData> GetRustInPeaceData()
         {
             List<GenericLocationData> rustinPeaceLocations = new List<GenericLocationData>() {
+                new GenericLocationData("AM1 - Rust in Peace - Chest - Grimoire Undine", Addresses.AM1_RustinPeaceChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("AM1 - Rust in Peace - Chest", Addresses.AM1_RustinPeaceChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("AM1 - Rust in Peace Entered", Addresses.AM1_RustinPeaceEntered, "0", "3634", LocationCheckType.UShort)
+                new GenericLocationData("AM1 - Rust in Peace Entered", Addresses.AM1_RustinPeaceEntered, "0", "3634", LocationCheckType.UShort)
             };
             return rustinPeaceLocations;
         }
@@ -3896,8 +3970,9 @@ namespace Helpers
         private static List<GenericLocationData> GetTheSmeltryData()
         {
             List<GenericLocationData> theSmeltryLocations = new List<GenericLocationData>() {
+                new GenericLocationData("AM1 - The Smeltry - Fire Elemental Boss - Grimoire Flamme", Addresses.AM1_TheSmeltryFireElementalBossDefeat, "4402", "0", LocationCheckType.UShort),
                 new GenericLocationData("AM1 - The Smeltry - Fire Elemental Boss", Addresses.AM1_TheSmeltryFireElementalBossDefeat, "4402", "0", LocationCheckType.UShort),
-                    new GenericLocationData("AM1 - The Smeltry Entered", Addresses.AM1_TheSmeltryEntered, "0", "4402", LocationCheckType.UShort)
+                new GenericLocationData("AM1 - The Smeltry Entered", Addresses.AM1_TheSmeltryEntered, "0", "4402", LocationCheckType.UShort)
             };
             return theSmeltryLocations;
         }
@@ -3939,8 +4014,9 @@ namespace Helpers
         private static List<GenericLocationData> GetTraitorsPartingData()
         {
             List<GenericLocationData> traitorsPartingLocations = new List<GenericLocationData>() {
+                new GenericLocationData("AM1 - Traitor's Parting - Ogre Boss - Grimoire Rempart", Addresses.AM1_TraitorsPartingOgreBossDefeat, "5682", "0", LocationCheckType.UShort),
                 new GenericLocationData("AM1 - Traitor's Parting - Ogre Boss", Addresses.AM1_TraitorsPartingOgreBossDefeat, "5682", "0", LocationCheckType.UShort),
-                    new GenericLocationData("AM1 - Traitor's Parting Entered", Addresses.AM1_TraitorsPartingEntered, "0", "5682", LocationCheckType.UShort)
+                new GenericLocationData("AM1 - Traitor's Parting Entered", Addresses.AM1_TraitorsPartingEntered, "0", "5682", LocationCheckType.UShort)
             };
             return traitorsPartingLocations;
         }
@@ -3964,8 +4040,9 @@ namespace Helpers
         private static List<GenericLocationData> GetDiningInDarknessData()
         {
             List<GenericLocationData> diningInDarknessLocations = new List<GenericLocationData>() {
+                new GenericLocationData("AM2 - Dining in Darkness - Sky Dragon Boss - Grimoire Demance", Addresses.AM2_DiningInDarknessSkyDragonBossDefeat, "1587", "0", LocationCheckType.UShort),
                 new GenericLocationData("AM2 - Dining in Darkness - Sky Dragon Boss", Addresses.AM2_DiningInDarknessSkyDragonBossDefeat, "1587", "0", LocationCheckType.UShort),
-                    new GenericLocationData("AM2 - Dining in Darkness Entered", Addresses.AM2_DiningInDarknessEntered, "0", "1587", LocationCheckType.UShort)
+                new GenericLocationData("AM2 - Dining in Darkness Entered", Addresses.AM2_DiningInDarknessEntered, "0", "1587", LocationCheckType.UShort)
             };
             return diningInDarknessLocations;
         }
@@ -3982,8 +4059,9 @@ namespace Helpers
         private static List<GenericLocationData> GetDelusionsOfHappinessData()
         {
             List<GenericLocationData> delusionsOfHappinessLocations = new List<GenericLocationData>() {
+                new GenericLocationData("AM2 - Delusions of Happiness - Chest - Grimoire Salamandre", Addresses.AM2_DelusionsOfHappinessChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("AM2 - Delusions of Happiness - Chest", Addresses.AM2_DelusionsOfHappinessChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("AM2 - Delusions of Happiness Entered", Addresses.AM2_DelusionsOfHappinessEntered, "0", "1331", LocationCheckType.UShort)
+                new GenericLocationData("AM2 - Delusions of Happiness Entered", Addresses.AM2_DelusionsOfHappinessEntered, "0", "1331", LocationCheckType.UShort)
             };
             return delusionsOfHappinessLocations;
         }
@@ -4008,8 +4086,9 @@ namespace Helpers
         private static List<GenericLocationData> GetTombOfTheRebornData()
         {
             List<GenericLocationData> tombOfTheRebornLocations = new List<GenericLocationData>() {
+                new GenericLocationData("AM2 - Tomb of the Reborn - Earth Elemental Boss - Grimoire Gaea", Addresses.AM2_TombOfTheRebornEarthElementalBossDefeat, "3635", "0", LocationCheckType.UShort),
                 new GenericLocationData("AM2 - Tomb of the Reborn - Earth Elemental Boss", Addresses.AM2_TombOfTheRebornEarthElementalBossDefeat, "3635", "0", LocationCheckType.UShort),
-                    new GenericLocationData("AM2 - Tomb of the Reborn Entered", Addresses.AM2_TombOfTheRebornEntered, "0", "3635", LocationCheckType.UShort)
+                new GenericLocationData("AM2 - Tomb of the Reborn Entered", Addresses.AM2_TombOfTheRebornEntered, "0", "3635", LocationCheckType.UShort)
             };
             return tombOfTheRebornLocations;
         }
@@ -4111,8 +4190,9 @@ namespace Helpers
         private static List<GenericLocationData> GetAcolytesBurialVaultData()
         {
             List<GenericLocationData> acolytesBurialVaultLocations = new List<GenericLocationData>() {
+                new GenericLocationData("AM2 - Acolyte's Burial Vault - Chest - Grimoire Vie", Addresses.AM2_AcolytesBurialVaultChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("AM2 - Acolyte's Burial Vault - Chest", Addresses.AM2_AcolytesBurialVaultChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("AM2 - Acolyte's Burial Vault Entered", Addresses.AM2_AcolytesBurialVaultEntered, "0", "2867", LocationCheckType.UShort)
+                new GenericLocationData("AM2 - Acolyte's Burial Vault Entered", Addresses.AM2_AcolytesBurialVaultEntered, "0", "2867", LocationCheckType.UShort)
             };
             return acolytesBurialVaultLocations;
         }
@@ -4171,8 +4251,9 @@ namespace Helpers
         private static List<GenericLocationData> GetHiddenResourcesData()
         {
             List<GenericLocationData> hiddenResourcesLocations = new List<GenericLocationData>() {
+                new GenericLocationData("AM2 - Hidden Resources - Chest - Grimoire Mollesse", Addresses.AM2_HiddenResourcesChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("AM2 - Hidden Resources - Chest", Addresses.AM2_HiddenResourcesChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("AM2 - Hidden Resources Entered", Addresses.AM2_HiddenResourcesEntered, "0", "2099", LocationCheckType.UShort)
+                new GenericLocationData("AM2 - Hidden Resources Entered", Addresses.AM2_HiddenResourcesEntered, "0", "2099", LocationCheckType.UShort)
             };
             return hiddenResourcesLocations;
         }
@@ -4190,8 +4271,9 @@ namespace Helpers
         private static List<GenericLocationData> GetTheMinersEndData()
         {
             List<GenericLocationData> theMinersEndLocations = new List<GenericLocationData>() {
+                new GenericLocationData("AM2 - The Miner's End - Air Elemental Boss - Grimoire Foudre", Addresses.AM2_TheMinersEndAirElementalBossDefeat, "563", "0", LocationCheckType.UShort),
                 new GenericLocationData("AM2 - The Miner's End - Air Elemental Boss", Addresses.AM2_TheMinersEndAirElementalBossDefeat, "563", "0", LocationCheckType.UShort),
-                    new GenericLocationData("AM2 - The Miner's End Entered", Addresses.AM2_TheMinersEndEntered, "0", "563", LocationCheckType.UShort)
+                new GenericLocationData("AM2 - The Miner's End Entered", Addresses.AM2_TheMinersEndEntered, "0", "563", LocationCheckType.UShort)
             };
             return theMinersEndLocations;
         }

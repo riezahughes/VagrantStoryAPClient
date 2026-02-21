@@ -26,9 +26,9 @@ public class MapHelper
 
                 if (APHelpers.isInTheGame() && APHelpers.isProcessingItems() == false && MapsWithBosses.Contains(mapId))
                 {
-                    Console.WriteLine($"Current Map ID: {mapId:X4} - Boss Drops Updating");
                     uint bossPointerLocation = Memory.ReadUInt(Addresses.MapBossDataPointer);
                     uint bossAddress = (bossPointerLocation & 0x0FFFFFFF);
+                    Console.WriteLine($"Current Map ID: {mapId:X4} - Boss Drops Updating");
                     UpdateBossInMap(bossAddress, options);
                     _lastPointerValueBoss = pointerValue;
                 }
@@ -77,18 +77,18 @@ public class MapHelper
             () =>
             {
                 ushort mapId = Memory.ReadUShort(Addresses.CurrentMapandRoomID);
+
                 if (APHelpers.isInTheGame() && APHelpers.isProcessingItems() == false && MapsWithChests.Contains(mapId))
                 {
-                    Console.WriteLine($"Current Map ID: {mapId:X4} - Chest Drops Updating");
-
+                    Thread.Sleep(3000);
                     uint chestPointerLocation = Memory.ReadUInt(Addresses.MapChestDataPointer);
                     uint chestAddress = (chestPointerLocation & 0x0FFFFFFF) + 0x14;
-
+                    Console.WriteLine($"Current Map ID: {mapId:X4} - Chest Drops Updating");
 
                     UpdateChestsInMap(chestAddress, options);
                     _lastMapIdChest = mapId;
                 }
-                Thread.Sleep(3000);
+                Thread.Sleep(500);
                 StartMapChestListener(options);
             },
             value => value != _lastMapIdChest);

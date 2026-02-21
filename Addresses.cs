@@ -931,6 +931,7 @@ namespace VagrantStoryArchipelago
         public const uint SFF_FlutteringHopeEntered = 0x000f1ab0;
 
         // Return to the Land
+        public const uint SFF_ReturnToTheLandEarthDragonBossDefeat = 0x0; // need to find the boss address correctly
         public const uint SFF_ReturnToTheLandEntered = 0x000f1ab0;
 
         // The Yellow Wood
