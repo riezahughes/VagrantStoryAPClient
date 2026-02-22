@@ -10,6 +10,7 @@ namespace Helpers
 {
     public class APHelpers
     {
+        public static bool PROCESSING_ITEM_LIST = false;
         public static Boolean isInTheGame()
         {
             ulong currentGameStatus = Memory.ReadUInt(Addresses.InGameCheck);
@@ -21,12 +22,18 @@ namespace Helpers
             return false;
         }
 
+        public static Boolean isProcessingItems()
+        {
+            return PROCESSING_ITEM_LIST == true;
+        }
+
         public static async void OnConnectedLogic(object sender, EventArgs args, ArchipelagoClient client)
         {
             if (client.CurrentSession == null)
             {
                 return;
             }
+
             Log.Logger.Information("Connected to Archipelago");
             Log.Logger.Information($"Playing {client.CurrentSession.ConnectionInfo.Game} as {client.CurrentSession.Players.GetPlayerName(client.CurrentSession.ConnectionInfo.Slot)}");
 
@@ -41,9 +48,33 @@ namespace Helpers
 
             if (isInTheGame())
             {
-                MapHelper.SilenceCutsceneRange(
-                    new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 22, 23, 35, 45, 64, 65, 66 }
-                );
+                MapHelper.SilenceCutsceneRange(new int[]
+                { 
+                    // Intro, Prologue & Early Game
+                    0, 1, 2, 3, 4, 5, 6, 7, 8, 13, 22, 23, 35, 45, 55, 56, 62, 64, 65, 66, 68, 70,
+
+                    // Empty Range (71 - 95)
+                    71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95,
+
+                    // Debug & Specific Story Beats
+                    96, 97, 98, 99, 100, 
+
+                    // Mostly Empty Range (101 - 249)
+                    101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120,
+                    121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140,
+                    141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160,
+                    161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180,
+                    181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200,
+                    201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220,
+                    221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240,
+                    241, 242, 243, 244, 245, 246, 247, 248, 249,
+
+                    // Debug Room & Final Empty Range (250 - 255)
+                    250, 251, 252, 253, 254, 255,
+
+                    // High-ID Cutscene Maps (Unmapped)
+                    341, 408, 412, 413, 414, 415, 427, 428, 429, 430, 506
+                });
             }
         }
 
@@ -56,70 +87,12 @@ namespace Helpers
             Console.WriteLine("Disconnected from Archipelago.");
         }
 
+
+
         public static void ItemReceivedLogic(object sender, ItemReceivedEventArgs args, ArchipelagoClient client)
         {
-            if (client.CurrentSession == null)
-            {
-                return;
-            }
-
-            // turn back on later when you can differentiate the menu's being open.
-
-            //if (!isInTheGame())
-            //{
-            //    Console.WriteLine($"Player is not in a valid location. Delaying {args.Item.Name}");
-            //    App.delayedItems.Add(args);
-            //    return;
-            //}
-
-#if DEBUG
-            Console.WriteLine($"ItemReceived Firing. Itemcount: {client.CurrentSession.Items.AllItemsReceived.Count}");
-#endif
-
-            string firstWord = args.Item.Name.Split(' ')[0];
-
-            // 2. Check if any value in the dictionary matches that word
-            // We use StringComparison.OrdinalIgnoreCase to be user-friendly with casing
-            var materialExists = ItemHelpers.MaterialReference.FirstOrDefault(x =>
-                string.Equals(x.Value, firstWord, StringComparison.OrdinalIgnoreCase));
-
-            // 3. If the key is not default (or if we found a match), return it
-
-            string result = null;
-
-            if (materialExists.Value is not null)
-            {
-                string[] parts = args.Item.Name.Split(' ', 2);
-                result = parts.Length > 1 ? parts[1] : "";
-            }
-            else
-            {
-                result = args.Item.Name;
-            }
-
-            Console.WriteLine(result);
-
-            switch (args.Item)
-            {
-                case var x when ItemHelpers.ItemReference.Any(itm => itm.Value == x.Name): ItemHelpers.handleInventoryItem(args); break;
-                case var x when ItemHelpers.GemReference.Any(itm => itm.Value == x.Name): ItemHelpers.handleInventoryGem(args); break;
-                case var x when ItemHelpers.ArmorReference.Any(itm => itm.Value == result): ItemHelpers.handleInventoryArmor(args); break;
-                case var x when ItemHelpers.ShieldReference.Any(itm => itm.Value == result): ItemHelpers.handleInventoryShield(args); break;
-                case var x when ItemHelpers.CraftingBladeReference.Any(itm => itm.Value == result): ItemHelpers.handleInventoryCraftingBlade(args); break;
-                case var x when ItemHelpers.CraftingGripReference.Any(itm => itm.Value == x.Name): ItemHelpers.handleInventoryCraftingGrip(args); break;
-                //case var x when ItemHandlers.ListOfWeaponStrings.Any(wpn => wpn == x.Name) || ItemHandlers.ListOfShieldStrings.Any(wpn => wpn == x.Name): ItemHandlers.ReceiveEquipment(x); break;
-                //case var x when x.Name.ContainsAny("Life Bottle"): ItemHandlers.ReceiveLifeBottle(); break;
-                //case var x when ItemHandlers.ListOfKeyItemStrings.Any(key => key == x.Name): ItemHandlers.ReceiveKeyItem(x); break;
-                //case var x when x.Name.ContainsAny("Gold Coins"): ItemHandlers.ReceiveGold(x); break;
-                //case var x when x.Name.ContainsAny("Health", "Energy:"): ItemHandlers.ReceiveEnergy(x); break;
-                //case var x when x.Name.Contains("Trap: Heavy Dan"): TrapHandlers.HeavyDanTrap(); break;
-                //case var x when x.Name.Contains("Trap: Light Dan"): TrapHandlers.LightDanTrap(); break;
-                //case var x when x.Name.Contains("Trap: Lag"): TrapHandlers.RunLagTrap(); break;
-                //case null: Console.WriteLine("Received an item with null data. Skipping."); break;
-                default: Console.WriteLine($"Item not recognised. ({args.Item.Name}) Skipping"); break;
-            };
-
-            //PlayerStateHelpers.UpdatePlayerState(client, false);
+            PROCESSING_ITEM_LIST = true;
+            ItemHelpers.ProcessPendingItems(client);
         }
 
         public static void Client_MessageReceivedLogic(object sender, MessageReceivedEventArgs e, ArchipelagoClient client, string slot)
@@ -164,11 +137,15 @@ namespace Helpers
             {
                 return;
             }
+#if DEBUG
             Console.WriteLine("Location Completed");
+#endif
         }
         public static void Locations_CheckedLocationsUpdated(System.Collections.ObjectModel.ReadOnlyCollection<long> newCheckedLocations)
         {
+#if DEBUG
             Console.WriteLine($"Location CheckedLocationsUpdated Firing.");
+#endif
         }
     }
 }

@@ -62,7 +62,7 @@
         CLERGY_ROD = 0x003A,
         SUMMONER_BATON = 0x003B,
         SHAMANIC_STAFF = 0x003C,
-        BISHOP_S_CROSIER = 0x003D,
+        BISHOP_CROSIER = 0x003D,
         SAGES_CANE = 0x003E,
         LANGDEBEVE = 0x003F,
         SABRE_MACE = 0x0040,
