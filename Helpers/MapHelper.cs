@@ -173,6 +173,9 @@ public class MapHelper
         0x1638, // The Iron Maiden - Asura
         0x1735, // Torture Without End - Ogre Lord
         0x1D35, // Hall of the Wage-Paying - Snow Dragon
+
+        // mini boss drops
+        //0x000e, // Lizardmen Fight // commented out till i can check it.
         // NG+
         0x0136, // Slaugher of the Innocent - Damascus Golem (Evil)
         0x0138, // Ordeal By Fire - Dark Dragon (Dragon)

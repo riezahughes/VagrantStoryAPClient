@@ -1613,7 +1613,7 @@ namespace VagrantStoryArchipelago
         public const uint CAT_ShrinetotheMartyrsEntered = 0x000f1ab0;
 
         // The Lamenting Mother (West)
-        public const uint CAT_TheLamentingMotherWestGhostBossDefeat = 0x0;
+        public const uint CAT_TheLamentingMotherWestGhostBossDefeat = 0x00185898;
         public const uint CAT_TheLamentingMotherWestEntered = 0x000f1ab0;
 
         // The Lamenting Mother (East)
@@ -1654,7 +1654,7 @@ namespace VagrantStoryArchipelago
         public const uint CAT_HallwayofHeroesEntered = 0x000f1ab0;
 
         // The Beasts Domain
-        public const uint CAT_TheBeastsDomainLizardmanBossDefeat = 0x0;
+        public const uint CAT_TheBeastsDomainLizardmanBossDefeat = 0x0017e9d8;
         public const uint CAT_TheBeastsDomainEntered = 0x000f1ab0;
 
         // Dreamers Entrance
