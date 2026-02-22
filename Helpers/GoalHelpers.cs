@@ -9,17 +9,13 @@ namespace Helpers
             return true;
         }
 
-        internal static bool CheckSecondWinCondition(ArchipelagoClient client) {
+        internal static bool CheckSecondWinCondition(ArchipelagoClient client)
+        {
             return true;
         }
 
         public static bool CheckGoalCondition(ArchipelagoClient client)
         {
-
-            if (client?.LocationState?.CompletedLocations == null)
-            {
-                return false;
-            }
 
             // TODO Victory logic goes into each of these goal conditions
 
@@ -27,7 +23,6 @@ namespace Helpers
 
             if (goalCondition == PlayerVictoryConditions.DEFEAT_DARK_ANGEL)
             {
-                Console.WriteLine("Cleared 1");
                 return true;
             }
             //else if (goalCondition == PlayerVictoryConditions.VICTORY_2)
