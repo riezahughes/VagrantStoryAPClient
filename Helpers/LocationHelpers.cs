@@ -1178,7 +1178,7 @@ namespace Helpers
         private static List<GenericLocationData> GetTheHerosWinehallData()
         {
             List<GenericLocationData> theHerosWinehallLocations = new List<GenericLocationData>() {
-                    new GenericLocationData("WC - The Hero's Winehall - Dullahan Boss - Grimoire Lux", Addresses.WC_TheHerosWinehallDullahanBossDefeat, "20", "0", LocationCheckType.UShort),
+                    new GenericLocationData("WC - The Hero's Winehall - Dullahan Boss - Grimoire Lux", Addresses.WC_TheHerosWinehallDullahanBossDefeat, "11", "0", LocationCheckType.UShort),
                     new GenericLocationData("WC - The Hero's Winehall - Dullahan Boss", Addresses.WC_TheHerosWinehallDullahanBossDefeat, "11", "0", LocationCheckType.UShort),
                     new GenericLocationData("WC - The Hero's Winehall - Chest", Addresses.WC_TheHerosWinehallChest, "0", "1", LocationCheckType.Byte),
                     new GenericLocationData("WC - The Hero's Winehall Entered", Addresses.WC_TheHerosWinehallEntered, "0", "11", LocationCheckType.UShort)

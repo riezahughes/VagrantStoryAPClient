@@ -350,67 +350,67 @@ namespace VagrantStoryArchipelago.Models.MapData
         public byte Accessory_STR { get; set; }
         [MemoryOffset(0x1F2)]
         public byte Accessory_INT { get; set; }
-        [MemoryOffset(0x1F3)]
-        public byte Accessory_AGL { get; set; }
-        [MemoryOffset(0x1F8)]
-        public uint Accessory_Types { get; set; }
-        [MemoryOffset(0x1FC)]
-        public ulong Accessory_Classes { get; set; }
-        [MemoryOffset(0x204)]
-        public ulong Accessory_Affinities { get; set; }
+        // the rest of these need properly mapped. They are incorrect.
+        //[MemoryOffset(0x1F3)]
+        //public byte Accessory_AGL { get; set; }
+        //[MemoryOffset(0x1F8)]
+        //public uint Accessory_Types { get; set; }
+        //[MemoryOffset(0x1FC)]
+        //public ulong Accessory_Classes { get; set; }
+        //[MemoryOffset(0x204)]
+        //public ulong Accessory_Affinities { get; set; }
 
         // --- STANDALONE GEM ---
-        [MemoryOffset(0x210)]
-        public uint GemExists { get; set; }
-        [MemoryOffset(0x214)]
-        public ushort Gem_NameIndex { get; set; }
-        [MemoryOffset(0x216)]
-        public byte Gem_ItemIndex { get; set; }
-        [MemoryOffset(0x218)]
-        public byte Gem_SpecialEffect { get; set; }
-        [MemoryOffset(0x219)]
-        public byte Gem_STR { get; set; }
-        [MemoryOffset(0x21A)]
-        public byte Gem_INT { get; set; }
-        [MemoryOffset(0x21B)]
-        public byte Gem_AGL { get; set; }
-        [MemoryOffset(0x21C)]
-        public ulong Gem_Classes { get; set; }
-        [MemoryOffset(0x224)]
-        public ulong Gem_Affinities { get; set; }
+        [MemoryOffset(0x1F4)]
+        public uint GemExists { get; set; }          // +$1F4  $4
 
-        // --- MISC ITEMS (+$214 from doc, but documentation says +$220) ---
+        [MemoryOffset(0x200)]
+        public ushort Gem_NameIndex { get; set; }    // +$200  $2
+        [MemoryOffset(0x202)]
+        public byte Gem_ItemIndex { get; set; }      // +$202  $1
+                                                     // +$203 unknown (always zero)
+        [MemoryOffset(0x204)]
+        public byte Gem_SpecialEffect { get; set; }  // +$204  $1
+        [MemoryOffset(0x205)]
+        public byte Gem_STR { get; set; }            // +$205  $1
+        [MemoryOffset(0x206)]
+        public byte Gem_INT { get; set; }            // +$206  $1
+        [MemoryOffset(0x207)]
+        public byte Gem_AGL { get; set; }            // +$207  $1
+        [MemoryOffset(0x208)]
+        public byte Gem_Unknown { get; set; }            // +$207  $1
+        [MemoryOffset(0x20c)]
+        public uint Gem_Classes { get; set; }       // +$208  $8
+        [MemoryOffset(0x210)]
+        public uint Gem_Affinities { get; set; }    // +$210  $8
+
+        // --- MISC ITEMS (+$214) --- each item is $4 bytes
         [MemoryOffset(0x214)]
-        public ushort Misc1_ID { get; set; }
+        public byte Misc1_ID { get; set; }
         [MemoryOffset(0x215)]
         public byte Misc1_Confirm { get; set; }
-
         [MemoryOffset(0x216)]
         public byte Misc1_Exists { get; set; }
         [MemoryOffset(0x217)]
         public byte Misc1_Qty { get; set; }
-
         [MemoryOffset(0x218)]
-        public ushort Misc2_ID { get; set; }
+        public byte Misc2_ID { get; set; }
         [MemoryOffset(0x219)]
         public byte Misc2_Confirm { get; set; }
         [MemoryOffset(0x21A)]
         public byte Misc2_Exists { get; set; }
         [MemoryOffset(0x21B)]
         public byte Misc2_Qty { get; set; }
-
         [MemoryOffset(0x21C)]
-        public ushort Misc3_ID { get; set; }
+        public byte Misc3_ID { get; set; }
         [MemoryOffset(0x21D)]
         public byte Misc3_Confirm { get; set; }
-
         [MemoryOffset(0x21E)]
         public byte Misc3_Exists { get; set; }
         [MemoryOffset(0x21F)]
         public byte Misc3_Qty { get; set; }
-
         [MemoryOffset(0x220)]
-        public ushort Misc4_ID { get; set; }
+        public byte Misc4_ID { get; set; }
         [MemoryOffset(0x221)]
         public byte Misc4_Confirm { get; set; }
         [MemoryOffset(0x222)]
