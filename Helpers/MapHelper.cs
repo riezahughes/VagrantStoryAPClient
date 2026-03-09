@@ -12,8 +12,31 @@ public class MapHelper
     /// </summary>
     /// 
 
+    private static ushort _lastRoomValue = 0xFFFF; // Store last known map ID
     private static ushort _lastMapIdChest = 0xFFFF; // Store last known map ID
     private static uint _lastPointerValueBoss = 0xFFFFFFFF; // Store last known map ID
+    private static bool _battleAbilitiesSet = false;
+
+
+    public static void StartMapProgressionListener()
+    {
+        Memory.MonitorAddressForAction<ushort>(
+            Addresses.CurrentMapandRoomID,
+            () =>
+            {
+                ushort mapId = Memory.ReadUShort(Addresses.CurrentMapandRoomID);
+                if (APHelpers.isInTheGame() && APHelpers.isProcessingItems() == false)
+                {
+                    Console.WriteLine("Progression State Updated");
+
+                    SetBossProgression(mapId);
+                }
+                _lastRoomValue = mapId;
+                Thread.Sleep(500);
+                StartMapProgressionListener();
+            },
+            value => value != _lastRoomValue);
+    }
 
     public static void StartMapBossListener(Dictionary<string, object> options)
     {
@@ -287,6 +310,21 @@ public class MapHelper
         0x0026, // The House Gilgitte
     };
 
+    public record struct RoomEntryProgression(ushort Prog1, byte? Prog2);
+
+    public static Dictionary<ushort, RoomEntryProgression> BossProgressionSettings = new Dictionary<ushort, RoomEntryProgression>
+    {
+        { 0x000C, new(0x0008, 0x00) }, // minotaur
+        { 0x000B, new(0x000c, 0x00) }, // dullahan
+        { 0x0320, new(0x0020, null) }, // Duane
+        { 0x1632, new(0x0022, null) }, // Ogre
+        { 0x1828, new(0x002c, 0x00) }, // Father and Dark Crusader
+        // Rozenrantz goes here
+        { 0x0F30, new(0x0035, null) }, // Dark Elemental
+        { 0x0737, new(0x0037, null) },
+        // neesa and tieger go here
+    };
+
     public static Dictionary<int, ushort> StartingLocationAddress = new Dictionary<int, ushort>
     {
         { 0, 0x002b },
@@ -296,6 +334,23 @@ public class MapHelper
         { 4, 0x002c },
         { 5, 0x002a }
     };
+
+    public static void SetBossProgression(ushort mapId)
+    {
+        if (BossProgressionSettings.TryGetValue(mapId, out var progression))
+        {
+            Memory.Write(Addresses.ProgressionState, progression.Prog1);
+            if (progression.Prog2.HasValue)
+            {
+                Memory.Write(Addresses.ProgressionState2, progression.Prog2.Value);
+            }
+        }
+        else
+        {
+            // No match found for this mapId — set a default/fallback state
+            Memory.Write(Addresses.ProgressionState, 0x0051);
+        }
+    }
 
     public static void SetStartingLocation(CancellationTokenSource cts, ArchipelagoClient client)
     {

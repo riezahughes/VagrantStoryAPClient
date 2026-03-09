@@ -8,10 +8,13 @@ namespace VagrantStoryArchipelago
         // Byte
         public const uint InGameCheck = 0x000f196c;
 
+        // halfword
+        public const uint ProgressionState = 0x0006161a;
+        public const uint ProgressionState2 = 0x00061653;
+
         // Byte
         public const uint CurrentRoomID = 0x000f1a0;
         public const uint CurrentMapID = 0x000f1a0;
-
         public const uint CurrentMapandRoomID = 0x000f1ab0;
 
         // Ashleys Stats And Abilities
@@ -81,6 +84,10 @@ namespace VagrantStoryArchipelago
         public const uint MapStatusAddress11 = 0x00060000;
         public const uint MapStatusAddress12 = 0x00060004;
         public const uint MapStatusAddress13 = 0x00060008;
+
+        // Main Menu 
+
+        public const uint MainMenuMapAddress = 0x00060022; // 0xfd
 
         // Pointer Locations
         public const uint MapBossDataPointer = 0x000f18e4;

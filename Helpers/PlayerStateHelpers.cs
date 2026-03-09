@@ -39,6 +39,39 @@ namespace Helpers
 
         }
 
+        public static void SetVanillaBattleSkills()
+        {
+            // set default battle chain abilities
+            Memory.WriteByte(Addresses.AbilityHeavyShotUnlock, 0x80);
+            Memory.WriteByte(Addresses.AbilityGainLifeUnlock, 0x80);
+            Memory.WriteByte(Addresses.AbilityTemperUnlock, 0x80);
+
+            // set default defence chain abilities
+            Memory.WriteByte(Addresses.AbilityWardUnlock, 0x90);
+            Memory.WriteByte(Addresses.AbilityReflectDamageUnlock, 0x90);
+            Memory.WriteByte(Addresses.AbilityImpactGuardUnlock, 0x90);
+
+            // set default starting progression value
+            Memory.WriteByte(Addresses.ProgressionState, 0x0a);
+        }
+
+        public static void SetOpenWorldSettings(ArchipelagoClient client)
+        {
+
+            /*
+             * It seems to be a tracker for game progress. Starting the game with the first three battle abilities and setting 0x8006161a to 0x0a will cause it load maps up to the post-Minotaur scene as though the story bits were already done (no scenes play), and battle points will actually increment
+             */
+
+            // set progression options on both progression 1 and/or 2 based on the room you're entering. 
+            // set first 6 battle abilities to on and progression to 0a before defaulting.
+
+            SetVanillaBattleSkills();
+
+            return;
+        }
+
+
+
         public static void EnableTeleportOptions(ArchipelagoClient client)
         {
 
@@ -95,6 +128,12 @@ namespace Helpers
                 Memory.Write(Addresses.TeleportTheAtrium, 0x0001);
                 Memory.Write(Addresses.TeleportGodsHandsWorkshop, 0x0001);
             }
+        }
+
+        public static void SetRoomProgression(ArchipelagoClient client)
+        {
+            ushort current_room = Memory.ReadByte(Addresses.CurrentMapandRoomID);
+            MapHelper.SetBossProgression(current_room);
         }
 
         public static void SetUpMapListener(CancellationTokenSource cts, ArchipelagoClient client)

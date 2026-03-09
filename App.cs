@@ -208,6 +208,8 @@ public class App
                 PlayerStateHelpers.OnGameLoaded(archipelagoClient);
                 PlayerStateHelpers.SetUpMapListener(_cancellationTokenSource, archipelagoClient);
                 PlayerStateHelpers.EnableTeleportOptions(archipelagoClient);
+                PlayerStateHelpers.SetVanillaBattleSkills();
+                MapHelper.StartMapProgressionListener();
                 MapHelper.StartMapChestListener(archipelagoClient.Options);
                 MapHelper.StartMapBossListener(archipelagoClient.Options);
 
