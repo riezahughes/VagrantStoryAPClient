@@ -1,5 +1,6 @@
 using Archipelago.Core.Models;
 using VagrantStoryArchipelago;
+using VagrantStoryArchipelago.Helpers;
 using VagrantStoryArchipelago.Models;
 
 namespace Helpers
@@ -398,7 +399,7 @@ namespace Helpers
             Dictionary<string, List<GenericLocationData>> allLevelLocations = new Dictionary<string, List<GenericLocationData>>();
 
             // Level Locations
-            allLevelLocations.Add("Ashley", GetAshleyData());
+            allLevelLocations.Add("Ashley", GetAshleyData(options));
             allLevelLocations.Add("Prologue", GetPrologueData());
             allLevelLocations.Add("Entrance to Darkness", GetEntranceToDarknessData());
             allLevelLocations.Add("Worker's Breakroom", GetWorkersBreakroomData());
@@ -863,8 +864,20 @@ namespace Helpers
             return locations;
         }
 
-        private static List<GenericLocationData> GetAshleyData()
+        private static List<GenericLocationData> GetAshleyData(Dictionary<string, object> options)
         {
+
+            int breakArtChoice = Int32.Parse(options?.GetValueOrDefault("break_art_unlock_option", "0").ToString());
+            int breakArtValue = Int32.Parse(options?.GetValueOrDefault("break_art_counter", "0").ToString());
+
+            bool breakArtValuesSet = breakArtChoice == 1;
+
+            string breakArtLevelOne = breakArtValue.ToString();
+            string breakArtLevelTwo = (breakArtValue * 2).ToString();
+            string breakArtLevelThree = (breakArtValue * 3).ToString();
+            string breakArtLevelFour = (breakArtValue * 4).ToString();
+
+
             List<GenericLocationData> ashleyLocations = new List<GenericLocationData>() {
                 //new GenericLocationData("Ability: Heavy Shot", Addresses.AbilityHeavyShotUnlock, "0", "128", LocationCheckType.Byte),
                 //new GenericLocationData("Ability: Gain Life", Addresses.AbilityGainLifeUnlock, "0", "128", LocationCheckType.Byte),
@@ -964,47 +977,47 @@ namespace Helpers
                 new GenericLocationData("Grimoire: Avalanche Max Level", Addresses.GrimoireAvalancheMaxLevel, "0", "704", LocationCheckType.Byte),
                 new GenericLocationData("Grimoire: Radial Surge Max Level", Addresses.GrimoireRadialSurgeMaxLevel, "0", "704", LocationCheckType.Byte),
                 new GenericLocationData("Grimoire: Meteor Max Level", Addresses.GrimoireMeteorMaxLevel, "0", "704", LocationCheckType.Byte),
-                // removed break locations until we can figure out where the stats are
-                //new GenericLocationData("Break: Whistle Sting", Addresses.BreakWhistleStingUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Shadoweave", Addresses.BreakShadoweaveUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Double Fang", Addresses.BreakDoubleFangUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Wyrm Scorn", Addresses.BreakWyrmScornUnlock, "0", "160", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Rending Gale", Addresses.BreakRendingGaleUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Vile Scar", Addresses.BreakVileScarUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Cherry Ronde", Addresses.BreakCherryRondeUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Papillon Reel", Addresses.BreakPapillonReelUnlock, "0", "160", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Sunder", Addresses.BreakSunderUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Thunderwave", Addresses.BreakThunderwaveUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Swallow Slash", Addresses.BreakSwallowSlashUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Advent Sign", Addresses.BreakAdventSignUnlock, "0", "160", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Mistral Edge", Addresses.BreakMistralEdgeUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Glacial Gale", Addresses.BreakGlacialGaleUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Killer Mantis", Addresses.BreakKillerMantisUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Black Nebula", Addresses.BreakBlackNebulaUnlock, "0", "160", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Bear Claw", Addresses.BreakBearClawUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Accursed Umbra", Addresses.BreakAccursedUmbraUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Iron Ripper", Addresses.BreakIronRipperUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Emetic Bomb", Addresses.BreakEmeticBombUnlock, "0", "160", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Sirocco", Addresses.BreakSiroccoUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Riskbreak", Addresses.BreakRiskbreakUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Gravis Aether", Addresses.BreakGravisAetherUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Trinity Pulse", Addresses.BreakTrinityPulseUnlock, "0", "160", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Bonecrusher", Addresses.BreakBonecrusherUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Quickshock", Addresses.BreakQuickshockUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Ignis Wheel", Addresses.BreakIgnisWheelUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Hex Flux", Addresses.BreakHexFluxUnlock, "0", "160", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Ruination Polearm", Addresses.BreakRuinationPolearmUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Scythe Wind", Addresses.BreakScytheWindUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Giga Tempest", Addresses.BreakGigaTempestUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Spiral Scourge", Addresses.BreakSpiralScourgeUnlock, "0", "160", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Brimstone Hail", Addresses.BreakBrimstoneHailUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Heaven's Scorn", Addresses.BreakHeavensScornUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Death Wail", Addresses.BreakDeathWailUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Sanctus Flare", Addresses.BreakSanctusFlareUnlock, "0", "224", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Lotus Palm", Addresses.BreakLotusPalmUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Vertigo", Addresses.BreakVertigoUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Vermillion Aura", Addresses.BreakVermillionAuraUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Break: Retribution", Addresses.BreakRetributionUnlock, "0", "160", LocationCheckType.Byte)
+
+                new GenericLocationData("Break: Whistle Sting", Addresses.BreakCounterDaggers, "0", breakArtValuesSet ? breakArtLevelOne : ItemHelpers.BreakArtUnlockReference["Dagger"]["Whistle Sting Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Shadoweave", Addresses.BreakCounterDaggers, "0", breakArtValuesSet ? breakArtLevelTwo : ItemHelpers.BreakArtUnlockReference["Dagger"]["Shadowweave Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Double Fang", Addresses.BreakCounterDaggers, "0", breakArtValuesSet ? breakArtLevelThree : ItemHelpers.BreakArtUnlockReference["Dagger"]["Double Fang Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Wyrm Scorn", Addresses.BreakCounterDaggers, "0", breakArtValuesSet ? breakArtLevelFour : ItemHelpers.BreakArtUnlockReference["Dagger"]["Wyrm Scorn Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Rending Gale", Addresses.BreakCounterSwords, "0", breakArtValuesSet ? breakArtLevelOne : ItemHelpers.BreakArtUnlockReference["Sword"]["Rending Gale Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Vile Scar", Addresses.BreakCounterSwords, "0", breakArtValuesSet ? breakArtLevelTwo :ItemHelpers.BreakArtUnlockReference["Sword"]["Vile Scar Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Cherry Ronde", Addresses.BreakCounterSwords, "0", breakArtValuesSet ? breakArtLevelThree : ItemHelpers.BreakArtUnlockReference["Sword"]["Cherry Ronde Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Papillon Reel", Addresses.BreakCounterSwords, "0", breakArtValuesSet ? breakArtLevelFour : ItemHelpers.BreakArtUnlockReference["Sword"]["Papillon Reel Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Sunder", Addresses.BreakCounterGreatSwords, "0", breakArtValuesSet ? breakArtLevelOne : ItemHelpers.BreakArtUnlockReference["Great Sword"]["Sunder Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Thunderwave", Addresses.BreakCounterGreatSwords, "0", breakArtValuesSet ? breakArtLevelTwo : ItemHelpers.BreakArtUnlockReference["Great Sword"]["Thunderwave Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Swallow Slash", Addresses.BreakCounterGreatSwords, "0", breakArtValuesSet ? breakArtLevelThree : ItemHelpers.BreakArtUnlockReference["Great Sword"]["Swallow Slash Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Advent Sign", Addresses.BreakCounterGreatSwords, "0", breakArtValuesSet ? breakArtLevelFour : ItemHelpers.BreakArtUnlockReference["Great Sword"]["Advent Sign Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Mistral Edge", Addresses.BreakCounterAxeAndMaces, "0", breakArtValuesSet ? breakArtLevelOne : ItemHelpers.BreakArtUnlockReference["Axe & Mace"]["Mistral Edge Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Glacial Gale", Addresses.BreakCounterAxeAndMaces, "0", breakArtValuesSet ? breakArtLevelTwo : ItemHelpers.BreakArtUnlockReference["Axe & Mace"]["Glacial Gale Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Killer Mantis", Addresses.BreakCounterAxeAndMaces, "0", breakArtValuesSet ? breakArtLevelThree : ItemHelpers.BreakArtUnlockReference["Axe & Mace"]["Killer Mantis Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Black Nebula", Addresses.BreakCounterAxeAndMaces, "0", breakArtValuesSet ? breakArtLevelFour : ItemHelpers.BreakArtUnlockReference["Axe & Mace"]["Black Nebula Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Bear Claw", Addresses.BreakCounterGreatAxes, "0", breakArtValuesSet ? breakArtLevelOne : ItemHelpers.BreakArtUnlockReference["Great Axe"]["Bear Claw Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Accursed Umbra", Addresses.BreakCounterGreatAxes, "0", breakArtValuesSet ? breakArtLevelTwo : ItemHelpers.BreakArtUnlockReference["Great Axe"]["Accursed Umbra Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Iron Ripper", Addresses.BreakCounterGreatAxes, "0", breakArtValuesSet ? breakArtLevelThree : ItemHelpers.BreakArtUnlockReference["Great Axe"]["Iron Ripper Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Emetic Bomb", Addresses.BreakCounterGreatAxes, "0", breakArtValuesSet ? breakArtLevelFour : ItemHelpers.BreakArtUnlockReference["Great Axe"]["Emetic Bomb Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Sirocco", Addresses.BreakCounterStaffs, "0", breakArtValuesSet ? breakArtLevelOne : ItemHelpers.BreakArtUnlockReference["Staff"]["Sirocco Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Riskbreak", Addresses.BreakCounterStaffs, "0", breakArtValuesSet ? breakArtLevelTwo : ItemHelpers.BreakArtUnlockReference["Staff"]["Riskbreak Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Gravis Aether", Addresses.BreakCounterStaffs, "0", breakArtValuesSet ? breakArtLevelThree : ItemHelpers.BreakArtUnlockReference["Staff"]["Gravis Aether Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Trinity Pulse", Addresses.BreakCounterStaffs, "0", breakArtValuesSet ? breakArtLevelFour : ItemHelpers.BreakArtUnlockReference["Staff"]["Trinity Pulse Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Bonecrusher", Addresses.BreakCounterHeavyMaces, "0", breakArtValuesSet ? breakArtLevelOne : ItemHelpers.BreakArtUnlockReference["Heavy Mace"]["Bonecrusher Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Quickshock", Addresses.BreakCounterHeavyMaces, "0", breakArtValuesSet ? breakArtLevelTwo : ItemHelpers.BreakArtUnlockReference["Heavy Mace"]["Quickshock Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Ignis Wheel", Addresses.BreakCounterHeavyMaces, "0", breakArtValuesSet ? breakArtLevelThree : ItemHelpers.BreakArtUnlockReference["Heavy Mace"]["Ignis Wheel Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Hex Flux", Addresses.BreakCounterHeavyMaces, "0", breakArtValuesSet ? breakArtLevelFour : ItemHelpers.BreakArtUnlockReference["Heavy Mace"]["Hex Flux Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Ruination", Addresses.BreakCounterPolearms, "0", breakArtValuesSet ? breakArtLevelOne : ItemHelpers.BreakArtUnlockReference["Polearm"]["Ruination Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Scythe Wind", Addresses.BreakCounterPolearms, "0", breakArtValuesSet ? breakArtLevelTwo : ItemHelpers.BreakArtUnlockReference["Polearm"]["Scythe Wind Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Giga Tempest", Addresses.BreakCounterPolearms, "0", breakArtValuesSet ? breakArtLevelThree : ItemHelpers.BreakArtUnlockReference["Polearm"]["Giga Tempest Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Spiral Scourge", Addresses.BreakCounterPolearms, "0", breakArtValuesSet ? breakArtLevelFour : ItemHelpers.BreakArtUnlockReference["Polearm"]["Spiral Scourge Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Brimstone Hail", Addresses.BreakCounterCrossbows, "0", breakArtValuesSet ? breakArtLevelOne : ItemHelpers.BreakArtUnlockReference["Crossbow"]["Brimstone Hail Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Heaven's Scorn", Addresses.BreakCounterCrossbows, "0", breakArtValuesSet ? breakArtLevelTwo : ItemHelpers.BreakArtUnlockReference["Crossbow"]["Heaven's Scorn Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Death Wail", Addresses.BreakCounterCrossbows, "0", breakArtValuesSet ? breakArtLevelThree : ItemHelpers.BreakArtUnlockReference["Crossbow"]["Death Wail Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Sanctus Flare", Addresses.BreakCounterCrossbows, "0", breakArtValuesSet ? breakArtLevelFour : ItemHelpers.BreakArtUnlockReference["Crossbow"]["Sanctus Flare Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Lotus Palm", Addresses.BreakCounterUnarmed, "0", breakArtValuesSet ? breakArtLevelOne : ItemHelpers.BreakArtUnlockReference["Bare Hands"]["Lotus Palm Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Vertigo", Addresses.BreakCounterUnarmed, "0", breakArtValuesSet ? breakArtLevelTwo : ItemHelpers.BreakArtUnlockReference["Bare Hands"]["Vertigo Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Vermillion Aura", Addresses.BreakCounterUnarmed, "0", breakArtValuesSet ? breakArtLevelThree : ItemHelpers.BreakArtUnlockReference["Bare Hands"]["Vermillion Aura Break Art"].Value.ToString(), LocationCheckType.Byte),
+                new GenericLocationData("Break: Retribution", Addresses.BreakCounterUnarmed, "0", breakArtValuesSet ? breakArtLevelFour : ItemHelpers.BreakArtUnlockReference["Bare Hands"]["Retribution Break Art"].Value.ToString(), LocationCheckType.Byte),
             };
 
             return ashleyLocations;
