@@ -868,85 +868,77 @@ namespace VagrantStoryArchipelago.Helpers
 
         public static Dictionary<string, Dictionary<string, BreakArtInfo>> BreakArtUnlockReference = new Dictionary<string, Dictionary<string, BreakArtInfo>>()
         {
-            ["Dagger"] = new Dictionary<string, BreakArtInfo>
-            {
-                ["Whistle Sting Break Art"] = new BreakArtInfo { Address = Addresses.BreakWhistleStingUnlock, KillsRequired = 0x000A, Value = 0xC0 },
-                ["Shadowweave Break Art"] = new BreakArtInfo { Address = Addresses.BreakShadoweaveUnlock, KillsRequired = 0x0041, Value = 0xC0 },
-                ["Double Fang Break Art"] = new BreakArtInfo { Address = Addresses.BreakDoubleFangUnlock, KillsRequired = 0x00AF, Value = 0x80 },
-                ["Wyrm Scorn Break Art"] = new BreakArtInfo { Address = Addresses.BreakWyrmScornUnlock, KillsRequired = 0x0154, Value = 0xA0 }
-            },
-
             ["Sword"] = new Dictionary<string, BreakArtInfo>
             {
-                ["Rending Gale Break Art"] = new BreakArtInfo { Address = Addresses.BreakRendingGaleUnlock, KillsRequired = 0x0014, Value = 0xC0 },
-                ["Vile Scar Break Art"] = new BreakArtInfo { Address = Addresses.BreakVileScarUnlock, KillsRequired = 0x005A, Value = 0xC0 },
-                ["Cherry Ronde Break Art"] = new BreakArtInfo { Address = Addresses.BreakCherryRondeUnlock, KillsRequired = 0x00EB, Value = 0x80 },
-                ["Papillon Reel Break Art"] = new BreakArtInfo { Address = Addresses.BreakPapillonReelUnlock, KillsRequired = 0x01A9, Value = 0xA0 }
+                ["Rending Gale Break Art"] = new BreakArtInfo { Address = Addresses.BreakRendingGaleUnlock, KillsRequired = 0x0019, Value = 0xC0 },
+                ["Vile Scar Break Art"] = new BreakArtInfo { Address = Addresses.BreakVileScarUnlock, KillsRequired = 0x006E, Value = 0xC0 },
+                ["Cherry Ronde Break Art"] = new BreakArtInfo { Address = Addresses.BreakCherryRondeUnlock, KillsRequired = 0x0104, Value = 0x80 },
+                ["Papillon Reel Break Art"] = new BreakArtInfo { Address = Addresses.BreakPapillonReelUnlock, KillsRequired = 0x01E5, Value = 0xA0 }
             },
 
             ["Great Sword"] = new Dictionary<string, BreakArtInfo>
             {
-                ["Sunder Break Art"] = new BreakArtInfo { Address = Addresses.BreakSunderUnlock, KillsRequired = 0x0019, Value = 0xC0 },
-                ["Thunderwave Break Art"] = new BreakArtInfo { Address = Addresses.BreakThunderwaveUnlock, KillsRequired = 0x006E, Value = 0xC0 },
-                ["Swallow Slash Break Art"] = new BreakArtInfo { Address = Addresses.BreakSwallowSlashUnlock, KillsRequired = 0x0104, Value = 0x80 },
-                ["Advent Sign Break Art"] = new BreakArtInfo { Address = Addresses.BreakAdventSignUnlock, KillsRequired = 0x01E5, Value = 0xA0 }
+                ["Sunder Break Art"] = new BreakArtInfo { Address = Addresses.BreakSunderUnlock, KillsRequired = 0x0012, Value = 0xC0 },
+                ["Thunderwave Break Art"] = new BreakArtInfo { Address = Addresses.BreakThunderwaveUnlock, KillsRequired = 0x0050, Value = 0xC0 },
+                ["Swallow Slash Break Art"] = new BreakArtInfo { Address = Addresses.BreakSwallowSlashUnlock, KillsRequired = 0x00D2, Value = 0x80 },
+                ["Advent Sign Break Art"] = new BreakArtInfo { Address = Addresses.BreakAdventSignUnlock, KillsRequired = 0x01A4, Value = 0xA0 }
             },
-
-            ["Axe & Mace"] = new Dictionary<string, BreakArtInfo>
-            {
-                ["Mistral Edge Break Art"] = new BreakArtInfo { Address = Addresses.BreakMistralEdgeUnlock, KillsRequired = 0x0012, Value = 0xC0 },
-                ["Glacial Gale Break Art"] = new BreakArtInfo { Address = Addresses.BreakGlacialGaleUnlock, KillsRequired = 0x0050, Value = 0xC0 },
-                ["Killer Mantis Break Art"] = new BreakArtInfo { Address = Addresses.BreakKillerMantisUnlock, KillsRequired = 0x00D2, Value = 0x80 },
-                ["Black Nebula Break Art"] = new BreakArtInfo { Address = Addresses.BreakBlackNebulaUnlock, KillsRequired = 0x01A4, Value = 0xA0 }
-            },
-
-            ["Great Axe"] = new Dictionary<string, BreakArtInfo>
-            {
-                ["Bear Claw Break Art"] = new BreakArtInfo { Address = Addresses.BreakBearClawUnlock, KillsRequired = 0x0014, Value = 0xC0 },
-                ["Accursed Umbra Break Art"] = new BreakArtInfo { Address = Addresses.BreakAccursedUmbraUnlock, KillsRequired = 0x0064, Value = 0xC0 },
-                ["Iron Ripper Break Art"] = new BreakArtInfo { Address = Addresses.BreakIronRipperUnlock, KillsRequired = 0x00F5, Value = 0x80 },
-                ["Emetic Bomb Break Art"] = new BreakArtInfo { Address = Addresses.BreakEmeticBombUnlock, KillsRequired = 0x01D1, Value = 0xA0 }
-            },
-
             ["Staff"] = new Dictionary<string, BreakArtInfo>
             {
-                ["Sirocco Break Art"] = new BreakArtInfo { Address = Addresses.BreakSiroccoUnlock, KillsRequired = 0x000F, Value = 0xC0 },
-                ["Riskbreak Break Art"] = new BreakArtInfo { Address = Addresses.BreakRiskbreakUnlock, KillsRequired = 0x005A, Value = 0xC0 },
-                ["Gravis Aether Break Art"] = new BreakArtInfo { Address = Addresses.BreakGravisAetherUnlock, KillsRequired = 0x00D7, Value = 0x80 },
-                ["Trinity Pulse Break Art"] = new BreakArtInfo { Address = Addresses.BreakTrinityPulseUnlock, KillsRequired = 0x019A, Value = 0xA0 }
+                ["Sirocco Break Art"] = new BreakArtInfo { Address = Addresses.BreakSiroccoUnlock, KillsRequired = 0x0014, Value = 0xC0 },
+                ["Riskbreak Break Art"] = new BreakArtInfo { Address = Addresses.BreakRiskbreakUnlock, KillsRequired = 0x005F, Value = 0xC0 },
+                ["Gravis Aether Break Art"] = new BreakArtInfo { Address = Addresses.BreakGravisAetherUnlock, KillsRequired = 0x00E6, Value = 0xC0 },
+                ["Trinity Pulse Break Art"] = new BreakArtInfo { Address = Addresses.BreakTrinityPulseUnlock, KillsRequired = 0x01AE, Value = 0xE0 }
             },
-
-            ["Heavy Mace"] = new Dictionary<string, BreakArtInfo>
-            {
-                ["Bonecrusher Break Art"] = new BreakArtInfo { Address = Addresses.BreakBonecrusherUnlock, KillsRequired = 0x0014, Value = 0xC0 },
-                ["Quickshock Break Art"] = new BreakArtInfo { Address = Addresses.BreakQuickshockUnlock, KillsRequired = 0x005F, Value = 0xC0 },
-                ["Ignis Wheel Break Art"] = new BreakArtInfo { Address = Addresses.BreakIgnisWheelUnlock, KillsRequired = 0x00CD, Value = 0x80 },
-                ["Hex Flux Break Art"] = new BreakArtInfo { Address = Addresses.BreakHexFluxUnlock, KillsRequired = 0x0181, Value = 0xA0 }
-            },
-
             ["Polearm"] = new Dictionary<string, BreakArtInfo>
             {
-                ["Ruination Break Art"] = new BreakArtInfo { Address = Addresses.BreakRuinationPolearmUnlock, KillsRequired = 0x0023, Value = 0xC0 },
+                ["Ruination Break Art"] = new BreakArtInfo { Address = Addresses.BreakRuinationPolearmUnlock, KillsRequired = 0x0014, Value = 0xC0 },
                 ["Scythe Wind Break Art"] = new BreakArtInfo { Address = Addresses.BreakScytheWindUnlock, KillsRequired = 0x005F, Value = 0xC0 },
-                ["Giga Tempest Break Art"] = new BreakArtInfo { Address = Addresses.BreakGigaTempestUnlock, KillsRequired = 0x00DC, Value = 0x80 },
-                ["Spiral Scourge Break Art"] = new BreakArtInfo { Address = Addresses.BreakSpiralScourgeUnlock, KillsRequired = 0x0195, Value = 0xA0 }
+                ["Giga Tempest Break Art"] = new BreakArtInfo { Address = Addresses.BreakGigaTempestUnlock, KillsRequired = 0x00E6, Value = 0xC0 },
+                ["Spiral Scourge Break Art"] = new BreakArtInfo { Address = Addresses.BreakSpiralScourgeUnlock, KillsRequired = 0x01AE, Value = 0xE0 }
             },
-
-            ["Crossbow"] = new Dictionary<string, BreakArtInfo>
+            ["Axe & Mace"] = new Dictionary<string, BreakArtInfo>
             {
-                ["Brimstone Hail Break Art"] = new BreakArtInfo { Address = Addresses.BreakBrimstoneHailUnlock, KillsRequired = 0x0014, Value = 0xC0 },
-                ["Heaven's Scorn Break Art"] = new BreakArtInfo { Address = Addresses.BreakHeavensScornUnlock, KillsRequired = 0x005F, Value = 0xC0 },
-                ["Death Wail Break Art"] = new BreakArtInfo { Address = Addresses.BreakDeathWailUnlock, KillsRequired = 0x00E6, Value = 0xC0 },
-                ["Sanctus Flare Break Art"] = new BreakArtInfo { Address = Addresses.BreakSanctusFlareUnlock, KillsRequired = 0x01AE, Value = 0xE0 }
+                ["Mistral Edge Break Art"] = new BreakArtInfo { Address = Addresses.BreakMistralEdgeUnlock, KillsRequired = 0x0014, Value = 0xC0 },
+                ["Glacial Gale Break Art"] = new BreakArtInfo { Address = Addresses.BreakGlacialGaleUnlock, KillsRequired = 0x0064, Value = 0xC0 },
+                ["Killer Mantis Break Art"] = new BreakArtInfo { Address = Addresses.BreakKillerMantisUnlock, KillsRequired = 0x00F5, Value = 0x80 },
+                ["Black Nebula Break Art"] = new BreakArtInfo { Address = Addresses.BreakBlackNebulaUnlock, KillsRequired = 0x01D1, Value = 0xA0 }
             },
-
             ["Bare Hands"] = new Dictionary<string, BreakArtInfo>
             {
-                ["Lotus Palm Break Art"] = new BreakArtInfo { Address = Addresses.BreakLotusPalmUnlock, KillsRequired = 0x001E, Value = 0xC0 },
-                ["Vertigo Break Art"] = new BreakArtInfo { Address = Addresses.BreakVertigoUnlock, KillsRequired = 0x0069, Value = 0xC0 },
-                ["Vermillion Aura Break Art"] = new BreakArtInfo { Address = Addresses.BreakVermillionAuraUnlock, KillsRequired = 0x00FA, Value = 0x80 },
-                ["Retribution Break Art"] = new BreakArtInfo { Address = Addresses.BreakRetributionUnlock, KillsRequired = 0x01CC, Value = 0xA0 }
-            }
+                ["Lotus Palm Break Art"] = new BreakArtInfo { Address = Addresses.BreakLotusPalmUnlock, KillsRequired = 0x000A, Value = 0xC0 },
+                ["Vertigo Break Art"] = new BreakArtInfo { Address = Addresses.BreakVertigoUnlock, KillsRequired = 0x0041, Value = 0xC0 },
+                ["Vermillion Aura Break Art"] = new BreakArtInfo { Address = Addresses.BreakVermillionAuraUnlock, KillsRequired = 0x00AF, Value = 0x80 },
+                ["Retribution Break Art"] = new BreakArtInfo { Address = Addresses.BreakRetributionUnlock, KillsRequired = 0x0154, Value = 0xA0 }
+            },
+            ["Crossbow"] = new Dictionary<string, BreakArtInfo>
+            {
+                ["Brimstone Hail Break Art"] = new BreakArtInfo { Address = Addresses.BreakBrimstoneHailUnlock, KillsRequired = 0x001E, Value = 0xC0 },
+                ["Heaven's Scorn Break Art"] = new BreakArtInfo { Address = Addresses.BreakHeavensScornUnlock, KillsRequired = 0x0069, Value = 0xC0 },
+                ["Death Wail Break Art"] = new BreakArtInfo { Address = Addresses.BreakDeathWailUnlock, KillsRequired = 0x00FA, Value = 0x80 },
+                ["Sanctus Flare Break Art"] = new BreakArtInfo { Address = Addresses.BreakSanctusFlareUnlock, KillsRequired = 0x01CC, Value = 0xA0 }
+            },
+            ["Great Axe"] = new Dictionary<string, BreakArtInfo>
+            {
+                ["Bear Claw Break Art"] = new BreakArtInfo { Address = Addresses.BreakBearClawUnlock, KillsRequired = 0x000F, Value = 0xC0 },
+                ["Accursed Umbra Break Art"] = new BreakArtInfo { Address = Addresses.BreakAccursedUmbraUnlock, KillsRequired = 0x005A, Value = 0xC0 },
+                ["Iron Ripper Break Art"] = new BreakArtInfo { Address = Addresses.BreakIronRipperUnlock, KillsRequired = 0x00D7, Value = 0x80 },
+                ["Emetic Bomb Break Art"] = new BreakArtInfo { Address = Addresses.BreakEmeticBombUnlock, KillsRequired = 0x019A, Value = 0xA0 }
+            },
+            ["Heavy Mace"] = new Dictionary<string, BreakArtInfo>
+            {
+                ["Bonecrusher Break Art"] = new BreakArtInfo { Address = Addresses.BreakBonecrusherUnlock, KillsRequired = 0x0023, Value = 0xC0 },
+                ["Quickshock Break Art"] = new BreakArtInfo { Address = Addresses.BreakQuickshockUnlock, KillsRequired = 0x005F, Value = 0xC0 },
+                ["Ignis Wheel Break Art"] = new BreakArtInfo { Address = Addresses.BreakIgnisWheelUnlock, KillsRequired = 0x00DC, Value = 0x80 },
+                ["Hex Flux Break Art"] = new BreakArtInfo { Address = Addresses.BreakHexFluxUnlock, KillsRequired = 0x0195, Value = 0xA0 }
+            },
+            ["Dagger"] = new Dictionary<string, BreakArtInfo>
+            {
+                ["Whistle Sting Break Art"] = new BreakArtInfo { Address = Addresses.BreakWhistleStingUnlock, KillsRequired = 0x0014, Value = 0xC0 },
+                ["Shadowweave Break Art"] = new BreakArtInfo { Address = Addresses.BreakShadoweaveUnlock, KillsRequired = 0x005A, Value = 0xC0 },
+                ["Double Fang Break Art"] = new BreakArtInfo { Address = Addresses.BreakDoubleFangUnlock, KillsRequired = 0x00EB, Value = 0x80 },
+                ["Wyrm Scorn Break Art"] = new BreakArtInfo { Address = Addresses.BreakWyrmScornUnlock, KillsRequired = 0x01A9, Value = 0xA0 }
+            },
         };
 
         private static readonly Dictionary<string, BreakArtInfo> BreakArtsFlattenedDictionary =
