@@ -8,6 +8,8 @@ using Archipelago.Core.Util;
 using Archipelago.MultiClient.Net.Models;
 using Helpers;
 using Microsoft.Extensions.Configuration;
+using VagrantStoryArchipelago;
+using VagrantStoryArchipelago.Helpers;
 
 public class App
 {
@@ -205,10 +207,12 @@ public class App
             {
 
                 await archipelagoClient.ReceiveReady();
+
                 PlayerStateHelpers.OnGameLoaded(archipelagoClient);
                 PlayerStateHelpers.SetUpMapListener(_cancellationTokenSource, archipelagoClient);
                 PlayerStateHelpers.EnableTeleportOptions(archipelagoClient);
                 PlayerStateHelpers.SetVanillaBattleSkills();
+
                 MapHelper.StartMapProgressionListener();
                 MapHelper.StartMapChestListener(archipelagoClient.Options);
                 MapHelper.StartMapBossListener(archipelagoClient.Options);
@@ -231,6 +235,31 @@ public class App
                         _cancellationTokenSource.Cancel();
                         break;
                     }
+                    if (input?.Trim().ToLower() == "debug")
+                    {
+                        uint actorPointer = Memory.ReadUInt(Addresses.MapMonsterDataPointer);
+                        uint pointerRemoved = (actorPointer & 0x0FFFFFFF);
+                        var enemyCount = ActorHelpers.CountActors(pointerRemoved);
+                        ushort roomAndId = Memory.ReadUShort(Addresses.CurrentMapandRoomID);
+                        byte prog1 = Memory.ReadByte(Addresses.ProgressionState);
+                        byte prog2 = Memory.ReadByte(Addresses.ProgressionState2);
+
+                        Console.WriteLine($"--- DEBUG INFO ---");
+                        Console.WriteLine($"Current Room: 0x{roomAndId:X4}");
+                        Console.WriteLine($"Current Pointer Value: 0x{actorPointer:X8}");
+                        Console.WriteLine($"Current Pointer Value Cleaned: 0x{pointerRemoved:X8}");
+                        Console.WriteLine($"Current Enemies: {enemyCount}");
+                        Console.WriteLine($"Progression State 1: 0x{prog1:X2}");
+                        Console.WriteLine($"Progression State 2: 0x{prog2:X2}");
+                        var actors = ActorHelpers.GetAllActors(pointerRemoved);
+                        foreach (var actor in actors)
+                        {
+                            Console.WriteLine($"Actor NextPointer: 0x{actor.NextActorPointer:X8}");
+                            Console.WriteLine($"Actor HP: {actor.CurrentHP}/{actor.MaxHP}");
+                        }
+                        Console.WriteLine($"------------------");
+
+                    }
                     else if (input?.Trim().ToLower().Contains("hint") == true)
                     {
 
@@ -248,6 +277,23 @@ public class App
                             Console.WriteLine($"id: {item.ItemId} - {item.ItemName}");
                         }
 #endif
+                    }
+                    else if (input?.Trim().ToLower().Contains("warp") == true)
+                    {
+                        string raw = input.Trim().Substring(5).Trim();
+                        if (ushort.TryParse(raw, System.Globalization.NumberStyles.HexNumber, null, out ushort warpValue))
+                        {
+                            Memory.Write(Addresses.ScreenFadeFunction, 0xcf);
+                            Thread.Sleep(100);
+                            Memory.Write(Addresses.CurrentMapandRoomID, warpValue);
+                            Thread.Sleep(100);
+                            Memory.Write(Addresses.LoadRoomFunction, 0x01);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid warp value. Use: warp 1234");
+                        }
+
                     }
                     else if (!string.IsNullOrWhiteSpace(input))
                     {

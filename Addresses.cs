@@ -17,6 +17,9 @@ namespace VagrantStoryArchipelago
         public const uint CurrentMapID = 0x000f1a0;
         public const uint CurrentMapandRoomID = 0x000f1ab0;
 
+        public const uint ScreenFadeFunction = 0x000F1AA0;
+        public const uint LoadRoomFunction = 0x000F1A48;
+
         // Ashleys Stats And Abilities
         public const uint AshleyHealth = 0x0011fa58;
 
@@ -88,10 +91,12 @@ namespace VagrantStoryArchipelago
         // Main Menu 
 
         public const uint MainMenuMapAddress = 0x00060022; // 0xfd
+        public const uint MainMenuBreakArtsAddress = 0x00060023; // 0x1f
 
         // Pointer Locations
         public const uint MapBossDataPointer = 0x000f18e4;
         public const uint MapChestDataPointer = 0x000f1ca4;
+        public const uint MapMonsterDataPointer = 0x0011F9F0;
 
         // Risk Skills
         public const uint AbilityHeavyShotUnlock = 0x0004be61;
@@ -174,7 +179,7 @@ namespace VagrantStoryArchipelago
         public const uint GrimoireAvalancheMaxLevel = 0x0004d34d;
         public const uint GrimoireRadialSurgeMaxLevel = 0x0004d41d;
         public const uint GrimoireMeteorMaxLevel = 0x0004d4ed;
-        // Break Arts
+        // Break Art Unlocks
         public const uint BreakWhistleStingUnlock = 0x0004df49;
         public const uint BreakShadoweaveUnlock = 0x0004df7d;
         public const uint BreakDoubleFangUnlock = 0x0004dfb1;
@@ -216,6 +221,17 @@ namespace VagrantStoryArchipelago
         public const uint BreakVermillionAuraUnlock = 0x0004e701;
         public const uint BreakRetributionUnlock = 0x0004e735;
 
+        // Break Art Counters
+        public const uint BreakCounterUnarmed = 0x0006004c;
+        public const uint BreakCounterDaggers = 0x0006004e;
+        public const uint BreakCounterSwords = 0x00060050;
+        public const uint BreakCounterGreatSwords = 0x00060052;
+        public const uint BreakCounterAxeAndMaces = 0x00060054;
+        public const uint BreakCounterGreatAxes = 0x00060056;
+        public const uint BreakCounterStaffs = 0x00060058;
+        public const uint BreakCounterHeavyMaces = 0x0006005a;
+        public const uint BreakCounterPolearms = 0x0006005c;
+        public const uint BreakCounterCrossbows = 0x0006005e;
 
         // Regular Consumables
         public const uint InventoryItemSlot1 = 0x00060f68;
