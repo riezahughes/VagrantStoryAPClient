@@ -212,6 +212,8 @@ public class App
                 PlayerStateHelpers.SetUpMapListener(_cancellationTokenSource, archipelagoClient);
                 PlayerStateHelpers.EnableTeleportOptions(archipelagoClient);
                 PlayerStateHelpers.SetVanillaBattleSkills();
+                PlayerStateHelpers.BreakArtThresholdSetup(archipelagoClient);
+                PlayerStateHelpers.BreakArtListener(_cancellationTokenSource, archipelagoClient);
 
                 MapHelper.StartMapProgressionListener();
                 MapHelper.StartMapChestListener(archipelagoClient.Options);
@@ -235,7 +237,14 @@ public class App
                         _cancellationTokenSource.Cancel();
                         break;
                     }
-                    if (input?.Trim().ToLower() == "debug")
+                    else if (input?.Trim().ToLower() == "options")
+                    {
+                        foreach (var option in archipelagoClient.Options)
+                        {
+                            Console.WriteLine($"{option.Key}: {option.Value}");
+                        }
+                    }
+                    else if (input?.Trim().ToLower() == "debug")
                     {
                         uint actorPointer = Memory.ReadUInt(Addresses.MapMonsterDataPointer);
                         uint pointerRemoved = (actorPointer & 0x0FFFFFFF);

@@ -2,6 +2,7 @@ using Archipelago.Core;
 using Archipelago.Core.Util;
 using VagrantStoryArchipelago;
 using VagrantStoryArchipelago.Helpers;
+using static VagrantStoryArchipelago.Helpers.ItemHelpers;
 
 namespace Helpers
 {
@@ -18,6 +19,8 @@ namespace Helpers
         {
             //TODO: Player update logic
             ItemHelpers.ProcessPendingItems(client);
+            BreakArtResetState(client);
+            BreakArtSyncState(client);
         }
 
         public static void OnSaveMenuDetected(ArchipelagoClient client)
@@ -29,7 +32,6 @@ namespace Helpers
 
         public static void OnGameLoaded(ArchipelagoClient client)
         {
-            // Read the saved index from memory
             // Read the saved index from memory
             var index = Memory.ReadUShort(Addresses.ItemIndexStorage);
             App.ProcessedItemIndex = index;
@@ -147,6 +149,80 @@ namespace Helpers
                 },
                 value => value == 0);
         }
-    }
 
+        public static void BreakArtThresholdSetup(ArchipelagoClient client)
+        {
+
+            int breakArtChoice = Int32.Parse(client.Options?.GetValueOrDefault("break_art_unlock_option", "0").ToString());
+
+            if (breakArtChoice == 1)
+            {
+
+                int breakArtValue = Int32.Parse(client.Options?.GetValueOrDefault("break_art_counter", "0").ToString());
+
+                foreach (var weapon in ItemHelpers.BreakArtUnlockReference)
+                {
+                    int level = 1;
+                    foreach (var breakArt in weapon.Value)
+                    {
+                        ushort newThreshold = (ushort)(breakArtValue * level);
+                        Memory.Write(breakArt.Value.ThresholdAddress, newThreshold);
+                        level++;
+
+                        if (level >= 5)
+                        {
+                            level = 1;
+                        }
+                    }
+                }
+            }
+        }
+
+        public static void BreakArtResetState(ArchipelagoClient client)
+        {
+            foreach (var weapon in ItemHelpers.BreakArtUnlockReference)
+            {
+                int level = 1;
+                foreach (var breakArt in weapon.Value)
+                {
+                    Memory.WriteByte(breakArt.Value.Address, 0x40);
+                }
+            }
+        }
+
+        public static void BreakArtSyncState(ArchipelagoClient client)
+        {
+            var items = client.CurrentSession.Items.AllItemsReceived;
+
+            foreach (var item in items)
+
+                if (item.ItemName.Contains("Break Art", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (ItemHelpers.BreakArtsFlattenedDictionary.TryGetValue(item.ItemName, out BreakArtInfo breakArtInfo))
+                    {
+                        Memory.WriteByte(breakArtInfo.Address, breakArtInfo.Value);
+                    }
+                }
+        }
+
+        public static void BreakArtListener(CancellationTokenSource cts, ArchipelagoClient client)
+        {
+            if (cts.Token.IsCancellationRequested) return;
+            Console.WriteLine("Listening for Break Arts...");
+
+            Memory.MonitorAddressForAction<byte>(
+            Addresses.BreakMessageUnlock,
+            () =>
+            {
+                byte currentValue = Memory.ReadByte(Addresses.BreakMessageUnlock);
+                Console.WriteLine("I can see the change! Updating Break art State!");
+                BreakArtResetState(client);
+                BreakArtSyncState(client);
+                Thread.Sleep(5000);
+                BreakArtListener(cts, client);
+            },
+            value => value == 0x02);
+
+        }
+    }
 }

@@ -179,6 +179,10 @@ namespace VagrantStoryArchipelago
         public const uint GrimoireAvalancheMaxLevel = 0x0004d34d;
         public const uint GrimoireRadialSurgeMaxLevel = 0x0004d41d;
         public const uint GrimoireMeteorMaxLevel = 0x0004d4ed;
+
+        // Unlock message for break arts to listen to. 
+        public const uint BreakMessageUnlock = 0x000f4e73;
+
         // Break Art Unlocks
         public const uint BreakWhistleStingUnlock = 0x0004df49;
         public const uint BreakShadoweaveUnlock = 0x0004df7d;
@@ -232,6 +236,50 @@ namespace VagrantStoryArchipelago
         public const uint BreakCounterHeavyMaces = 0x0006005a;
         public const uint BreakCounterPolearms = 0x0006005c;
         public const uint BreakCounterCrossbows = 0x0006005e;
+
+        // Break Art Thresholds
+
+        // Unarmed
+        public const uint BreakArtThresholdUnarmed1 = 0x0004fde4;
+        public const uint BreakArtThresholdUnarmed2 = 0x0004fde6;
+        public const uint BreakArtThresholdUnarmed3 = 0x0004fde8;
+        public const uint BreakArtThresholdUnarmed4 = 0x0004fdea;
+        public const uint BreakArtThresholdDagger1 = 0x0004fdec;
+        public const uint BreakArtThresholdDagger2 = 0x0004fdee;
+        public const uint BreakArtThresholdDagger3 = 0x0004fdf0;
+        public const uint BreakArtThresholdDagger4 = 0x0004fdf2;
+        public const uint BreakArtThresholdSword1 = 0x0004fdf4;
+        public const uint BreakArtThresholdSword2 = 0x0004fdf6;
+        public const uint BreakArtThresholdSword3 = 0x0004fdf8;
+        public const uint BreakArtThresholdSword4 = 0x0004fdfa;
+        public const uint BreakArtThresholdGreatSword1 = 0x0004fdfc;
+        public const uint BreakArtThresholdGreatSword2 = 0x0004fdfe;
+        public const uint BreakArtThresholdGreatSword3 = 0x0004fe00;
+        public const uint BreakArtThresholdGreatSword4 = 0x0004fe02;
+        public const uint BreakArtThresholdAxeMace1 = 0x0004fe04;
+        public const uint BreakArtThresholdAxeMace2 = 0x0004fe06;
+        public const uint BreakArtThresholdAxeMace3 = 0x0004fe08;
+        public const uint BreakArtThresholdAxeMace4 = 0x0004fe0a;
+        public const uint BreakArtThresholdGreatAxe1 = 0x0004fe0c;
+        public const uint BreakArtThresholdGreatAxe2 = 0x0004fe0e;
+        public const uint BreakArtThresholdGreatAxe3 = 0x0004fe10;
+        public const uint BreakArtThresholdGreatAxe4 = 0x0004fe12;
+        public const uint BreakArtThresholdStaff1 = 0x0004fe14;
+        public const uint BreakArtThresholdStaff2 = 0x0004fe16;
+        public const uint BreakArtThresholdStaff3 = 0x0004fe18;
+        public const uint BreakArtThresholdStaff4 = 0x0004fe1a;
+        public const uint BreakArtThresholdHeavyMace1 = 0x0004fe1c;
+        public const uint BreakArtThresholdHeavyMace2 = 0x0004fe1e;
+        public const uint BreakArtThresholdHeavyMace3 = 0x0004fe20;
+        public const uint BreakArtThresholdHeavyMace4 = 0x0004fe22;
+        public const uint BreakArtThresholdPolearm1 = 0x0004fe24;
+        public const uint BreakArtThresholdPolearm2 = 0x0004fe26;
+        public const uint BreakArtThresholdPolearm3 = 0x0004fe28;
+        public const uint BreakArtThresholdPolearm4 = 0x0004fe2a;
+        public const uint BreakArtThresholdCrossbow1 = 0x0004fe2c;
+        public const uint BreakArtThresholdCrossbow2 = 0x0004fe2e;
+        public const uint BreakArtThresholdCrossbow3 = 0x0004fe30;
+        public const uint BreakArtThresholdCrossbow4 = 0x0004fe32;
 
         // Regular Consumables
         public const uint InventoryItemSlot1 = 0x00060f68;
