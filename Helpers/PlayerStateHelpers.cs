@@ -150,6 +150,8 @@ namespace Helpers
                 value => value == 0);
         }
 
+        // BREAK ART SETUPS
+
         public static void BreakArtThresholdSetup(ArchipelagoClient client)
         {
 
@@ -208,21 +210,145 @@ namespace Helpers
         public static void BreakArtListener(CancellationTokenSource cts, ArchipelagoClient client)
         {
             if (cts.Token.IsCancellationRequested) return;
+#if DEBUG
             Console.WriteLine("Listening for Break Arts...");
+#endif
 
             Memory.MonitorAddressForAction<byte>(
             Addresses.BreakMessageUnlock,
             () =>
             {
+
                 byte currentValue = Memory.ReadByte(Addresses.BreakMessageUnlock);
-                Console.WriteLine("I can see the change! Updating Break art State!");
-                BreakArtResetState(client);
-                BreakArtSyncState(client);
-                Thread.Sleep(5000);
+                if (currentValue == 0x02)
+                {
+#if DEBUG
+                    Console.WriteLine("I can see the change! Updating Break art State!");
+#endif
+                    BreakArtResetState(client);
+                    BreakArtSyncState(client);
+                }
+                Thread.Sleep(300);
                 BreakArtListener(cts, client);
             },
             value => value == 0x02);
 
         }
+
+
+        // CHAIN ABILITY SETUPS
+
+
+        public static void ChainAbilityThresholdSetup(ArchipelagoClient client)
+        {
+
+            int chainAbilityChoice = Int32.Parse(client.Options?.GetValueOrDefault("chain_skill_unlock_option", "0").ToString());
+
+            if (chainAbilityChoice == 1)
+            {
+
+                int chainAbilityValue = Int32.Parse(client.Options?.GetValueOrDefault("chain_skill_counter", "0").ToString());
+                int count = 1;
+                foreach (var abilityThreshold in ItemHelpers.ChainAbilityThresholds.OrderBy(x => x.Key))
+                {
+                    ushort newThreshold = (ushort)(chainAbilityValue * count);
+                    Memory.Write(abilityThreshold.Value, newThreshold);
+                    count++;
+                }
+            }
+        }
+
+        public static void ChainAbilityResetState(ArchipelagoClient client)
+        {
+            var chainAbilitySkip = new HashSet<string>
+            {
+                "Heavy Shot Chain Ability",
+                "Gain Life Chain Ability",
+                "Temper Chain Ability"
+            };
+
+            var defenceAbilitySkip = new HashSet<string>
+            {
+                "Ward Defence Ability",
+                "Reflect Damage Defence Ability",
+                "Impact Guard Defence Ability"
+            };
+
+            foreach (var ability in ItemHelpers.ChainAbilityUnlockReference)
+            {
+                if (chainAbilitySkip.Contains(ability.Key))
+                {
+                    Memory.WriteByte(ability.Value, 0x80);
+                }
+                else
+                {
+                    Memory.WriteByte(ability.Value, 0x00);
+                };
+            }
+
+            foreach (var ability in ItemHelpers.DefenceAbilityUnlockReference)
+            {
+                if (defenceAbilitySkip.Contains(ability.Key))
+                {
+                    Memory.WriteByte(ability.Value, 0x90);
+                }
+                else
+                {
+                    Memory.WriteByte(ability.Value, 0x00);
+                };
+            }
+        }
+
+        public static void ChainAbilitySyncState(ArchipelagoClient client)
+        {
+            var items = client.CurrentSession.Items.AllItemsReceived;
+
+            foreach (var item in items)
+            {
+                if (item.ItemName.Contains("Chain Ability", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (ItemHelpers.ChainAbilityUnlockReference.TryGetValue(item.ItemName, out uint chainUnlockReference))
+                    {
+                        Memory.WriteByte(chainUnlockReference, 0x80);
+                    }
+                }
+
+                if (item.ItemName.Contains("Defence Ability", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (ItemHelpers.DefenceAbilityUnlockReference.TryGetValue(item.ItemName, out uint defenceUnlockReference))
+                    {
+                        Memory.WriteByte(defenceUnlockReference, 0x90);
+                    }
+                }
+            }
+        }
+
+        public static void ChainAbilityListener(CancellationTokenSource cts, ArchipelagoClient client)
+        {
+            if (cts.Token.IsCancellationRequested) return;
+#if DEBUG
+            Console.WriteLine("Listening for Chain Ability Updates...");
+#endif
+            Memory.MonitorAddressForAction<byte>(
+            Addresses.BreakMessageUnlock,
+            () =>
+            {
+                byte currentValue = Memory.ReadByte(Addresses.BreakMessageUnlock);
+                if (currentValue == 0x04 || currentValue == 0x05)
+                {
+#if DEBUG
+                    Console.WriteLine("I can see the change! Updating Chain Ability State!");
+#endif
+                    ChainAbilityResetState(client);
+                    ChainAbilitySyncState(client);
+                }
+                Thread.Sleep(300);
+                ChainAbilityListener(cts, client);
+            },
+            value => value == 0x05);
+
+        }
+
+
     }
 }

@@ -98,7 +98,13 @@ namespace VagrantStoryArchipelago
         public const uint MapChestDataPointer = 0x000f1ca4;
         public const uint MapMonsterDataPointer = 0x0011F9F0;
 
-        // Risk Skills
+        // Unlock chain message for listener
+
+        public const uint ChainAnimationUnlockMenu = 0x0005d2e0; // animation
+        public const uint ChainMessageUnlock = 0x0005d2e0; // animation
+
+        // Chain Ability Unlocks
+
         public const uint AbilityHeavyShotUnlock = 0x0004be61;
         public const uint AbilityGainLifeUnlock = 0x0004be95;
         public const uint AbilityMindAssaultUnlock = 0x0004bec9;
@@ -127,6 +133,32 @@ namespace VagrantStoryArchipelago
         public const uint AbilityShadowGuardUnlock = 0x0004c445;
         public const uint AbilityDemonscaleUnlock = 0x0004c479;
         public const uint AbilityPhantomShieldUnlock = 0x0004c4ad;
+
+        // Chain Thresholds
+
+        public const uint ChainAbilityThreshold1 = 0x0004fe5c;
+        public const uint ChainAbilityThreshold2 = 0x0004fe5e;
+        public const uint ChainAbilityThreshold3 = 0x0004fe60;
+        public const uint ChainAbilityThreshold4 = 0x0004fe62;
+        public const uint ChainAbilityThreshold5 = 0x0004fe64;
+        public const uint ChainAbilityThreshold6 = 0x0004fe66;
+        public const uint ChainAbilityThreshold7 = 0x0004fe68;
+        public const uint ChainAbilityThreshold8 = 0x0004fe6a;
+        public const uint ChainAbilityThreshold9 = 0x0004fe6c;
+        public const uint ChainAbilityThreshold10 = 0x0004fe6e;
+        public const uint ChainAbilityThreshold11 = 0x0004fe70;
+        public const uint ChainAbilityThreshold12 = 0x0004fe72;
+        public const uint ChainAbilityThreshold13 = 0x0004fe74;
+        public const uint ChainAbilityThreshold14 = 0x0004fe76;
+        public const uint ChainAbilityThreshold15 = 0x0004fe78;
+        public const uint ChainAbilityThreshold16 = 0x0004fe7a;
+        public const uint ChainAbilityThreshold17 = 0x0004fe7c;
+        public const uint ChainAbilityThreshold18 = 0x0004fe7e;
+        public const uint ChainAbilityThreshold19 = 0x0004fe80;
+        public const uint ChainAbilityThreshold20 = 0x0004fe82;
+        public const uint ChainAbilityThreshold21 = 0x0004fe84;
+        public const uint ChainAbilityThreshold22 = 0x0004fe86;
+
         // Regular Grimoires
         public const uint GrimoireDegenerateUnlock = 0x0004c4e1;
         public const uint GrimoirePsychodrainUnlock = 0x0004c515;

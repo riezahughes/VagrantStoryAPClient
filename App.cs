@@ -214,6 +214,8 @@ public class App
                 PlayerStateHelpers.SetVanillaBattleSkills();
                 PlayerStateHelpers.BreakArtThresholdSetup(archipelagoClient);
                 PlayerStateHelpers.BreakArtListener(_cancellationTokenSource, archipelagoClient);
+                PlayerStateHelpers.ChainAbilityThresholdSetup(archipelagoClient);
+                PlayerStateHelpers.ChainAbilityListener(_cancellationTokenSource, archipelagoClient);
 
                 MapHelper.StartMapProgressionListener();
                 MapHelper.StartMapChestListener(archipelagoClient.Options);

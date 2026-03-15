@@ -823,6 +823,32 @@ namespace VagrantStoryArchipelago.Helpers
             [15] = Addresses.InventoryGripSlot16,
         };
 
+        public static readonly Dictionary<int, uint> ChainAbilityThresholds = new Dictionary<int, uint>
+        {
+            [1] = Addresses.ChainAbilityThreshold1,
+            [2] = Addresses.ChainAbilityThreshold2,
+            [3] = Addresses.ChainAbilityThreshold3,
+            [4] = Addresses.ChainAbilityThreshold4,
+            [5] = Addresses.ChainAbilityThreshold5,
+            [6] = Addresses.ChainAbilityThreshold6,
+            [7] = Addresses.ChainAbilityThreshold7,
+            [8] = Addresses.ChainAbilityThreshold8,
+            [9] = Addresses.ChainAbilityThreshold9,
+            [10] = Addresses.ChainAbilityThreshold10,
+            [11] = Addresses.ChainAbilityThreshold11,
+            [12] = Addresses.ChainAbilityThreshold12,
+            [13] = Addresses.ChainAbilityThreshold13,
+            [14] = Addresses.ChainAbilityThreshold14,
+            [15] = Addresses.ChainAbilityThreshold15,
+            [16] = Addresses.ChainAbilityThreshold16,
+            [17] = Addresses.ChainAbilityThreshold17,
+            [18] = Addresses.ChainAbilityThreshold18,
+            [19] = Addresses.ChainAbilityThreshold19,
+            [20] = Addresses.ChainAbilityThreshold20,
+            [21] = Addresses.ChainAbilityThreshold21,
+            [22] = Addresses.ChainAbilityThreshold22,
+        };
+
         public static Dictionary<string, uint> ChainAbilityUnlockReference = new Dictionary<string, uint>()
         {
             ["Crimson Pain Chain Ability"] = Addresses.AbilityCrimsonPainUnlock,
