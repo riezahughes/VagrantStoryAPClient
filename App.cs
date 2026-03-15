@@ -249,20 +249,29 @@ public class App
                     else if (input?.Trim().ToLower() == "debug")
                     {
                         uint actorPointer = Memory.ReadUInt(Addresses.MapMonsterDataPointer);
-                        uint pointerRemoved = (actorPointer & 0x0FFFFFFF);
-                        var enemyCount = ActorHelpers.CountActors(pointerRemoved);
+                        uint actorPointerRemoved = (actorPointer & 0x0FFFFFFF);
+                        var enemyCount = ActorHelpers.CountActors(actorPointerRemoved);
+
+                        uint trapPointer = Memory.ReadUInt(Addresses.RoomTilesPointer);
+                        uint trapPointerRemoved = (trapPointer & 0x0FFFFFFF);
+                        var trapCount = FloorTrapHelpers.CountTraps(trapPointerRemoved + 0x08);
+
                         ushort roomAndId = Memory.ReadUShort(Addresses.CurrentMapandRoomID);
                         byte prog1 = Memory.ReadByte(Addresses.ProgressionState);
                         byte prog2 = Memory.ReadByte(Addresses.ProgressionState2);
 
                         Console.WriteLine($"--- DEBUG INFO ---");
                         Console.WriteLine($"Current Room: 0x{roomAndId:X4}");
-                        Console.WriteLine($"Current Pointer Value: 0x{actorPointer:X8}");
-                        Console.WriteLine($"Current Pointer Value Cleaned: 0x{pointerRemoved:X8}");
+                        Console.WriteLine($"Current Actor Pointer Value: 0x{actorPointer:X8}");
+                        Console.WriteLine($"Current Actor Pointer Value Cleaned: 0x{actorPointerRemoved:X8}");
                         Console.WriteLine($"Current Enemies: {enemyCount}");
+                        Console.WriteLine($"Current Trap Pointer Value: 0x{trapPointer:X8}");
+                        Console.WriteLine($"Current Trap Pointer Value Cleaned: 0x{trapPointerRemoved:X8}");
+                        Console.WriteLine($"Current Traps in Rooom: {trapCount}");
                         Console.WriteLine($"Progression State 1: 0x{prog1:X2}");
                         Console.WriteLine($"Progression State 2: 0x{prog2:X2}");
-                        var actors = ActorHelpers.GetAllActors(pointerRemoved);
+
+                        var actors = ActorHelpers.GetAllActors(actorPointerRemoved);
                         foreach (var actor in actors)
                         {
                             Console.WriteLine($"Actor NextPointer: 0x{actor.NextActorPointer:X8}");

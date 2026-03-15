@@ -35,6 +35,9 @@ namespace VagrantStoryArchipelago
         public const uint CurrentBP = 0x00060062; // byte
         public const uint TotalRiskAbilitiesEarned = 0x00060060; // byte
 
+        // Unlock message for break arts to listen to. 
+        public const uint MenuUnlockState = 0x000f4e73;
+
         // Teleport Zone Toggles
 
         public const uint TeleportWorkerBreakroom = 0x000616EE;
@@ -97,11 +100,11 @@ namespace VagrantStoryArchipelago
         public const uint MapBossDataPointer = 0x000f18e4;
         public const uint MapChestDataPointer = 0x000f1ca4;
         public const uint MapMonsterDataPointer = 0x0011F9F0;
+        public const uint RoomTilesPointer = 0x000f1c7c;
 
         // Unlock chain message for listener
 
         public const uint ChainAnimationUnlockMenu = 0x0005d2e0; // animation
-        public const uint ChainMessageUnlock = 0x0005d2e0; // animation
 
         // Chain Ability Unlocks
 
@@ -211,9 +214,6 @@ namespace VagrantStoryArchipelago
         public const uint GrimoireAvalancheMaxLevel = 0x0004d34d;
         public const uint GrimoireRadialSurgeMaxLevel = 0x0004d41d;
         public const uint GrimoireMeteorMaxLevel = 0x0004d4ed;
-
-        // Unlock message for break arts to listen to. 
-        public const uint BreakMessageUnlock = 0x000f4e73;
 
         // Break Art Unlocks
         public const uint BreakWhistleStingUnlock = 0x0004df49;

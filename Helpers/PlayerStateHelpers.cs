@@ -215,11 +215,11 @@ namespace Helpers
 #endif
 
             Memory.MonitorAddressForAction<byte>(
-            Addresses.BreakMessageUnlock,
+            Addresses.MenuUnlockState,
             () =>
             {
 
-                byte currentValue = Memory.ReadByte(Addresses.BreakMessageUnlock);
+                byte currentValue = Memory.ReadByte(Addresses.MenuUnlockState);
                 if (currentValue == 0x02)
                 {
 #if DEBUG
@@ -330,10 +330,10 @@ namespace Helpers
             Console.WriteLine("Listening for Chain Ability Updates...");
 #endif
             Memory.MonitorAddressForAction<byte>(
-            Addresses.BreakMessageUnlock,
+            Addresses.MenuUnlockState,
             () =>
             {
-                byte currentValue = Memory.ReadByte(Addresses.BreakMessageUnlock);
+                byte currentValue = Memory.ReadByte(Addresses.MenuUnlockState);
                 if (currentValue == 0x04 || currentValue == 0x05)
                 {
 #if DEBUG
