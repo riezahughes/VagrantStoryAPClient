@@ -14,8 +14,9 @@ namespace Helpers
         public static Boolean isInTheGame()
         {
             ulong currentGameStatus = Memory.ReadUInt(Addresses.InGameCheck);
+            ulong cutaway = Memory.ReadUInt(Addresses.ScreenFadeFunction);
 
-            if (currentGameStatus == 0x01)
+            if (currentGameStatus == 0x01 && cutaway == 0x00)
             {
                 return true;
             }

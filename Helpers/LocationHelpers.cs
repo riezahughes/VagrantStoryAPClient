@@ -1793,7 +1793,7 @@ namespace Helpers
         {
             List<GenericLocationData> aStormOfArrowsLocations = new List<GenericLocationData>() {
                 new GenericLocationData("KEP - A Storm of Arrows - Kalmia Sigil Unlock", Addresses.KEP_AStormOfArrowsKalmiaSigilUnlock, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("KEP - A Storm of Arrows - Columbine Sigil Unlock", Addresses.KEP_AStormOfArrowsColumbineSigilUnlock, "0", "160", LocationCheckType.Byte),
+                    new GenericLocationData("KEP - A Storm of Arrows - Columbine Sigil Unlock", Addresses.KEP_AStormOfArrowsColombineSigilUnlock, "0", "160", LocationCheckType.Byte),
                     new GenericLocationData("KEP - A Storm of Arrows Entered", Addresses.KEP_AStormOfArrowsEntered, "0", "797", LocationCheckType.UShort)
             };
             return aStormOfArrowsLocations;
@@ -3821,8 +3821,8 @@ namespace Helpers
         private static List<GenericLocationData> GetTheBeastsDomainData()
         {
             List<GenericLocationData> theBeastsDomainLocations = new List<GenericLocationData>() {
-                new GenericLocationData("CAT - The Beast's Domain - Lizardman Boss - Grimoire Antidote", Addresses.CAT_TheBeastsDomainLizardmanBossDefeat, "14", "0", LocationCheckType.UShort),
-                new GenericLocationData("CAT - The Beast's Domain - Lizardman Boss", Addresses.CAT_TheBeastsDomainLizardmanBossDefeat, "14", "0", LocationCheckType.UShort), // MISSING
+                new GenericLocationData("CAT - The Beast's Domain - Lizardman Boss - Grimoire Antidote", Addresses.CAT_TheBeastsDomainLizardman1BossDefeat, "14", "0", LocationCheckType.UShort),
+                new GenericLocationData("CAT - The Beast's Domain - Lizardman Boss", Addresses.CAT_TheBeastsDomainLizardman1BossDefeat, "14", "0", LocationCheckType.UShort), // MISSING
                 new GenericLocationData("CAT - The Beast's Domain Entered", Addresses.CAT_TheBeastsDomainEntered, "0", "14", LocationCheckType.UShort)
             };
             return theBeastsDomainLocations;

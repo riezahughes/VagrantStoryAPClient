@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Silk.NET.OpenGL;
+﻿using Archipelago.Core.Util;
+using Helpers;
 using Spectre.Console;
 
 namespace VagrantStoryArchipelago.Helpers
@@ -12,7 +8,7 @@ namespace VagrantStoryArchipelago.Helpers
     {
         public static Layout CreateGridLayout()
         {
- 
+
             var layout = new Layout("Root")
                 .SplitColumns(
                     new Layout("Left").Ratio(1),
@@ -41,11 +37,52 @@ namespace VagrantStoryArchipelago.Helpers
 
             return layout;
         }
-        public static void AddMessageToLeftPanel(Layout layout, List<Markup>currentMessages, string newMessage){
+        public static void AddMessageToLeftPanel(Layout layout, List<Markup> currentMessages, string newMessage)
+        {
 
             currentMessages.Add(new Markup($"\n[bold yellow]{newMessage}[/]"));
             layout["Left"].Update(new Panel(new Rows(currentMessages)).Expand());
             //AnsiConsole.Write(layout);
+        }
+
+        public static void DebugInformation()
+        {
+            uint actorPointer = Memory.ReadUInt(Addresses.MapMonsterDataPointer);
+            uint actorPointerRemoved = (actorPointer & 0x0FFFFFFF);
+            var enemyCount = ActorHelpers.CountActors(actorPointerRemoved);
+
+            uint trapPointer = Memory.ReadUInt(Addresses.RoomTilesPointer);
+            uint trapPointerRemoved = (trapPointer & 0x0FFFFFFF);
+            var trapCount = trapPointer == 0x0 ? 0 : FloorTrapHelpers.CountTraps(trapPointerRemoved + 0x08);
+
+            uint bossPointer = Memory.ReadUInt(Addresses.MapBossDataPointer);
+            uint bossPointerRemoved = (bossPointer & 0x0FFFFFFF);
+
+            ushort roomAndId = Memory.ReadUShort(Addresses.CurrentMapandRoomID);
+            byte prog1 = Memory.ReadByte(Addresses.ProgressionState);
+            byte prog2 = Memory.ReadByte(Addresses.ProgressionState2);
+
+            Console.WriteLine($"--- DEBUG INFO ---");
+            Console.WriteLine($"Current Room: 0x{roomAndId:X4}");
+            Console.WriteLine($"Current Room Name: {MapHelper.HexToRoomDictionary[roomAndId]}");
+            Console.WriteLine($"Current Actor Pointer Value: 0x{actorPointer:X8}");
+            Console.WriteLine($"Current Actor Pointer Value Cleaned: 0x{actorPointerRemoved:X8}");
+            Console.WriteLine($"Current Boss Pointer: 0x{bossPointerRemoved:X8}");
+            Console.WriteLine($"Current Enemies: {enemyCount}");
+            Console.WriteLine($"Current Trap Pointer Value: 0x{trapPointer:X8}");
+            Console.WriteLine($"Current Trap Pointer Value Cleaned: 0x{trapPointerRemoved:X8}");
+            Console.WriteLine($"Current Traps in Rooom: {trapCount}");
+            Console.WriteLine($"Progression State 1: 0x{prog1:X2}");
+            Console.WriteLine($"Progression  State 2: 0x{prog2:X2}");
+
+
+            var actors = ActorHelpers.GetAllActors(actorPointerRemoved);
+            foreach (var actor in actors)
+            {
+                Console.WriteLine($"Actor NextPointer: 0x{actor.NextActorPointer:X8}");
+                Console.WriteLine($"Actor HP: {actor.CurrentHP}/{actor.MaxHP}");
+            }
+            Console.WriteLine($"------------------");
         }
     }
 }

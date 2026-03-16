@@ -1403,7 +1403,7 @@ namespace VagrantStoryArchipelago.Helpers
             { 0xDD, "Acacia Sigil" },
             { 0xDE, "Palm Sigil" },
             { 0xDF, "Kalmia Sigil" },
-            { 0xE0, "Columbine Sigil" },
+            { 0xE0, "Colombine Sigil" },
             { 0xE1, "Anemone Sigil" },
             { 0xE2, "Verbena Sigil" },
             { 0xE3, "Schirra Sigil" },

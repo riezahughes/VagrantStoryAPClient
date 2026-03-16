@@ -7,7 +7,7 @@ namespace VagrantStoryArchipelago.Models.MapData
         [MemoryOffset(0x00)]
         public byte NextTileAvailable { get; set; }
         [MemoryOffset(0x01)]
-        public byte UnknownTileState2 { get; set; }
+        public byte TypeOfEntity { get; set; }
         [MemoryOffset(0x02)]
         public byte TileTriggered { get; set; }
         [MemoryOffset(0x03)]

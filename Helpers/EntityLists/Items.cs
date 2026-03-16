@@ -126,7 +126,7 @@ namespace VagrantStoryArchipelago.Data
             ["Acacia Sigil"] = new InventoryItemData("Acacia Sigil", 0xDD, 0x01, 1, 0x00),
             ["Palm Sigil"] = new InventoryItemData("Palm Sigil", 0xDE, 0x01, 1, 0x00),
             ["Kalmia Sigil"] = new InventoryItemData("Kalmia Sigil", 0xDF, 0x01, 1, 0x00),
-            ["Columbine Sigil"] = new InventoryItemData("Colombine Sigil", 0xE0, 0x01, 1, 0x00),
+            ["Colombine Sigil"] = new InventoryItemData("Colombine Sigil", 0xE0, 0x01, 1, 0x00),
             ["Anemone Sigil"] = new InventoryItemData("Anemone Sigil", 0xE1, 0x01, 1, 0x00),
             ["Verbena Sigil"] = new InventoryItemData("Verbena Sigil", 0xE2, 0x01, 1, 0x00),
             ["Schirra Sigil"] = new InventoryItemData("Schirra Sigil", 0xE3, 0x01, 1, 0x00),

@@ -916,7 +916,7 @@ namespace VagrantStoryArchipelago
 
         // A Storm of Arrows
         public const uint KEP_AStormOfArrowsKalmiaSigilUnlock = 0x0;
-        public const uint KEP_AStormOfArrowsColumbineSigilUnlock = 0x0;
+        public const uint KEP_AStormOfArrowsColombineSigilUnlock = 0x0;
         public const uint KEP_AStormOfArrowsEntered = 0x000f1ab0;
 
         // Time Trial (Minotaur)
@@ -1757,7 +1757,8 @@ namespace VagrantStoryArchipelago
         public const uint CAT_HallwayofHeroesEntered = 0x000f1ab0;
 
         // The Beasts Domain
-        public const uint CAT_TheBeastsDomainLizardmanBossDefeat = 0x0017e9d8;
+        public const uint CAT_TheBeastsDomainLizardman1BossDefeat = 0x0017e9d8;
+        public const uint CAT_TheBestsDomainLizardman2BossDefeat = 0x0017e658; // NEEDS ADDED TO LOCATIONS
         public const uint CAT_TheBeastsDomainEntered = 0x000f1ab0;
 
         // Dreamers Entrance

@@ -13,6 +13,12 @@ namespace Helpers
             while (true)
             {
                 MapFloorTrapData trap = Memory.ReadObject<MapFloorTrapData>(currentAddress);
+
+                if (trap.TypeOfEntity == 0xff)
+                {
+                    break;
+                }
+
                 traps.Add(trap);
 
                 currentAddress += 0x0c;

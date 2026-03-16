@@ -28,5 +28,7 @@ namespace VagrantStoryArchipelago.Helpers
         }
 
         public static int CountActors(uint pointerAddress) => GetAllActors(pointerAddress).Count;
+
+        //public static Dictionary<>
     }
 }
