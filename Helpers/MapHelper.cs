@@ -15,7 +15,7 @@ public class MapHelper
 
     private static ushort _lastRoomValue = 0xFFFF; // Store last known map ID
     private static ushort _lastMapIdChest = 0xFFFF; // Store last known map ID
-    private static uint _lastPointerValueBoss = 0xFFFFFFFF; // Store last known map ID
+    private static uint _lastPointerValueBoss = 0xFFFFFFFF; // Store last known boss pointer
     private static bool _battleAbilitiesSet = false;
 
 
@@ -29,7 +29,6 @@ public class MapHelper
                 if (APHelpers.isInTheGame() && APHelpers.isProcessingItems() == false)
                 {
                     Console.WriteLine("Progression State Updated");
-
                     SetBossProgression(mapId);
                 }
                 _lastRoomValue = mapId;
@@ -685,6 +684,7 @@ public class MapHelper
         { 0x000C, new(0x0008, 0x00) }, // minotaur
         { 0x000B, new(0x000c, 0x00) }, // dullahan
         { 0x0320, new(0x0020, null) }, // Duane
+        { 0x1532, new(0x0020, null) }, // Ogre didn't trigger, did this in the room previous to it
         { 0x1632, new(0x0022, null) }, // Ogre
         { 0x1828, new(0x002c, 0x00) }, // Father and Dark Crusader
         // Rozenrantz goes here

@@ -16,7 +16,7 @@ namespace Helpers
             ulong currentGameStatus = Memory.ReadUInt(Addresses.InGameCheck);
             ulong cutaway = Memory.ReadUInt(Addresses.ScreenFadeFunction);
 
-            if (currentGameStatus == 0x01 && cutaway == 0x00)
+            if (currentGameStatus >= 0x01 && currentGameStatus <= 0x0f)
             {
                 return true;
             }
