@@ -821,6 +821,64 @@ namespace Helpers
                                 CheckValue = loc.Check
 
                             });
+                            conditionalChoice.Add(new Location()
+                            {
+                                Id = -1,
+                                Name = "Movement Check",
+                                Address = Addresses.InGameCheck,
+                                CheckType = LocationCheckType.Byte,
+                                CompareType = LocationCheckCompareType.Match,
+                                CheckValue = "1"
+
+                            });
+
+                            conditionalChoice.Add(new Location()
+                            {
+                                Id = -1,
+                                Name = "Screen Fade Check",
+                                Address = Addresses.ScreenFadeFunction,
+                                CheckType = LocationCheckType.Byte,
+                                CompareType = LocationCheckCompareType.Match,
+                                CheckValue = "0"
+
+                            });
+
+                            CompositeLocation location = new CompositeLocation()
+                            {
+                                Name = loc.Name,
+                                Id = locationId,
+                                CheckType = LocationCheckType.AND,
+                                Conditions = conditionalChoice,
+                            };
+
+                            locations.Add(location);
+                            location_index++;
+                            continue;
+                        }
+                        if (loc.Name.Contains("Floor Trap"))
+                        {
+                            List<ILocation> conditionalChoice = new List<ILocation>();
+
+                            conditionalChoice.Add(new Location()
+                            {
+                                Id = -1,
+                                Name = "Level Check",
+                                Address = Addresses.CurrentMapandRoomID,
+                                CheckType = LocationCheckType.UShort,
+                                CompareType = LocationCheckCompareType.Match,
+                                CheckValue = loc.LevelId
+                            });
+
+                            conditionalChoice.Add(new Location()
+                            {
+                                Id = -1,
+                                Name = "Trap Trigger Check",
+                                Address = loc.Address,
+                                CheckType = loc.CheckType,
+                                CompareType = LocationCheckCompareType.Match,
+                                CheckValue = loc.Check
+
+                            });
 
                             CompositeLocation location = new CompositeLocation()
                             {
@@ -1060,7 +1118,7 @@ namespace Helpers
         private static List<GenericLocationData> GetSmokebarrelStairData()
         {
             List<GenericLocationData> smokebarrelStairLocations = new List<GenericLocationData>() {
-                new GenericLocationData("WC - Smokebarrel Stair - Gust Panel Floor Trap", Addresses.WC_SmokebarrelStairHealPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("WC - Smokebarrel Stair - Gust Floor Trap", Addresses.WC_SmokebarrelStairHealPanelFloorTrap, "1033", "32769", LocationCheckType.UShort),
                     new GenericLocationData("WC - Smokebarrel Stair - Chamomile Sigil Unlock", Addresses.WC_SmokebarrelStairChamomileSigilUnlock, "0", "160", LocationCheckType.Byte),
                     new GenericLocationData("WC - Smokebarrel Stair Entered", Addresses.WC_SmokebarrelStairEntered, "0", "1033", LocationCheckType.UShort)
             };
@@ -1078,7 +1136,7 @@ namespace Helpers
         private static List<GenericLocationData> GetWineMagnatesChambersData()
         {
             List<GenericLocationData> wineMagnatesChambersLocations = new List<GenericLocationData>() {
-                new GenericLocationData("WC - Wine Magnate's Chambers - Gust Floor Trap", Addresses.WC_WineMagnatesChambersGustFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("WC - Wine Magnate's Chambers - Gust Floor Trap", Addresses.WC_WineMagnatesChambersGustFloorTrap, "1545", "32769", LocationCheckType.UShort),
                     new GenericLocationData("WC - Wine Magnate's Chambers Entered", Addresses.WC_WineMagnatesChambersEntered, "0", "1545", LocationCheckType.UShort)
             };
             return wineMagnatesChambersLocations;
@@ -1128,8 +1186,7 @@ namespace Helpers
         private static List<GenericLocationData> GetRoomOfRottenGrapesData()
         {
             List<GenericLocationData> roomOfRottenGrapesLocations = new List<GenericLocationData>() {
-                new GenericLocationData("WC - Room of Rotten Grapes - Heal Panel Floor Trap", Addresses.WC_RoomOfRottenGrapesHealPanelFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("WC - Room of Rotten Grapes - Curse Panel Floor Trap", Addresses.WC_RoomOfRottenGrapesCursePanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("WC - Room of Rotten Grapes - Heal Floor Trap", Addresses.WC_RoomOfRottenGrapesHealPanelFloorTrap, "3081", "32769", LocationCheckType.UShort),
                     new GenericLocationData("WC - Room of Rotten Grapes Entered", Addresses.WC_RoomOfRottenGrapesEntered, "0", "3081", LocationCheckType.UShort)
             };
             return roomOfRottenGrapesLocations;
@@ -1163,7 +1220,7 @@ namespace Helpers
         {
             List<GenericLocationData> roomOfCheapRedWineLocations = new List<GenericLocationData>() {
                     new GenericLocationData("WC - Room of Cheap Red Wine - Mandel Boss", Addresses.WC_RoomOfCheapRedWineMandelBossDefeat, "256", "0", LocationCheckType.UShort),
-                    new GenericLocationData("WC - Room of Cheap Red Wine - Heal Panel Floor Trap", Addresses.WC_RoomOfCheapRedWineHealPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                    new GenericLocationData("WC - Room of Cheap Red Wine - Heal Floor Trap", Addresses.WC_RoomOfCheapRedWineHealPanelFloorTrap, "265", "3081", LocationCheckType.UShort),
                     new GenericLocationData("WC - Room of Cheap Red Wine Entered", Addresses.WC_RoomOfCheapRedWineEntered, "0", "265", LocationCheckType.UShort)
             };
             return roomOfCheapRedWineLocations;
@@ -1281,8 +1338,8 @@ namespace Helpers
         {
             List<GenericLocationData> theWashingWomansWayLocations = new List<GenericLocationData>() {
                 new GenericLocationData("UW - The Washing-Woman's Way - Silver Key Unlock", Addresses.UW_TheWashingWomansWaySilverKeyUnlock, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("UW - The Washing-Woman's Way - Heal Panel Floor Trap", Addresses.UW_TheWashingWomansWayHealPanelFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("UW - The Washing-Woman's Way - Cure Panel Floor Trap", Addresses.UW_TheWashingWomansWayCurePanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                    new GenericLocationData("UW - The Washing-Woman's Way - Heal Floor Trap", Addresses.UW_TheWashingWomansWayHealPanelFloorTrap, "2352", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("UW - The Washing-Woman's Way - Cure Floor Trap", Addresses.UW_TheWashingWomansWayCurePanelFloorTrap, "2352", "32769", LocationCheckType.UShort),
                     new GenericLocationData("UW - The Washing-Woman's Way Entered", Addresses.UW_TheWashingWomansWayEntered, "0", "2352", LocationCheckType.UShort)
             };
             return theWashingWomansWayLocations;
@@ -1362,7 +1419,7 @@ namespace Helpers
         private static List<GenericLocationData> GetCrossroadsOfRestData()
         {
             List<GenericLocationData> crossroadsOfRestLocations = new List<GenericLocationData>() {
-                new GenericLocationData("UW - Crossroads of Rest - Gust Floor Trap", Addresses.UW_CrossroadsOfRestGustFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("UW - Crossroads of Rest - Gust Floor Trap", Addresses.UW_CrossroadsOfRestGustFloorTrap, "3376", "32769", LocationCheckType.UShort),
                     new GenericLocationData("UW - Crossroads of Rest Entered", Addresses.UW_CrossroadsOfRestEntered, "0", "3376", LocationCheckType.UShort)
             };
             return crossroadsOfRestLocations;
@@ -1388,8 +1445,8 @@ namespace Helpers
         {
             List<GenericLocationData> salvationForTheMotherLocations = new List<GenericLocationData>() {
                 new GenericLocationData("UW - Salvation for the Mother - Gold Key Unlock", Addresses.UW_SalvationForTheMotherGoldKeyUnlock, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("UW - Salvation for the Mother - Diabolos Floor Trap", Addresses.UW_SalvationForTheMotherDiabolosFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("UW - Salvation for the Mother - Poison Panel Floor Trap", Addresses.UW_SalvationForTheMotherPoisonPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                    new GenericLocationData("UW - Salvation for the Mother - Diabolos Floor Trap", Addresses.UW_SalvationForTheMotherDiabolosFloorTrap, "6448", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("UW - Salvation for the Mother - Poison Floor Trap", Addresses.UW_SalvationForTheMotherPoisonPanelFloorTrap, "6448", "32769", LocationCheckType.UShort),
                     new GenericLocationData("UW - Salvation for the Mother Entered", Addresses.UW_SalvationForTheMotherEntered, "0", "6448", LocationCheckType.UShort)
             };
             return salvationForTheMotherLocations;
@@ -1432,12 +1489,12 @@ namespace Helpers
         {
             List<GenericLocationData> theCrumblingMarketNorthLocations = new List<GenericLocationData>() {
                 new GenericLocationData("UW - The Crumbling Market (North) - Chest", Addresses.UW_TheCrumblingMarketNorthChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("UW - The Crumbling Market (North) - Eruption Floor Trap", Addresses.UW_TheCrumblingMarketNorthEruptionFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("UW - The Crumbling Market (North) - Freeze Floor Trap", Addresses.UW_TheCrumblingMarketNorthFreezeFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("UW - The Crumbling Market (North) - Gust Floor Trap", Addresses.UW_TheCrumblingMarketNorthGustFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("UW - The Crumbling Market (North) - Terra Thrust Floor Trap", Addresses.UW_TheCrumblingMarketNorthTerraThrustFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("UW - The Crumbling Market (North) - Holy Light Floor Trap", Addresses.UW_TheCrumblingMarketNorthHolyLightFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("UW - The Crumbling Market (North) Entered", Addresses.UW_TheCrumblingMarketNorthEntered, "0", "5424", LocationCheckType.UShort)
+                    new GenericLocationData("UW - The Crumbling Market (North) - Eruption Floor Trap", Addresses.UW_TheCrumblingMarketNorthEruptionFloorTrap, "5424", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("UW - The Crumbling Market (North) - Freeze Floor Trap", Addresses.UW_TheCrumblingMarketNorthFreezeFloorTrap, "5424", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("UW - The Crumbling Market (North) - Gust Floor Trap", Addresses.UW_TheCrumblingMarketNorthGustFloorTrap, "5424", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("UW - The Crumbling Market (North) - Terra Thrust Floor Trap", Addresses.UW_TheCrumblingMarketNorthTerraThrustFloorTrap, "5424", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("UW - The Crumbling Market (North) - Holy Light Floor Trap", Addresses.UW_TheCrumblingMarketNorthHolyLightFloorTrap, "5424", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("UW - The Crumbling Market (North) Entered", Addresses.UW_TheCrumblingMarketNorthEntered, "5424", "5424", LocationCheckType.UShort)
             };
             return theCrumblingMarketNorthLocations;
         }
@@ -1476,7 +1533,8 @@ namespace Helpers
         {
             List<GenericLocationData> bazaarOfTheBizarreLocations = new List<GenericLocationData>() {
                 new GenericLocationData("UE - Bazaar of the Bizarre - Lich Boss", Addresses.UE_BazaarOfTheBizarreLichBossDefeat, "561", "0", LocationCheckType.UShort),
-                    new GenericLocationData("UE - Bazaar of the Bizarre Entered", Addresses.UE_BazaarOfTheBizarreEntered, "0", "561", LocationCheckType.UShort)
+                new GenericLocationData("UE - Bazaar of the Bizarre - Teleport Unlock", Addresses.UE_BazaarOfTheBizarreLichBossDefeat, "561", "0", LocationCheckType.UShort),
+                new GenericLocationData("UE - Bazaar of the Bizarre Entered", Addresses.UE_BazaarOfTheBizarreEntered, "0", "561", LocationCheckType.UShort)
             };
             return bazaarOfTheBizarreLocations;
         }
@@ -1556,8 +1614,7 @@ namespace Helpers
         {
             List<GenericLocationData> catspawBlackmarketLocations = new List<GenericLocationData>() {
                 new GenericLocationData("UEN - Catspaw Blackmarket - Chest - Grimoire Paralysie", Addresses.UEN_CatspawBlackmarketChest, "0", "1", LocationCheckType.Byte),
-                new GenericLocationData("UEN - Catspaw Blackmarket - Diabolos Floor Trap", Addresses.UEN_CatspawBlackmarketDiabolosFloorTrap, "0", "160", LocationCheckType.Byte),
-                new GenericLocationData("UEN - Catspaw Blackmarket - Trap Clear Floor Trap", Addresses.UEN_CatspawBlackmarketTrapClearFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("UEN - Catspaw Blackmarket - Diabolos Floor Trap", Addresses.UEN_CatspawBlackmarketDiabolosFloorTrap, "3121", "32769", LocationCheckType.UShort),
                 new GenericLocationData("UEN - Catspaw Blackmarket - Chest", Addresses.UEN_CatspawBlackmarketChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("UEN - Catspaw Blackmarket Entered", Addresses.UEN_CatspawBlackmarketEntered, "0", "3121", LocationCheckType.UShort)
             };
@@ -1654,7 +1711,7 @@ namespace Helpers
         private static List<GenericLocationData> GetRueFisseranoData()
         {
             List<GenericLocationData> rueFisseranoLocations = new List<GenericLocationData>() {
-                new GenericLocationData("TCE - Rue Fisserano - Heal Panel Floor Trap", Addresses.TCE_RueFisseranoHealPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("TCE - Rue Fisserano - Heal Floor Trap", Addresses.TCE_RueFisseranoHealPanelFloorTrap, "4640", "32769", LocationCheckType.UShort),
                     new GenericLocationData("TCE - Rue Fisserano Entered", Addresses.TCE_RueFisseranoEntered, "0", "4640", LocationCheckType.UShort)
             };
             return rueFisseranoLocations;
@@ -1693,7 +1750,7 @@ namespace Helpers
         private static List<GenericLocationData> GetPlateiaLumitarData()
         {
             List<GenericLocationData> plateiaLumitarLocations = new List<GenericLocationData>() {
-                new GenericLocationData("TCE - Plateia Lumitar - Cure Panel Floor Trap", Addresses.TCE_PlateiaLumitarCurePanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("TCE - Plateia Lumitar - Cure Floor Trap", Addresses.TCE_PlateiaLumitarCurePanelFloorTrap, "39", "32769", LocationCheckType.UShort),
                     new GenericLocationData("TCE - Plateia Lumitar Entered", Addresses.TCE_PlateiaLumitarEntered, "0", "39", LocationCheckType.UShort)
             };
             return plateiaLumitarLocations;
@@ -1709,7 +1766,7 @@ namespace Helpers
         private static List<GenericLocationData> GetTheReneCoastroadData()
         {
             List<GenericLocationData> theReneCoastroadLocations = new List<GenericLocationData>() {
-                new GenericLocationData("TCW - The Rene Coastroad - Heal Panel Floor Trap", Addresses.TCW_TheReneCoastroadHealPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("TCW - The Rene Coastroad - Heal Floor Trap", Addresses.TCW_TheReneCoastroadHealPanelFloorTrap, "288", "32769", LocationCheckType.UShort),
                     new GenericLocationData("TCW - The Rene Coastroad Entered", Addresses.TCW_TheReneCoastroadEntered, "0", "288", LocationCheckType.UShort)
             };
             return theReneCoastroadLocations;
@@ -1860,7 +1917,8 @@ namespace Helpers
         private static List<GenericLocationData> GetTimeTrialDamascusCrabData()
         {
             List<GenericLocationData> timeTrialDamascusCrabLocations = new List<GenericLocationData>() {
-                new GenericLocationData("KEP - Time Trial (Damascus Crab) - Damascus Crab Boss", Addresses.KEP_TimeTrialDamascusCrabDamascusCrabBossDefeat, "29", "160", LocationCheckType.UShort), new GenericLocationData("KEP - Time Trial (Damascus Crab) Entered", Addresses.KEP_TimeTrialDamascusCrabEntered, "0", "29", LocationCheckType.UShort)
+                new GenericLocationData("KEP - Time Trial (Damascus Crab) - Damascus Crab Boss", Addresses.KEP_TimeTrialDamascusCrabDamascusCrabBossDefeat, "29", "160", LocationCheckType.UShort),
+                new GenericLocationData("KEP - Time Trial (Damascus Crab) Entered", Addresses.KEP_TimeTrialDamascusCrabEntered, "0", "29", LocationCheckType.UShort)
             };
             return timeTrialDamascusCrabLocations;
         }
@@ -1868,7 +1926,9 @@ namespace Helpers
         private static List<GenericLocationData> GetWipingBloodFromBladesData()
         {
             List<GenericLocationData> wipingBloodFromBladesLocations = new List<GenericLocationData>() {
-                new GenericLocationData("KEP - Wiping Blood from Blades - Azalea Sigil Unlock", Addresses.KEP_WipingBloodFromBladesAzaleaSigilUnlock, "0", "160", LocationCheckType.Byte), new GenericLocationData("KEP - Wiping Blood from Blades - Tigertail Sigil Unlock", Addresses.KEP_WipingBloodFromBladesTigertailSigilUnlock, "0", "160", LocationCheckType.Byte), new GenericLocationData("KEP - Wiping Blood from Blades Entered", Addresses.KEP_WipingBloodFromBladesEntered, "0", "1565", LocationCheckType.UShort)
+                new GenericLocationData("KEP - Wiping Blood from Blades - Azalea Sigil Unlock", Addresses.KEP_WipingBloodFromBladesAzaleaSigilUnlock, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("KEP - Wiping Blood from Blades - Tigertail Sigil Unlock", Addresses.KEP_WipingBloodFromBladesTigertailSigilUnlock, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("KEP - Wiping Blood from Blades Entered", Addresses.KEP_WipingBloodFromBladesEntered, "0", "1565", LocationCheckType.UShort)
             };
             return wipingBloodFromBladesLocations;
         }
@@ -1876,7 +1936,9 @@ namespace Helpers
         private static List<GenericLocationData> GetTimeTrialDeathOgreZombieData()
         {
             List<GenericLocationData> timeTrialDeathOgreZombieLocations = new List<GenericLocationData>() {
-                new GenericLocationData("KEP - Time Trial (Death + Ogre Zombie) - Death Boss", Addresses.KEP_TimeTrialDeathOgreZombieDeathBossDefeat, "29", "160", LocationCheckType.UShort), new GenericLocationData("KEP - Time Trial (Death + Ogre Zombie) - Ogre Zombie Boss", Addresses.KEP_TimeTrialDeathOgreZombieOgreZombieBossDefeat, "0", "160", LocationCheckType.Byte), new GenericLocationData("KEP - Time Trial (Death + Ogre Zombie) Entered", Addresses.KEP_TimeTrialDeathOgreZombieEntered, "0", "29", LocationCheckType.UShort)
+                new GenericLocationData("KEP - Time Trial (Death + Ogre Zombie) - Death Boss", Addresses.KEP_TimeTrialDeathOgreZombieDeathBossDefeat, "29", "160", LocationCheckType.UShort),
+                new GenericLocationData("KEP - Time Trial (Death + Ogre Zombie) - Ogre Zombie Boss", Addresses.KEP_TimeTrialDeathOgreZombieOgreZombieBossDefeat, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("KEP - Time Trial (Death + Ogre Zombie) Entered", Addresses.KEP_TimeTrialDeathOgreZombieEntered, "0", "29", LocationCheckType.UShort)
             };
             return timeTrialDeathOgreZombieLocations;
         }
@@ -1884,7 +1946,8 @@ namespace Helpers
         private static List<GenericLocationData> GetTimeTrialAsuraData()
         {
             List<GenericLocationData> timeTrialAsuraLocations = new List<GenericLocationData>() {
-                new GenericLocationData("KEP - Time Trial (Asura) - Asura Boss", Addresses.KEP_TimeTrialAsuraAsuraBossDefeat, "29", "0", LocationCheckType.UShort), new GenericLocationData("KEP - Time Trial (Asura) Entered", Addresses.KEP_TimeTrialAsuraEntered, "0", "29", LocationCheckType.UShort)
+                new GenericLocationData("KEP - Time Trial (Asura) - Asura Boss", Addresses.KEP_TimeTrialAsuraAsuraBossDefeat, "29", "0", LocationCheckType.UShort),
+                new GenericLocationData("KEP - Time Trial (Asura) Entered", Addresses.KEP_TimeTrialAsuraEntered, "0", "29", LocationCheckType.UShort)
             };
             return timeTrialAsuraLocations;
         }
@@ -1892,7 +1955,9 @@ namespace Helpers
         private static List<GenericLocationData> GetTheWarriorsRestData()
         {
             List<GenericLocationData> theWarriorsRestLocations = new List<GenericLocationData>() {
-                new GenericLocationData("KEP - The Warrior's Rest - Rosencrantz Boss", Addresses.KEP_TheWarriorsRestRosencrantzBossDefeat, "29", "0", LocationCheckType.UShort), new GenericLocationData("KEP - The Warrior's Rest - Chest", Addresses.KEP_TheWarriorsRestChest, "0", "1", LocationCheckType.Byte), new GenericLocationData("KEP - The Warrior's Rest Entered", Addresses.KEP_TheWarriorsRestEntered, "0", "29", LocationCheckType.UShort)
+                new GenericLocationData("KEP - The Warrior's Rest - Rosencrantz Boss", Addresses.KEP_TheWarriorsRestRosencrantzBossDefeat, "29", "0", LocationCheckType.UShort),
+                new GenericLocationData("KEP - The Warrior's Rest - Chest", Addresses.KEP_TheWarriorsRestChest, "0", "1", LocationCheckType.Byte),
+                new GenericLocationData("KEP - The Warrior's Rest Entered", Addresses.KEP_TheWarriorsRestEntered, "0", "29", LocationCheckType.UShort)
             };
             return theWarriorsRestLocations;
         }
@@ -1908,7 +1973,9 @@ namespace Helpers
         private static List<GenericLocationData> GetTheDarkCoastData()
         {
             List<GenericLocationData> theDarkCoastLocations = new List<GenericLocationData>() {
-                new GenericLocationData("TOK - The Dark Coast - Trap Clear Floor Trap", Addresses.TOK_TheDarkCoastTrapClearFloorTrap, "0", "160", LocationCheckType.Byte), new GenericLocationData("TOK - The Dark Coast - Heal Panel Floor Trap", Addresses.TOK_TheDarkCoastHealPanelFloorTrap, "0", "160", LocationCheckType.Byte), new GenericLocationData("TOK - The Dark Coast Entered", Addresses.TOK_TheDarkCoastEntered, "0", "30", LocationCheckType.UShort)
+                new GenericLocationData("TOK - The Dark Coast - Trap Clear Floor Trap", Addresses.TOK_TheDarkCoastTrapClearFloorTrap, "30", "32769", LocationCheckType.UShort),
+                new GenericLocationData("TOK - The Dark Coast - Heal Floor Trap", Addresses.TOK_TheDarkCoastHealPanelFloorTrap, "30", "32769", LocationCheckType.UShort),
+                new GenericLocationData("TOK - The Dark Coast Entered", Addresses.TOK_TheDarkCoastEntered, "0", "30", LocationCheckType.UShort)
             };
             return theDarkCoastLocations;
         }
@@ -1926,7 +1993,8 @@ namespace Helpers
         private static List<GenericLocationData> GetThoseWhoDrinkTheDarkData()
         {
             List<GenericLocationData> thoseWhoDrinkTheDarkLocations = new List<GenericLocationData>() {
-                new GenericLocationData("TOK - Those who Drink the Dark - Silver Key Unlock", Addresses.TOK_ThoseWhoDrinkTheDarkSilverKeyUnlock, "0", "160", LocationCheckType.Byte), new GenericLocationData("TOK - Those who Drink the Dark Entered", Addresses.TOK_ThoseWhoDrinkTheDarkEntered, "0", "542", LocationCheckType.UShort)
+                new GenericLocationData("TOK - Those who Drink the Dark - Silver Key Unlock", Addresses.TOK_ThoseWhoDrinkTheDarkSilverKeyUnlock, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("TOK - Those who Drink the Dark Entered", Addresses.TOK_ThoseWhoDrinkTheDarkEntered, "0", "542", LocationCheckType.UShort)
             };
             return thoseWhoDrinkTheDarkLocations;
         }
@@ -1934,7 +2002,8 @@ namespace Helpers
         private static List<GenericLocationData> GetTheChapelOfMeschaunceData()
         {
             List<GenericLocationData> theChapelOfMeschaunceLocations = new List<GenericLocationData>() {
-                new GenericLocationData("TOK - The Chapel of Meschaunce - Minotaur Lord Boss", Addresses.TOK_TheChapelOfMeschaunceMinotaurLordBossDefeat, "798", "0", LocationCheckType.UShort), new GenericLocationData("TOK - The Chapel of Meschaunce Entered", Addresses.TOK_TheChapelOfMeschaunceEntered, "0", "798", LocationCheckType.UShort)
+                new GenericLocationData("TOK - The Chapel of Meschaunce - Minotaur Lord Boss", Addresses.TOK_TheChapelOfMeschaunceMinotaurLordBossDefeat, "798", "0", LocationCheckType.UShort),
+                new GenericLocationData("TOK - The Chapel of Meschaunce Entered", Addresses.TOK_TheChapelOfMeschaunceEntered, "0", "798", LocationCheckType.UShort)
             };
             return theChapelOfMeschaunceLocations;
         }
@@ -1942,7 +2011,8 @@ namespace Helpers
         private static List<GenericLocationData> GetTheResentfulOnesData()
         {
             List<GenericLocationData> theResentfulOnesLocations = new List<GenericLocationData>() {
-                new GenericLocationData("TOK - The Resentful Ones - Silver Key Unlock", Addresses.TOK_TheResentfulOnesSilverKeyUnlock, "0", "160", LocationCheckType.Byte), new GenericLocationData("TOK - The Resentful Ones Entered", Addresses.TOK_TheResentfulOnesEntered, "0", "1054", LocationCheckType.UShort)
+                new GenericLocationData("TOK - The Resentful Ones - Silver Key Unlock", Addresses.TOK_TheResentfulOnesSilverKeyUnlock, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("TOK - The Resentful Ones Entered", Addresses.TOK_TheResentfulOnesEntered, "0", "1054", LocationCheckType.UShort)
             };
             return theResentfulOnesLocations;
         }
@@ -1958,7 +2028,8 @@ namespace Helpers
         private static List<GenericLocationData> GetChamberOfReasonData()
         {
             List<GenericLocationData> chamberOfReasonLocations = new List<GenericLocationData>() {
-                new GenericLocationData("TOK - Chamber of Reason - Kali Boss", Addresses.TOK_ChamberOfReasonKaliBossDefeat, "31", "0", LocationCheckType.UShort), new GenericLocationData("TOK - Chamber of Reason Entered", Addresses.TOK_ChamberOfReasonEntered, "0", "31", LocationCheckType.UShort)
+                new GenericLocationData("TOK - Chamber of Reason - Kali Boss", Addresses.TOK_ChamberOfReasonKaliBossDefeat, "31", "0", LocationCheckType.UShort),
+                new GenericLocationData("TOK - Chamber of Reason Entered", Addresses.TOK_ChamberOfReasonEntered, "0", "31", LocationCheckType.UShort)
             };
             return chamberOfReasonLocations;
         }
@@ -2047,8 +2118,8 @@ namespace Helpers
         {
             List<GenericLocationData> returnToTheLandLocations = new List<GenericLocationData>() {
                 // Need to get the addresses for this!
-                new GenericLocationData("SFF - Return to the Land - Earth Dragon Boss - Grimoire Parebrise", Addresses.SFF_ReturnToTheLandEarthDragonBossDefeat, "0", "0", LocationCheckType.UShort),
-                new GenericLocationData("SFF - Return to the Land - Earth Dragon Boss", Addresses.SFF_ReturnToTheLandEarthDragonBossDefeat, "0", "0", LocationCheckType.UShort),
+                new GenericLocationData("SFF - Return to the Land - Earth Dragon Boss - Grimoire Parebrise", Addresses.SFF_ReturnToTheLandEarthDragonBossDefeat, "5672", "0", LocationCheckType.UShort),
+                new GenericLocationData("SFF - Return to the Land - Earth Dragon Boss", Addresses.SFF_ReturnToTheLandEarthDragonBossDefeat, "5672", "0", LocationCheckType.UShort),
                 new GenericLocationData("SFF - Return to the Land Entered", Addresses.SFF_ReturnToTheLandEntered, "0", "5672", LocationCheckType.UShort)
             };
             return returnToTheLandLocations;
@@ -2090,7 +2161,9 @@ namespace Helpers
         {
             List<GenericLocationData> forestRiverLocations = new List<GenericLocationData>() {
                 new GenericLocationData("SFF - Forest River - Chest - Grimoire Agilite", Addresses.SFF_ForestRiverChest, "0", "1", LocationCheckType.Byte),
-                new GenericLocationData("SFF - Forest River - Cure Panel Floor Trap", Addresses.SFF_ForestRiverCurePanelFloorTrap, "0", "160", LocationCheckType.Byte), new GenericLocationData("SFF - Forest River - Chest", Addresses.SFF_ForestRiverChest, "0", "1", LocationCheckType.Byte), new GenericLocationData("SFF - Forest River Entered", Addresses.SFF_ForestRiverEntered, "0", "5928", LocationCheckType.UShort)
+                new GenericLocationData("SFF - Forest River - Cure Floor Trap", Addresses.SFF_ForestRiverCurePanelFloorTrap, "5928", "32769", LocationCheckType.UShort),
+                new GenericLocationData("SFF - Forest River - Chest", Addresses.SFF_ForestRiverChest, "0", "1", LocationCheckType.Byte),
+                new GenericLocationData("SFF - Forest River Entered", Addresses.SFF_ForestRiverEntered, "0", "5928", LocationCheckType.UShort)
             };
             return forestRiverLocations;
         }
@@ -2192,7 +2265,8 @@ namespace Helpers
         private static List<GenericLocationData> GetSteadyTheBoarSpearsData()
         {
             List<GenericLocationData> steadyTheBoarSpearsLocations = new List<GenericLocationData>() {
-                new GenericLocationData("SFE - Steady the Boar-Spears - Rood Inverse Unlock", Addresses.SFE_SteadyTheBoarSpearsRoodInverseUnlock, "0", "160", LocationCheckType.Byte), new GenericLocationData("SFE - Steady the Boar-Spears Entered", Addresses.SFE_SteadyTheBoarSpearsEntered, "0", "41", LocationCheckType.UShort)
+                new GenericLocationData("SFE - Steady the Boar-Spears - Rood Inverse Unlock", Addresses.SFE_SteadyTheBoarSpearsRoodInverseUnlock, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("SFE - Steady the Boar-Spears Entered", Addresses.SFE_SteadyTheBoarSpearsEntered, "0", "41", LocationCheckType.UShort)
             };
             return steadyTheBoarSpearsLocations;
         }
@@ -2208,7 +2282,8 @@ namespace Helpers
         private static List<GenericLocationData> GetNaturesWombData()
         {
             List<GenericLocationData> naturesWombLocations = new List<GenericLocationData>() {
-                new GenericLocationData("SFE - Nature's Womb - Damascus Crab Boss", Addresses.SFE_NaturesWombDamascusCrabBossDefeat, "553", "0", LocationCheckType.UShort), new GenericLocationData("SFE - Nature's Womb Entered", Addresses.SFE_NaturesWombEntered, "0", "553", LocationCheckType.UShort)
+                new GenericLocationData("SFE - Nature's Womb - Damascus Crab Boss", Addresses.SFE_NaturesWombDamascusCrabBossDefeat, "553", "0", LocationCheckType.UShort),
+                new GenericLocationData("SFE - Nature's Womb Entered", Addresses.SFE_NaturesWombEntered, "0", "553", LocationCheckType.UShort)
             };
             return naturesWombLocations;
         }
@@ -2241,7 +2316,8 @@ namespace Helpers
         {
             List<GenericLocationData> alchemistsLaboratoryLocations = new List<GenericLocationData>() {
                 new GenericLocationData("SNC - Alchemists' Laboratory - Chest - Grimoire Halte", Addresses.SNC_AlchemistsLaboratoryChest, "0", "1", LocationCheckType.Byte),
-                new GenericLocationData("SNC - Alchemists' Laboratory - Chest", Addresses.SNC_AlchemistsLaboratoryChest, "0", "1", LocationCheckType.Byte), new GenericLocationData("SNC - Alchemists' Laboratory Entered", Addresses.SNC_AlchemistsLaboratoryEntered, "0", "783", LocationCheckType.UShort)
+                new GenericLocationData("SNC - Alchemists' Laboratory - Chest", Addresses.SNC_AlchemistsLaboratoryChest, "0", "1", LocationCheckType.Byte),
+                new GenericLocationData("SNC - Alchemists' Laboratory Entered", Addresses.SNC_AlchemistsLaboratoryEntered, "0", "783", LocationCheckType.UShort)
             };
             return alchemistsLaboratoryLocations;
         }
@@ -2282,7 +2358,8 @@ namespace Helpers
         {
             List<GenericLocationData> hallOfSacrilegeLocations = new List<GenericLocationData>() {
                 new GenericLocationData("SNC - Hall of Sacrilege - Golem Boss - Grimoire Ameliorer", Addresses.SNC_HallOfSacrilegeGolemBossDefeat, "16", "0", LocationCheckType.Byte),
-                new GenericLocationData("SNC - Hall of Sacrilege - Golem Boss", Addresses.SNC_HallOfSacrilegeGolemBossDefeat, "16", "0", LocationCheckType.Byte), new GenericLocationData("SNC - Hall of Sacrilege Entered", Addresses.SNC_HallOfSacrilegeEntered, "0", "16", LocationCheckType.UShort)
+                new GenericLocationData("SNC - Hall of Sacrilege - Golem Boss", Addresses.SNC_HallOfSacrilegeGolemBossDefeat, "16", "0", LocationCheckType.Byte),
+                new GenericLocationData("SNC - Hall of Sacrilege Entered", Addresses.SNC_HallOfSacrilegeEntered, "0", "16", LocationCheckType.UShort)
             };
             return hallOfSacrilegeLocations;
         }
@@ -2298,7 +2375,8 @@ namespace Helpers
         private static List<GenericLocationData> GetPassageOfTheRefugeesSouthData()
         {
             List<GenericLocationData> passageOfTheRefugeesSouthLocations = new List<GenericLocationData>() {
-                new GenericLocationData("SNC - Passage of the Refugees (South) - Hall of Sacrilege Unlock", Addresses.SNC_PassageOfTheRefugeesSouthHallOfSacrilegeUnlock, "0", "160", LocationCheckType.Byte), new GenericLocationData("SNC - Passage of the Refugees (South) Entered", Addresses.SNC_PassageOfTheRefugeesSouthEntered, "0", "1807", LocationCheckType.UShort)
+                new GenericLocationData("SNC - Passage of the Refugees (South) - Hall of Sacrilege Unlock", Addresses.SNC_PassageOfTheRefugeesSouthHallOfSacrilegeUnlock, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("SNC - Passage of the Refugees (South) Entered", Addresses.SNC_PassageOfTheRefugeesSouthEntered, "0", "1807", LocationCheckType.UShort)
             };
             return passageOfTheRefugeesSouthLocations;
         }
@@ -2386,7 +2464,7 @@ namespace Helpers
         private static List<GenericLocationData> GetAtoneForEternityData()
         {
             List<GenericLocationData> atoneForEternityLocations = new List<GenericLocationData>() {
-                new GenericLocationData("LQ - Atone for Eternity - Death Vapor Floor Trap", Addresses.LQ_AtoneForEternityDeathVaporFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("LQ - Atone for Eternity - Death Vapor Floor Trap", Addresses.LQ_AtoneForEternityDeathVaporFloorTrap, "821", "32769", LocationCheckType.UShort),
                     new GenericLocationData("LQ - Atone for Eternity Entered", Addresses.LQ_AtoneForEternityEntered, "0", "821", LocationCheckType.UShort)
             };
             return atoneForEternityLocations;
@@ -2420,7 +2498,7 @@ namespace Helpers
         {
             List<GenericLocationData> theDreamersClimbLocations = new List<GenericLocationData>() {
                 new GenericLocationData("LQ - The Dreamer's Climb - Eulelia Sigil Unlock", Addresses.LQ_TheDreamersClimbEuleliaSigilUnlock, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("LQ - The Dreamer's Climb - Heal Panel Floor Trap", Addresses.LQ_TheDreamersClimbHealPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                    new GenericLocationData("LQ - The Dreamer's Climb - Heal Floor Trap", Addresses.LQ_TheDreamersClimbHealPanelFloorTrap, "3125", "32769", LocationCheckType.UShort),
                     new GenericLocationData("LQ - The Dreamer's Climb Entered", Addresses.LQ_TheDreamersClimbEntered, "0", "3125", LocationCheckType.UShort)
             };
             return theDreamersClimbLocations;
@@ -2429,7 +2507,7 @@ namespace Helpers
         private static List<GenericLocationData> GetTheOreBearersData()
         {
             List<GenericLocationData> theOreBearersLocations = new List<GenericLocationData>() {
-                new GenericLocationData("LQ - The Ore-Bearers - Poison Panel Floor Trap", Addresses.LQ_TheOreBearersPoisonPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("LQ - The Ore-Bearers - Poison Floor Trap", Addresses.LQ_TheOreBearersPoisonPanelFloorTrap, "2869", "32769", LocationCheckType.UShort),
                     new GenericLocationData("LQ - The Ore-Bearers Entered", Addresses.LQ_TheOreBearersEntered, "0", "2869", LocationCheckType.UShort)
             };
             return theOreBearersLocations;
@@ -2524,7 +2602,7 @@ namespace Helpers
         {
             List<GenericLocationData> theLaborersBonfireLocations = new List<GenericLocationData>() {
                 new GenericLocationData("LQ - The Laborer's Bonfire - Melissa Sigil Unlock", Addresses.LQ_TheLaborersBonfireMelissaSigilUnlock, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("LQ - The Laborer's Bonfire - Paralysis Panel Floor Trap", Addresses.LQ_TheLaborersBonfireParalysisPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                    new GenericLocationData("LQ - The Laborer's Bonfire - Paralysis Floor Trap", Addresses.LQ_TheLaborersBonfireParalysisPanelFloorTrap, "5429", "32769", LocationCheckType.UShort),
                     new GenericLocationData("LQ - The Laborer's Bonfire Entered", Addresses.LQ_TheLaborersBonfireEntered, "0", "5429", LocationCheckType.UShort)
             };
             return theLaborersBonfireLocations;
@@ -2621,8 +2699,9 @@ namespace Helpers
         {
             List<GenericLocationData> theCauldronLocations = new List<GenericLocationData>() {
                 new GenericLocationData("IM1 - The Cauldron - Wraith Boss - Grimoire Exsorcer", Addresses.IM1_TheCauldronWraithBossDefeat, "311", "0", LocationCheckType.UShort),
-                new GenericLocationData("IM1 - The Cauldron - Gargoyle Boss", Addresses.IM1_TheCauldronGargoyleBossDefeat, "311", "0", LocationCheckType.UShort), // MISSING ADDRESS
-                new GenericLocationData("IM1 - The Cauldron - Wraith Boss", Addresses.IM1_TheCauldronWraithBossDefeat, "311", "0", LocationCheckType.UShort), // MISSING ADDRESS
+                new GenericLocationData("IM1 - The Cauldron - Gargoyle Boss 1", Addresses.IM1_TheCauldronGargoyle1BossDefeat, "311", "0", LocationCheckType.UShort),
+                new GenericLocationData("IM1 - The Cauldron - Gargoyle Boss 2", Addresses.IM1_TheCauldronGargoyle2BossDefeat, "311", "0", LocationCheckType.UShort),
+                new GenericLocationData("IM1 - The Cauldron - Wraith Boss", Addresses.IM1_TheCauldronWraithBossDefeat, "311", "0", LocationCheckType.UShort),
                 new GenericLocationData("IM1 - The Cauldron - Tearose Sigil Unlock", Addresses.IM1_TheCauldronTearoseSigilUnlock, "0", "160", LocationCheckType.Byte),
                 new GenericLocationData("IM1 - The Cauldron Entered", Addresses.IM1_TheCauldronEntered, "0", "311", LocationCheckType.UShort)
             };
@@ -2711,8 +2790,8 @@ namespace Helpers
         private static List<GenericLocationData> GetHereticsForkData()
         {
             List<GenericLocationData> hereticsForkLocations = new List<GenericLocationData>() {
-                new GenericLocationData("IM1 - Heretic's Fork - Freeze Floor Trap", Addresses.IM1_HereticsForkFreezeFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("IM1 - Heretic's Fork - Gust Floor Trap", Addresses.IM1_HereticsForkGustFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("IM1 - Heretic's Fork - Freeze Floor Trap", Addresses.IM1_HereticsForkFreezeFloorTrap, "2103", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("IM1 - Heretic's Fork - Gust Floor Trap", Addresses.IM1_HereticsForkGustFloorTrap, "2103", "32769", LocationCheckType.UShort),
                     new GenericLocationData("IM1 - Heretic's Fork Entered", Addresses.IM1_HereticsForkEntered, "0", "2103", LocationCheckType.UShort)
             };
             return hereticsForkLocations;
@@ -2729,8 +2808,8 @@ namespace Helpers
         private static List<GenericLocationData> GetBloodingData()
         {
             List<GenericLocationData> bloodingLocations = new List<GenericLocationData>() {
-                new GenericLocationData("IM1 - Blooding - Death Vapor Floor Trap", Addresses.IM1_BloodingDeathVaporFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("IM1 - Blooding - Eruption Floor Trap", Addresses.IM1_BloodingEruptionFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("IM1 - Blooding - Death Vapor Floor Trap", Addresses.IM1_BloodingDeathVaporFloorTrap, "2615", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("IM1 - Blooding - Eruption Floor Trap", Addresses.IM1_BloodingEruptionFloorTrap, "2615", "32769", LocationCheckType.UShort),
                     new GenericLocationData("IM1 - Blooding Entered", Addresses.IM1_BloodingEntered, "0", "2615", LocationCheckType.UShort)
             };
             return bloodingLocations;
@@ -2756,8 +2835,8 @@ namespace Helpers
         private static List<GenericLocationData> GetBurningData()
         {
             List<GenericLocationData> burningLocations = new List<GenericLocationData>() {
-                new GenericLocationData("IM1 - Burning - Terra Thrust Floor Trap", Addresses.IM1_BurningTerraThrustFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("IM1 - Burning - Holy Light Floor Trap", Addresses.IM1_BurningHolyLightFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("IM1 - Burning - Terra Thrust Floor Trap", Addresses.IM1_BurningTerraThrustFloorTrap, "3383", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("IM1 - Burning - Holy Light Floor Trap", Addresses.IM1_BurningHolyLightFloorTrap, "3383", "32769", LocationCheckType.UShort),
                     new GenericLocationData("IM1 - Burning Entered", Addresses.IM1_BurningEntered, "0", "3383", LocationCheckType.UShort)
             };
             return burningLocations;
@@ -2852,8 +2931,8 @@ namespace Helpers
         private static List<GenericLocationData> GetTheMindBurnsData()
         {
             List<GenericLocationData> theMindBurnsLocations = new List<GenericLocationData>() {
-                new GenericLocationData("IM2 - The Mind Burns - Freeze Floor Trap", Addresses.IM2_TheMindBurnsFreezeFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("IM2 - The Mind Burns - Gust Floor Trap", Addresses.IM2_TheMindBurnsGustFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("IM2 - The Mind Burns - Freeze Floor Trap", Addresses.IM2_TheMindBurnsFreezeFloorTrap, "1848", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("IM2 - The Mind Burns - Gust Floor Trap", Addresses.IM2_TheMindBurnsGustFloorTrap, "1848", "32769", LocationCheckType.UShort),
                     new GenericLocationData("IM2 - The Mind Burns Entered", Addresses.IM2_TheMindBurnsEntered, "0", "1848", LocationCheckType.UShort)
             };
             return theMindBurnsLocations;
@@ -2879,9 +2958,9 @@ namespace Helpers
         private static List<GenericLocationData> GetTheColdsBridleData()
         {
             List<GenericLocationData> theColdsBridleLocations = new List<GenericLocationData>() {
-                new GenericLocationData("IM2 - The Cold's Bridle - Curse Panel Floor Trap", Addresses.IM2_TheColdsBridleCursePanelFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("IM2 - The Cold's Bridle - Death Vapor Floor Trap", Addresses.IM2_TheColdsBridleDeathVaporFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("IM2 - The Cold's Bridle - Poison Panel Floor Trap", Addresses.IM2_TheColdsBridlePoisonPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("IM2 - The Cold's Bridle - Curse Floor Trap", Addresses.IM2_TheColdsBridleCursePanelFloorTrap, "3128", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("IM2 - The Cold's Bridle - Death Vapor Floor Trap", Addresses.IM2_TheColdsBridleDeathVaporFloorTrap, "3128", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("IM2 - The Cold's Bridle - Poison Floor Trap", Addresses.IM2_TheColdsBridlePoisonPanelFloorTrap, "3128", "32769", LocationCheckType.UShort),
                     new GenericLocationData("IM2 - The Cold's Bridle Entered", Addresses.IM2_TheColdsBridleEntered, "0", "3128", LocationCheckType.UShort)
             };
             return theColdsBridleLocations;
@@ -2909,7 +2988,7 @@ namespace Helpers
         {
             List<GenericLocationData> leadSprinklerLocations = new List<GenericLocationData>() {
                 new GenericLocationData("IM2 - Lead Sprinkler - Chest", Addresses.IM2_LeadSprinklerChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("IM2 - Lead Sprinkler - Paralysis Panel Floor Trap", Addresses.IM2_LeadSprinklerParalysisPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                    new GenericLocationData("IM2 - Lead Sprinkler - Paralysis Floor Trap", Addresses.IM2_LeadSprinklerParalysisPanelFloorTrap, "4408", "32769", LocationCheckType.UShort),
                     new GenericLocationData("IM2 - Lead Sprinkler Entered", Addresses.IM2_LeadSprinklerEntered, "0", "4408", LocationCheckType.UShort)
             };
             return leadSprinklerLocations;
@@ -2919,8 +2998,8 @@ namespace Helpers
         {
             List<GenericLocationData> squassationLocations = new List<GenericLocationData>() {
                 new GenericLocationData("IM2 - Squassation - Chest", Addresses.IM2_SquassationChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("IM2 - Squassation - Poison Panel Floor Trap", Addresses.IM2_SquassationPoisonPanelFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("IM2 - Squassation - Terra Thrust Floor Trap", Addresses.IM2_SquassationTerraThrustFloorTrap, "0", "160", LocationCheckType.Byte),
+                    new GenericLocationData("IM2 - Squassation - Poison Floor Trap", Addresses.IM2_SquassationPoisonPanelFloorTrap, "3896", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("IM2 - Squassation - Terra Thrust Floor Trap", Addresses.IM2_SquassationTerraThrustFloorTrap, "3896", "32769", LocationCheckType.UShort),
                     new GenericLocationData("IM2 - Squassation Entered", Addresses.IM2_SquassationEntered, "0", "3896", LocationCheckType.UShort)
             };
             return squassationLocations;
@@ -2947,7 +3026,7 @@ namespace Helpers
         private static List<GenericLocationData> GetPendulumData()
         {
             List<GenericLocationData> pendulumLocations = new List<GenericLocationData>() {
-                new GenericLocationData("IM2 - Pendulum - Curse Panel Floor Trap", Addresses.IM2_PendulumCursePanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("IM2 - Pendulum - Curse Floor Trap", Addresses.IM2_PendulumCursePanelFloorTrap, "4664", "32769", LocationCheckType.UShort),
                     new GenericLocationData("IM2 - Pendulum Entered", Addresses.IM2_PendulumEntered, "0", "4664", LocationCheckType.UShort)
             };
 
@@ -2957,7 +3036,7 @@ namespace Helpers
         private static List<GenericLocationData> GetDraggingData()
         {
             List<GenericLocationData> draggingLocations = new List<GenericLocationData>() {
-                new GenericLocationData("IM2 - Dragging - Curse Panel Floor Trap", Addresses.IM2_DraggingCursePanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("IM2 - Dragging - Curse Floor Trap", Addresses.IM2_DraggingCursePanelFloorTrap, "4920", "32769", LocationCheckType.UShort),
                     new GenericLocationData("IM2 - Dragging Entered", Addresses.IM2_DraggingEntered, "0", "4920", LocationCheckType.UShort)
             };
 
@@ -3079,8 +3158,8 @@ namespace Helpers
         private static List<GenericLocationData> GetSinAndPunishmentData()
         {
             List<GenericLocationData> sinAndPunishmentLocations = new List<GenericLocationData>() {
-                new GenericLocationData("GC1 - Sin and Punishment - Curse Panel Floor Trap", Addresses.GC1_SinAndPunishmentCursePanelFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("GC1 - Sin and Punishment - Eruption Panel Floor Trap", Addresses.GC1_SinAndPunishmentEruptionPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("GC1 - Sin and Punishment - Curse Floor Trap", Addresses.GC1_SinAndPunishmentCursePanelFloorTrap, "1560", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("GC1 - Sin and Punishment - Eruption Floor Trap", Addresses.GC1_SinAndPunishmentEruptionPanelFloorTrap, "1560", "32769", LocationCheckType.UShort),
                     new GenericLocationData("GC1 - Sin and Punishment Entered", Addresses.GC1_SinAndPunishmentEntered, "0", "1560", LocationCheckType.UShort)
             };
 
@@ -3147,7 +3226,7 @@ namespace Helpers
         private static List<GenericLocationData> GetStruggleForTheSoulData()
         {
             List<GenericLocationData> struggleForTheSoulLocations = new List<GenericLocationData>() {
-                new GenericLocationData("GCB - Struggle for the Soul - Heal Panel Floor Trap", Addresses.GCB_StruggleForTheSoulHealPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("GCB - Struggle for the Soul - Heal Floor Trap", Addresses.GCB_StruggleForTheSoulHealPanelFloorTrap, "2070", "32769", LocationCheckType.UShort),
                     new GenericLocationData("GCB - Struggle for the Soul Entered", Addresses.GCB_StruggleForTheSoulEntered, "0", "2070", LocationCheckType.UShort)
             };
             return struggleForTheSoulLocations;
@@ -3209,9 +3288,9 @@ namespace Helpers
         private static List<GenericLocationData> GetAbasementFromAboveData()
         {
             List<GenericLocationData> abasementfromAboveLocations = new List<GenericLocationData>() {
-                new GenericLocationData("GC2 - Abasement from Above - Poison Panel Floor Trap", Addresses.GC2_AbasementfromAbovePoisonPanelFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("GC2 - Abasement from Above - Paralysis Panel Floor Trap", Addresses.GC2_AbasementfromAboveParalysisPanelFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("GC2 - Abasement from Above - Curse Panel Floor Trap", Addresses.GC2_AbasementfromAboveCursePanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("GC2 - Abasement from Above - Poison Floor Trap", Addresses.GC2_AbasementfromAbovePoisonPanelFloorTrap, "791", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("GC2 - Abasement from Above - Paralysis Floor Trap", Addresses.GC2_AbasementfromAboveParalysisPanelFloorTrap, "791", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("GC2 - Abasement from Above - Curse Floor Trap", Addresses.GC2_AbasementfromAboveCursePanelFloorTrap, "791", "32769", LocationCheckType.UShort),
                     new GenericLocationData("GC2 - Abasement from Above Entered", Addresses.GC2_AbasementfromAboveEntered, "0", "791", LocationCheckType.UShort)
             };
             return abasementfromAboveLocations;
@@ -3255,8 +3334,8 @@ namespace Helpers
         private static List<GenericLocationData> GetHeScreamsForMercyData()
         {
             List<GenericLocationData> heScreamsforMercyLocations = new List<GenericLocationData>() {
-                new GenericLocationData("GC2 - He Screams for Mercy - Terra Thrust Floor Trap", Addresses.GC2_HeScreamsforMercyTerraThrustFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("GC2 - He Screams for Mercy - Cure Panel Floor Trap", Addresses.GC2_HeScreamsforMercyCurePanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("GC2 - He Screams for Mercy - Terra Thrust Floor Trap", Addresses.GC2_HeScreamsforMercyTerraThrustFloorTrap, "279", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("GC2 - He Screams for Mercy - Cure Floor Trap", Addresses.GC2_HeScreamsforMercyCurePanelFloorTrap, "279", "32769", LocationCheckType.UShort),
                     new GenericLocationData("GC2 - He Screams for Mercy Entered", Addresses.GC2_HeScreamsforMercyEntered, "0", "279", LocationCheckType.UShort)
             };
             return heScreamsforMercyLocations;
@@ -3396,8 +3475,8 @@ namespace Helpers
         private static List<GenericLocationData> GetTheOracleSinsNoMoreData()
         {
             List<GenericLocationData> theOracleSinsNoMoreLocations = new List<GenericLocationData>() {
-                new GenericLocationData("FP - The Oracle Sins No More - Curse Panel Floor Trap", Addresses.FP_TheOracleSinsNoMoreCursePanelFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("FP - The Oracle Sins No More - Holy Light Floor Trap", Addresses.FP_TheOracleSinsNoMoreHolyLightFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("FP - The Oracle Sins No More - Curse Floor Trap", Addresses.FP_TheOracleSinsNoMoreCursePanelFloorTrap, "822", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("FP - The Oracle Sins No More - Holy Light Floor Trap", Addresses.FP_TheOracleSinsNoMoreHolyLightFloorTrap, "822", "32769", LocationCheckType.UShort),
                     new GenericLocationData("FP - The Oracle Sins No More Entered", Addresses.FP_TheOracleSinsNoMoreEntered, "0", "822", LocationCheckType.UShort)
             };
             return theOracleSinsNoMoreLocations;
@@ -3453,8 +3532,8 @@ namespace Helpers
         private static List<GenericLocationData> GetFacingYourIllusionsData()
         {
             List<GenericLocationData> facingYourIllusionsLocations = new List<GenericLocationData>() {
-                new GenericLocationData("ESC - Facing Your Illusions - Diabolos Floor Trap", Addresses.ESC_FacingYourIllusionsDiabolosFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("ESC - Facing Your Illusions Entered", Addresses.ESC_FacingYourIllusionsEntered, "0", "820", LocationCheckType.UShort)
+                new GenericLocationData("ESC - Facing Your Illusions - Diabolos Floor Trap", Addresses.ESC_FacingYourIllusionsDiabolosFloorTrap, "820", "32769", LocationCheckType.UShort),
+                new GenericLocationData("ESC - Facing Your Illusions Entered", Addresses.ESC_FacingYourIllusionsEntered, "0", "820", LocationCheckType.UShort)
             };
 
             return facingYourIllusionsLocations;
@@ -3485,7 +3564,7 @@ namespace Helpers
         private static List<GenericLocationData> GetBloodAndTheBeastData()
         {
             List<GenericLocationData> bloodAndTheBeastLocations = new List<GenericLocationData>() {
-                new GenericLocationData("ESC - Blood and The Beast - Poison Panel Floor Trap", Addresses.ESC_BloodAndTheBeastPoisonPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("ESC - Blood and The Beast - Poison Floor Trap", Addresses.ESC_BloodAndTheBeastPoisonPanelFloorTrap, "1588", "32769", LocationCheckType.UShort),
                     new GenericLocationData("ESC - Blood and The Beast Entered", Addresses.ESC_BloodAndTheBeastEntered, "0", "1588", LocationCheckType.UShort)
             };
 
@@ -3668,8 +3747,8 @@ namespace Helpers
         private static List<GenericLocationData> GetHallOfSwornRevengeData()
         {
             List<GenericLocationData> hallofSwornRevengeLocations = new List<GenericLocationData>() {
-                new GenericLocationData("CAT - Hall of Sworn Revenge - Heal Panel Floor Trap", Addresses.CAT_HallofSwornRevengeHealPanelFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("CAT - Hall of Sworn Revenge - Cure Panel Floor Trap", Addresses.CAT_HallofSwornRevengeCurePanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("CAT - Hall of Sworn Revenge - Heal Floor Trap", Addresses.CAT_HallofSwornRevengeHealPanelFloorTrap, "777", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("CAT - Hall of Sworn Revenge - Cure Floor Trap", Addresses.CAT_HallofSwornRevengeCurePanelFloorTrap, "777", "32769", LocationCheckType.UShort),
                     new GenericLocationData("CAT - Hall of Sworn Revenge Entered", Addresses.CAT_HallofSwornRevengeEntered, "0", "13", LocationCheckType.UShort)
             };
             return hallofSwornRevengeLocations;
@@ -3686,7 +3765,7 @@ namespace Helpers
         private static List<GenericLocationData> GetTheWeepingCorridorData()
         {
             List<GenericLocationData> theWeepingCorridorLocations = new List<GenericLocationData>() {
-                new GenericLocationData("CAT - The Weeping Corridor - Freeze Floor Trap", Addresses.CAT_TheWeepingCorridorFreezeFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("CAT - The Weeping Corridor - Freeze Floor Trap", Addresses.CAT_TheWeepingCorridorFreezeFloorTrap, "525", "32769", LocationCheckType.UShort),
                     new GenericLocationData("CAT - The Weeping Corridor Entered", Addresses.CAT_TheWeepingCorridorEntered, "0", "525", LocationCheckType.UShort)
             };
             return theWeepingCorridorLocations;
@@ -3804,7 +3883,7 @@ namespace Helpers
         private static List<GenericLocationData> GetTheLastStabOfHopeData()
         {
             List<GenericLocationData> theLastStabofHopeLocations = new List<GenericLocationData>() {
-                new GenericLocationData("CAT - The Last Stab of Hope - Cure Panel Floor Trap", Addresses.CAT_TheLastStabofHopeCurePanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("CAT - The Last Stab of Hope - Cure Floor Trap", Addresses.CAT_TheLastStabofHopeCurePanelFloorTrap, "3853", "32769", LocationCheckType.UShort),
                     new GenericLocationData("CAT - The Last Stab of Hope Entered", Addresses.CAT_TheLastStabofHopeEntered, "0", "3853", LocationCheckType.UShort)
             };
             return theLastStabofHopeLocations;
@@ -3822,7 +3901,8 @@ namespace Helpers
         {
             List<GenericLocationData> theBeastsDomainLocations = new List<GenericLocationData>() {
                 new GenericLocationData("CAT - The Beast's Domain - Lizardman Boss - Grimoire Antidote", Addresses.CAT_TheBeastsDomainLizardman1BossDefeat, "14", "0", LocationCheckType.UShort),
-                new GenericLocationData("CAT - The Beast's Domain - Lizardman Boss", Addresses.CAT_TheBeastsDomainLizardman1BossDefeat, "14", "0", LocationCheckType.UShort), // MISSING
+                new GenericLocationData("CAT - The Beast's Domain - Lizardman Boss 1", Addresses.CAT_TheBeastsDomainLizardman1BossDefeat, "14", "0", LocationCheckType.UShort),
+                new GenericLocationData("CAT - The Beast's Domain - Lizardman Boss 2", Addresses.CAT_TheBeastsDomainLizardman2BossDefeat, "14", "0", LocationCheckType.UShort),
                 new GenericLocationData("CAT - The Beast's Domain Entered", Addresses.CAT_TheBeastsDomainEntered, "0", "14", LocationCheckType.UShort)
             };
             return theBeastsDomainLocations;
@@ -3873,8 +3953,8 @@ namespace Helpers
         private static List<GenericLocationData> GetTheEarthquakesMarkData()
         {
             List<GenericLocationData> theEarthquakesMarkLocations = new List<GenericLocationData>() {
-                new GenericLocationData("AM1 - The Earthquake's Mark - Hyacinth Sigil Unlock", Addresses.AM1_TheEarthquakesMarkHyacinthSigilUnlock, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("AM1 - The Earthquake's Mark - Eruption Floor Trap", Addresses.AM1_TheEarthquakesMarkEruptionFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("AM1 - The Earthquake's Mark - Hyacinth Sigil Unlock", Addresses.AM1_TheEarthquakesMarkHyacinthSigilUnlock, "2354", "160", LocationCheckType.Byte),
+                    new GenericLocationData("AM1 - The Earthquake's Mark - Eruption Floor Trap", Addresses.AM1_TheEarthquakesMarkEruptionFloorTrap, "2354", "32769", LocationCheckType.UShort),
                     new GenericLocationData("AM1 - The Earthquake's Mark Entered", Addresses.AM1_TheEarthquakesMarkEntered, "0", "2354", LocationCheckType.UShort)
             };
             return theEarthquakesMarkLocations;
@@ -3884,8 +3964,8 @@ namespace Helpers
         {
             List<GenericLocationData> coalMineStorageLocations = new List<GenericLocationData>() {
                 new GenericLocationData("AM1 - Coal Mine Storage - Chest", Addresses.AM1_CoalMineStorageChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("AM1 - Coal Mine Storage - Poison Panel Floor Trap", Addresses.AM1_CoalMineStoragePoisonPanelFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("AM1 - Coal Mine Storage - Trap Clear Floor Trap", Addresses.AM1_CoalMineStorageTrapClearFloorTrap, "0", "160", LocationCheckType.Byte),
+                    new GenericLocationData("AM1 - Coal Mine Storage - Poison Floor Trap", Addresses.AM1_CoalMineStoragePoisonPanelFloorTrap, "2610", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("AM1 - Coal Mine Storage - Trap Clear Floor Trap", Addresses.AM1_CoalMineStorageTrapClearFloorTrap, "2610", "32769", LocationCheckType.UShort),
                     new GenericLocationData("AM1 - Coal Mine Storage Entered", Addresses.AM1_CoalMineStorageEntered, "0", "2610", LocationCheckType.UShort)
             };
             return coalMineStorageLocations;
@@ -3912,7 +3992,7 @@ namespace Helpers
         private static List<GenericLocationData> GetWhatLiesAheadData()
         {
             List<GenericLocationData> whatLiesAheadLocations = new List<GenericLocationData>() {
-                new GenericLocationData("AM1 - What Lies Ahead? - Heal Panel Floor Trap", Addresses.AM1_WhatLiesAheadHealPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("AM1 - What Lies Ahead? - Heal Floor Trap", Addresses.AM1_WhatLiesAheadHealPanelFloorTrap, "1842", "32769", LocationCheckType.UShort),
                     new GenericLocationData("AM1 - What Lies Ahead? Entered", Addresses.AM1_WhatLiesAheadEntered, "0", "1842", LocationCheckType.UShort)
             };
             return whatLiesAheadLocations;
@@ -3964,7 +4044,7 @@ namespace Helpers
         {
             List<GenericLocationData> miningRegretsLocations = new List<GenericLocationData>() {
                 new GenericLocationData("AM1 - Mining Regrets - Chest", Addresses.AM1_MiningRegretsChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("AM1 - Mining Regrets - Death Vapor Floor Trap", Addresses.AM1_MiningRegretsDeathVaporFloorTrap, "0", "160", LocationCheckType.Byte),
+                    new GenericLocationData("AM1 - Mining Regrets - Death Vapor Floor Trap", Addresses.AM1_MiningRegretsDeathVaporFloorTrap, "4146", "32769", LocationCheckType.UShort),
                     new GenericLocationData("AM1 - Mining Regrets Entered", Addresses.AM1_MiningRegretsEntered, "0", "4146", LocationCheckType.UShort)
             };
             return miningRegretsLocations;
@@ -4109,7 +4189,7 @@ namespace Helpers
         private static List<GenericLocationData> GetFoolsGoldFoolsLossData()
         {
             List<GenericLocationData> foolsGoldFoolsLossLocations = new List<GenericLocationData>() {
-                new GenericLocationData("AM2 - Fool's Gold, Fool's Loss - Paralysis Panel Floor Trap", Addresses.AM2_FoolsGoldFoolsLossParalysisPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("AM2 - Fool's Gold, Fool's Loss - Paralysis Floor Trap", Addresses.AM2_FoolsGoldFoolsLossParalysisPanelFloorTrap, "4403", "32769", LocationCheckType.UShort),
                     new GenericLocationData("AM2 - Fool's Gold, Fool's Loss Entered", Addresses.AM2_FoolsGoldFoolsLossEntered, "0", "4403", LocationCheckType.UShort)
             };
             return foolsGoldFoolsLossLocations;
@@ -4134,7 +4214,7 @@ namespace Helpers
         private static List<GenericLocationData> GetLambsToTheSlaughterData()
         {
             List<GenericLocationData> lambsToTheSlaughterLocations = new List<GenericLocationData>() {
-                new GenericLocationData("AM2 - Lambs to the Slaughter - Heal Panel Floor Trap", Addresses.AM2_LambsToTheSlaughterHealPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("AM2 - Lambs to the Slaughter - Heal Floor Trap", Addresses.AM2_LambsToTheSlaughterHealPanelFloorTrap, "6195", "32769", LocationCheckType.UShort),
                     new GenericLocationData("AM2 - Lambs to the Slaughter Entered", Addresses.AM2_LambsToTheSlaughterEntered, "0", "6195", LocationCheckType.UShort)
             };
             return lambsToTheSlaughterLocations;
@@ -4152,14 +4232,14 @@ namespace Helpers
         {
             List<GenericLocationData> suicidalDesiresLocations = new List<GenericLocationData>() {
                 new GenericLocationData("AM2 - Suicidal Desires - Chest", Addresses.AM2_SuicidalDesiresChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("AM2 - Suicidal Desires - Death Vapor Floor Trap", Addresses.AM2_SuicidalDesiresDeathVaporFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("AM2 - Suicidal Desires - Paralysis Panel Floor Trap", Addresses.AM2_SuicidalDesiresParalysisPanelFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("AM2 - Suicidal Desires - Holy Light Floor Trap", Addresses.AM2_SuicidalDesiresHolyLightFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("AM2 - Suicidal Desires - Terra Thrust Floor Trap", Addresses.AM2_SuicidalDesiresTeraThrustFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("AM2 - Suicidal Desires - Gust Floor Trap", Addresses.AM2_SuicidalDesiresGustFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("AM2 - Suicidal Desires - Freeze Floor Trap", Addresses.AM2_SuicidalDesiresFreezeFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("AM2 - Suicidal Desires - Eruption Floor Trap", Addresses.AM2_SuicidalDesiresEruptionFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("AM2 - Suicidal Desires - Trap Clear Floor Trap", Addresses.AM2_SuicidalDesiresTrapClearFloorTrap, "0", "160", LocationCheckType.Byte),
+                    new GenericLocationData("AM2 - Suicidal Desires - Death Vapor Floor Trap", Addresses.AM2_SuicidalDesiresDeathVaporFloorTrap, "5683", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("AM2 - Suicidal Desires - Paralysis Floor Trap", Addresses.AM2_SuicidalDesiresParalysisPanelFloorTrap, "5683", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("AM2 - Suicidal Desires - Holy Light Floor Trap", Addresses.AM2_SuicidalDesiresHolyLightFloorTrap, "5683", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("AM2 - Suicidal Desires - Terra Thrust Floor Trap", Addresses.AM2_SuicidalDesiresTeraThrustFloorTrap, "5683", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("AM2 - Suicidal Desires - Gust Floor Trap", Addresses.AM2_SuicidalDesiresGustFloorTrap, "5683", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("AM2 - Suicidal Desires - Freeze Floor Trap", Addresses.AM2_SuicidalDesiresFreezeFloorTrap, "5683", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("AM2 - Suicidal Desires - Eruption Floor Trap", Addresses.AM2_SuicidalDesiresEruptionFloorTrap, "5683", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("AM2 - Suicidal Desires - Trap Clear Floor Trap", Addresses.AM2_SuicidalDesiresTrapClearFloorTrap, "5683", "32769", LocationCheckType.UShort),
                     new GenericLocationData("AM2 - Suicidal Desires Entered", Addresses.AM2_SuicidalDesiresEntered, "0", "5683", LocationCheckType.UShort)
             };
             return suicidalDesiresLocations;
@@ -4184,7 +4264,7 @@ namespace Helpers
         private static List<GenericLocationData> GetHallOfContemplationData()
         {
             List<GenericLocationData> hallOfContemplationLocations = new List<GenericLocationData>() {
-                new GenericLocationData("AM2 - Hall of Contemplation - Eruption Floor Trap", Addresses.AM2_HallOfContemplationEruptionFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("AM2 - Hall of Contemplation - Eruption Floor Trap", Addresses.AM2_HallOfContemplationEruptionFloorTrap, "3123", "32769", LocationCheckType.UShort),
                     new GenericLocationData("AM2 - Hall of Contemplation Entered", Addresses.AM2_HallOfContemplationEntered, "0", "3123", LocationCheckType.UShort)
             };
             return hallOfContemplationLocations;
@@ -4223,8 +4303,8 @@ namespace Helpers
         private static List<GenericLocationData> GetCrossingOfBloodData()
         {
             List<GenericLocationData> crossingOfBloodLocations = new List<GenericLocationData>() {
-                new GenericLocationData("AM2 - Crossing of Blood - Holy Light Floor Trap", Addresses.AM2_CrossingOfBloodHolyLightFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("AM2 - Crossing of Blood - Diabolos Floor Trap", Addresses.AM2_CrossingOfBloodDiabolosFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("AM2 - Crossing of Blood - Holy Light Floor Trap", Addresses.AM2_CrossingOfBloodHolyLightFloorTrap, "4147", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("AM2 - Crossing of Blood - Diabolos Floor Trap", Addresses.AM2_CrossingOfBloodDiabolosFloorTrap, "4147", "32769", LocationCheckType.UShort),
                     new GenericLocationData("AM2 - Crossing of Blood Entered", Addresses.AM2_CrossingOfBloodEntered, "0", "4147", LocationCheckType.UShort)
             };
             return crossingOfBloodLocations;
@@ -4234,8 +4314,8 @@ namespace Helpers
         private static List<GenericLocationData> GetSensesLostData()
         {
             List<GenericLocationData> sensesLostLocations = new List<GenericLocationData>() {
-                new GenericLocationData("AM2 - Senses Lost - Eruption Floor Trap", Addresses.AM2_SensesLostEruptionFloorTrap, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("AM2 - Senses Lost - Poison Panel Floor Trap", Addresses.AM2_SensesLostPoisonPanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("AM2 - Senses Lost - Eruption Floor Trap", Addresses.AM2_SensesLostEruptionFloorTrap, "4915", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("AM2 - Senses Lost - Poison Floor Trap", Addresses.AM2_SensesLostPoisonPanelFloorTrap, "4915", "32769", LocationCheckType.UShort),
                     new GenericLocationData("AM2 - Senses Lost Entered", Addresses.AM2_SensesLostEntered, "0", "4915", LocationCheckType.UShort)
             };
             return sensesLostLocations;
@@ -4245,7 +4325,7 @@ namespace Helpers
         private static List<GenericLocationData> GetDesiresPassageData()
         {
             List<GenericLocationData> desiresPassageLocations = new List<GenericLocationData>() {
-                new GenericLocationData("AM2 - Desire's Passage - Cure Panel Floor Trap", Addresses.AM2_DesiresPassageCurePanelFloorTrap, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("AM2 - Desire's Passage - Cure Floor Trap", Addresses.AM2_DesiresPassageCurePanelFloorTrap, "5171", "32769", LocationCheckType.UShort),
                     new GenericLocationData("AM2 - Desire's Passage Entered", Addresses.AM2_DesiresPassageEntered, "0", "5171", LocationCheckType.UShort)
             };
             return desiresPassageLocations;

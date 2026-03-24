@@ -16,6 +16,13 @@ public class App
 
     public static int ProcessedItemIndex = 0;
 
+    public static CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+    public static CancellationTokenSource _cancellationTokenMapListener = new CancellationTokenSource();
+    public static CancellationTokenSource _cancellationTokenBreakArtListener = new CancellationTokenSource();
+    public static CancellationTokenSource _cancellationTokenChainAbilityListener = new CancellationTokenSource();
+    public static CancellationTokenSource _cancellationTokenMapChestListener = new CancellationTokenSource();
+    public static CancellationTokenSource _cancellationTokenMapBossListener = new CancellationTokenSource();
+
     private static async Task Main(string[] args)
     {
         Console.OutputEncoding = Encoding.UTF8;
@@ -28,8 +35,6 @@ public class App
         string slot;
         string password;
         string gameName = "Vagrant Story";
-
-        CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
         List<ILocation> GameLocations = null;
 
@@ -209,17 +214,18 @@ public class App
                 await archipelagoClient.ReceiveReady();
 
                 PlayerStateHelpers.OnGameLoaded(archipelagoClient);
-                PlayerStateHelpers.SetUpMapListener(_cancellationTokenSource, archipelagoClient);
+                PlayerStateHelpers.SetUpMapListener(_cancellationTokenMapListener, archipelagoClient);
                 PlayerStateHelpers.EnableTeleportOptions(archipelagoClient);
+                PlayerStateHelpers.EnableNewGamePlus(archipelagoClient);
                 PlayerStateHelpers.SetVanillaBattleSkills();
                 PlayerStateHelpers.BreakArtThresholdSetup(archipelagoClient);
-                PlayerStateHelpers.BreakArtListener(_cancellationTokenSource, archipelagoClient);
+                PlayerStateHelpers.BreakArtListener(_cancellationTokenBreakArtListener, archipelagoClient);
                 PlayerStateHelpers.ChainAbilityThresholdSetup(archipelagoClient);
-                PlayerStateHelpers.ChainAbilityListener(_cancellationTokenSource, archipelagoClient);
+                PlayerStateHelpers.ChainAbilityListener(_cancellationTokenChainAbilityListener, archipelagoClient);
 
                 MapHelper.StartMapProgressionListener();
-                MapHelper.StartMapChestListener(archipelagoClient.Options);
-                MapHelper.StartMapBossListener(archipelagoClient.Options);
+                MapHelper.StartMapChestListener(_cancellationTokenMapChestListener, archipelagoClient.Options);
+                MapHelper.StartMapBossListener(_cancellationTokenMapBossListener, archipelagoClient.Options);
 
                 _ = archipelagoClient.MonitorLocationsAsync(GameLocations);
             }

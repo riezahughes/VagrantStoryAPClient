@@ -1,5 +1,6 @@
 ﻿using Archipelago.Core.Util;
 using Helpers;
+using Kokuban;
 using Spectre.Console;
 
 namespace VagrantStoryArchipelago.Helpers
@@ -63,25 +64,34 @@ namespace VagrantStoryArchipelago.Helpers
             byte prog2 = Memory.ReadByte(Addresses.ProgressionState2);
 
             Console.WriteLine($"--- DEBUG INFO ---");
+            Console.WriteLine($"Current Thread States:");
+            Console.WriteLine($"Main Thread: {App._cancellationTokenSource.Token.CanBeCanceled}");
+            Console.WriteLine($"Map Listener: {App._cancellationTokenMapListener.Token.CanBeCanceled}");
+            Console.WriteLine($"Break Art Listener: {App._cancellationTokenBreakArtListener.Token.CanBeCanceled}");
+            Console.WriteLine($"Chain Ability Listener: {App._cancellationTokenChainAbilityListener.Token.CanBeCanceled}");
+            Console.WriteLine($"Chest Listener: {App._cancellationTokenMapChestListener.Token.CanBeCanceled}");
+            Console.WriteLine($"Boss Listener: {App._cancellationTokenMapBossListener.Token.CanBeCanceled}");
+            Console.WriteLine("---");
             Console.WriteLine($"Current Room: 0x{roomAndId:X4}");
             Console.WriteLine($"Current Room Name: {MapHelper.HexToRoomDictionary[roomAndId]}");
+            Console.WriteLine("---");
             Console.WriteLine($"Current Actor Pointer Value: 0x{actorPointer:X8}");
             Console.WriteLine($"Current Actor Pointer Value Cleaned: 0x{actorPointerRemoved:X8}");
             Console.WriteLine($"Current Boss Pointer: 0x{bossPointerRemoved:X8}");
             Console.WriteLine($"Current Enemies: {enemyCount}");
-            Console.WriteLine($"Current Trap Pointer Value: 0x{trapPointer:X8}");
-            Console.WriteLine($"Current Trap Pointer Value Cleaned: 0x{trapPointerRemoved:X8}");
-            Console.WriteLine($"Current Traps in Rooom: {trapCount}");
-            Console.WriteLine($"Progression State 1: 0x{prog1:X2}");
-            Console.WriteLine($"Progression  State 2: 0x{prog2:X2}");
-
-
             var actors = ActorHelpers.GetAllActors(actorPointerRemoved);
             foreach (var actor in actors)
             {
                 Console.WriteLine($"Actor NextPointer: 0x{actor.NextActorPointer:X8}");
                 Console.WriteLine($"Actor HP: {actor.CurrentHP}/{actor.MaxHP}");
             }
+            Console.WriteLine("---");
+            Console.WriteLine($"Current Trap Pointer Value: 0x{trapPointer:X8}");
+            Console.WriteLine($"Current Trap Pointer Value Cleaned: 0x{trapPointerRemoved:X8}");
+            Console.WriteLine($"Current Traps in Rooom: {Chalk.BgBlue + (Chalk.White + trapCount.ToString())}");
+            Console.WriteLine("---");
+            Console.WriteLine($"Progression State 1: 0x{prog1:X2}");
+            Console.WriteLine($"Progression  State 2: 0x{prog2:X2}");
             Console.WriteLine($"------------------");
         }
     }

@@ -1,4 +1,5 @@
-﻿using Archipelago.Core;
+﻿using System.Collections.ObjectModel;
+using Archipelago.Core;
 using Archipelago.Core.Util;
 using Archipelago.MultiClient.Net.Models;
 using Helpers;
@@ -30,6 +31,14 @@ namespace VagrantStoryArchipelago.Helpers
             }
 
             // Try to handle the item based on type
+            if (result.Contains("Teleport"))
+                return handleTeleportItem();
+            if (result.Contains("Rood Inverse"))
+                return handleRoodInverseItem();
+            if (ItemHelpers.ItemReference.Any(itm => itm.Value == item.ItemName && itm.Value.Contains("Grimoire")))
+                return ItemHelpers.handleGrimoireUnlock(item, client.CurrentSession.Items.AllItemsReceived);
+            if (ItemHelpers.ItemReference.Any(itm => itm.Value == item.ItemName && itm.Value.Contains("Grimoire")))
+                return ItemHelpers.handleGrimoireUnlock(item, client.CurrentSession.Items.AllItemsReceived);
             if (ItemHelpers.ItemReference.Any(itm => itm.Value == item.ItemName))
                 return ItemHelpers.handleInventoryItem(item);
             else if (ItemHelpers.GemReference.Any(itm => itm.Value == item.ItemName))
@@ -53,6 +62,18 @@ namespace VagrantStoryArchipelago.Helpers
                 Console.WriteLine($"Item not recognised. ({item.ItemName}) Skipping");
                 return true; // Skip unrecognized items
             }
+        }
+
+        public static bool handleRoodInverseItem()
+        {
+            Memory.WriteByte(Addresses.RoodInverseActive, 0x0);
+            return true;
+        }
+
+        public static bool handleTeleportItem()
+        {
+            Memory.WriteByte(Addresses.TeleportToggle, 0x01);
+            return true;
         }
 
 
@@ -349,6 +370,38 @@ namespace VagrantStoryArchipelago.Helpers
             }
 
         }
+
+        public static bool handleGrimoireUnlock(ItemInfo item, ReadOnlyCollection<ItemInfo> itemsRecieved)
+        {
+            if (GrimoireReference.TryGetValue(item.ItemName, out GrimoireData grimoire))
+            {
+                if (grimoire.Address.Count == 1)
+                {
+                    Memory.WriteByte(grimoire.Address[0], grimoire.Value);
+                    return true;
+                }
+                else
+                {
+                    // take the items recieved, take the current state, count how many of the item appear between 0 and state, run through each update
+
+                    var count = itemsRecieved.Take(App.ProcessedItemIndex + 1).Count(itm => itm.ItemName == item.ItemName);
+                    count = count > 4 ? 4 : count;
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        Memory.WriteByte(grimoire.Address[i], grimoire.Value);
+                    }
+
+                    return true;
+                }
+            }
+            else
+            {
+                Console.WriteLine($"Grimoire {item.ItemName} not recognised. Skipping.");
+                return true;
+            }
+        }
+
         public static bool handleInventoryItem(ItemInfo item)
         {
             // Specifically only for inventory items. Does not include weapons/armour/etc
@@ -885,6 +938,125 @@ namespace VagrantStoryArchipelago.Helpers
             ["Windbreak Defence Ability"] = Addresses.AbilityWindBreakUnlock,
         };
 
+        public class GrimoireData
+        {
+            public required List<uint> Address { get; set; }
+            public required byte Value { get; set; }
+        }
+
+        public static Dictionary<string, GrimoireData> GrimoireReference = new Dictionary<string, GrimoireData>()
+        {
+            ["Grimoire Debile"] = new GrimoireData { Address = [Addresses.GrimoireDegenerateUnlock], Value = 0x90 },
+            ["Grimoire Nuageux"] = new GrimoireData { Address = [Addresses.GrimoirePsychodrainUnlock], Value = 0x90 },
+            ["Grimoire Tardif"] = new GrimoireData { Address = [Addresses.GrimoireLeadbonesUnlock], Value = 0x90 },
+            ["Grimoire Deteriorer"] = new GrimoireData { Address = [Addresses.GrimoireTarnishUnlock], Value = 0x90 },
+            ["Grimoire Analyse"] = new GrimoireData { Address = [Addresses.GrimoireAnalyzeUnlock], Value = 0x90 },
+            ["Grimoire Intensite"] = new GrimoireData { Address = [Addresses.GrimoireHeraklesUnlock], Value = 0x90 },
+            ["Grimoire Terre"] = new GrimoireData { Address = [Addresses.GrimoireVulcanLanceUnlock], Value = 0x90 },
+            ["Grimoire Eclairer"] = new GrimoireData { Address = [Addresses.GrimoireEnlightenUnlock], Value = 0x90 },
+            ["Grimoire Agilite"] = new GrimoireData { Address = [Addresses.GrimoireInvigorateUnlock], Value = 0x90 },
+            ["Grimoire Ameliorer"] = new GrimoireData { Address = [Addresses.GrimoireProstasiaUnlock], Value = 0x90 },
+            ["Grimoire Sylphe"] = new GrimoireData { Address = [Addresses.GrimoireLuftFusionUnlock], Value = 0x90 },
+            ["Grimoire Salamandre"] = new GrimoireData { Address = [Addresses.GrimoireSparkFusionUnlock], Value = 0x90 },
+            ["Grimoire Gnome"] = new GrimoireData { Address = [Addresses.GrimoireSoilFusionUnlock], Value = 0x90 },
+            ["Grimoire Undine"] = new GrimoireData { Address = [Addresses.GrimoireFrostFusionUnlock], Value = 0x90 },
+            ["Grimoire Parebrise"] = new GrimoireData { Address = [Addresses.GrimoireAeroGuardUnlock], Value = 0x90 },
+            ["Grimoire Ignifuge"] = new GrimoireData { Address = [Addresses.GrimoirePyroGuardUnlock], Value = 0x90 },
+            ["Grimoire Rempart"] = new GrimoireData { Address = [Addresses.GrimoireTerraGuardUnlock], Value = 0x90 },
+            ["Grimoire Barrer"] = new GrimoireData { Address = [Addresses.GrimoireAquaGuardUnlock], Value = 0x90 },
+            ["Grimoire Muet"] = new GrimoireData { Address = [Addresses.GrimoireSilenceUnlock], Value = 0x90 },
+            ["Grimoire Annuler"] = new GrimoireData { Address = [Addresses.GrimoireMagicWardUnlock], Value = 0x90 },
+            ["Grimoire Vie"] = new GrimoireData { Address = [Addresses.GrimoireSurgingBalmUnlock], Value = 0x90 },
+            ["Grimoire Halte"] = new GrimoireData { Address = [Addresses.GrimoireFixateUnlock], Value = 0xB0 },
+            ["Grimoire Dissiper"] = new GrimoireData { Address = [Addresses.GrimoireDispelUnlock], Value = 0x90 },
+            ["Grimoire Paralysie"] = new GrimoireData { Address = [Addresses.GrimoireStunCloudUnlock], Value = 0x90 },
+            ["Grimoire Venin"] = new GrimoireData { Address = [Addresses.GrimoirePoisonMistUnlock], Value = 0x90 },
+            ["Grimoire Fleau"] = new GrimoireData { Address = [Addresses.GrimoireCurseUnlock], Value = 0x90 },
+            ["Grimoire Mollesse"] = new GrimoireData { Address = [Addresses.GrimoireRestorationUnlock], Value = 0x90 },
+            ["Grimoire Antidote"] = new GrimoireData { Address = [Addresses.GrimoireAntidoteUnlock], Value = 0x90 },
+            ["Grimoire Benir"] = new GrimoireData { Address = [Addresses.GrimoireBlessingUnlock], Value = 0x90 },
+            ["Grimoire Purifier"] = new GrimoireData { Address = [Addresses.GrimoireClearanceUnlock], Value = 0x90 },
+            ["Grimoire Clef"] = new GrimoireData { Address = [Addresses.GrimoireUnlockUnlock], Value = 0x90 },
+            ["Grimoire Visible"] = new GrimoireData { Address = [Addresses.GrimoireEurekaUnlock], Value = 0xB0 },
+            ["Grimoire Egout"] = new GrimoireData { Address = [Addresses.GrimoireDrainHeartUnlock], Value = 0x90 },
+            ["Grimoire Demance"] = new GrimoireData { Address = [Addresses.GrimoireDrainMindUnlock], Value = 0x90 },
+            ["Grimoire Guerir"] = new GrimoireData { Address = [Addresses.GrimoireHealUnlock], Value = 0x90 },
+            ["Grimoire Teslae"] = new GrimoireData { Address = [Addresses.GrimoireLightningBoltUnlock], Value = 0xC0 },
+            ["Grimoire Lux"] = new GrimoireData { Address = [Addresses.GrimoireSpiritSurgeUnlock], Value = 0xC0 },
+            ["Grimoire Exsorcer"] = new GrimoireData { Address = [Addresses.GrimoireExorcismUnlock], Value = 0x90 },
+
+            ["Grimoire Demolir"] = new GrimoireData
+            {
+                Address = new List<uint> {
+                    Addresses.GrimoireExplosionL1,
+                    Addresses.GrimoireExplosionL2,
+                    Addresses.GrimoireExplosionL3,
+                    Addresses.GrimoireExplosionMaxLevel
+            },
+                Value = 0x80
+            },
+            ["Grimoire Foudre"] = new GrimoireData
+            {
+                Address = new List<uint> {
+                    Addresses.GrimoireThunderburstL1,
+                    Addresses.GrimoireThunderburstL2,
+                    Addresses.GrimoireThunderburstL3,
+                    Addresses.GrimoireThunderburstMaxLevel
+            },
+                Value = 0x80
+            },
+            ["Grimoire Flamme"] = new GrimoireData
+            {
+                Address = new List<uint> {
+                    Addresses.GrimoireFlameSphereL1,
+                    Addresses.GrimoireFlameSphereL2,
+                    Addresses.GrimoireFlameSphereL3,
+                    Addresses.GrimoireFlameSphereMaxLevel
+            },
+                Value = 0x80
+            },
+            ["Grimoire Gaea"] = new GrimoireData
+            {
+                Address = new List<uint> {
+                    Addresses.GrimoireGaeaStrikeL1,
+                    Addresses.GrimoireGaeaStrikeL2,
+                    Addresses.GrimoireGaeaStrikeL3,
+                    Addresses.GrimoireGaeaStrikeMaxLevel
+            },
+                Value = 0x80
+            },
+            ["Grimoire Avalanche"] = new GrimoireData
+            {
+                Address = new List<uint> {
+                    Addresses.GrimoireAvalancheL1,
+                    Addresses.GrimoireAvalancheL2,
+                    Addresses.GrimoireAvalancheL3,
+                    Addresses.GrimoireAvalancheMaxLevel
+            },
+                Value = 0x80
+            },
+            ["Grimoire Radius"] = new GrimoireData
+            {
+                Address = new List<uint> {
+                    Addresses.GrimoireRadialSurgeL1,
+                    Addresses.GrimoireRadialSurgeL2,
+                    Addresses.GrimoireRadialSurgeL3,
+                    Addresses.GrimoireRadialSurgeMaxLevel
+            },
+                Value = 0x80
+            },
+            ["Grimoire Meteore"] = new GrimoireData
+            {
+                Address = new List<uint> {
+                    Addresses.GrimoireMeteorL1,
+                    Addresses.GrimoireMeteorL2,
+                    Addresses.GrimoireMeteorL3,
+                    Addresses.GrimoireMeteorMaxLevel
+            },
+                Value = 0x80
+            },
+        };
+
         public struct BreakArtInfo
         {
             public uint Address;
@@ -1342,11 +1514,12 @@ namespace VagrantStoryArchipelago.Helpers
             { 0x89, "Grimoire Exsorcer" },
             { 0x8A, "Grimoire Banish" },
             { 0x8B, "Grimoire Demolir" },
+            { 0x8F, "Grimoire Foudre" },
             { 0x93, "Grimoire Flamme" },
             { 0x97, "Grimoire Gaea" },
             { 0x9B, "Grimoire Avalanche" },
             { 0x9F, "Grimoire Radius" },
-            { 0xA1, "Grimoire Meteore" },
+            { 0xA3, "Grimoire Meteore" },
             { 0xA7, "Grimoire Egout" },
             { 0xA8, "Grimoire Demance" },
             { 0xA9, "Grimoire Guerir" },

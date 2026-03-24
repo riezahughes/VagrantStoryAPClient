@@ -30,5 +30,15 @@ namespace VagrantStoryArchipelago.Helpers
         public static int CountActors(uint pointerAddress) => GetAllActors(pointerAddress).Count;
 
         //public static Dictionary<>
+        //
+        // Dark Crusader fight
+        /*
+        Actor NextPointer: 0x8018D340
+        Actor HP: 302/302 guy
+        Actor NextPointer: 0x801814C0
+        Actor HP: 379/379 crusader
+        Actor NextPointer: 0x00000000
+        Actor HP: 282/282 sydney
+        */
     }
 }

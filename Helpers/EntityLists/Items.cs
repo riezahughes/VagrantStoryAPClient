@@ -65,7 +65,7 @@ namespace VagrantStoryArchipelago.Data
             ["Grimoire Gaea"] = new InventoryItemData("Grimoire Gaea", 0x97, 0x01, 1, 0x00),
             ["Grimoire Avalanche"] = new InventoryItemData("Grimoire Avalanche", 0x9B, 0x01, 1, 0x00),
             ["Grimoire Radius"] = new InventoryItemData("Grimoire Radius", 0x9F, 0x01, 1, 0x00),
-            ["Grimoire Meteore"] = new InventoryItemData("Grimoire Meteore", 0xA1, 0x01, 1, 0x00),
+            ["Grimoire Meteore"] = new InventoryItemData("Grimoire Meteore", 0xA3, 0x01, 1, 0x00),
             ["Grimoire Egout"] = new InventoryItemData("Grimoire Egout", 0xA7, 0x01, 1, 0x00),
             ["Grimoire Demance"] = new InventoryItemData("Grimoire Demance", 0xA8, 0x01, 1, 0x00),
             ["Grimoire Guerir"] = new InventoryItemData("Grimoire Guerir", 0xA9, 0x01, 1, 0x00),
@@ -100,6 +100,7 @@ namespace VagrantStoryArchipelago.Data
             ["Grimoire Ignifuge"] = new InventoryItemData("Grimoire Ignifuge", 0xC6, 0x01, 1, 0x00),
             ["Grimoire Rempart"] = new InventoryItemData("Grimoire Rempart", 0xC7, 0x01, 1, 0x00),
             ["Grimoire Barrer"] = new InventoryItemData("Grimoire Barrer", 0xC8, 0x01, 1, 0x00),
+            ["Grimoire Foudre"] = new InventoryItemData("Grimoire Foudre", 0x8F, 0x01, 1, 0x00),
 
             // Keys (0xCA-0xD1)
             ["Bronze Key"] = new InventoryItemData("Bronze Key", 0xCA, 0x01, 1, 0x00),

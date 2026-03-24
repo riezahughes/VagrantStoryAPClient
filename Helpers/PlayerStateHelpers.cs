@@ -59,9 +59,17 @@ namespace Helpers
 
         public static void SetOpenWorldSettings(ArchipelagoClient client)
         {
-
             SetVanillaBattleSkills();
             return;
+        }
+
+        public static void EnableNewGamePlus(ArchipelagoClient client)
+        {
+            int newgameplus_choice = Int32.Parse(client.Options?.GetValueOrDefault("include_new_game_plus", "0").ToString());
+            if (newgameplus_choice == 1)
+            {
+                Memory.WriteByte(Addresses.RoodInverseActive, 0x01);
+            }
         }
 
 

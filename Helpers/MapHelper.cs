@@ -42,12 +42,13 @@ public class MapHelper
             value => value != _lastRoomValue);
     }
 
-    public static void StartMapBossListener(Dictionary<string, object> options)
+    public static void StartMapBossListener(CancellationTokenSource cts, Dictionary<string, object> options)
     {
         Memory.MonitorAddressForAction<uint>(
             Addresses.MapBossDataPointer,
             () =>
             {
+                if (cts.Token.IsCancellationRequested) return;
                 ushort mapId = Memory.ReadUShort(Addresses.CurrentMapandRoomID);
                 uint pointerValue = Memory.ReadUInt(Addresses.MapBossDataPointer);
 
@@ -60,7 +61,7 @@ public class MapHelper
                     _lastPointerValueBoss = pointerValue;
                 }
                 Thread.Sleep(500);
-                StartMapBossListener(options);
+                StartMapBossListener(cts, options);
             },
             value => value != _lastPointerValueBoss);
     }
@@ -97,12 +98,14 @@ public class MapHelper
         Memory.WriteObject<MapBossData>(currentPointerValue, replacementBossItems);
     }
 
-    public static void StartMapChestListener(Dictionary<string, object> options)
+    public static void StartMapChestListener(CancellationTokenSource cts, Dictionary<string, object> options)
     {
         Memory.MonitorAddressForAction<ushort>(
             Addresses.CurrentMapandRoomID,
             () =>
             {
+                if (cts.Token.IsCancellationRequested) return;
+
                 ushort mapId = Memory.ReadUShort(Addresses.CurrentMapandRoomID);
 
                 if (APHelpers.isInTheGame() && APHelpers.isProcessingItems() == false && MapsWithChests.Contains(mapId))
@@ -116,7 +119,7 @@ public class MapHelper
                     _lastMapIdChest = mapId;
                 }
                 Thread.Sleep(500);
-                StartMapChestListener(options);
+                StartMapChestListener(cts, options);
             },
             value => value != _lastMapIdChest);
     }
