@@ -10,6 +10,7 @@ using Helpers;
 using Microsoft.Extensions.Configuration;
 using VagrantStoryArchipelago;
 using VagrantStoryArchipelago.Helpers;
+using VagrantStoryArchipelago.Options;
 
 public class App
 {
@@ -193,9 +194,9 @@ public class App
 
             GameLocations = LocationHelpers.BuildLocationList(archipelagoClient.Options);
 
-            int progression_choice = Int32.Parse(archipelagoClient.Options?.GetValueOrDefault("progression_option", "0").ToString());
+            ProgressionOptions progression_choice = PlayerStateHelpers.GetPlayerOption<ProgressionOptions>(archipelagoClient.Options, "progression_option");
 
-            if (progression_choice == 1)
+            if (progression_choice == ProgressionOptions.OPEN)
             {
                 MapHelper.SetStartingLocation(_cancellationTokenSource, archipelagoClient);
             }
@@ -227,7 +228,7 @@ public class App
                 MapHelper.StartMapChestListener(_cancellationTokenMapChestListener, archipelagoClient.Options);
                 MapHelper.StartMapBossListener(_cancellationTokenMapBossListener, archipelagoClient.Options);
 
-                _ = archipelagoClient.MonitorLocationsAsync(GameLocations);
+                _ = archipelagoClient.MonitorLocationsAsync(GameLocations, _cancellationTokenSource.Token);
             }
             catch (Exception ex)
             {
@@ -243,14 +244,14 @@ public class App
                     if (input?.Trim().ToLower() == "exit")
                     {
                         _cancellationTokenSource.Cancel();
-                        break;
                     }
                     else if (input?.Trim().ToLower() == "options")
                     {
-                        foreach (var option in archipelagoClient.Options)
-                        {
-                            Console.WriteLine($"{option.Key}: {option.Value}");
-                        }
+                        CliHelpers.RunOptions(archipelagoClient);
+                    }
+                    else if (input?.Trim().ToLower() == "status")
+                    {
+                        CliHelpers.RunStatus(archipelagoClient);
                     }
                     else if (input?.Trim().ToLower() == "debug")
                     {
@@ -258,7 +259,6 @@ public class App
                     }
                     else if (input?.Trim().ToLower().Contains("hint") == true)
                     {
-
                         string hintString = input?.Trim().ToLower() == "hint" ? "!hint" : $"!hint {input.Substring(5).Trim()}";
                         archipelagoClient.SendMessage(hintString);
                     }

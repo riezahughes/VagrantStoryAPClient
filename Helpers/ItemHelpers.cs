@@ -3,6 +3,7 @@ using Archipelago.Core;
 using Archipelago.Core.Util;
 using Archipelago.MultiClient.Net.Models;
 using Helpers;
+using Kokuban;
 using VagrantStoryArchipelago.Data;
 using VagrantStoryArchipelago.Enums;
 using VagrantStoryArchipelago.Helpers.EntityLists;
@@ -99,12 +100,16 @@ namespace VagrantStoryArchipelago.Helpers
                     // Only increment if we successfully gave the item
                     App.ProcessedItemIndex++;
                     Memory.Write(Addresses.ItemIndexStorage, (ushort)App.ProcessedItemIndex);
+#if DEBUG
                     Console.WriteLine($"Successfully processed item {App.ProcessedItemIndex}/{allItems.Count}");
+#endif
                 }
                 else
                 {
                     // Inventory full - stop processing and wait
-                    Console.WriteLine($"Cannot process item {itemToProcess.ItemName} - inventory full. Will retry later.");
+                    Kokuban.AnsiEscape.AnsiStyle bg = Chalk.BgMagenta;
+                    Kokuban.AnsiEscape.AnsiStyle fg = Chalk.White;
+                    Console.WriteLine(bg + (fg + $"⚠️ Cannot process item {itemToProcess.ItemName} - inventory full. Will retry later."));
                     break; // Exit the loop, we'll try again later
                 }
             }
@@ -301,7 +306,6 @@ namespace VagrantStoryArchipelago.Helpers
                 switch ((ArmorType)type)
                 {
                     case 0x00:
-                        Console.WriteLine("Armour type not set up yet");
                         armorData = HelmetDatabase.Helmets["Leather Bandana"]; // just adding a slot for the sake of it. Way less hassle if i do this.
                         armorData.ArmorInventorySlot = bytes[0];
                         armorList.Add(armorData);
@@ -328,7 +332,6 @@ namespace VagrantStoryArchipelago.Helpers
                         armorList.Add(armorData);
                         break;
                     default:
-                        Console.WriteLine("Armour type not set up yet");
                         armorData = HelmetDatabase.Helmets["Leather Bandana"]; // just adding a slot for the sake of it. Way less hassle if i do this.
                         armorData.ArmorInventorySlot = bytes[0];
                         armorList.Add(armorData);
@@ -412,7 +415,9 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (listOfSlots.Count >= 64)
             {
+#if DEBUG
                 Console.WriteLine($"Inventory full. Cannot add {item.ItemName}");
+#endif
                 return false;
             }
 
@@ -449,7 +454,9 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (listOfSlots.Count >= 48)
             {
+#if DEBUG
                 Console.WriteLine($"Inventory full. Cannot add {item.ItemName}");
+#endif
                 return false;
             }
 
@@ -481,7 +488,9 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (listOfSlots.Count >= 8)
             {
+#if DEBUG
                 Console.WriteLine($"Inventory full. Cannot add {item.ItemName}");
+#endif
                 return false;
             }
 
@@ -513,7 +522,9 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (listOfSlots.Count >= 16)
             {
+#if DEBUG
                 Console.WriteLine($"Inventory full. Cannot add {item.ItemName}");
+#endif
                 return false;
             }
 
@@ -545,7 +556,9 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (listOfSlots.Count >= 16)
             {
+#if DEBUG
                 Console.WriteLine($"Inventory full. Cannot add {item.ItemName}");
+#endif
                 return false;
             }
 
@@ -577,7 +590,9 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (listOfSlots.Count >= 16)
             {
+#if DEBUG
                 Console.WriteLine($"Inventory full. Cannot add {item.ItemName}");
+#endif
                 return false;
             }
 
@@ -1486,7 +1501,7 @@ namespace VagrantStoryArchipelago.Helpers
             { 0x50, "Saint's Nostrum" },
             { 0x51, "Alchemist's Reagent" },
             { 0x52, "Sorcerer's Reagent" },
-            { 0x53, "Yggdrasill's Tears" },
+            { 0x53, "Yggdrasil's Tears" },
             { 0x54, "Faerie Chortle" },
             { 0x55, "Spirit Orison" },
             { 0x56, "Angelic Paean" },

@@ -2,12 +2,38 @@ using Archipelago.Core;
 using Archipelago.Core.Util;
 using VagrantStoryArchipelago;
 using VagrantStoryArchipelago.Helpers;
+using VagrantStoryArchipelago.Options;
 using static VagrantStoryArchipelago.Helpers.ItemHelpers;
 
 namespace Helpers
 {
     public class PlayerStateHelpers
     {
+
+        public static T GetPlayerOption<T>(Dictionary<string, object> options, string optionKey, T defaultValue = default) where T : struct, Enum
+        {
+            string optionValue = options?.GetValueOrDefault(optionKey, "0").ToString();
+
+            if (Enum.TryParse<T>(optionValue, out T result))
+            {
+                return result;
+            }
+
+            return defaultValue;
+        }
+
+        public static int GetPlayerOptionCounts(Dictionary<string, object> options, string optionKey, int defaultValue = 0)
+        {
+            string optionValue = options?.GetValueOrDefault(optionKey, "0")?.ToString() ?? "0";
+
+            if (Int32.TryParse(optionValue, out int result))
+            {
+                return result;
+            }
+
+            return defaultValue;
+        }
+
         public static void KillPlayer()
         {
             //TODO: Kill the player logic goes here
@@ -27,7 +53,9 @@ namespace Helpers
         {
             // Write the current ProcessedItemIndex to a specific memory address
             Memory.Write(Addresses.ItemIndexStorage, (ushort)App.ProcessedItemIndex);
+#if DEBUG
             Console.WriteLine($"Saved item index: {App.ProcessedItemIndex}");
+#endif
         }
 
         public static void OnGameLoaded(ArchipelagoClient client)
@@ -35,7 +63,9 @@ namespace Helpers
             // Read the saved index from memory
             var index = Memory.ReadUShort(Addresses.ItemIndexStorage);
             App.ProcessedItemIndex = index;
+#if DEBUG
             Console.WriteLine($"Loaded item index: {App.ProcessedItemIndex}");
+#endif
             // Immediately try to process any pending items
             UpdatePlayerState(client);
 
@@ -65,8 +95,8 @@ namespace Helpers
 
         public static void EnableNewGamePlus(ArchipelagoClient client)
         {
-            int newgameplus_choice = Int32.Parse(client.Options?.GetValueOrDefault("include_new_game_plus", "0").ToString());
-            if (newgameplus_choice == 1)
+            OptionToggle newgameplus_choice = PlayerStateHelpers.GetPlayerOption<OptionToggle>(client.Options, "include_new_game_plus");
+            if (newgameplus_choice == OptionToggle.TRUE)
             {
                 Memory.WriteByte(Addresses.RoodInverseActive, 0x01);
             }
@@ -76,23 +106,22 @@ namespace Helpers
 
         public static void EnableTeleportOptions(ArchipelagoClient client)
         {
+            OptionToggle teleport_choice = PlayerStateHelpers.GetPlayerOption<OptionToggle>(client.Options, "include_teleport");
+            OptionToggle teleport_zero_mp_choice = PlayerStateHelpers.GetPlayerOption<OptionToggle>(client.Options, "zero_mp_teleport");
+            OptionToggle teleport_open_locations = PlayerStateHelpers.GetPlayerOption<OptionToggle>(client.Options, "open_teleport_locations");
 
-            int teleport_choice = Int32.Parse(client.Options?.GetValueOrDefault("include_teleport", "0").ToString());
-            int teleport_zero_mp_choice = Int32.Parse(client.Options?.GetValueOrDefault("zero_mp_teleport", "0").ToString());
-            int teleport_open_locations = Int32.Parse(client.Options?.GetValueOrDefault("open_teleport_locations", "0").ToString());
-
-            if (teleport_choice == 1)
+            if (teleport_choice == OptionToggle.TRUE)
             {
                 Memory.WriteByte(Addresses.MagicMenuUnlock, 0x90);
                 Memory.WriteByte(Addresses.TeleportToggle, 0x01);
             }
 
-            if (teleport_zero_mp_choice == 1)
+            if (teleport_zero_mp_choice == OptionToggle.TRUE)
             {
                 Memory.Write(Addresses.TeleportNoMP, 0x00801023);
             }
 
-            if (teleport_open_locations == 1)
+            if (teleport_open_locations == OptionToggle.TRUE)
             {
                 Memory.Write(Addresses.TeleportWorkerBreakroom, 0x0001);
                 Memory.Write(Addresses.TeleportWineGuildHall, 0x0001);
@@ -162,13 +191,12 @@ namespace Helpers
 
         public static void BreakArtThresholdSetup(ArchipelagoClient client)
         {
+            SkillUnlockOptions breakArtChoice = PlayerStateHelpers.GetPlayerOption<SkillUnlockOptions>(client.Options, "break_art_unlock_option");
 
-            int breakArtChoice = Int32.Parse(client.Options?.GetValueOrDefault("break_art_unlock_option", "0").ToString());
-
-            if (breakArtChoice == 1)
+            if (breakArtChoice == SkillUnlockOptions.SET)
             {
 
-                int breakArtValue = Int32.Parse(client.Options?.GetValueOrDefault("break_art_counter", "0").ToString());
+                int breakArtValue = PlayerStateHelpers.GetPlayerOptionCounts(client.Options, "break_art_counter");
 
                 foreach (var weapon in ItemHelpers.BreakArtUnlockReference)
                 {
@@ -250,12 +278,12 @@ namespace Helpers
         public static void ChainAbilityThresholdSetup(ArchipelagoClient client)
         {
 
-            int chainAbilityChoice = Int32.Parse(client.Options?.GetValueOrDefault("chain_skill_unlock_option", "0").ToString());
+            SkillUnlockOptions chainAbilityChoice = PlayerStateHelpers.GetPlayerOption<SkillUnlockOptions>(client.Options, "chain_skill_unlock_option");
 
-            if (chainAbilityChoice == 1)
+            if (chainAbilityChoice == SkillUnlockOptions.SET)
             {
 
-                int chainAbilityValue = Int32.Parse(client.Options?.GetValueOrDefault("chain_skill_counter", "0").ToString());
+                int chainAbilityValue = PlayerStateHelpers.GetPlayerOptionCounts(client.Options, "chain_skill_counter");
                 int count = 1;
                 foreach (var abilityThreshold in ItemHelpers.ChainAbilityThresholds.OrderBy(x => x.Key))
                 {

@@ -5,12 +5,14 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ApplicationIcon>vagrantstory.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
 	  <Content Include="appsettings.Local.json" Condition="Exists('appsettings.Local.json')">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
+	  <Content Include="vagrantstory.ico" />
   </ItemGroup>
 
   <ItemGroup>

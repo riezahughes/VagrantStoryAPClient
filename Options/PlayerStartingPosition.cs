@@ -1,12 +1,12 @@
 ﻿namespace Helpers
 {
-    class PlayerStartingPosition
+    public enum PlayerStartingPosition
     {
-        public static string MAGIC_HAMMER = "Magic Hammer";
-        public static string JUNCTION_POINT = "Junction Point";
-        public static string METAL_WORKS = "Metal Works";
-        public static string GODHANDS = "Godhands";
-        public static string KEANES_CRAFT = "Keanes Craft";
-        public static string WORK_OF_ART = "Work Of Art";
+        MAGIC_HAMMER = 0,
+        JUNCTION_POINT = 1,
+        METAL_WORKS = 2,
+        GODHANDS = 3,
+        KEANES_CRAFT = 4,
+        WORK_OF_ART = 5,
     }
 }

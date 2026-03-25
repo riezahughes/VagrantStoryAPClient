@@ -1,7 +1,7 @@
 namespace Helpers
 {
-    class PlayerVictoryConditions
+    public enum PlayerVictoryConditions
     {
-        public static int DEFEAT_DARK_ANGEL = 0;
+        DEFEAT_DARK_ANGEL = 0
     }
 }

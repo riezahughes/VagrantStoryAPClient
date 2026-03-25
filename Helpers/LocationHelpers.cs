@@ -2,6 +2,7 @@ using Archipelago.Core.Models;
 using VagrantStoryArchipelago;
 using VagrantStoryArchipelago.Helpers;
 using VagrantStoryArchipelago.Models;
+using VagrantStoryArchipelago.Options;
 
 namespace Helpers
 {
@@ -924,11 +925,10 @@ namespace Helpers
 
         private static List<GenericLocationData> GetAshleyData(Dictionary<string, object> options)
         {
+            SkillUnlockOptions breakArtChoice = PlayerStateHelpers.GetPlayerOption<SkillUnlockOptions>(options, "break_art_unlock_option");
+            int breakArtValue = PlayerStateHelpers.GetPlayerOptionCounts(options, "break_art_counter");
 
-            int breakArtChoice = Int32.Parse(options?.GetValueOrDefault("break_art_unlock_option", "0").ToString());
-            int breakArtValue = Int32.Parse(options?.GetValueOrDefault("break_art_counter", "0").ToString());
-
-            bool breakArtValuesSet = breakArtChoice == 1;
+            bool breakArtValuesSet = breakArtChoice == SkillUnlockOptions.SET;
 
             string breakArtLevelOne = breakArtValue.ToString();
             string breakArtLevelTwo = (breakArtValue * 2).ToString();
@@ -937,34 +937,6 @@ namespace Helpers
 
 
             List<GenericLocationData> ashleyLocations = new List<GenericLocationData>() {
-                //new GenericLocationData("Ability: Heavy Shot", Addresses.AbilityHeavyShotUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Gain Life", Addresses.AbilityGainLifeUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Mind Assault", Addresses.AbilityMindAssaultUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Gain Magic", Addresses.AbilityGainMagicUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Raging Ache", Addresses.AbilityRagingAcheUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Mind Ache", Addresses.AbilityMindAcheUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Temper", Addresses.AbilityTemperUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Crimson Pain", Addresses.AbilityCrimsonPainUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Instill", Addresses.AbilityInstillUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Phantom Pain", Addresses.AbilityPhantomPainUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Paralysis Pulse", Addresses.AbilityParalysisPulseUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Numbing Claw", Addresses.AbilityNumbingClawUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Dulling Impact", Addresses.AbilityDullingImpactUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Snake Venom", Addresses.AbilitySnakeVenomUnlock, "0", "128", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Ward", Addresses.AbilityWardUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Siphon Soul", Addresses.AbilitySiphonSoulUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Reflect Magic", Addresses.AbilityReflectMagicUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Reflect Damage", Addresses.AbilityReflectDamageUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Absorb Magic", Addresses.AbilityAbsorbMagicUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Absorb Damage", Addresses.AbilityAbsorbDamageUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Impact Guard", Addresses.AbilityImpactGuardUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Wind Break", Addresses.AbilityWindBreakUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Fire Proof", Addresses.AbilityFireProofUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Terra Ward", Addresses.AbilityTerraWardUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Aqua Ward", Addresses.AbilityAquaWardUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Shadow Guard", Addresses.AbilityShadowGuardUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Demonscale", Addresses.AbilityDemonscaleUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Ability: Phantom Shield", Addresses.AbilityPhantomShieldUnlock, "0", "144", LocationCheckType.Byte),
                 new GenericLocationData("Chain Unlock 1", Addresses.TotalRiskAbilitiesEarned, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("Chain Unlock 2", Addresses.TotalRiskAbilitiesEarned, "0", "2", LocationCheckType.Byte),
                 new GenericLocationData("Chain Unlock 3", Addresses.TotalRiskAbilitiesEarned, "0", "3", LocationCheckType.Byte),
@@ -974,60 +946,20 @@ namespace Helpers
                 new GenericLocationData("Chain Unlock 7", Addresses.TotalRiskAbilitiesEarned, "0", "7", LocationCheckType.Byte),
                 new GenericLocationData("Chain Unlock 8", Addresses.TotalRiskAbilitiesEarned, "0", "8", LocationCheckType.Byte),
                 new GenericLocationData("Chain Unlock 9", Addresses.TotalRiskAbilitiesEarned, "0", "9", LocationCheckType.Byte),
-                new GenericLocationData("Chain Unlock 11", Addresses.TotalRiskAbilitiesEarned, "0", "10", LocationCheckType.Byte),
-                new GenericLocationData("Chain Unlock 12", Addresses.TotalRiskAbilitiesEarned, "0", "11", LocationCheckType.Byte),
-                new GenericLocationData("Chain Unlock 13", Addresses.TotalRiskAbilitiesEarned, "0", "12", LocationCheckType.Byte),
-                new GenericLocationData("Chain Unlock 14", Addresses.TotalRiskAbilitiesEarned, "0", "13", LocationCheckType.Byte),
-                new GenericLocationData("Chain Unlock 15", Addresses.TotalRiskAbilitiesEarned, "0", "14", LocationCheckType.Byte),
-                new GenericLocationData("Chain Unlock 16", Addresses.TotalRiskAbilitiesEarned, "0", "15", LocationCheckType.Byte),
-                new GenericLocationData("Chain Unlock 17", Addresses.TotalRiskAbilitiesEarned, "0", "16", LocationCheckType.Byte),
-                new GenericLocationData("Chain Unlock 18", Addresses.TotalRiskAbilitiesEarned, "0", "17", LocationCheckType.Byte),
-                new GenericLocationData("Chain Unlock 19", Addresses.TotalRiskAbilitiesEarned, "0", "18", LocationCheckType.Byte),
-                new GenericLocationData("Chain Unlock 20", Addresses.TotalRiskAbilitiesEarned, "0", "19", LocationCheckType.Byte),
-                new GenericLocationData("Chain Unlock 21", Addresses.TotalRiskAbilitiesEarned, "0", "20", LocationCheckType.Byte),
-                new GenericLocationData("Chain Unlock 22", Addresses.TotalRiskAbilitiesEarned, "0", "21", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Degenerate", Addresses.GrimoireDegenerateUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Psychodrain", Addresses.GrimoirePsychodrainUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Leadbones", Addresses.GrimoireLeadbonesUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Tarnish", Addresses.GrimoireTarnishUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Analyze", Addresses.GrimoireAnalyzeUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Herakles", Addresses.GrimoireHeraklesUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Enlighten", Addresses.GrimoireEnlightenUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Invigorate", Addresses.GrimoireInvigorateUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Prostasia", Addresses.GrimoireProstasiaUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Luft Fusion", Addresses.GrimoireLuftFusionUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Spark Fusion", Addresses.GrimoireSparkFusionUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Soil Fusion", Addresses.GrimoireSoilFusionUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Frost Fusion", Addresses.GrimoireFrostFusionUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Aero Guard", Addresses.GrimoireAeroGuardUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Pyro Guard", Addresses.GrimoirePyroGuardUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Terra Guard", Addresses.GrimoireTerraGuardUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Silence", Addresses.GrimoireSilenceUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Magic Ward", Addresses.GrimoireMagicWardUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Surging Balm", Addresses.GrimoireSurgingBalmUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Fixate", Addresses.GrimoireFixateUnlock, "0", "176", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Dispel", Addresses.GrimoireDispelUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Stun Cloud", Addresses.GrimoireStunCloudUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Poison Mist", Addresses.GrimoirePoisonMistUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Curse", Addresses.GrimoireCurseUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Restoration", Addresses.GrimoireRestorationUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Antidote", Addresses.GrimoireAntidoteUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Blessing", Addresses.GrimoireBlessingUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Clearance", Addresses.GrimoireClearanceUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Unlock", Addresses.GrimoireUnlockUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Eureka", Addresses.GrimoireEurekaUnlock, "0", "176", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Drain Heart", Addresses.GrimoireDrainHeartUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Drain Mind", Addresses.GrimoireDrainMindUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Heal", Addresses.GrimoireHealUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Solid Shock", Addresses.GrimoireSolidShockUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Lightning Bolt", Addresses.GrimoireLightningBoltUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Fireball", Addresses.GrimoireFireballUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Vulcan Lance", Addresses.GrimoireVulcanLanceUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Aqua Blast", Addresses.GrimoireAquaBlastUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Spirit Surge", Addresses.GrimoireSpiritSurgeUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Dark Chant", Addresses.GrimoireDarkChantUnlock, "0", "192", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Exorcism", Addresses.GrimoireExorcismUnlock, "0", "144", LocationCheckType.Byte),
-                //new GenericLocationData("Grimoire: Banish", Addresses.GrimoireBanishUnlock, "0", "144", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 10", Addresses.TotalRiskAbilitiesEarned, "0", "10", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 11", Addresses.TotalRiskAbilitiesEarned, "0", "11", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 12", Addresses.TotalRiskAbilitiesEarned, "0", "12", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 13", Addresses.TotalRiskAbilitiesEarned, "0", "13", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 14", Addresses.TotalRiskAbilitiesEarned, "0", "14", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 15", Addresses.TotalRiskAbilitiesEarned, "0", "15", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 16", Addresses.TotalRiskAbilitiesEarned, "0", "16", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 17", Addresses.TotalRiskAbilitiesEarned, "0", "17", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 18", Addresses.TotalRiskAbilitiesEarned, "0", "18", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 19", Addresses.TotalRiskAbilitiesEarned, "0", "19", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 20", Addresses.TotalRiskAbilitiesEarned, "0", "20", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 21", Addresses.TotalRiskAbilitiesEarned, "0", "21", LocationCheckType.Byte),
+                new GenericLocationData("Chain Unlock 22", Addresses.TotalRiskAbilitiesEarned, "0", "22", LocationCheckType.Byte),
+
                 new GenericLocationData("Grimoire: Explosion Max Level", Addresses.GrimoireExplosionMaxLevel, "0", "704", LocationCheckType.Byte),
                 new GenericLocationData("Grimoire: Thunderburst Max Level", Addresses.GrimoireThunderburstMaxLevel, "0", "704", LocationCheckType.Byte),
                 new GenericLocationData("Grimoire: Flame Sphere Max Level", Addresses.GrimoireFlameSphereMaxLevel, "0", "704", LocationCheckType.Byte),

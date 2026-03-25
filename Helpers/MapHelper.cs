@@ -4,7 +4,7 @@ using Helpers;
 using VagrantStoryArchipelago;
 using VagrantStoryArchipelago.Data;
 using VagrantStoryArchipelago.Helpers;
-using VagrantStoryArchipelago.Models.MapData; // Assuming your Memory class is here
+using VagrantStoryArchipelago.Models.MapData;
 
 public class MapHelper
 {
@@ -28,7 +28,9 @@ public class MapHelper
                 ushort mapId = Memory.ReadUShort(Addresses.CurrentMapandRoomID);
                 if (APHelpers.isInTheGame() && APHelpers.isProcessingItems() == false)
                 {
+#if DEBUG
                     Console.WriteLine("Progression State Updated");
+#endif
                     SetBossProgression(mapId);
                 }
                 _lastRoomValue = mapId;
@@ -56,7 +58,9 @@ public class MapHelper
                 {
                     uint bossPointerLocation = Memory.ReadUInt(Addresses.MapBossDataPointer);
                     uint bossAddress = (bossPointerLocation & 0x0FFFFFFF);
+#if DEBUG
                     Console.WriteLine($"Current Map ID: {mapId:X4} - Boss Drops Updating");
+#endif
                     UpdateBossInMap(bossAddress, options);
                     _lastPointerValueBoss = pointerValue;
                 }
@@ -68,7 +72,7 @@ public class MapHelper
 
     public static void UpdateBossInMap(uint currentPointerValue, Dictionary<string, object> options)
     {
-        int dropChoice = Int32.Parse(options?.GetValueOrDefault("boss_item_choices", "0").ToString());
+        DropItemChoice dropChoice = PlayerStateHelpers.GetPlayerOption<DropItemChoice>(options, "boss_item_choices");
         var replacementBossItems = new MapBossData();
         var item1 = ItemDatabase.Items["Cure Root"];
         var item2 = ItemDatabase.Items["Vera Root"];
@@ -113,7 +117,9 @@ public class MapHelper
                     Thread.Sleep(3000);
                     uint chestPointerLocation = Memory.ReadUInt(Addresses.MapChestDataPointer);
                     uint chestAddress = (chestPointerLocation & 0x0FFFFFFF) + 0x14;
+#if DEBUG
                     Console.WriteLine($"Current Map ID: {mapId:X4} - Chest Drops Updating");
+#endif
 
                     UpdateChestsInMap(chestAddress, options);
                     _lastMapIdChest = mapId;
@@ -127,7 +133,7 @@ public class MapHelper
     public static void UpdateChestsInMap(uint currentPointerValue, Dictionary<string, object> options)
     {
 
-        int dropChoice = Int32.Parse(options?.GetValueOrDefault("chest_item_choices", "0").ToString());
+        DropItemChoice dropChoice = PlayerStateHelpers.GetPlayerOption<DropItemChoice>(options, "chest_item_choices");
 
         var replacementChestItems = new MapChestData();
         var item1 = ItemDatabase.Items["Cure Root"];
@@ -728,20 +734,20 @@ public class MapHelper
         if (cts.Token.IsCancellationRequested) return;
 
         Memory.MonitorAddressForAction<ushort>(
-            Addresses.CurrentMapandRoomID,
-            () =>
+        Addresses.CurrentMapandRoomID,
+        () =>
+        {
+            PlayerStartingPosition startingLocation = PlayerStateHelpers.GetPlayerOption<PlayerStartingPosition>(client.Options, "open_world_option");
+            string choice;
+
+            int count = 0;
+            while (count < 10)
             {
-
-                int startingLocation = Int32.Parse(client.Options?.GetValueOrDefault("open_world_option", "0").ToString());
-
-                int count = 0;
-                while (count < 10)
-                {
-                    var address = StartingLocationAddress[startingLocation];
-                    Memory.Write(Addresses.CurrentMapandRoomID, address);
-                    count++;
-                }
-            },
+                var address = StartingLocationAddress[(int)startingLocation];
+                Memory.Write(Addresses.CurrentMapandRoomID, address);
+                count++;
+            }
+        },
             value => value >= 1);
     }
 
