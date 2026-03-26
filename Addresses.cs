@@ -1752,12 +1752,9 @@ namespace VagrantStoryArchipelago
         public const uint CAT_ShrinetotheMartyrsEntered = 0x000f1ab0;
 
         // The Lamenting Mother (West)
-        public const uint CAT_TheLamentingMotherWestGhostBossDefeat = 0x00185898;
-        public const uint CAT_TheLamentingMotherWestEntered = 0x000f1ab0;
-
-        // The Lamenting Mother (East)
-        public const uint CAT_TheLamentingMotherEastChest = 0x0006196A;
-        public const uint CAT_TheLamentingMotherEastEntered = 0x000f1ab0;
+        public const uint CAT_TheLamentingMotherGhostBossDefeat = 0x00185898;
+        public const uint CAT_TheLamentingMotherEntered = 0x000f1ab0;
+        public const uint CAT_TheLamentingMotherChest = 0x0006196A;
 
         // Hall of Dying Hope
         public const uint CAT_HallofDyingHopeEntered = 0x000f1ab0;

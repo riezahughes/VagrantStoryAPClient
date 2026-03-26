@@ -60,8 +60,7 @@ namespace Helpers
                 "The Body Fragile Yields",
                 "Bite the Master's Wounds",
                 "Workshop 'Godhands'",
-                "The Crumbling Market (South)",
-                "The Crumbling Market (North)",
+                "The Crumbling Market",
                 "Where Flood Waters Ran",
                 "Tears from Empty Sockets",
                 "Hall to a New World",
@@ -99,8 +98,7 @@ namespace Helpers
                 "The Rene Coastroad",
                 "Workshop 'Magic Hammer'",
                 "Rue Mal Fallde",
-                "Tircolas Flow (North)",
-                "Tircolas Flow (South)",
+                "Tircolas Flow",
                 "Rue Bouquet",
                 "Glacialdra Kirk Ruins",
                 "Rue Sant D'alsa",
@@ -167,10 +165,8 @@ namespace Helpers
                 "Shrine of the Martyrs",
                 "Hallowed Hope",
                 "Hall of Sacrilege",
-                "Advent Ground (South)",
-                "Passage of the Refugees (South)",
-                "Passage of the Refugees (North)",
-                "Advent Ground (North)",
+                "Advent Ground",
+                "Passage of the Refugees",
                 "The Cleansing Chantry",
                 "Stairway to the Light",
                 "Dark Abhors Light",
@@ -280,8 +276,7 @@ namespace Helpers
                 "The Melodics of Madness",
                 "What Ails You, Kills You",
                 "The Wine-Lecher's Fall",
-                "The Heretics' Story (Lower)",
-                "The Heretics' Story (Upper)",
+                "The Heretics' Story",
                 "Despair of the Fallen",
                 "Hopes of the Idealist",
                 "Where the Soul Rots",
@@ -326,8 +321,7 @@ namespace Helpers
                 "Persecution Hall",
                 "Rodent-Ridden Chamber",
                 "Shrine to the Martyrs",
-                "The Lamenting Mother (West)",
-                "The Lamenting Mother (East)",
+                "The Lamenting Mother",
                 "Hall of Dying Hope",
                 "Bandits' Hideout",
                 "The Bloody Hallway",
@@ -445,8 +439,7 @@ namespace Helpers
             allLevelLocations.Add("The Body Fragile Yields", GetTheBodyFragileYieldsData());
             allLevelLocations.Add("Bite the Master's Wounds", GetBiteTheMastersWoundsData());
             allLevelLocations.Add("Workshop 'Godhands'", GetWorkshopGodhandsData());
-            allLevelLocations.Add("The Crumbling Market (South)", GetTheCrumblingMarketSouthData());
-            allLevelLocations.Add("The Crumbling Market (North)", GetTheCrumblingMarketNorthData());
+            allLevelLocations.Add("The Crumbling Market", GetTheCrumblingMarketData());
             allLevelLocations.Add("Where Flood Waters Ran", GetWhereFloodWatersRanData());
             allLevelLocations.Add("Tears from Empty Sockets", GetTearsFromEmptySocketsData());
             allLevelLocations.Add("Hall to a New World", GetHallToANewWorldData());
@@ -484,8 +477,7 @@ namespace Helpers
             allLevelLocations.Add("The Rene Coastroad", GetTheReneCoastroadData());
             allLevelLocations.Add("Workshop 'Magic Hammer'", GetWorkshopMagicHammerData());
             allLevelLocations.Add("Rue Mal Fallde", GetRueMalFalldeData());
-            allLevelLocations.Add("Tircolas Flow (North)", GetTircolasFlowNorthData());
-            allLevelLocations.Add("Tircolas Flow (South)", GetTircolasFlowSouthData());
+            allLevelLocations.Add("Tircolas Flow", GetTircolasFlowData());
             allLevelLocations.Add("Rue Bouquet", GetRueBouquetData());
             allLevelLocations.Add("Glacialdra Kirk Ruins", GetGlacialdraKirkRuinsData());
             allLevelLocations.Add("Rue Sant D'alsa", GetRueSantDalsaData());
@@ -552,10 +544,8 @@ namespace Helpers
             allLevelLocations.Add("Shrine of the Martyrs", GetShrineOfTheMartyrsData());
             allLevelLocations.Add("Hallowed Hope", GetHallowedHopeData());
             allLevelLocations.Add("Hall of Sacrilege", GetHallOfSacrilegeData());
-            allLevelLocations.Add("Advent Ground (South)", GetAdventGroundSouthData());
-            allLevelLocations.Add("Passage of the Refugees (South)", GetPassageOfTheRefugeesSouthData());
-            allLevelLocations.Add("Passage of the Refugees (North)", GetPassageOfTheRefugeesNorthData());
-            allLevelLocations.Add("Advent Ground (North)", GetAdventGroundNorthData());
+            allLevelLocations.Add("Advent Ground", GetAdventGroundData());
+            allLevelLocations.Add("Passage of the Refugees", GetPassageOfTheRefugeesData());
             allLevelLocations.Add("The Cleansing Chantry", GetTheCleansingChantryData());
             allLevelLocations.Add("Stairway to the Light", GetStairwayToTheLightData());
             allLevelLocations.Add("Dark Abhors Light", GetDarkAbhorsLightData());
@@ -665,8 +655,7 @@ namespace Helpers
             allLevelLocations.Add("The Melodics of Madness", GetTheMelodicsOfMadnessData());
             allLevelLocations.Add("What Ails You, Kills You", GetWhatAilsYouKillsYouData());
             allLevelLocations.Add("The Wine-Lecher's Fall", GetTheWineLechersFallData());
-            allLevelLocations.Add("The Heretics' Story (Lower)", GetTheHereticsStoryLowerData());
-            allLevelLocations.Add("The Heretics' Story (Upper)", GetTheHereticsStoryUpperData());
+            allLevelLocations.Add("The Heretics' Story", GetTheHereticsStoryData());
             allLevelLocations.Add("Despair of the Fallen", GetDespairOfTheFallenData());
             allLevelLocations.Add("Hopes of the Idealist", GetHopesOfTheIdealistData());
             allLevelLocations.Add("Where the Soul Rots", GetWhereTheSoulRotsData());
@@ -711,8 +700,7 @@ namespace Helpers
             allLevelLocations.Add("Persecution Hall", GetPersecutionHallData());
             allLevelLocations.Add("Rodent-Ridden Chamber", GetRodentRiddenChamberData());
             allLevelLocations.Add("Shrine to the Martyrs", GetShrineToTheMartyrsData());
-            allLevelLocations.Add("The Lamenting Mother (West)", GetTheLamentingMotherWestData());
-            allLevelLocations.Add("The Lamenting Mother (East)", GetTheLamentingMotherEastData());
+            allLevelLocations.Add("The Lamenting Mother", GetTheLamentingMotherData());
             allLevelLocations.Add("Hall of Dying Hope", GetHallOfDyingHopeData());
             allLevelLocations.Add("Bandits' Hideout", GetBanditsHideoutData());
             allLevelLocations.Add("The Bloody Hallway", GetTheBloodyHallwayData());
@@ -841,7 +829,6 @@ namespace Helpers
                                 CheckType = LocationCheckType.Byte,
                                 CompareType = LocationCheckCompareType.Match,
                                 CheckValue = "0"
-
                             });
 
                             CompositeLocation location = new CompositeLocation()
@@ -1140,7 +1127,8 @@ namespace Helpers
                     new GenericLocationData("WC - The Gallows - Minotaur Boss - Grimoire Debile", Addresses.WC_TheGallowsMinotaurBossDefeat, "12", "0", LocationCheckType.UShort),
                     new GenericLocationData("WC - The Gallows - Minotaur Boss - Grimoire Guerir", Addresses.WC_TheGallowsMinotaurBossDefeat, "12", "0", LocationCheckType.UShort),
                     new GenericLocationData("WC - The Gallows - Minotaur Boss", Addresses.WC_TheGallowsMinotaurBossDefeat, "12", "0", LocationCheckType.UShort),
-                    new GenericLocationData("WC - The Gallows (Again) - Minotaur Zombie Boss", Addresses.WC_TheGallowsAgainMinotaurZombieBossDefeat, "12", "0", LocationCheckType.UShort),
+                    // You need to come up with a solution for tracking different bosses based on the items you've collected.
+                    new GenericLocationData("WC - The Gallows (Again) - Minotaur Zombie Boss", Addresses.WC_TheGallowsAgainMinotaurZombieBossDefeat, "0", "999", LocationCheckType.UShort),
                     new GenericLocationData("WC - The Gallows (Again) - Chest", Addresses.WC_TheGallowsAgainChest, "0", "1", LocationCheckType.Byte),
                     new GenericLocationData("WC - The Gallows - Chest", Addresses.WC_TheGallowsChest, "0", "1", LocationCheckType.Byte),
                     new GenericLocationData("WC - The Gallows Entered", Addresses.WC_TheGallowsEntered, "0", "12", LocationCheckType.UShort)
@@ -1409,26 +1397,18 @@ namespace Helpers
             return workshopGodhandsLocations;
         }
 
-        private static List<GenericLocationData> GetTheCrumblingMarketSouthData()
+        private static List<GenericLocationData> GetTheCrumblingMarketData()
         {
             List<GenericLocationData> theCrumblingMarketSouthLocations = new List<GenericLocationData>() {
-                new GenericLocationData("UW - The Crumbling Market (South) Entered", Addresses.UW_TheCrumblingMarketSouthEntered, "0", "5424", LocationCheckType.UShort)
+                new GenericLocationData("UW - The Crumbling Market - Chest", Addresses.UW_TheCrumblingMarketNorthChest, "0", "1", LocationCheckType.Byte),
+                new GenericLocationData("UW - The Crumbling Market - Eruption Floor Trap", Addresses.UW_TheCrumblingMarketNorthEruptionFloorTrap, "5424", "32769", LocationCheckType.UShort),
+                new GenericLocationData("UW - The Crumbling Market - Freeze Floor Trap", Addresses.UW_TheCrumblingMarketNorthFreezeFloorTrap, "5424", "32769", LocationCheckType.UShort),
+                new GenericLocationData("UW - The Crumbling Market - Gust Floor Trap", Addresses.UW_TheCrumblingMarketNorthGustFloorTrap, "5424", "32769", LocationCheckType.UShort),
+                new GenericLocationData("UW - The Crumbling Market - Terra Thrust Floor Trap", Addresses.UW_TheCrumblingMarketNorthTerraThrustFloorTrap, "5424", "32769", LocationCheckType.UShort),
+                new GenericLocationData("UW - The Crumbling Market - Holy Light Floor Trap", Addresses.UW_TheCrumblingMarketNorthHolyLightFloorTrap, "5424", "32769", LocationCheckType.UShort),
+                new GenericLocationData("UW - The Crumbling Market Entered", Addresses.UW_TheCrumblingMarketSouthEntered, "0", "5424", LocationCheckType.UShort)
             };
             return theCrumblingMarketSouthLocations;
-        }
-
-        private static List<GenericLocationData> GetTheCrumblingMarketNorthData()
-        {
-            List<GenericLocationData> theCrumblingMarketNorthLocations = new List<GenericLocationData>() {
-                new GenericLocationData("UW - The Crumbling Market (North) - Chest", Addresses.UW_TheCrumblingMarketNorthChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("UW - The Crumbling Market (North) - Eruption Floor Trap", Addresses.UW_TheCrumblingMarketNorthEruptionFloorTrap, "5424", "32769", LocationCheckType.UShort),
-                    new GenericLocationData("UW - The Crumbling Market (North) - Freeze Floor Trap", Addresses.UW_TheCrumblingMarketNorthFreezeFloorTrap, "5424", "32769", LocationCheckType.UShort),
-                    new GenericLocationData("UW - The Crumbling Market (North) - Gust Floor Trap", Addresses.UW_TheCrumblingMarketNorthGustFloorTrap, "5424", "32769", LocationCheckType.UShort),
-                    new GenericLocationData("UW - The Crumbling Market (North) - Terra Thrust Floor Trap", Addresses.UW_TheCrumblingMarketNorthTerraThrustFloorTrap, "5424", "32769", LocationCheckType.UShort),
-                    new GenericLocationData("UW - The Crumbling Market (North) - Holy Light Floor Trap", Addresses.UW_TheCrumblingMarketNorthHolyLightFloorTrap, "5424", "32769", LocationCheckType.UShort),
-                    new GenericLocationData("UW - The Crumbling Market (North) Entered", Addresses.UW_TheCrumblingMarketNorthEntered, "5424", "5424", LocationCheckType.UShort)
-            };
-            return theCrumblingMarketNorthLocations;
         }
 
         private static List<GenericLocationData> GetWhereFloodWatersRanData()
@@ -1717,22 +1697,15 @@ namespace Helpers
             };
             return rueMalFalldeLocations;
         }
-        private static List<GenericLocationData> GetTircolasFlowNorthData()
+        private static List<GenericLocationData> GetTircolasFlowData()
         {
-            List<GenericLocationData> tircolasFlowNorthLocations = new List<GenericLocationData>() {
-                new GenericLocationData("TCW - Tircolas Flow (North) - Duane Boss - Grimoire Demolir", Addresses.TCW_TircolasFlowNorthDuaneBossDefeat, "800", "0", LocationCheckType.UShort),
-                new GenericLocationData("TCW - Tircolas Flow (North) - Duane Boss - Grimoire Clef", Addresses.TCW_TircolasFlowNorthDuaneBossDefeat, "800", "0", LocationCheckType.UShort),
-                new GenericLocationData("TCW - Tircolas Flow (North) - Duane Boss", Addresses.TCW_TircolasFlowNorthDuaneBossDefeat, "800", "0", LocationCheckType.UShort),
-                new GenericLocationData("TCW - Tircolas Flow (North) Entered", Addresses.TCW_TircolasFlowNorthEntered, "0", "800", LocationCheckType.UShort)
+            List<GenericLocationData> tircolasFlowLocations = new List<GenericLocationData>() {
+                new GenericLocationData("TCW - Tircolas Flow - Duane Boss - Grimoire Demolir", Addresses.TCW_TircolasFlowNorthDuaneBossDefeat, "800", "0", LocationCheckType.UShort),
+                new GenericLocationData("TCW - Tircolas Flow - Duane Boss - Grimoire Clef", Addresses.TCW_TircolasFlowNorthDuaneBossDefeat, "800", "0", LocationCheckType.UShort),
+                new GenericLocationData("TCW - Tircolas Flow - Duane Boss", Addresses.TCW_TircolasFlowNorthDuaneBossDefeat, "800", "0", LocationCheckType.UShort),
+                new GenericLocationData("TCW - Tircolas Flow Entered", Addresses.TCW_TircolasFlowNorthEntered, "0", "800", LocationCheckType.UShort)
             };
-            return tircolasFlowNorthLocations;
-        }
-        private static List<GenericLocationData> GetTircolasFlowSouthData()
-        {
-            List<GenericLocationData> tircolasFlowSouthLocations = new List<GenericLocationData>() {
-                new GenericLocationData("TCW - Tircolas Flow (South) Entered", Addresses.TCW_TircolasFlowSouthEntered, "0", "800", LocationCheckType.UShort)
-            };
-            return tircolasFlowSouthLocations;
+            return tircolasFlowLocations;
         }
         private static List<GenericLocationData> GetRueBouquetData()
         {
@@ -2296,39 +2269,22 @@ namespace Helpers
             return hallOfSacrilegeLocations;
         }
 
-        private static List<GenericLocationData> GetAdventGroundSouthData()
+        private static List<GenericLocationData> GetAdventGroundData()
         {
-            List<GenericLocationData> adventGroundSouthLocations = new List<GenericLocationData>() {
-                new GenericLocationData("SNC - Advent Ground (South) Entered", Addresses.SNC_AdventGroundSouthEntered, "0", "1551", LocationCheckType.UShort)
+            List<GenericLocationData> adventGroundLocations = new List<GenericLocationData>() {
+                new GenericLocationData("SNC - Advent Ground Entered", Addresses.SNC_AdventGroundSouthEntered, "0", "1551", LocationCheckType.UShort)
             };
-            return adventGroundSouthLocations;
+            return adventGroundLocations;
         }
 
-        private static List<GenericLocationData> GetPassageOfTheRefugeesSouthData()
+        private static List<GenericLocationData> GetPassageOfTheRefugeesData()
         {
-            List<GenericLocationData> passageOfTheRefugeesSouthLocations = new List<GenericLocationData>() {
-                new GenericLocationData("SNC - Passage of the Refugees (South) - Hall of Sacrilege Unlock", Addresses.SNC_PassageOfTheRefugeesSouthHallOfSacrilegeUnlock, "0", "160", LocationCheckType.Byte),
-                new GenericLocationData("SNC - Passage of the Refugees (South) Entered", Addresses.SNC_PassageOfTheRefugeesSouthEntered, "0", "1807", LocationCheckType.UShort)
+            List<GenericLocationData> passageOfTheRefugeesLocations = new List<GenericLocationData>() {
+                new GenericLocationData("SNC - Passage of the Refugees - Hall of Sacrilege Unlock", Addresses.SNC_PassageOfTheRefugeesSouthHallOfSacrilegeUnlock, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("SNC - Passage of the Refugees Entered", Addresses.SNC_PassageOfTheRefugeesSouthEntered, "0", "1807", LocationCheckType.UShort)
             };
-            return passageOfTheRefugeesSouthLocations;
+            return passageOfTheRefugeesLocations;
         }
-
-        private static List<GenericLocationData> GetPassageOfTheRefugeesNorthData()
-        {
-            List<GenericLocationData> passageOfTheRefugeesNorthLocations = new List<GenericLocationData>() {
-                new GenericLocationData("SNC - Passage of the Refugees (North) Entered", Addresses.SNC_PassageOfTheRefugeesNorthEntered, "0", "1807", LocationCheckType.UShort)
-            };
-            return passageOfTheRefugeesNorthLocations;
-        }
-
-        private static List<GenericLocationData> GetAdventGroundNorthData()
-        {
-            List<GenericLocationData> adventGroundNorthLocations = new List<GenericLocationData>() {
-                new GenericLocationData("SNC - Advent Ground (North) Entered", Addresses.SNC_AdventGroundNorthEntered, "0", "1551", LocationCheckType.UShort)
-            };
-            return adventGroundNorthLocations;
-        }
-
         private static List<GenericLocationData> GetTheCleansingChantryData()
         {
             List<GenericLocationData> theCleansingChantryLocations = new List<GenericLocationData>() {
@@ -3318,21 +3274,13 @@ namespace Helpers
             return theWineLechersFallLocations;
         }
 
-        private static List<GenericLocationData> GetTheHereticsStoryLowerData()
+        private static List<GenericLocationData> GetTheHereticsStoryData()
         {
             List<GenericLocationData> theHereticsStoryLowerLocations = new List<GenericLocationData>() {
-                new GenericLocationData("GC3 - The Heretics' Story (Lower) - Calla Sigil Unlock", Addresses.GC3_TheHereticsStoryLowerCallaSigilUnlock, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("GC3 - The Heretics' Story (Lower) Entered", Addresses.GC3_TheHereticsStoryLowerEntered, "0", "1047", LocationCheckType.UShort)
+                new GenericLocationData("GC3 - The Heretics' Story - Calla Sigil Unlock", Addresses.GC3_TheHereticsStoryLowerCallaSigilUnlock, "0", "160", LocationCheckType.Byte),
+                    new GenericLocationData("GC3 - The Heretics' Story Entered", Addresses.GC3_TheHereticsStoryLowerEntered, "0", "1047", LocationCheckType.UShort)
             };
             return theHereticsStoryLowerLocations;
-        }
-
-        private static List<GenericLocationData> GetTheHereticsStoryUpperData()
-        {
-            List<GenericLocationData> theHereticsStoryUpperLocations = new List<GenericLocationData>() {
-                new GenericLocationData("GC3 - The Heretics' Story (Upper) Entered", Addresses.GC3_TheHereticsStoryUpperEntered, "0", "1047", LocationCheckType.UShort)
-            };
-            return theHereticsStoryUpperLocations;
         }
 
         private static List<GenericLocationData> GetDespairOfTheFallenData()
@@ -3728,22 +3676,14 @@ namespace Helpers
             return shrinetotheMartyrsLocations;
         }
 
-        private static List<GenericLocationData> GetTheLamentingMotherWestData()
+        private static List<GenericLocationData> GetTheLamentingMotherData()
         {
-            List<GenericLocationData> theLamentingMotherWestLocations = new List<GenericLocationData>() {
-                new GenericLocationData("CAT - The Lamenting Mother (West) - Ghost Boss", Addresses.CAT_TheLamentingMotherWestGhostBossDefeat, "1037", "0", LocationCheckType.Byte), // MISSING
-                    new GenericLocationData("CAT - The Lamenting Mother (West) Entered", Addresses.CAT_TheLamentingMotherWestEntered, "0", "1037", LocationCheckType.UShort)
+            List<GenericLocationData> theLamentingMotherLocations = new List<GenericLocationData>() {
+                new GenericLocationData("CAT - The Lamenting Mother - Ghost Boss", Addresses.CAT_TheLamentingMotherGhostBossDefeat, "1037", "0", LocationCheckType.Byte), // MISSING
+                new GenericLocationData("CAT - The Lamenting Mother - Chest", Addresses.CAT_TheLamentingMotherChest, "0", "1", LocationCheckType.Byte),
+                new GenericLocationData("CAT - The Lamenting Mother Entered", Addresses.CAT_TheLamentingMotherEntered, "0", "1037", LocationCheckType.UShort)
             };
-            return theLamentingMotherWestLocations;
-        }
-
-        private static List<GenericLocationData> GetTheLamentingMotherEastData()
-        {
-            List<GenericLocationData> theLamentingMotherEastLocations = new List<GenericLocationData>() {
-                new GenericLocationData("CAT - The Lamenting Mother (East) - Chest", Addresses.CAT_TheLamentingMotherEastChest, "0", "1", LocationCheckType.Byte),
-                    new GenericLocationData("CAT - The Lamenting Mother (East) Entered", Addresses.CAT_TheLamentingMotherEastEntered, "0", "1037", LocationCheckType.UShort)
-            };
-            return theLamentingMotherEastLocations;
+            return theLamentingMotherLocations;
         }
 
         private static List<GenericLocationData> GetHallOfDyingHopeData()
