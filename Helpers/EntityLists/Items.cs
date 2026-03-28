@@ -25,11 +25,11 @@ namespace VagrantStoryArchipelago.Data
             ["Vera Potion"] = new InventoryItemData("Vera Potion", 0x4E, 0x01, 1, 0x00),
 
             // Special Potions (0x4F-0x5E)
-            ["Acolyte's Nostrum"] = new InventoryItemData("Acolyte´s Nostrum", 0x4F, 0x01, 1, 0x00),
-            ["Saint's Nostrum"] = new InventoryItemData("Saint´s Nostrum", 0x50, 0x01, 1, 0x00),
-            ["Alchemist's Reagent"] = new InventoryItemData("Alchemist´s Reagent", 0x51, 0x01, 1, 0x00),
-            ["Sorcerer's Reagent"] = new InventoryItemData("Sorcerer´s Reagent", 0x52, 0x01, 1, 0x00),
-            ["Yggdrasil's Tears"] = new InventoryItemData("Yggdrasil´s Tears", 0x53, 0x01, 1, 0x00),
+            ["Acolyte's Nostrum"] = new InventoryItemData("Acolyte's Nostrum", 0x4F, 0x01, 1, 0x00),
+            ["Saint's Nostrum"] = new InventoryItemData("Saint's Nostrum", 0x50, 0x01, 1, 0x00),
+            ["Alchemist's Reagent"] = new InventoryItemData("Alchemist's Reagent", 0x51, 0x01, 1, 0x00),
+            ["Sorcerer's Reagent"] = new InventoryItemData("Sorcerer's Reagent", 0x52, 0x01, 1, 0x00),
+            ["Yggdrasil's Tears"] = new InventoryItemData("Yggdrasil's Tears", 0x53, 0x01, 1, 0x00),
             ["Faerie Chortle"] = new InventoryItemData("Faerie Chortle", 0x54, 0x01, 1, 0x00),
             ["Spirit Orison"] = new InventoryItemData("Spirit Orison", 0x55, 0x01, 1, 0x00),
             ["Angelic Paean"] = new InventoryItemData("Angelic Paean", 0x56, 0x01, 1, 0x00),

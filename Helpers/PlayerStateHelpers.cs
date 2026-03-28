@@ -87,6 +87,11 @@ namespace Helpers
             Memory.WriteByte(Addresses.ProgressionState, 0x0a);
         }
 
+        public static void SetMenuOptionsAvailable()
+        {
+            Memory.Write(Addresses.MainMenuOptionsAddress, 0xffff);
+        }
+
         public static void SetOpenWorldSettings(ArchipelagoClient client)
         {
             SetVanillaBattleSkills();

@@ -38,8 +38,6 @@ namespace VagrantStoryArchipelago.Helpers
                 return handleRoodInverseItem();
             if (ItemHelpers.ItemReference.Any(itm => itm.Value == item.ItemName && itm.Value.Contains("Grimoire")))
                 return ItemHelpers.handleGrimoireUnlock(item, client.CurrentSession.Items.AllItemsReceived);
-            if (ItemHelpers.ItemReference.Any(itm => itm.Value == item.ItemName && itm.Value.Contains("Grimoire")))
-                return ItemHelpers.handleGrimoireUnlock(item, client.CurrentSession.Items.AllItemsReceived);
             if (ItemHelpers.ItemReference.Any(itm => itm.Value == item.ItemName))
                 return ItemHelpers.handleInventoryItem(item);
             else if (ItemHelpers.GemReference.Any(itm => itm.Value == item.ItemName))
@@ -411,9 +409,9 @@ namespace VagrantStoryArchipelago.Helpers
 
             var listOfSlots = GetInventoryItemSlots();
 
-            //Console.WriteLine($"{listOfSlots.Count} slots found");
+            var match = listOfSlots.FirstOrDefault(kvp => kvp.Name == item.ItemName);
 
-            if (listOfSlots.Count >= 64)
+            if (listOfSlots.Count >= 64 && match?.Name == null)
             {
 #if DEBUG
                 Console.WriteLine($"Inventory full. Cannot add {item.ItemName}");

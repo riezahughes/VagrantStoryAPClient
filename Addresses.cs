@@ -39,6 +39,42 @@ namespace VagrantStoryArchipelago
         // Unlock message for break arts to listen to. 
         public const uint MenuUnlockState = 0x000f4e73;
 
+        // Title Addresses (uses individual bits)
+        public const uint MenuTitleSet1 = 0x0005fea0; // Bits
+        public const uint MenuTitleSet2 = 0x0005fea1; // Bits
+        public const uint MenuTitleSet3 = 0x0005fea2; // Bits
+        public const uint MenuTitleSet4 = 0x0005fea3; // Bits
+
+        // Times for Time Attack
+
+        public const uint TimeAttackSeconds = 0x0005046c;
+
+        public const uint TimeAttackMinotaurRecord1 = 0x0005fecb;
+        public const uint TimeAttackMinotaurRecord2 = 0x0005fecf;
+        public const uint TimeAttackMinotaurRecord3 = 0x0005fed3;
+        public const uint TimeAttackDragonRecord1 = 0x0005fed7;
+        public const uint TimeAttackDragonRecord2 = 0x0005fedb;
+        public const uint TimeAttackDragonRecord3 = 0x0005fedf;
+        public const uint TimeAttackEarthDragonRecord1 = 0x0005fee3;
+        public const uint TimeAttackEarthDragonRecord2 = 0x0005fee7;
+        public const uint TimeAttackEarthDragonRecord3 = 0x0005feeb;
+        public const uint TimeAttackSnowDragonRecord1 = 0x0005feef;
+        public const uint TimeAttackSnowDragonRecord2 = 0x0005fef3;
+        public const uint TimeAttackSnowDragonRecord3 = 0x0005fef7;
+        public const uint TimeAttackDamascusGolemRecord1 = 0x0005fefb;
+        public const uint TimeAttackDamascusGolemRecord2 = 0x0005feff;
+        public const uint TimeAttackDamascusGolemRecord3 = 0x0005ff03;
+        public const uint TimeAttackDamascusCrabRecord1 = 0x0005fefb;
+        public const uint TimeAttackDamascusCrabRecord2 = 0x0005feff;
+        public const uint TimeAttackDamascusCrabRecord3 = 0x0005ff03;
+        public const uint TimeAttackDeathAndOgreZombieRecord1 = 0x0005ff07;
+        public const uint TimeAttackDeathAndOgreZombieRecord2 = 0x0005ff0b;
+        public const uint TimeAttackDeathAndOgreZombieRecord3 = 0x0005ff0f;
+        public const uint TimeAttackAsuraRecord1 = 0x0005ff13;
+        public const uint TimeAttackAsuraRecord2 = 0x0005ff17;
+        public const uint TimeAttackAsuraRecord3 = 0x0005ff1b;
+
+
         // Teleport Zone Toggles
 
         public const uint TeleportWorkerBreakroom = 0x000616EE;
@@ -94,7 +130,7 @@ namespace VagrantStoryArchipelago
 
         // Main Menu 
 
-        public const uint MainMenuMapAddress = 0x00060022; // 0xfd
+        public const uint MainMenuOptionsAddress = 0x00060022; // 0xfd
         public const uint MainMenuBreakArtsAddress = 0x00060023; // 0x1f
 
         // Pointer Locations

@@ -786,6 +786,81 @@ namespace Helpers
                     {
                         int locationId = (int)currentRegionBaseId + location_index;
 
+
+                        if (loc.Name.Contains("Time Trial") && loc.Name.Contains("Entered"))
+                        {
+                            List<ILocation> conditionalChoice = new List<ILocation>();
+
+                            conditionalChoice.Add(new Location()
+                            {
+                                Id = -1,
+                                Name = "Level Check",
+                                Address = Addresses.CurrentMapandRoomID,
+                                CheckType = LocationCheckType.UShort,
+                                CompareType = LocationCheckCompareType.Match,
+                                CheckValue = loc.LevelId
+                            });
+
+                            conditionalChoice.Add(new Location()
+                            {
+                                Id = -1,
+                                Name = "Timer Check",
+                                Address = loc.Address,
+                                CheckType = LocationCheckType.Byte,
+                                CompareType = LocationCheckCompareType.GreaterThan,
+                                CheckValue = "5"
+                            });
+
+                            CompositeLocation location = new CompositeLocation()
+                            {
+                                Name = loc.Name,
+                                Id = locationId,
+                                CheckType = LocationCheckType.AND,
+                                Conditions = conditionalChoice,
+                            };
+
+                            locations.Add(location);
+                            location_index++;
+                            continue;
+                        }
+
+                        if (loc.Name.Contains("Time Trial"))
+                        {
+                            List<ILocation> conditionalChoice = new List<ILocation>();
+
+                            conditionalChoice.Add(new Location()
+                            {
+                                Id = -1,
+                                Name = "Level Check",
+                                Address = Addresses.CurrentMapandRoomID,
+                                CheckType = LocationCheckType.UShort,
+                                CompareType = LocationCheckCompareType.GreaterThan,
+                                CheckValue = "0"
+                            });
+
+                            conditionalChoice.Add(new Location()
+                            {
+                                Id = -1,
+                                Name = "Time Trail Complete",
+                                Address = loc.Address,
+                                CheckType = LocationCheckType.Byte,
+                                CompareType = LocationCheckCompareType.Match,
+                                CheckValue = "128"
+                            });
+
+                            CompositeLocation location = new CompositeLocation()
+                            {
+                                Name = loc.Name,
+                                Id = locationId,
+                                CheckType = LocationCheckType.AND,
+                                Conditions = conditionalChoice,
+                            };
+
+                            locations.Add(location);
+                            location_index++;
+                            continue;
+                        }
+
                         if (loc.Name.Contains("Boss"))
                         {
                             List<ILocation> conditionalChoice = new List<ILocation>();
@@ -1763,16 +1838,16 @@ namespace Helpers
         private static List<GenericLocationData> GetTimeTrialMinotaurData()
         {
             List<GenericLocationData> timeTrialMinotaurLocations = new List<GenericLocationData>() {
-                new GenericLocationData("KEP - Time Trial (Minotaur) - Minotaur Boss", Addresses.KEP_TimeTrialMinotaurMinotaurBossDefeat, "29", "0", LocationCheckType.UShort),
-                    new GenericLocationData("KEP - Time Trial (Minotaur) Entered", Addresses.KEP_TimeTrialMinotaurEntered, "0", "29", LocationCheckType.UShort)
+                new GenericLocationData("KEP - Time Trial (Minotaur) - Minotaur Boss", Addresses.TimeAttackMinotaurRecord1, "12", "0", LocationCheckType.Byte),
+                new GenericLocationData("KEP - Time Trial (Minotaur) Entered", Addresses.TimeAttackSeconds, "12", "5", LocationCheckType.UShort)
             };
             return timeTrialMinotaurLocations;
         }
         private static List<GenericLocationData> GetTimeTrialDragonData()
         {
             List<GenericLocationData> timeTrialDragonLocations = new List<GenericLocationData>() {
-                new GenericLocationData("KEP - Time Trial (Dragon) - Dragon Boss", Addresses.KEP_TimeTrialDragonDragonBossDefeat, "29", "0", LocationCheckType.UShort),
-                    new GenericLocationData("KEP - Time Trial (Dragon) Entered", Addresses.KEP_TimeTrialDragonEntered, "0", "29", LocationCheckType.UShort)
+                new GenericLocationData("KEP - Time Trial (Dragon) - Dragon Boss", Addresses.TimeAttackDragonRecord1, "17", "0", LocationCheckType.Byte),
+                new GenericLocationData("KEP - Time Trial (Dragon) Entered", Addresses.TimeAttackSeconds, "17", "5", LocationCheckType.UShort)
             };
             return timeTrialDragonLocations;
         }
@@ -1788,16 +1863,16 @@ namespace Helpers
         private static List<GenericLocationData> GetTimeTrialEarthDragonData()
         {
             List<GenericLocationData> timeTrialEarthDragonLocations = new List<GenericLocationData>() {
-                new GenericLocationData("KEP - Time Trial (Earth Dragon) - Earth Dragon Boss", Addresses.KEP_TimeTrialEarthDragonEarthDragonBossDefeat, "29", "0", LocationCheckType.UShort),
-                    new GenericLocationData("KEP - Time Trial (Earth Dragon) Entered", Addresses.KEP_TimeTrialEarthDragonEntered, "0", "29", LocationCheckType.UShort)
+                new GenericLocationData("KEP - Time Trial (Earth Dragon) - Earth Dragon Boss", Addresses.TimeAttackEarthDragonRecord1, "5672", "0", LocationCheckType.Byte),
+                    new GenericLocationData("KEP - Time Trial (Earth Dragon) Entered", Addresses.TimeAttackSeconds, "5672", "5", LocationCheckType.UShort)
             };
             return timeTrialEarthDragonLocations;
         }
         private static List<GenericLocationData> GetTimeTrialSnowDragonData()
         {
             List<GenericLocationData> timeTrialSnowDragonLocations = new List<GenericLocationData>() {
-                new GenericLocationData("KEP - Time Trial (Snow Dragon) - Snow Dragon Boss", Addresses.KEP_TimeTrialSnowDragonSnowDragonBossDefeat, "29", "0", LocationCheckType.UShort),
-                    new GenericLocationData("KEP - Time Trial (Snow Dragon) Entered", Addresses.KEP_TimeTrialSnowDragonEntered, "0", "29", LocationCheckType.UShort)
+                new GenericLocationData("KEP - Time Trial (Snow Dragon) - Snow Dragon Boss", Addresses.TimeAttackSnowDragonRecord1, "7477", "0", LocationCheckType.Byte),
+                    new GenericLocationData("KEP - Time Trial (Snow Dragon) Entered",Addresses.TimeAttackSeconds, "7477", "5", LocationCheckType.UShort)
             };
             return timeTrialSnowDragonLocations;
         }
@@ -1813,8 +1888,8 @@ namespace Helpers
         private static List<GenericLocationData> GetTimeTrialDamascusGolemData()
         {
             List<GenericLocationData> timeTrialDamascusGolemLocations = new List<GenericLocationData>() {
-                new GenericLocationData("KEP - Time Trial (Damascus Golem) - Damascus Golem Boss", Addresses.KEP_TimeTrialDamascusGolemDamascusGolemBossDefeat, "29", "0", LocationCheckType.UShort),
-                    new GenericLocationData("KEP - Time Trial (Damascus Golem) Entered", Addresses.KEP_TimeTrialDamascusGolemEntered, "0", "29", LocationCheckType.UShort)
+                new GenericLocationData("KEP - Time Trial (Damascus Golem) - Damascus Golem Boss", Addresses.TimeAttackDamascusGolemRecord1, "310", "0", LocationCheckType.Byte),
+                new GenericLocationData("KEP - Time Trial (Damascus Golem) Entered", Addresses.TimeAttackSeconds, "310", "5", LocationCheckType.UShort)
             };
             return timeTrialDamascusGolemLocations;
         }
@@ -1822,8 +1897,8 @@ namespace Helpers
         private static List<GenericLocationData> GetTimeTrialDamascusCrabData()
         {
             List<GenericLocationData> timeTrialDamascusCrabLocations = new List<GenericLocationData>() {
-                new GenericLocationData("KEP - Time Trial (Damascus Crab) - Damascus Crab Boss", Addresses.KEP_TimeTrialDamascusCrabDamascusCrabBossDefeat, "29", "160", LocationCheckType.UShort),
-                new GenericLocationData("KEP - Time Trial (Damascus Crab) Entered", Addresses.KEP_TimeTrialDamascusCrabEntered, "0", "29", LocationCheckType.UShort)
+                new GenericLocationData("KEP - Time Trial (Damascus Crab) - Damascus Crab Boss", Addresses.TimeAttackDamascusCrabRecord1, "553", "0", LocationCheckType.Byte),
+                new GenericLocationData("KEP - Time Trial (Damascus Crab) Entered", Addresses.TimeAttackSeconds, "553", "5", LocationCheckType.UShort)
             };
             return timeTrialDamascusCrabLocations;
         }
@@ -1841,9 +1916,9 @@ namespace Helpers
         private static List<GenericLocationData> GetTimeTrialDeathOgreZombieData()
         {
             List<GenericLocationData> timeTrialDeathOgreZombieLocations = new List<GenericLocationData>() {
-                new GenericLocationData("KEP - Time Trial (Death + Ogre Zombie) - Death Boss", Addresses.KEP_TimeTrialDeathOgreZombieDeathBossDefeat, "29", "160", LocationCheckType.UShort),
-                new GenericLocationData("KEP - Time Trial (Death + Ogre Zombie) - Ogre Zombie Boss", Addresses.KEP_TimeTrialDeathOgreZombieOgreZombieBossDefeat, "0", "160", LocationCheckType.Byte),
-                new GenericLocationData("KEP - Time Trial (Death + Ogre Zombie) Entered", Addresses.KEP_TimeTrialDeathOgreZombieEntered, "0", "29", LocationCheckType.UShort)
+                new GenericLocationData("KEP - Time Trial (Death + Ogre Zombie) - Death Boss", Addresses.TimeAttackDeathAndOgreZombieRecord1, "5688", "0", LocationCheckType.Byte),
+                new GenericLocationData("KEP - Time Trial (Death + Ogre Zombie) - Ogre Zombie Boss", Addresses.TimeAttackDeathAndOgreZombieRecord1, "5688", "0", LocationCheckType.Byte),
+                new GenericLocationData("KEP - Time Trial (Death + Ogre Zombie) Entered",  Addresses.TimeAttackSeconds, "5688", "5", LocationCheckType.UShort)
             };
             return timeTrialDeathOgreZombieLocations;
         }
@@ -1851,8 +1926,8 @@ namespace Helpers
         private static List<GenericLocationData> GetTimeTrialAsuraData()
         {
             List<GenericLocationData> timeTrialAsuraLocations = new List<GenericLocationData>() {
-                new GenericLocationData("KEP - Time Trial (Asura) - Asura Boss", Addresses.KEP_TimeTrialAsuraAsuraBossDefeat, "29", "0", LocationCheckType.UShort),
-                new GenericLocationData("KEP - Time Trial (Asura) Entered", Addresses.KEP_TimeTrialAsuraEntered, "0", "29", LocationCheckType.UShort)
+                new GenericLocationData("KEP - Time Trial (Asura) - Asura Boss", Addresses.TimeAttackAsuraRecord1, "3640", "0", LocationCheckType.Byte),
+                new GenericLocationData("KEP - Time Trial (Asura) Entered",Addresses.TimeAttackSeconds, "5688", "5", LocationCheckType.UShort)
             };
             return timeTrialAsuraLocations;
         }

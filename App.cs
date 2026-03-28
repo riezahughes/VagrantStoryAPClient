@@ -5,9 +5,7 @@ using Archipelago.Core;
 using Archipelago.Core.Helpers;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
-using Archipelago.MultiClient.Net.Models;
 using Helpers;
-using Microsoft.Extensions.Configuration;
 using VagrantStoryArchipelago;
 using VagrantStoryArchipelago.Helpers;
 using VagrantStoryArchipelago.Options;
@@ -219,6 +217,7 @@ public class App
                 PlayerStateHelpers.EnableTeleportOptions(archipelagoClient);
                 PlayerStateHelpers.EnableNewGamePlus(archipelagoClient);
                 PlayerStateHelpers.SetVanillaBattleSkills();
+                PlayerStateHelpers.SetMenuOptionsAvailable();
                 PlayerStateHelpers.BreakArtThresholdSetup(archipelagoClient);
                 PlayerStateHelpers.BreakArtListener(_cancellationTokenBreakArtListener, archipelagoClient);
                 PlayerStateHelpers.ChainAbilityThresholdSetup(archipelagoClient);
