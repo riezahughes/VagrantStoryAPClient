@@ -2034,6 +2034,6 @@ namespace VagrantStoryArchipelago
         public const uint AM2_CorridorOfShadeEntered = 0x000f1ab0;
 
         // Credits
-        public const uint GE_Credits = 0x0;
+        public const uint GE_Credits = 0x0017cd08; // angels hp
     }
 }

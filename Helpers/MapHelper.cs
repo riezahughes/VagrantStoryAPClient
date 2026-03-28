@@ -20,13 +20,19 @@ public class MapHelper
     private static bool _battleAbilitiesSet = false;
 
 
-    public static void StartMapProgressionListener()
+    public static void StartMapProgressionListener(CancellationTokenSource cts, ArchipelagoClient client)
     {
         Memory.MonitorAddressForAction<ushort>(
             Addresses.CurrentMapandRoomID,
             () =>
             {
                 ushort mapId = Memory.ReadUShort(Addresses.CurrentMapandRoomID);
+
+                if (mapId == 0x011b)
+                {
+                    PlayerStateHelpers.AngelGoalListener(cts, client);
+                }
+
                 if (APHelpers.isInTheGame() && APHelpers.isProcessingItems() == false)
                 {
 #if DEBUG
@@ -36,7 +42,7 @@ public class MapHelper
                 }
                 _lastRoomValue = mapId;
                 Thread.Sleep(500);
-                StartMapProgressionListener();
+                StartMapProgressionListener(cts, client);
 #if DEBUG
                 Thread.Sleep(3000);
                 CliHelpers.DebugInformation();
@@ -730,6 +736,9 @@ public class MapHelper
         // Rozenrantz goes here
         { 0x0F30, new(0x0035, null) }, // Dark Elemental
         { 0x0737, new(0x0037, null) },
+        { 0x0419, new(0x004c, null) }, // atrium
+        { 0x001b, new(0x004d, null) }, // atrium
+        { 0x001a, new(0x004e, null) }, // atrium
         // neesa and tieger go here
     };
 

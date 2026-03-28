@@ -390,6 +390,21 @@ namespace Helpers
 
         }
 
+        public static void AngelGoalListener(CancellationTokenSource cts, ArchipelagoClient client)
+        {
+            if (cts.Token.IsCancellationRequested) return;
+#if DEBUG
+            Console.WriteLine("Listening for Chain Ability Updates...");
+#endif
+            Memory.MonitorAddressForAction<byte>(
+            Addresses.GE_Credits,
+            () =>
+            {
+                client.SendGoalCompletion();
+            },
+            value => value == 0);
+
+        }
 
     }
 }
