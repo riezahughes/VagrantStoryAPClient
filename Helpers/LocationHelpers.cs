@@ -31,6 +31,7 @@ namespace Helpers
                 "Room of Rotten Grapes",
                 "Blackmarket of Wines",
                 "The Gallows",
+                "The Gallows Again",
                 "Room of Cheap Red Wine",
                 "Room of Cheap White Wine",
                 "The Greedy One's Den",
@@ -410,6 +411,7 @@ namespace Helpers
             allLevelLocations.Add("Room of Rotten Grapes", GetRoomOfRottenGrapesData());
             allLevelLocations.Add("Blackmarket of Wines", GetBlackmarketOfWinesData());
             allLevelLocations.Add("The Gallows", GetTheGallowsData());
+            allLevelLocations.Add("The Gallows Again", GetTheGallowsAgainData());
             allLevelLocations.Add("Room of Cheap Red Wine", GetRoomOfCheapRedWineData());
             allLevelLocations.Add("Room of Cheap White Wine", GetRoomOfCheapWhiteWineData());
             allLevelLocations.Add("The Greedy One's Den", GetTheGreedyOnesDenData());
@@ -1112,9 +1114,9 @@ namespace Helpers
         private static List<GenericLocationData> GetSmokebarrelStairData()
         {
             List<GenericLocationData> smokebarrelStairLocations = new List<GenericLocationData>() {
-                new GenericLocationData("WC - Smokebarrel Stair - Gust Floor Trap", Addresses.WC_SmokebarrelStairHealPanelFloorTrap, "1033", "32769", LocationCheckType.UShort),
-                    new GenericLocationData("WC - Smokebarrel Stair - Chamomile Sigil Unlock", Addresses.WC_SmokebarrelStairChamomileSigilUnlock, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("WC - Smokebarrel Stair Entered", Addresses.WC_SmokebarrelStairEntered, "0", "1033", LocationCheckType.UShort)
+                new GenericLocationData("WC - Smokebarrel Stair - Heal Floor Trap", Addresses.WC_SmokebarrelStairHealPanelFloorTrap, "1033", "32769", LocationCheckType.UShort),
+                new GenericLocationData("WC - Smokebarrel Stair - Chamomile Sigil Unlock", Addresses.WC_SmokebarrelStairChamomileSigilUnlock, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("WC - Smokebarrel Stair Entered", Addresses.WC_SmokebarrelStairEntered, "0", "1033", LocationCheckType.UShort)
             };
             return smokebarrelStairLocations;
         }
@@ -1203,10 +1205,18 @@ namespace Helpers
                     new GenericLocationData("WC - The Gallows - Minotaur Boss - Grimoire Guerir", Addresses.WC_TheGallowsMinotaurBossDefeat, "12", "0", LocationCheckType.UShort),
                     new GenericLocationData("WC - The Gallows - Minotaur Boss", Addresses.WC_TheGallowsMinotaurBossDefeat, "12", "0", LocationCheckType.UShort),
                     // You need to come up with a solution for tracking different bosses based on the items you've collected.
-                    new GenericLocationData("WC - The Gallows (Again) - Minotaur Zombie Boss", Addresses.WC_TheGallowsAgainMinotaurZombieBossDefeat, "0", "999", LocationCheckType.UShort),
-                    new GenericLocationData("WC - The Gallows (Again) - Chest", Addresses.WC_TheGallowsAgainChest, "0", "1", LocationCheckType.Byte),
                     new GenericLocationData("WC - The Gallows - Chest", Addresses.WC_TheGallowsChest, "0", "1", LocationCheckType.Byte),
                     new GenericLocationData("WC - The Gallows Entered", Addresses.WC_TheGallowsEntered, "0", "12", LocationCheckType.UShort)
+            };
+            return theGallowsLocations;
+        }
+
+        private static List<GenericLocationData> GetTheGallowsAgainData()
+        {
+            List<GenericLocationData> theGallowsLocations = new List<GenericLocationData>() {
+                    // You need to come up with a solution for tracking different bosses based on the items you've collected.
+                    new GenericLocationData("WC - The Gallows Again - Minotaur Zombie Boss", Addresses.WC_TheGallowsAgainMinotaurZombieBossDefeat, "0", "999", LocationCheckType.UShort),
+                    new GenericLocationData("WC - The Gallows Again - Chest", Addresses.WC_TheGallowsAgainChest, "0", "1", LocationCheckType.Byte),
             };
             return theGallowsLocations;
         }

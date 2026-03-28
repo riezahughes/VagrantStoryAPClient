@@ -16,6 +16,7 @@ public class MapHelper
     private static ushort _lastRoomValue = 0xFFFF; // Store last known map ID
     private static ushort _lastMapIdChest = 0xFFFF; // Store last known map ID
     private static uint _lastPointerValueBoss = 0xFFFFFFFF; // Store last known boss pointer
+    private static uint _lastActorValue = 0xFFFFFFFF; // Store last known boss pointer
     private static bool _battleAbilitiesSet = false;
 
 
@@ -100,6 +101,34 @@ public class MapHelper
         }
 
         Memory.WriteObject<MapBossData>(currentPointerValue, replacementBossItems);
+    }
+
+
+    public static void StartActorListener(CancellationTokenSource cts, Dictionary<string, object> options)
+    {
+        Memory.MonitorAddressForAction<uint>(
+            Addresses.MapMonsterDataPointer,
+            () =>
+            {
+                if (cts.Token.IsCancellationRequested) return;
+
+                uint actorPointer = Memory.ReadUInt(Addresses.MapMonsterDataPointer);
+                ushort mapId = Memory.ReadUShort(Addresses.CurrentMapandRoomID);
+
+                if (APHelpers.isInTheGame() && APHelpers.isProcessingItems() == false && !MapsWithBosses.Contains(mapId))
+                {
+                    uint actorPointerRemoved = (actorPointer & 0x0FFFFFFF);
+#if DEBUG
+                    Console.WriteLine($"Current Actor Pointer: {actorPointer:X4} - Actor Drops Updating");
+#endif
+                    ActorHelpers.CleanActorDrops(actorPointerRemoved);
+
+                    _lastActorValue = actorPointer;
+                }
+                Thread.Sleep(500);
+                StartActorListener(cts, options);
+            },
+            value => value != _lastActorValue);
     }
 
     public static void StartMapChestListener(CancellationTokenSource cts, Dictionary<string, object> options)
@@ -212,6 +241,7 @@ public class MapHelper
 
         // mini boss drops
         //0x000e, // Lizardmen Fight // commented out till i can check it.
+
         // NG+
         0x0136, // Slaugher of the Innocent - Damascus Golem (Evil)
         0x0138, // Ordeal By Fire - Dark Dragon (Dragon)
@@ -240,6 +270,7 @@ public class MapHelper
         0x050D, // Rodent-Ridden Chamber
         0x040D, // The Lamenting Mother
         0x090D, // Bandits' Hideout
+        0x110d, // the ghost room's second form
         
         // Sanctum
         0x030F, // Alchemists' Laboratory

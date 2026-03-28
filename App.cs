@@ -5,7 +5,9 @@ using Archipelago.Core;
 using Archipelago.Core.Helpers;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
+using Archipelago.MultiClient.Net.Models;
 using Helpers;
+using Microsoft.Extensions.Configuration;
 using VagrantStoryArchipelago;
 using VagrantStoryArchipelago.Helpers;
 using VagrantStoryArchipelago.Options;
@@ -226,6 +228,7 @@ public class App
                 MapHelper.StartMapProgressionListener();
                 MapHelper.StartMapChestListener(_cancellationTokenMapChestListener, archipelagoClient.Options);
                 MapHelper.StartMapBossListener(_cancellationTokenMapBossListener, archipelagoClient.Options);
+                MapHelper.StartActorListener(_cancellationTokenMapBossListener, archipelagoClient.Options);
 
                 _ = archipelagoClient.MonitorLocationsAsync(GameLocations, _cancellationTokenSource.Token);
             }

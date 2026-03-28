@@ -29,6 +29,24 @@ namespace VagrantStoryArchipelago.Helpers
 
         public static int CountActors(uint pointerAddress) => GetAllActors(pointerAddress).Count;
 
+        public static void CleanActorDrops(uint pointerAddress)
+        {
+            if (pointerAddress == 0x0)
+                return;
+            ulong currentAddress = pointerAddress; // already the actor's address, don't dereference
+            while (true)
+            {
+                MapActorData actor = Memory.ReadObject<MapActorData>(currentAddress);
+                actor.GuaranteedLoot1_Name = 0x00;
+                actor.GuaranteedLoot2_Name = 0x00;
+                Memory.WriteObject(currentAddress, actor);
+
+                currentAddress = actor.NextActorPointer & 0x0FFFFFFF;
+                if (currentAddress == 0x0)
+                    break;
+            }
+        }
+
         //public static Dictionary<>
         //
         // Dark Crusader fight
