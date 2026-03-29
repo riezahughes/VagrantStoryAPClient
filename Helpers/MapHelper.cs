@@ -173,11 +173,6 @@ public class MapHelper
         DropItemChoice dropChoice = PlayerStateHelpers.GetPlayerOption<DropItemChoice>(options, "chest_item_choices");
 
         var replacementChestItems = new MapChestData();
-        var item1 = ItemDatabase.Items["Cure Root"];
-        var item2 = ItemDatabase.Items["Vera Root"];
-        var item3 = ItemDatabase.Items["Alchemist's Reagent"];
-
-
 
         if (dropChoice == DropItemChoice.HEALING_HEAVY)
         {
