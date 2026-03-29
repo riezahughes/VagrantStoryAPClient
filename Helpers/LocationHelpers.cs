@@ -788,6 +788,55 @@ namespace Helpers
                     {
                         int locationId = (int)currentRegionBaseId + location_index;
 
+                        // Zombie Minotaur overlaps with both time trial and regular minotaur
+                        if (loc.Name.Contains("Minotaur Zombie Boss"))
+                        {
+                            List<ILocation> conditionalChoice = new List<ILocation>();
+
+                            conditionalChoice.Add(new Location()
+                            {
+                                Id = -1,
+                                Name = "Level Check",
+                                Address = Addresses.CurrentMapandRoomID,
+                                CheckType = LocationCheckType.UShort,
+                                CompareType = LocationCheckCompareType.Match,
+                                CheckValue = loc.LevelId
+                            });
+
+                            conditionalChoice.Add(new Location()
+                            {
+                                Id = -1,
+                                Name = "Regular HP Check",
+                                Address = Addresses.WC_TheGallowsAgainMinotaurZombieBossDefeat,
+                                CheckType = LocationCheckType.UShort,
+                                CompareType = LocationCheckCompareType.Match,
+                                CheckValue = "0"
+                            });
+
+                            conditionalChoice.Add(new Location()
+                            {
+                                Id = -1,
+                                Name = "Max HP Check",
+                                Address = Addresses.WC_TheGallowsAgainMinotaurZombieBossMaxHP,
+                                CheckType = LocationCheckType.UShort,
+                                CompareType = LocationCheckCompareType.Match,
+                                CheckValue = "340"
+                            });
+
+                            CompositeLocation location = new CompositeLocation()
+                            {
+                                Name = loc.Name,
+                                Id = locationId,
+                                CheckType = LocationCheckType.AND,
+                                Conditions = conditionalChoice,
+                            };
+
+                            locations.Add(location);
+                            location_index++;
+                            continue;
+                        }
+
+                        // Time trials need some seperation as their rooms aren't inque
 
                         if (loc.Name.Contains("Time Trial") && loc.Name.Contains("Entered"))
                         {
@@ -1081,7 +1130,9 @@ namespace Helpers
         private static List<GenericLocationData> GetPrologueData()
         {
             List<GenericLocationData> prologueLocations = new List<GenericLocationData>() {
-                new GenericLocationData("PR - Prologue - Injured Wyvern Boss", Addresses.PR_PrologueInjuredWyvernBossDefeat, "0", "0", LocationCheckType.UShort)
+                new GenericLocationData("PR - Prologue - Injured Wyvern Boss", Addresses.PR_PrologueInjuredWyvernBossDefeat, "0", "0", LocationCheckType.UShort),
+                new GenericLocationData("PR - Prologue - Entrance to Manor Entered", Addresses.PR_EntranceToManorEntered, "0", "3", LocationCheckType.UShort),
+                new GenericLocationData("PR - Prologue - Alter Room Entered", Addresses.PR_AlterRoomEntered, "0", "6", LocationCheckType.UShort)
             };
             return prologueLocations;
         }
@@ -1215,7 +1266,7 @@ namespace Helpers
         {
             List<GenericLocationData> theGallowsLocations = new List<GenericLocationData>() {
                     // You need to come up with a solution for tracking different bosses based on the items you've collected.
-                    new GenericLocationData("WC - The Gallows Again - Minotaur Zombie Boss", Addresses.WC_TheGallowsAgainMinotaurZombieBossDefeat, "0", "999", LocationCheckType.UShort),
+                    new GenericLocationData("WC - The Gallows Again - Minotaur Zombie Boss", Addresses.WC_TheGallowsAgainMinotaurZombieBossDefeat, "12", "999", LocationCheckType.UShort),
                     new GenericLocationData("WC - The Gallows Again - Chest", Addresses.WC_TheGallowsAgainChest, "0", "1", LocationCheckType.Byte),
             };
             return theGallowsLocations;
@@ -1224,7 +1275,6 @@ namespace Helpers
         private static List<GenericLocationData> GetRoomOfCheapRedWineData()
         {
             List<GenericLocationData> roomOfCheapRedWineLocations = new List<GenericLocationData>() {
-                    new GenericLocationData("WC - Room of Cheap Red Wine - Mandel Boss", Addresses.WC_RoomOfCheapRedWineMandelBossDefeat, "256", "0", LocationCheckType.UShort),
                     new GenericLocationData("WC - Room of Cheap Red Wine - Heal Floor Trap", Addresses.WC_RoomOfCheapRedWineHealPanelFloorTrap, "265", "3081", LocationCheckType.UShort),
                     new GenericLocationData("WC - Room of Cheap Red Wine Entered", Addresses.WC_RoomOfCheapRedWineEntered, "0", "265", LocationCheckType.UShort)
             };
@@ -1234,9 +1284,6 @@ namespace Helpers
         private static List<GenericLocationData> GetRoomOfCheapWhiteWineData()
         {
             List<GenericLocationData> roomOfCheapWhiteWineLocations = new List<GenericLocationData>() {
-                    new GenericLocationData("WC - Room of Cheap White Wine - Zombie Fighter Boss", Addresses.WC_RoomOfCheapWhiteWineZombieFighterBossDefeat, "521", "0", LocationCheckType.UShort),
-                    new GenericLocationData("WC - Room of Cheap White Wine - Zombie Boss", Addresses.WC_RoomOfCheapWhiteWineZombieBossDefeat, "521", "0", LocationCheckType.UShort),
-                    new GenericLocationData("WC - Room of Cheap White Wine - Ghoul Boss", Addresses.WC_RoomOfCheapWhiteWineGhoulBossDefeat, "521", "0", LocationCheckType.UShort),
                     new GenericLocationData("WC - Room of Cheap White Wine Entered", Addresses.WC_RoomOfCheapWhiteWineEntered, "0", "521", LocationCheckType.UShort)
             };
             return roomOfCheapWhiteWineLocations;
@@ -1587,9 +1634,10 @@ namespace Helpers
         private static List<GenericLocationData> GetTheGreengrocersStairData()
         {
             List<GenericLocationData> theGreengrocersStairLocations = new List<GenericLocationData>() {
-                new GenericLocationData("UEN - The Greengrocer's Stair - Neesa Boss", Addresses.UEN_TheGreengrocersStairNeesaBossDefeat, "2353", "0", LocationCheckType.UShort),
-                    new GenericLocationData("UEN - The Greengrocer's Stair - Tieger Boss", Addresses.UEN_TheGreengrocersStairTiegerBossDefeat, "0", "160", LocationCheckType.Byte),
-                    new GenericLocationData("UEN - The Greengrocer's Stair Entered", Addresses.UEN_TheGreengrocersStairEntered, "0", "2353", LocationCheckType.UShort)
+                // Current Progression state means these two don't spawn
+                // new GenericLocationData("UEN - The Greengrocer's Stair - Neesa Boss", Addresses.UEN_TheGreengrocersStairNeesaBossDefeat, "2353", "0", LocationCheckType.UShort),
+                // new GenericLocationData("UEN - The Greengrocer's Stair - Tieger Boss", Addresses.UEN_TheGreengrocersStairTiegerBossDefeat, "0", "160", LocationCheckType.Byte),
+                new GenericLocationData("UEN - The Greengrocer's Stair Entered", Addresses.UEN_TheGreengrocersStairEntered, "0", "2353", LocationCheckType.UShort)
             };
             return theGreengrocersStairLocations;
         }
@@ -1945,7 +1993,8 @@ namespace Helpers
         private static List<GenericLocationData> GetTheWarriorsRestData()
         {
             List<GenericLocationData> theWarriorsRestLocations = new List<GenericLocationData>() {
-                new GenericLocationData("KEP - The Warrior's Rest - Rosencrantz Boss", Addresses.KEP_TheWarriorsRestRosencrantzBossDefeat, "29", "0", LocationCheckType.UShort),
+                // current game progression state means he won't spawn.
+                //new GenericLocationData("KEP - The Warrior's Rest - Rosencrantz Boss", Addresses.KEP_TheWarriorsRestRosencrantzBossDefeat, "29", "0", LocationCheckType.UShort),
                 new GenericLocationData("KEP - The Warrior's Rest - Chest", Addresses.KEP_TheWarriorsRestChest, "0", "1", LocationCheckType.Byte),
                 new GenericLocationData("KEP - The Warrior's Rest Entered", Addresses.KEP_TheWarriorsRestEntered, "0", "29", LocationCheckType.UShort)
             };

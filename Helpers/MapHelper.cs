@@ -745,7 +745,7 @@ public class MapHelper
     public static Dictionary<int, ushort> StartingLocationAddress = new Dictionary<int, ushort>
     {
         { 0, 0x002b },
-        { 1, 0x0005 },
+        { 1, 0x002E }, // bugs out to a cutscene
         { 2, 0x002d },
         { 3, 0x002f },
         { 4, 0x002c },
@@ -780,15 +780,21 @@ public class MapHelper
             PlayerStartingPosition startingLocation = PlayerStateHelpers.GetPlayerOption<PlayerStartingPosition>(client.Options, "open_world_option");
             string choice;
 
-            int count = 0;
-            while (count < 10)
+            var address = StartingLocationAddress[(int)startingLocation];
+
+            var loadState = Memory.ReadByte(Addresses.LoadRoomFunction);
+
+            Memory.Write(Addresses.CurrentMapandRoomID, address);
+            while (loadState != 0x00)
             {
-                var address = StartingLocationAddress[(int)startingLocation];
-                Memory.Write(Addresses.CurrentMapandRoomID, address);
-                count++;
+                Thread.Sleep(50);
+                loadState = Memory.ReadByte(Addresses.LoadRoomFunction);
             }
+
+            Memory.Write(Addresses.LoadRoomFunction, 0x02);
+
         },
-            value => value >= 1);
+            value => value == 0x0009);
     }
 
     public static void MarkMapAsSeen(int mapId)

@@ -283,7 +283,7 @@ public class App
                             Thread.Sleep(100);
                             Memory.Write(Addresses.CurrentMapandRoomID, warpValue);
                             Thread.Sleep(100);
-                            Memory.Write(Addresses.LoadRoomFunction, 0x01);
+                            Memory.Write(Addresses.LoadRoomFunction, 0x02);
                         }
                         else
                         {

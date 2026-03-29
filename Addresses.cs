@@ -646,7 +646,9 @@ namespace VagrantStoryArchipelago
 
 
         // Prologue
-        public const uint PR_PrologueInjuredWyvernBossDefeat = 0x0;
+        public const uint PR_PrologueInjuredWyvernBossDefeat = 0x0017dd68;
+        public const uint PR_EntranceToManorEntered = 0x000f1ab0;
+        public const uint PR_AlterRoomEntered = 0x000f1ab0;
 
         // Entrance to Darkness
         public const uint WC_EntranceToDarknessEntered = 0x000f1ab0;
@@ -698,6 +700,7 @@ namespace VagrantStoryArchipelago
         // The Gallows
         public const uint WC_TheGallowsMinotaurBossDefeat = 0x00180bd8;
         public const uint WC_TheGallowsAgainMinotaurZombieBossDefeat = 0x00180c68;
+        public const uint WC_TheGallowsAgainMinotaurZombieBossMaxHP = 0x00180c6a;
         public const uint WC_TheGallowsAgainChest = 0x00061977;
         public const uint WC_TheGallowsChest = 0x0006195A;
         public const uint WC_TheGallowsEntered = 0x000f1ab0;
