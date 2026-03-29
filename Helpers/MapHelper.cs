@@ -81,12 +81,12 @@ public class MapHelper
     {
         DropItemChoice dropChoice = PlayerStateHelpers.GetPlayerOption<DropItemChoice>(options, "boss_item_choices");
         var replacementBossItems = new MapBossData();
-        var item1 = ItemDatabase.Items["Cure Root"];
-        var item2 = ItemDatabase.Items["Vera Root"];
-        var item3 = ItemDatabase.Items["Alchemist's Reagent"];
 
         if (dropChoice == DropItemChoice.HEALING_HEAVY)
         {
+            var item1 = ItemDatabase.Items["Cure Bulb"];
+            var item2 = ItemDatabase.Items["Vera Root"];
+            var item3 = ItemDatabase.Items["Alchemist's Reagent"];
             replacementBossItems.Item1_Id = item1.ItemID;
             replacementBossItems.Item1_Qty = 0x01;
             replacementBossItems.Item2_Id = item2.ItemID;
@@ -97,7 +97,9 @@ public class MapHelper
 
         else if (dropChoice == DropItemChoice.RISK_HEAVY)
         {
-
+            var item1 = ItemDatabase.Items["Cure Root"];
+            var item2 = ItemDatabase.Items["Vera Bulb"];
+            var item3 = ItemDatabase.Items["Alchemist's Reagent"];
             replacementBossItems.Item1_Id = item1.ItemID;
             replacementBossItems.Item1_Qty = 0x01;
             replacementBossItems.Item2_Id = item2.ItemID;
@@ -179,6 +181,9 @@ public class MapHelper
 
         if (dropChoice == DropItemChoice.HEALING_HEAVY)
         {
+            var item1 = ItemDatabase.Items["Cure Bulb"];
+            var item2 = ItemDatabase.Items["Vera Root"];
+            var item3 = ItemDatabase.Items["Alchemist's Reagent"];
             replacementChestItems.Misc1_Exists = 0x03;
             replacementChestItems.Misc2_Exists = 0x03;
             replacementChestItems.Misc3_Exists = 0x03;
@@ -195,6 +200,9 @@ public class MapHelper
 
         else if (dropChoice == DropItemChoice.RISK_HEAVY)
         {
+            var item1 = ItemDatabase.Items["Cure Root"];
+            var item2 = ItemDatabase.Items["Vera Bulb"];
+            var item3 = ItemDatabase.Items["Alchemist's Reagent"];
             replacementChestItems.Misc1_Exists = 0x03;
             replacementChestItems.Misc2_Exists = 0x03;
             replacementChestItems.Misc3_Exists = 0x03;
