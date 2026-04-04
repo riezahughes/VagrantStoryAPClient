@@ -259,6 +259,11 @@ public class App
                     {
                         CliHelpers.DebugInformation();
                     }
+                    else if (input?.Trim().ToLower().Contains("release") == true)
+                    {
+                        Console.WriteLine("Manually sending goal completion ping to Archipelago server...");
+                        archipelagoClient.SendGoalCompletion();
+                    }
                     else if (input?.Trim().ToLower().Contains("hint") == true)
                     {
                         string hintString = input?.Trim().ToLower() == "hint" ? "!hint" : $"!hint {input.Substring(5).Trim()}";

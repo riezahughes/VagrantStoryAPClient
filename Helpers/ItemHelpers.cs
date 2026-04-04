@@ -1238,7 +1238,7 @@ namespace VagrantStoryArchipelago.Helpers
             { 0x21, "Rune Blade" },
             { 0x22, "Holy Win" },
             { 0x23, "Hand Axe" },
-            { 0x24, "BattleAxe" },
+            { 0x24, "Battle Axe" },
             { 0x25, "Francisca" },
             { 0x26, "Tabarzin" },
             { 0x27, "Chamkaq" },
