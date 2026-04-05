@@ -169,7 +169,7 @@ namespace Helpers
         public static void SetRoomProgression(ArchipelagoClient client)
         {
             ushort current_room = Memory.ReadByte(Addresses.CurrentMapandRoomID);
-            MapHelper.SetBossProgression(current_room);
+            MapHelper.SetBossProgression(current_room, client.Options);
         }
 
         public static void SetUpMapListener(CancellationTokenSource cts, ArchipelagoClient client)

@@ -38,7 +38,7 @@ public class MapHelper
 #if DEBUG
                     Console.WriteLine("Progression State Updated");
 #endif
-                    SetBossProgression(mapId);
+                    SetBossProgression(mapId, client.Options);
                 }
                 _lastRoomValue = mapId;
                 Thread.Sleep(500);
@@ -755,8 +755,17 @@ public class MapHelper
         { 5, 0x002a }
     };
 
-    public static void SetBossProgression(ushort mapId)
+    private static readonly HashSet<ushort> _atriumMapIds = new() { 0x0419, 0x001b, 0x001a };
+
+    public static void SetBossProgression(ushort mapId, Dictionary<string, object> options)
     {
+        if (_atriumMapIds.Contains(mapId))
+        {
+            int required = PlayerStateHelpers.GetPlayerOptionCounts(options, "blood_sin_quantity");
+            if (App.BloodSinsCollected < required)
+                return;
+        }
+
         if (BossProgressionSettings.TryGetValue(mapId, out var progression))
         {
             Memory.Write(Addresses.ProgressionState, progression.Prog1);

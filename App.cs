@@ -5,6 +5,7 @@ using Archipelago.Core;
 using Archipelago.Core.Helpers;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
+using Archipelago.Core.Util.Overlay;
 using Archipelago.MultiClient.Net.Models;
 using Helpers;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +17,7 @@ public class App
 {
 
     public static int ProcessedItemIndex = 0;
+    public static int BloodSinsCollected = 0;
 
     public static CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
     public static CancellationTokenSource _cancellationTokenMapListener = new CancellationTokenSource();
@@ -154,10 +156,11 @@ public class App
 
         Console.WriteLine("Got the details! Attempting to connect to Archipelagos main server");
 
-
-
         try
         {
+            archipelagoClient.Connected += (sender, args) => APHelpers.OnConnectedLogic(sender, args, archipelagoClient);
+            archipelagoClient.Disconnected += (sender, args) => APHelpers.OnDisconnectedLogic(sender, args, archipelagoClient);
+
             await archipelagoClient.Connect(url + ":" + port, gameName);
             Thread.Sleep(1000);
             await archipelagoClient?.Login(slot, password);
@@ -183,14 +186,12 @@ public class App
             }
 
             // Register event handlers
-            archipelagoClient.Connected += (sender, args) => APHelpers.OnConnectedLogic(sender, args, archipelagoClient);
-            archipelagoClient.Disconnected += (sender, args) => APHelpers.OnDisconnectedLogic(sender, args, archipelagoClient);
             archipelagoClient.ItemManager.ItemReceived += (sender, args) => APHelpers.ItemReceivedLogic(sender, args, archipelagoClient);
             archipelagoClient.MessageReceived += (sender, args) => APHelpers.Client_MessageReceivedLogic(sender, args, archipelagoClient, slot);
             archipelagoClient.LocationManager.LocationCompleted += (sender, args) => APHelpers.Client_LocationCompletedLogic(sender, args, archipelagoClient);
             archipelagoClient.LocationManager.EnableLocationsCondition = () => APHelpers.isInTheGame();
-
             archipelagoClient.CurrentSession.Locations.CheckedLocationsUpdated += APHelpers.Locations_CheckedLocationsUpdated;
+
 
             GameLocations = LocationHelpers.BuildLocationList(archipelagoClient.Options);
 
@@ -209,6 +210,19 @@ public class App
             }
             Console.Clear();
             Console.WriteLine("Listening for locations...");
+
+
+            var gameOverlay = new WindowsOverlayService(new OverlayOptions
+            {
+                XOffset = 50,
+                YOffset = 500,
+                FontSize = 12,
+                DefaultTextColor = Archipelago.Core.Util.Overlay.Color.Yellow,
+                FadeDuration = 10.0f,
+            });
+
+            //archipelagoClient.IntializeOverlayService(gameOverlay);
+
             try
             {
 
@@ -230,6 +244,7 @@ public class App
                 MapHelper.StartMapBossListener(_cancellationTokenMapBossListener, archipelagoClient.Options);
                 MapHelper.StartActorListener(_cancellationTokenMapBossListener, archipelagoClient.Options);
 
+                gameOverlay.AddTextPopup("Vagrant Story is ready to go.");
                 _ = archipelagoClient.MonitorLocationsAsync(GameLocations, _cancellationTokenSource.Token);
             }
             catch (Exception ex)

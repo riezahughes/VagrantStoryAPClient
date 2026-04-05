@@ -36,6 +36,8 @@ namespace VagrantStoryArchipelago.Helpers
                 return handleTeleportItem();
             if (result.Contains("Rood Inverse"))
                 return handleRoodInverseItem();
+            if (result.Contains("Blood Sin"))
+                return handleBloodSinProgession();
             if (ItemHelpers.ItemReference.Any(itm => itm.Value == item.ItemName && itm.Value.Contains("Grimoire")))
                 return ItemHelpers.handleGrimoireUnlock(item, client.CurrentSession.Items.AllItemsReceived);
             if (ItemHelpers.ItemReference.Any(itm => itm.Value == item.ItemName))
@@ -63,6 +65,12 @@ namespace VagrantStoryArchipelago.Helpers
             }
         }
 
+        public static bool handleBloodSinProgession()
+        {
+            App.BloodSinsCollected++;
+            return true;
+        }
+
         public static bool handleRoodInverseItem()
         {
             Memory.WriteByte(Addresses.RoodInverseActive, 0x0);
@@ -84,6 +92,15 @@ namespace VagrantStoryArchipelago.Helpers
             }
 
             var allItems = client.CurrentSession.Items.AllItemsReceived;
+
+            int bloodSinCount = 0;
+            for (int i = 0; i < App.ProcessedItemIndex && i < allItems.Count; i++)
+            {
+                if (allItems[i].ItemName.Contains("Blood Sin"))
+                    bloodSinCount++;
+            }
+
+            App.BloodSinsCollected = bloodSinCount;
 
             // Process items from our last saved index up to what we've received
             while (App.ProcessedItemIndex < allItems.Count)
@@ -111,6 +128,7 @@ namespace VagrantStoryArchipelago.Helpers
                     break; // Exit the loop, we'll try again later
                 }
             }
+
             APHelpers.PROCESSING_ITEM_LIST = false;
         }
 

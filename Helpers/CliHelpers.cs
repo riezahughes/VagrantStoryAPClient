@@ -114,10 +114,13 @@ namespace VagrantStoryArchipelago.Helpers
 
             ReadOnlyCollection<ItemInfo> items = client.CurrentSession.Items.AllItemsReceived;
             int index = App.ProcessedItemIndex - 1;
+            int maxBloodSins = PlayerStateHelpers.GetPlayerOptionCounts(client.Options, "blood_sin_quantity");
 
             Console.WriteLine($"--- RUN STATUS ---");
             Console.WriteLine($"Current Items Collected: {index}");
             Console.WriteLine($"Last Item: {items[index]}");
+            Console.WriteLine($"--- BLOOD SINS ---");
+            Console.WriteLine($"{App.BloodSinsCollected} / {maxBloodSins}");
             Console.WriteLine($"--- KEY ITEM CHECK ---");
             Console.WriteLine($"Bronze Key: {items.Any(i => i.ItemName == "Bronze Key") && items.Select((item, index) => new { item, index }).First(x => x.item.ItemName == "Bronze Key").index <= index}");
             Console.WriteLine($"Iron Key: {items.Any(i => i.ItemName == "Iron Key") && items.Select((item, index) => new { item, index }).First(x => x.item.ItemName == "Iron Key").index <= index}");

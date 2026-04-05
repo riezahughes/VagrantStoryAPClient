@@ -9,7 +9,10 @@ namespace VagrantStoryArchipelago.Models.Inventory
         public string BladeName { get; set; }
 
         [MemoryOffset(0x00)]  // 0x607d1 - Item ID (note: 16-bit, spans 0x02-0x03)
-        public uint BladeID { get; set; }
+        public ushort BladeID { get; set; }
+
+        [MemoryOffset(0x02)]
+        public byte UNKOWN_1 { get; set; }
 
         [MemoryOffset(0x03)]  // 0x607f6 - Blade Type
         public byte BladeType { get; set; }
@@ -37,6 +40,9 @@ namespace VagrantStoryArchipelago.Models.Inventory
 
         [MemoryOffset(0x0f)]  // 0x607d8 - Current DP
         public ushort BladeRiskStat { get; set; }
+
+        [MemoryOffset(0x10)]  // 0x607d8 - Current DP
+        public ushort BladeDamageType { get; set; }
 
         [MemoryOffset(0x14)]  // 0x607e1 - 
         public byte BladeRangeStat { get; set; }
@@ -91,6 +97,7 @@ namespace VagrantStoryArchipelago.Models.Inventory
 
         public InventoryBladeData(
             string name,
+            DamageType damageType,
             BladeType bladeType,
             BladeID bladeID,
             ushort bladeMaxDP,
@@ -121,6 +128,7 @@ namespace VagrantStoryArchipelago.Models.Inventory
         )
         {
             BladeName = name;
+            BladeDamageType = Convert.ToByte(damageType);
             BladeType = Convert.ToByte(bladeType);
             BladeID = Convert.ToByte(bladeID);
             BladeMaxDP = bladeMaxDP;

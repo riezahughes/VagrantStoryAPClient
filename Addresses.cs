@@ -28,6 +28,7 @@ namespace VagrantStoryArchipelago
         public const uint WeaponStatusToggle = 0x00060020;
         public const uint SaveAnywhere = 0x000109FC6;
         public const uint ItemIndexStorage = 0x00060024; // it's a twobyte value
+        //public const uint TotalBloodSins = 0x0006003E; // byte not used, but mem could be used for something else
         public const uint SaveBannerPercentage = 0x0010ae4c; // it's used to track the percentage and it's also a twobyte value
         public const uint TeleportToggle = 0x0006164d;
         public const uint TeleportNoMP = 0x000736dc;
