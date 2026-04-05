@@ -34,13 +34,15 @@ namespace VagrantStoryArchipelago.Helpers
             // Try to handle the item based on type
             if (result.Contains("Teleport"))
                 return handleTeleportItem();
-            if (result.Contains("Rood Inverse"))
+            else if (result.Contains("Rood Inverse"))
                 return handleRoodInverseItem();
-            if (result.Contains("Blood Sin"))
+            else if (result.Contains("Blood Sin"))
                 return handleBloodSinProgession();
-            if (ItemHelpers.ItemReference.Any(itm => itm.Value == item.ItemName && itm.Value.Contains("Grimoire")))
+            else if (item.ItemName.Contains("Progressive"))
                 return ItemHelpers.handleGrimoireUnlock(item, client.CurrentSession.Items.AllItemsReceived);
-            if (ItemHelpers.ItemReference.Any(itm => itm.Value == item.ItemName))
+            else if (ItemHelpers.ItemReference.Any(itm => itm.Value == item.ItemName && itm.Value.Contains("Grimoire")))
+                return ItemHelpers.handleGrimoireUnlock(item, client.CurrentSession.Items.AllItemsReceived);
+            else if (ItemHelpers.ItemReference.Any(itm => itm.Value == item.ItemName))
                 return ItemHelpers.handleInventoryItem(item);
             else if (ItemHelpers.GemReference.Any(itm => itm.Value == item.ItemName))
                 return ItemHelpers.handleInventoryGem(item);
@@ -394,25 +396,25 @@ namespace VagrantStoryArchipelago.Helpers
         {
             if (GrimoireReference.TryGetValue(item.ItemName, out GrimoireData grimoire))
             {
-                if (grimoire.Address.Count == 1)
+                Memory.WriteByte(grimoire.Address[0], grimoire.Value);
+                return true;
+            }
+            else if (item.ItemName.Contains("Progressive"))
+            {
+
+                string grimoireChoice = item.ItemName.Replace("Progressive", "").Trim();
+
+                var progBook = GrimoireReference.TryGetValue(grimoireChoice, out GrimoireData grim);
+
+                var count = itemsRecieved.Take(App.ProcessedItemIndex + 1).Count(itm => itm.ItemName == item.ItemName);
+                count = count > 4 ? 4 : count;
+
+                for (int i = 0; i < count; i++)
                 {
-                    Memory.WriteByte(grimoire.Address[0], grimoire.Value);
-                    return true;
+                    Memory.WriteByte(grim.Address[i], grim.Value);
                 }
-                else
-                {
-                    // take the items recieved, take the current state, count how many of the item appear between 0 and state, run through each update
 
-                    var count = itemsRecieved.Take(App.ProcessedItemIndex + 1).Count(itm => itm.ItemName == item.ItemName);
-                    count = count > 4 ? 4 : count;
-
-                    for (int i = 0; i < count; i++)
-                    {
-                        Memory.WriteByte(grimoire.Address[i], grimoire.Value);
-                    }
-
-                    return true;
-                }
+                return true;
             }
             else
             {
