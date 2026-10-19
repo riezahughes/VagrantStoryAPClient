@@ -1,13 +1,18 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Diagnostics;
+using System.Globalization;
+using System.Runtime.InteropServices;
 using System.Text;
 using Archipelago.Core;
 using Archipelago.Core.Helpers;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
 using Archipelago.Core.Util.Overlay;
+using Archipelago.Core.Util.PlatformMemory;
 using Archipelago.MultiClient.Net.Models;
 using Helpers;
+using Kokuban;
 using Microsoft.Extensions.Configuration;
 using VagrantStoryArchipelago;
 using VagrantStoryArchipelago.Helpers;
@@ -26,8 +31,36 @@ public class App
     public static CancellationTokenSource _cancellationTokenMapChestListener = new CancellationTokenSource();
     public static CancellationTokenSource _cancellationTokenMapBossListener = new CancellationTokenSource();
 
+    [DllImport("libc")]
+    private static extern uint geteuid();
+
     private static async Task Main(string[] args)
     {
+        // macOS only lets root read another process's memory, so relaunch under sudo in the same terminal
+        if (OperatingSystem.IsMacOS() && geteuid() != 0)
+        {
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.WriteLine();
+            Console.WriteLine(Chalk.BgMagenta.White.Bold["  ⚔️ Vagrant Story Archipelago Client · macOS  ⚔️  "]);
+            Console.WriteLine();
+            Console.WriteLine(Chalk.Yellow.Bold["  ⚠  Administrator access needed"]);
+            Console.WriteLine(Chalk.Gray["     macOS only lets admin apps read DuckStation's memory."]);
+            Console.WriteLine();
+            Console.WriteLine(Chalk.Cyan["  🔑 Enter your Mac password below."]);
+            Console.WriteLine(Chalk.Gray["     Nothing will appear as you type, that's normal."]);
+            Console.WriteLine();
+
+            var startInfo = new ProcessStartInfo("/usr/bin/sudo") { UseShellExecute = false };
+            startInfo.ArgumentList.Add("-p");
+            startInfo.ArgumentList.Add(Chalk.Magenta.Bold["  🔒 Password: "].ToString());
+            startInfo.ArgumentList.Add(Environment.ProcessPath!);
+            foreach (var arg in args) startInfo.ArgumentList.Add(arg);
+
+            using var elevated = Process.Start(startInfo)!;
+            await elevated.WaitForExitAsync();
+            Environment.Exit(elevated.ExitCode);
+        }
+
         Console.OutputEncoding = Encoding.UTF8;
         Console.Title = "⚔️ Vagrant Story Archipelago Client";
 
@@ -49,8 +82,8 @@ public class App
 
         // Make sure the connect is initialised
 
-        GameClient gameClient = null;
-        bool clientInitializedAndConnected = false; // Renamed for clarity
+        GameClient gameClient = new GameClient(OperatingSystem.IsMacOS() ? "DuckStation" : "duckstation-qt-x64-ReleaseLTCG");
+        bool clientInitializedAndConnected = false;
 
         int retryAttempt = 0;
 
@@ -62,17 +95,17 @@ public class App
 
             try
             {
-                gameClient = new GameClient("duckstation-qt-x64-ReleaseLTCG");
-                clientInitializedAndConnected = true;
+                clientInitializedAndConnected = gameClient.Connect();
+                if (!clientInitializedAndConnected)
+                {
+                    Console.WriteLine($"Could not find Duckstation open. Retrying in 5 seconds...");
+                    Thread.Sleep(5000);
+                }
             }
             catch (Exception ex)
             {
-                // Catch any exception thrown during the DuckstationClient constructor call
-                // or any other unexpected error during the try block.
-                Console.WriteLine($"Could not find Duckstation open.");
-
-                // Wait for 5 seconds before the next retry
-                Thread.Sleep(5000); // 5000 milliseconds = 5 seconds
+                Console.WriteLine($"Could not find Duckstation open ({ex.Message}). Retrying in 5 seconds...");
+                Thread.Sleep(5000);
             }
         }
 
@@ -81,8 +114,6 @@ public class App
         Console.Clear();
 #endif
 
-
-        bool connected = gameClient.Connect();
         var archipelagoClient = new ArchipelagoClient(gameClient);
 
         //archipelagoClient.CancelMonitors();
@@ -90,15 +121,24 @@ public class App
         Console.WriteLine("Successfully connected to Duckstation.");
 
         // get the duckstation offset
-        try
+        if (OperatingSystem.IsMacOS())
         {
-            Memory.GlobalOffset = Memory.GetDuckstationOffset();
-            Console.WriteLine($"Duckstation Memory Offset found at: 0x{Memory.GlobalOffset:X}");
+            // macOS memory restrictions stop Core from finding the offset, so the user has to provide it
+            PlatformMemory.GlobalOffset = PromptForDuckstationOffset();
+            Console.WriteLine($"Duckstation Memory Offset found at: 0x{PlatformMemory.GlobalOffset:X}");
         }
-        catch (Exception ex)
+        else
         {
-            Console.WriteLine($"An unexpected error occurred while getting Duckstation memory offset: {ex.Message}");
-            Console.WriteLine(ex); // Print full exception for debugging
+            try
+            {
+                PlatformMemory.GlobalOffset = PlatformMemory.GetDuckstationOffset();
+                Console.WriteLine($"Duckstation Memory Offset found at: 0x{PlatformMemory.GlobalOffset:X}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An unexpected error occurred while getting Duckstation memory offset: {ex.Message}");
+                Console.WriteLine(ex); // Print full exception for debugging
+            }
         }
 
 #if DEBUG
@@ -337,6 +377,46 @@ public class App
         {
             // Perform any necessary cleanup here
             Console.WriteLine("Shutting down...");
+        }
+    }
+
+    private static ulong PromptForDuckstationOffset()
+    {
+        Console.WriteLine();
+        Console.WriteLine(Chalk.BgMagenta.White.Bold["  ⚔️ DuckStation Memory Address  ⚔️  "]);
+        Console.WriteLine();
+        Console.WriteLine(Chalk.Yellow.Bold["  ⚠  macOS needs the DuckStation memory address entered manually"]);
+        Console.WriteLine();
+        Console.WriteLine(Chalk.Cyan["  1. "] + "In DuckStation, open " + Chalk.Bold["Tools > Memory Scanner"]);
+        Console.WriteLine(Chalk.Cyan["  2. "] + "Find this line in the bottom right:");
+        Console.WriteLine(Chalk.Gray["       Address of RAM for HxD Usage: "] + Chalk.Green.Bold["0x000000011c400000"]);
+        Console.WriteLine(Chalk.Cyan["  3. "] + "Paste the " + Chalk.Green.Bold["0x..."] + " address (or the whole line) below");
+        Console.WriteLine();
+
+        while (true)
+        {
+            Console.Write(Chalk.Magenta.Bold["  📍 Address: "]);
+            string input = Console.ReadLine() ?? "";
+
+            // accept the full "Address of RAM for HxD Usage: 0x..." line as well as just the address
+            int colonIndex = input.LastIndexOf(':');
+            if (colonIndex >= 0)
+            {
+                input = input.Substring(colonIndex + 1);
+            }
+
+            input = input.Trim();
+            if (input.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
+            {
+                input = input.Substring(2);
+            }
+
+            if (ulong.TryParse(input, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out ulong offset) && offset != 0)
+            {
+                return offset;
+            }
+
+            Console.WriteLine(Chalk.Red.Bold["  ✖  That doesn't look like a valid address. "] + Chalk.Gray["It should look like: "] + Chalk.Green["0x000000011c400000"]);
         }
     }
 }
