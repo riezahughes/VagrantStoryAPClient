@@ -261,7 +261,7 @@ public class App
                 FadeDuration = 10.0f,
             });
 
-            //archipelagoClient.IntializeOverlayService(gameOverlay);
+            archipelagoClient.IntializeOverlayService(gameOverlay);
 
             try
             {
@@ -285,6 +285,7 @@ public class App
                 MapHelper.StartActorListener(_cancellationTokenMapBossListener, archipelagoClient.Options);
 
                 gameOverlay.AddTextPopup("Vagrant Story is ready to go.");
+
                 _ = archipelagoClient.MonitorLocationsAsync(GameLocations, _cancellationTokenSource.Token);
             }
             catch (Exception ex)

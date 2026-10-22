@@ -108,7 +108,7 @@ namespace Helpers
 
             var timestamp = DateTime.Now.ToString("HH:mm:ss");
 
-            //client.AddOverlayMessage(e.Message.ToString());
+            client.AddOverlayMessage(e.Message.ToString());
 
             // adds coloured messages to terminal
 

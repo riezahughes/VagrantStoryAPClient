@@ -139,6 +139,7 @@ namespace VagrantStoryArchipelago
         public const uint MapChestDataPointer = 0x000f1ca4;
         public const uint MapMonsterDataPointer = 0x0011F9F0;
         public const uint RoomTilesPointer = 0x000f1c7c;
+        public const uint RoomLockPointer = 0x000f1c80;
 
         // Unlock chain message for listener
 
