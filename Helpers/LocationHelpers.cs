@@ -1073,13 +1073,14 @@ namespace Helpers
                 new GenericLocationData("Chain Unlock 21", Addresses.TotalRiskAbilitiesEarned, "0", "21", LocationCheckType.Byte),
                 new GenericLocationData("Chain Unlock 22", Addresses.TotalRiskAbilitiesEarned, "0", "22", LocationCheckType.Byte),
 
-                new GenericLocationData("Grimoire: Explosion Max Level", Addresses.GrimoireExplosionMaxLevel, "0", "704", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Thunderburst Max Level", Addresses.GrimoireThunderburstMaxLevel, "0", "704", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Flame Sphere Max Level", Addresses.GrimoireFlameSphereMaxLevel, "0", "704", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Gaea Strike Max Level", Addresses.GrimoireGaeaStrikeMaxLevel, "0", "704", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Avalanche Max Level", Addresses.GrimoireAvalancheMaxLevel, "0", "704", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Radial Surge Max Level", Addresses.GrimoireRadialSurgeMaxLevel, "0", "704", LocationCheckType.Byte),
-                new GenericLocationData("Grimoire: Meteor Max Level", Addresses.GrimoireMeteorMaxLevel, "0", "704", LocationCheckType.Byte),
+                // these locations have been removed for now
+                //new GenericLocationData("Grimoire: Explosion Max Level", Addresses.GrimoireExplosionMaxLevel, "0", "704", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Thunderburst Max Level", Addresses.GrimoireThunderburstMaxLevel, "0", "704", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Flame Sphere Max Level", Addresses.GrimoireFlameSphereMaxLevel, "0", "704", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Gaea Strike Max Level", Addresses.GrimoireGaeaStrikeMaxLevel, "0", "704", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Avalanche Max Level", Addresses.GrimoireAvalancheMaxLevel, "0", "704", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Radial Surge Max Level", Addresses.GrimoireRadialSurgeMaxLevel, "0", "704", LocationCheckType.Byte),
+                //new GenericLocationData("Grimoire: Meteor Max Level", Addresses.GrimoireMeteorMaxLevel, "0", "704", LocationCheckType.Byte),
 
                 new GenericLocationData("Break Art Dagger Level 1", Addresses.BreakCounterDaggers, "0", breakArtValuesSet ? breakArtLevelOne : ItemHelpers.BreakArtUnlockReference["Dagger"]["Whistle Sting Break Art"].Value.ToString(), LocationCheckType.Byte),
                 new GenericLocationData("Break Art Dagger Level 2", Addresses.BreakCounterDaggers, "0", breakArtValuesSet ? breakArtLevelTwo : ItemHelpers.BreakArtUnlockReference["Dagger"]["Shadowweave Break Art"].Value.ToString(), LocationCheckType.Byte),

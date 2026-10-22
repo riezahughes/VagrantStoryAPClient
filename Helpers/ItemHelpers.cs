@@ -558,7 +558,7 @@ namespace VagrantStoryArchipelago.Helpers
                 byte itemID = ItemHelpers.CraftingBladeReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
                 InventoryBladeData blade = BladeDatabase.Blades[item.ItemName];
                 blade.BladeInventorySlot = (byte)(listOfSlots.Count + 1);
-                Console.WriteLine($"No Blades has been found: Adding {blade.BladeName} with Agi {blade.BladeAgiStat} to slot {listOfSlots.Count}");
+                Console.WriteLine($"No Blades has been found: Adding {blade.BladeName} to slot {listOfSlots.Count}");
                 Memory.WriteObject<InventoryBladeData>(InventoryBladeSlotReference[listOfSlots.Count], BladeDatabase.Blades[item.ItemName]);
                 return true;
             }
@@ -1284,7 +1284,7 @@ namespace VagrantStoryArchipelago.Helpers
             { 0x3B, "Summoner Baton" },
             { 0x3C, "Shamanic Staff" },
             { 0x3D, "Bishop's Crosier" },
-            { 0x3E, "Sage Cane" },
+            { 0x3E, "Sage's Cane" },
             { 0x3F, "Langdebeve" },
             { 0x40, "Sabre Mace" },
             { 0x41, "Footman's Mace" },

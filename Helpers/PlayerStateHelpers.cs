@@ -163,7 +163,7 @@ namespace Helpers
                 Memory.Write(Addresses.TeleportSinAndPunishment, 0x0001);
                 Memory.Write(Addresses.TeleportTheAtrium, 0x0001);
                 Memory.Write(Addresses.TeleportGodsHandsWorkshop, 0x0001);
-            }
+            }    
         }
 
         public static void SetRoomProgression(ArchipelagoClient client)
