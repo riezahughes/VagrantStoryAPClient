@@ -29,9 +29,6 @@ jobs:
       # - name: Publish a release (Linux)
       #   run: dotnet publish -f net8.0-windows10.0.19041.0 -c Release -r linux-x64 --self-contained true /p:PublishSingleFile=true /p:EnableCompressionInSingleFile=true /p:PublishAppxPackage=false
 
-      # - name: Publish a release (Mac)
-      #   run: dotnet publish -f net8.0-windows10.0.19041.0 -c Release -r osx-x64 --self-contained true /p:PublishSingleFile=true /p:EnableCompressionInSingleFile=true /p:PublishAppxPackage=false
-
       - name: Rename Files
         run: |
             mv ./publish/VagrantStoryArchipelago.exe ./publish/VagrantStoryArchipelago_${{ github.ref_name }}_x64.exe
@@ -40,5 +37,38 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: "./publish/VagrantStoryArchipelago_${{ github.ref_name }}_x64.exe"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # macOS builds run on a mac runner so the SDK ad-hoc signs them (unsigned arm64 binaries get killed by macOS)
+  release-macos:
+    needs: release
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        rid: [osx-arm64, osx-x64]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+            ref: ${{ github.head_ref || github.ref_name }}
+
+      - name: Setup .NET 8.x
+        uses: actions/setup-dotnet@v4
+        with:
+            dotnet-version: '8.x'
+
+      - name: Publish a release (${{ matrix.rid }})
+        run: dotnet publish -f net8.0 -c Release -r ${{ matrix.rid }} --self-contained true /p:PublishSingleFile=true /p:EnableCompressionInSingleFile=true -o ./publish
+
+      # zipped so the executable permission survives the download
+      - name: Zip client
+        run: |
+            cd ./publish
+            zip -r VagrantStoryArchipelago_${{ github.ref_name }}_${{ matrix.rid }}.zip VagrantStoryArchipelago libcimgui.dylib
+
+      - name: Publish new client
+        uses: softprops/action-gh-release@v2
+        with:
+          files: "./publish/VagrantStoryArchipelago_${{ github.ref_name }}_${{ matrix.rid }}.zip"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

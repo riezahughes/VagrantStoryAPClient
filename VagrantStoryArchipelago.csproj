@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <ApplicationIcon>vagrantstory.ico</ApplicationIcon>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,7 +26,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.1" />
     <PackageReference Include="Spectre.Console" Version="0.54.0" />
 	<PackageReference Include="Kokuban" Version="0.2.0" />
-	<ProjectReference Include="D:\Archipelago\dev\Archipelago.Core\Archipelago.Core.csproj" />
+	<PackageReference Include="Archipelago.Core" Version="2.1.0" />
   </ItemGroup>
 
 </Project>
