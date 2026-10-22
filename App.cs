@@ -252,16 +252,16 @@ public class App
             Console.WriteLine("Listening for locations...");
 
 
-            var gameOverlay = new WindowsOverlayService(new OverlayOptions
+            var toggleableOverlay = new ToggleableOverlayService(() => new WindowsOverlayService(new OverlayOptions
             {
                 XOffset = 50,
                 YOffset = 500,
                 FontSize = 12,
                 DefaultTextColor = Archipelago.Core.Util.Overlay.Color.Yellow,
                 FadeDuration = 10.0f,
-            });
+            }));
 
-            archipelagoClient.IntializeOverlayService(gameOverlay);
+            archipelagoClient.IntializeOverlayService(toggleableOverlay);
 
             try
             {
@@ -284,7 +284,7 @@ public class App
                 MapHelper.StartMapBossListener(_cancellationTokenMapBossListener, archipelagoClient.Options);
                 MapHelper.StartActorListener(_cancellationTokenMapBossListener, archipelagoClient.Options);
 
-                gameOverlay.AddTextPopup("Vagrant Story is ready to go.");
+                toggleableOverlay.AddTextPopup("Vagrant Story is ready to go.");
 
                 _ = archipelagoClient.MonitorLocationsAsync(GameLocations, _cancellationTokenSource.Token);
             }
@@ -353,6 +353,11 @@ public class App
                             Console.WriteLine("Invalid warp value. Use: warp 1234");
                         }
 
+                    }
+                    else if (input?.Trim().ToLower() == "overlay")
+                    {
+                        toggleableOverlay.Enabled = !toggleableOverlay.Enabled;
+                        Console.WriteLine($"Game overlay {(toggleableOverlay.Enabled ? "enabled" : "disabled")}.");
                     }
                     else if (!string.IsNullOrWhiteSpace(input))
                     {
