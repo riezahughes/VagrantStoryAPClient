@@ -1276,7 +1276,7 @@ namespace Helpers
         private static List<GenericLocationData> GetRoomOfCheapRedWineData()
         {
             List<GenericLocationData> roomOfCheapRedWineLocations = new List<GenericLocationData>() {
-                    new GenericLocationData("WC - Room of Cheap Red Wine - Heal Floor Trap", Addresses.WC_RoomOfCheapRedWineHealPanelFloorTrap, "265", "3081", LocationCheckType.UShort),
+                    new GenericLocationData("WC - Room of Cheap Red Wine - Heal Floor Trap", Addresses.WC_RoomOfCheapRedWineHealPanelFloorTrap, "265", "32769", LocationCheckType.UShort),
                     new GenericLocationData("WC - Room of Cheap Red Wine Entered", Addresses.WC_RoomOfCheapRedWineEntered, "0", "265", LocationCheckType.UShort)
             };
             return roomOfCheapRedWineLocations;
@@ -3762,8 +3762,8 @@ namespace Helpers
         private static List<GenericLocationData> GetHallOfSwornRevengeData()
         {
             List<GenericLocationData> hallofSwornRevengeLocations = new List<GenericLocationData>() {
-                new GenericLocationData("CAT - Hall of Sworn Revenge - Heal Floor Trap", Addresses.CAT_HallofSwornRevengeHealPanelFloorTrap, "777", "32769", LocationCheckType.UShort),
-                    new GenericLocationData("CAT - Hall of Sworn Revenge - Cure Floor Trap", Addresses.CAT_HallofSwornRevengeCurePanelFloorTrap, "777", "32769", LocationCheckType.UShort),
+                new GenericLocationData("CAT - Hall of Sworn Revenge - Heal Floor Trap", Addresses.CAT_HallofSwornRevengeHealPanelFloorTrap, "13", "32769", LocationCheckType.UShort),
+                    new GenericLocationData("CAT - Hall of Sworn Revenge - Cure Floor Trap", Addresses.CAT_HallofSwornRevengeCurePanelFloorTrap, "13", "32769", LocationCheckType.UShort),
                     new GenericLocationData("CAT - Hall of Sworn Revenge Entered", Addresses.CAT_HallofSwornRevengeEntered, "0", "13", LocationCheckType.UShort)
             };
             return hallofSwornRevengeLocations;

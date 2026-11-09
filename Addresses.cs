@@ -140,6 +140,7 @@ namespace VagrantStoryArchipelago
         public const uint MapMonsterDataPointer = 0x0011F9F0;
         public const uint RoomTilesPointer = 0x000f1c7c;
         public const uint RoomLockPointer = 0x000f1c80;
+        public const uint RoomLockLength = 0x000f1c20; // byte length of the lock array, 0x14 per entry
 
         // Unlock chain message for listener
 
@@ -457,17 +458,17 @@ namespace VagrantStoryArchipelago
         public const uint InventoryWeaponSlot1_GripSlot = 0x0006016a;
         public const uint InventoryWeaponSlot1_Equipped = 0x0006016b;
         public const uint InventoryWeaponSlot1_Gem1 = 0x0006016c;
-        public const uint InventoryWeaponSlot1_Gem2 = 0x0006106d;
-        public const uint InventoryWeaponSlot1_Gem3 = 0x0006106e;
-        public const uint InventoryWeaponSlot1_FirstNameStart = 0x00061070;
-        public const uint InventoryWeaponSlot1_LastNameStart = 0x00061084;
+        public const uint InventoryWeaponSlot1_Gem2 = 0x0006016d;
+        public const uint InventoryWeaponSlot1_Gem3 = 0x0006016e;
+        public const uint InventoryWeaponSlot1_FirstNameStart = 0x00060170;
+        public const uint InventoryWeaponSlot1_LastNameStart = 0x00060184;
 
-        public const uint InventoryWeaponSlot2_BladeSlot = 0x00060169;
-        public const uint InventoryWeaponSlot2_GripSlot = 0x0006016a;
-        public const uint InventoryWeaponSlot2_Equipped = 0x0006016b;
-        public const uint InventoryWeaponSlot2_Gem1 = 0x0006016c;
-        public const uint InventoryWeaponSlot2_Gem2 = 0x0006016d;
-        public const uint InventoryWeaponSlot2_Gem3 = 0x0006016e;
+        public const uint InventoryWeaponSlot2_BladeSlot = 0x00060189;
+        public const uint InventoryWeaponSlot2_GripSlot = 0x0006018a;
+        public const uint InventoryWeaponSlot2_Equipped = 0x0006018b;
+        public const uint InventoryWeaponSlot2_Gem1 = 0x0006018c;
+        public const uint InventoryWeaponSlot2_Gem2 = 0x0006018d;
+        public const uint InventoryWeaponSlot2_Gem3 = 0x0006018e;
         public const uint InventoryWeaponSlot2_FirstNameStart = 0x00060190;
         public const uint InventoryWeaponSlot2_LastNameStart = 0x000601a4;
 
@@ -544,22 +545,22 @@ namespace VagrantStoryArchipelago
         public const uint InventoryBladeSlot16 = 0x0006067c;
 
         // Grip Inventory Slots
-        public const uint InventoryGripSlot01 = 0x0000606a8;
-        public const uint InventoryGripSlot02 = 0x0000606c8;
-        public const uint InventoryGripSlot03 = 0x0000606d8;
-        public const uint InventoryGripSlot04 = 0x0000606e8;
-        public const uint InventoryGripSlot05 = 0x0000606f8;
-        public const uint InventoryGripSlot06 = 0x000060708;
-        public const uint InventoryGripSlot07 = 0x000060718;
-        public const uint InventoryGripSlot08 = 0x000060728;
-        public const uint InventoryGripSlot09 = 0x000060738;
-        public const uint InventoryGripSlot10 = 0x000060748;
-        public const uint InventoryGripSlot11 = 0x000060758;
-        public const uint InventoryGripSlot12 = 0x000060768;
-        public const uint InventoryGripSlot13 = 0x000060778;
-        public const uint InventoryGripSlot14 = 0x000060788;
-        public const uint InventoryGripSlot15 = 0x000060798;
-        public const uint InventoryGripSlot16 = 0x0000607a8;
+        public const uint InventoryGripSlot01 = 0x000606a8;
+        public const uint InventoryGripSlot02 = 0x000606b8;
+        public const uint InventoryGripSlot03 = 0x000606c8;
+        public const uint InventoryGripSlot04 = 0x000606d8;
+        public const uint InventoryGripSlot05 = 0x000606e8;
+        public const uint InventoryGripSlot06 = 0x000606f8;
+        public const uint InventoryGripSlot07 = 0x00060708;
+        public const uint InventoryGripSlot08 = 0x00060718;
+        public const uint InventoryGripSlot09 = 0x00060728;
+        public const uint InventoryGripSlot10 = 0x00060738;
+        public const uint InventoryGripSlot11 = 0x00060748;
+        public const uint InventoryGripSlot12 = 0x00060758;
+        public const uint InventoryGripSlot13 = 0x00060768;
+        public const uint InventoryGripSlot14 = 0x00060778;
+        public const uint InventoryGripSlot15 = 0x00060788;
+        public const uint InventoryGripSlot16 = 0x00060798;
 
         // Armor Inventory Slots
         public const uint InventoryArmorSlot01 = 0x000607a7;
@@ -585,11 +586,11 @@ namespace VagrantStoryArchipelago
         public const uint InventoryShieldSlot01 = 0x00060268;
         public const uint InventoryShieldSlot02 = 0x00060298;
         public const uint InventoryShieldSlot03 = 0x000602c8;
-        public const uint InventoryShieldSlot04 = 0x000602fd;
+        public const uint InventoryShieldSlot04 = 0x000602f8;
         public const uint InventoryShieldSlot05 = 0x00060328;
         public const uint InventoryShieldSlot06 = 0x00060358;
         public const uint InventoryShieldSlot07 = 0x00060388;
-        public const uint InventoryShieldSlot08 = 0x000603bd;
+        public const uint InventoryShieldSlot08 = 0x000603b8;
 
 
         // Equipped Armour Slots
@@ -761,7 +762,7 @@ namespace VagrantStoryArchipelago
         // The Washing-Woman's Way
         public const uint UW_TheWashingWomansWaySilverKeyUnlock = 0x0;
         public const uint UW_TheWashingWomansWayHealPanelFloorTrap = 0x001854b6;
-        public const uint UW_TheWashingWomansWayCurePanelFloorTrap = 0x001854c4;
+        public const uint UW_TheWashingWomansWayCurePanelFloorTrap = 0x001854c2;
         public const uint UW_TheWashingWomansWayEntered = 0x000f1ab0;
 
         // Nameless Dark Oblivion
@@ -1953,7 +1954,7 @@ namespace VagrantStoryArchipelago
         public const uint AM2_TombOfTheRebornEntered = 0x000f1ab0;
 
         // Fool's Gold, Fool's Loss
-        public const uint AM2_FoolsGoldFoolsLossParalysisPanelFloorTrap = 0x0;
+        public const uint AM2_FoolsGoldFoolsLossParalysisPanelFloorTrap = 0x00184afa;
         public const uint AM2_FoolsGoldFoolsLossEntered = 0x000f1ab0;
 
         // Kilroy Was Here

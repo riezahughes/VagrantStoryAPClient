@@ -7,7 +7,7 @@ namespace VagrantStoryArchipelago.Models.Inventory
 
         // IMPORTANT NOTE - THESE WON'T UPDATE IF YOU HAVE THE ITEM EQUIPPED. THEY ARE THEN STORED IN DIFFERENT SLOTS TO THIS AND THIS IS JUST A DUPLICATE
         public string ArmorName { get; set; }
-        [MemoryOffset(0x00)]  // 0x607cf - Armor Slot
+        [MemoryOffset(0x28)]  // index: 1-based position in the armour inventory (the record's own last byte; this class starts 1 byte before the record)
         public byte ArmorInventorySlot { get; set; }
 
         [MemoryOffset(0x01)]  // 0x607d1 - Item ID (note: 16-bit, spans 0x02-0x03)
@@ -20,7 +20,7 @@ namespace VagrantStoryArchipelago.Models.Inventory
         public ushort ArmorMaxDP { get; set; }
 
         [MemoryOffset(0x09)]  // 0x607d8 - Current DP
-        public byte ArmorCurrentDP { get; set; }
+        public ushort ArmorCurrentDP { get; set; }
 
         [MemoryOffset(0x0e)]  // 0x607dd - STR
         public byte ArmorStrStat { get; set; }
@@ -31,13 +31,13 @@ namespace VagrantStoryArchipelago.Models.Inventory
         [MemoryOffset(0x10)]  // 0x607df - AGI
         public byte ArmorAgiStat { get; set; }
 
-        [MemoryOffset(0x12)]  // 0x607e1 - Blunt
+        [MemoryOffset(0x12)]  // types[1] (signed); types[0] is bare hands
         public byte ArmorBluntDefStat { get; set; }
 
-        [MemoryOffset(0x13)]  // 0x607e2 - Edged
+        [MemoryOffset(0x13)]  // types[2] (signed)
         public byte ArmorEdgedDefStat { get; set; }
 
-        [MemoryOffset(0x14)]  // 0x607e3 - Piercing
+        [MemoryOffset(0x14)]  // types[3] (signed)
         public byte ArmorPiercingDefStat { get; set; }
 
         [MemoryOffset(0x15)]  // 0x607e4 - Human
@@ -82,7 +82,7 @@ namespace VagrantStoryArchipelago.Models.Inventory
         [MemoryOffset(0x25)]  // 0x607f4 - Material
         public byte ArmorMaterial { get; set; }
 
-        [MemoryOffset(0x27)]  // 0x607f6 - Equip Status
+        [MemoryOffset(0x27)]  // limb: which body part the armour is for (not an equipped flag)
         public byte ArmorEquipStatus { get; set; }
 
         public InventoryArmorData(
@@ -91,7 +91,7 @@ namespace VagrantStoryArchipelago.Models.Inventory
             object armorID,
             ArmorType armorType,
             ushort armorMaxDP,
-            byte armorCurrentDP,
+            ushort armorCurrentDP,
             byte armorStrStat,
             byte armorIntStat,
             byte armorAgiStat,
@@ -117,7 +117,8 @@ namespace VagrantStoryArchipelago.Models.Inventory
         {
             ArmorName = name;
             ArmorInventorySlot = armorInventorySlot;
-            ArmorID = Convert.ToByte(armorID);
+            byte id = Convert.ToByte(armorID);
+            ArmorID = (uint)(id | ((id - 126) << 8)); // id, then sub id = id - 126 (wep id and category follow; the category is written by ArmorType)
             ArmorType = (byte)armorType;
             ArmorMaxDP = armorMaxDP;
             ArmorCurrentDP = armorCurrentDP;

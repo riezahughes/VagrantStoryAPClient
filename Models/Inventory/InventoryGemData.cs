@@ -7,10 +7,12 @@ namespace VagrantStoryArchipelago.Models.Inventory
     public class InventoryGemData
     {
         public string GemName { get; set; }
-        [MemoryOffset(0x02)]
-        public byte GemInventorySlot { get; set; }
+        [MemoryOffset(0x1e)]  // index: 1-based position in the gem inventory (the record's own index at real +0x1A; this class starts 4 bytes before the record)
+        public ushort GemInventorySlot { get; set; }
         [MemoryOffset(0x04)]
         public byte GemID { get; set; }
+        [MemoryOffset(0x06)]  // sub id = id - 4 for the named gems (id 5 and up); 0 for the five material gems
+        public byte GemSubId { get; set; }
         [MemoryOffset(0x05)]
         public byte GemTextCategory { get; set; }
         [MemoryOffset(0x09)]
@@ -55,6 +57,7 @@ namespace VagrantStoryArchipelago.Models.Inventory
             GemName = name;
             GemInventorySlot = inventorySlot;
             GemID = gemID;
+            GemSubId = gemID >= 5 ? (byte)(gemID - 4) : (byte)0;
             GemTextCategory = 0x01;
             GemStrStat = strStat;
             GemIntStat = intStat;

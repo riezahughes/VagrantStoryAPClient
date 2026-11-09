@@ -2,59 +2,64 @@
 
 namespace VagrantStoryArchipelago.Models.Inventory
 {
+    // Record = vs_main_inventoryWeapon (0x20 bytes): index, blade, grip, isEquipped, gems[4], name[24] one byte per character.
+    // The old offsets assumed every field was two bytes apart. Characters 21-24 of the name are not mapped.
     public class InventoryWeaponData
     {
+        [MemoryOffset(0x01)]  // blade: 1-based index into the blade inventory
+        public byte BladeSlot { get; set; }
+
         [MemoryOffset(0x00)]
         public byte WeaponSlot { get; set; }
         [MemoryOffset(0x02)]
         public byte GripSlot { get; set; }
-        [MemoryOffset(0x04)]
+        [MemoryOffset(0x03)]
         public byte Equipped { get; set; }
-        [MemoryOffset(0x06)]
+        [MemoryOffset(0x04)]
         public byte Gem1 { get; set; }
-        [MemoryOffset(0x08)]
+        [MemoryOffset(0x05)]
         public byte Gem2 { get; set; }
-        [MemoryOffset(0x0a)]
+        [MemoryOffset(0x06)]
         public byte Gem3 { get; set; }
-        [MemoryOffset(0x0c)]
+        [MemoryOffset(0x08)]
         public byte FirstNameChar1 { get; set; }
-        [MemoryOffset(0x0e)]
+        [MemoryOffset(0x09)]
         public byte FirstNameChar2 { get; set; }
-        [MemoryOffset(0x11)]
+        [MemoryOffset(0x0a)]
         public byte FirstNameChar3 { get; set; }
-        [MemoryOffset(0x13)]
+        [MemoryOffset(0x0b)]
         public byte FirstNameChar4 { get; set; }
-        [MemoryOffset(0x15)]
+        [MemoryOffset(0x0c)]
         public byte FirstNameChar5 { get; set; }
-        [MemoryOffset(0x17)]
+        [MemoryOffset(0x0d)]
         public byte FirstNameChar6 { get; set; }
-        [MemoryOffset(0x19)]
+        [MemoryOffset(0x0e)]
         public byte FirstNameChar7 { get; set; }
-        [MemoryOffset(0x1b)]
+        [MemoryOffset(0x0f)]
         public byte FirstNameChar8 { get; set; }
-        [MemoryOffset(0x1d)]
+        [MemoryOffset(0x10)]
         public byte FirstNameChar9 { get; set; }
-        [MemoryOffset(0x1f)]
+        [MemoryOffset(0x11)]
         public byte FirstNameChar10 { get; set; }
-        [MemoryOffset(0x22)]
+        [MemoryOffset(0x12)]
         public byte LastNameChar1 { get; set; }
-        [MemoryOffset(0x24)]
+        [MemoryOffset(0x13)]
         public byte LastNameChar2 { get; set; }
-        [MemoryOffset(0x26)]
+        [MemoryOffset(0x14)]
         public byte LastNameChar3 { get; set; }
-        [MemoryOffset(0x28)]
+        [MemoryOffset(0x15)]
         public byte LastNameChar4 { get; set; }
-        [MemoryOffset(0x2a)]
+        [MemoryOffset(0x16)]
         public byte LastNameChar5 { get; set; }
-        [MemoryOffset(0x2c)]
+        [MemoryOffset(0x17)]
         public byte LastNameChar6 { get; set; }
-        [MemoryOffset(0x2e)]
+        [MemoryOffset(0x18)]
         public byte LastNameChar7 { get; set; }
-        [MemoryOffset(0x31)]
+        [MemoryOffset(0x19)]
         public byte LastNameChar8 { get; set; }
-        [MemoryOffset(0x33)]
+        [MemoryOffset(0x1a)]
         public byte LastNameChar9 { get; set; }
-        [MemoryOffset(0x35)]
+        [MemoryOffset(0x1b)]
         public byte LastNameChar10 { get; set; }
 
 

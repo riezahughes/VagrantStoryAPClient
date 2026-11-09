@@ -1,5 +1,6 @@
 using Archipelago.Core.Util;
 using VagrantStoryArchipelago.Enums;
+using VagrantStoryArchipelago.Helpers.EntityLists;
 namespace VagrantStoryArchipelago.Models.Inventory
 {
     public class InventoryBladeData
@@ -8,11 +9,12 @@ namespace VagrantStoryArchipelago.Models.Inventory
         // IMPORTANT NOTE - THESE WON'T UPDATE IF YOU HAVE THE ITEM EQUIPPED. THEY ARE THEN STORED IN DIFFERENT SLOTS TO THIS AND THIS IS JUST A DUPLICATE
         public string BladeName { get; set; }
 
-        [MemoryOffset(0x00)]  // Item ID (16-bit)
+        // Record layout = vs_main_inventoryBlade in rood-reverse (0x2C bytes); checked against blades in the maps' chest loot.
+        [MemoryOffset(0x00)]  // Item ID in the low byte, sub id in the high byte. The game always stores the same value in both.
         public ushort BladeID { get; set; }
 
-        [MemoryOffset(0x02)]
-        public byte UNKOWN_1 { get; set; }
+        [MemoryOffset(0x02)]  // wepId: model of the blade. 0 means no model is loaded for the assembled weapon.
+        public byte BladeWepId { get; set; }
 
         [MemoryOffset(0x03)]  // Blade Type
         public byte BladeType { get; set; }
@@ -38,14 +40,23 @@ namespace VagrantStoryArchipelago.Models.Inventory
         [MemoryOffset(0x0e)]  // AGI
         public byte BladeAgiStat { get; set; }
 
-        [MemoryOffset(0x0f)]
-        public ushort BladeRiskStat { get; set; }
+        [MemoryOffset(0x0f)]  // Risk (a single byte; this used to be a ushort that overlapped the damage type byte)
+        public byte BladeRiskStat { get; set; }
 
-        [MemoryOffset(0x10)]
-        public ushort BladeDamageType { get; set; }
+        [MemoryOffset(0x10)]  // bits 0-1 damage type (1 blunt, 2 edged, 3 piercing), bits 2-4 cost type (2 on every blade)
+        public byte BladeDamageType { get; set; }
 
-        [MemoryOffset(0x14)]
+        [MemoryOffset(0x14)]  // range struct: range, two more range bytes, then the attack shape/angle bitfield
         public byte BladeRangeStat { get; set; }
+
+        [MemoryOffset(0x15)]
+        public byte BladeRangeUnk1 { get; set; }
+
+        [MemoryOffset(0x16)]
+        public byte BladeRangeUnk2 { get; set; }
+
+        [MemoryOffset(0x17)]
+        public byte BladeAttackShape { get; set; }
 
         [MemoryOffset(0x18)]  // Human
         public byte BladeHumanStat { get; set; }
@@ -86,13 +97,13 @@ namespace VagrantStoryArchipelago.Models.Inventory
         [MemoryOffset(0x26)]  // Dark
         public byte BladeDarkStat { get; set; }
 
-        [MemoryOffset(0x28)]  // Material
+        [MemoryOffset(0x28)]  // Material (u16 in the game, always < 8)
         public byte BladeMaterial { get; set; }
 
-        [MemoryOffset(0x2a)]  // Blade Type
+        [MemoryOffset(0x2a)]  // assembledWeaponIndex: which assembled weapon uses this blade, 0 for none
         public byte BladeEquipStatus { get; set; }
 
-        [MemoryOffset(0x2b)]  // Blade Slot
+        [MemoryOffset(0x2b)]  // index: 1-based position in the blade inventory
         public byte BladeInventorySlot { get; set; }
 
         public InventoryBladeData(
@@ -128,9 +139,17 @@ namespace VagrantStoryArchipelago.Models.Inventory
         )
         {
             BladeName = name;
-            BladeDamageType = Convert.ToByte(damageType);
+            BladeDamageType = (byte)((byte)damageType | (2 << 2)); // damage type + cost type 2
             BladeType = Convert.ToByte(bladeType);
-            BladeID = Convert.ToByte(bladeID);
+            byte id = Convert.ToByte(bladeID);
+            BladeID = (ushort)(id | (id << 8));
+            if (BladeBaseStats.ById.TryGetValue(bladeID, out var baseData))
+            {
+                BladeWepId = baseData.WepId;
+                BladeRangeUnk1 = baseData.RangeUnk1;
+                BladeRangeUnk2 = baseData.RangeUnk2;
+                BladeAttackShape = baseData.AttackShape;
+            }
             BladeMaxDP = bladeMaxDP;
             BladeMaxPP = bladeMaxPP;
             BladeCurrentDP = bladeCurrentDP;

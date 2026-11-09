@@ -215,6 +215,85 @@ public class MapHelper
         Memory.WriteObject<MapChestData>(currentPointerValue, replacementChestItems);
     }
 
+    private static ushort _lastMapIdDoors = 0xFFFF;
+
+    public static void StartMapDoorLockListener(CancellationTokenSource cts)
+    {
+        Memory.MonitorAddressForAction<ushort>(
+            Addresses.CurrentMapandRoomID,
+            () =>
+            {
+                if (cts.Token.IsCancellationRequested) return;
+
+                ushort mapId = Memory.ReadUShort(Addresses.CurrentMapandRoomID);
+
+                if (APHelpers.isInTheGame() && APHelpers.isProcessingItems() == false && DoorLocks.ByMap.Contains(mapId))
+                {
+                    Thread.Sleep(3000); // let the room's lock array finish loading, same as the chest listener
+                    if (Memory.ReadUShort(Addresses.CurrentMapandRoomID) == mapId)
+                    {
+                        UpdateDoorLocksInMap(mapId);
+                    }
+                }
+                _lastMapIdDoors = mapId;
+                Thread.Sleep(500);
+                StartMapDoorLockListener(cts);
+            },
+            value => value != _lastMapIdDoors);
+    }
+
+    /// <summary>
+    /// Locks the doors listed in DoorLocks for this room by writing the key into the matching lock entry
+    /// (found by tile, using the same neighbour rule as the game). Entries that are already locked are left alone.
+    /// </summary>
+    public static void UpdateDoorLocksInMap(ushort mapId)
+    {
+        uint lockArray = Memory.ReadUInt(Addresses.RoomLockPointer) & 0x0FFFFFFF;
+        uint entryCount = Memory.ReadUInt(Addresses.RoomLockLength) / MapLockedDoorData.EntrySize;
+        if (lockArray == 0 || entryCount == 0 || entryCount > 64) return;
+
+        var entries = new List<(uint Address, MapLockedDoorData Data)>();
+        for (uint i = 0; i < entryCount; i++)
+        {
+            uint address = lockArray + i * MapLockedDoorData.EntrySize;
+            entries.Add((address, Memory.ReadObject<MapLockedDoorData>(address)));
+        }
+
+        foreach (var door in DoorLocks.ByMap[mapId])
+        {
+            var match = entries.FirstOrDefault(e => LockCoversTile(e.Data, door.TileX, door.TileZ, door.Surface));
+            if (match.Data == null)
+            {
+#if DEBUG
+                Console.WriteLine($"Door at {door.TileX},{door.TileZ} in {mapId:X4} has no lock entry (needs {door.KeyName})");
+#endif
+                continue;
+            }
+            if (match.Data.LockState != 0) continue;
+
+            Memory.Write(match.Address + 0x0C, door.KeyItemId);
+            Memory.Write(match.Address + 0x08, (byte)1);
+#if DEBUG
+            Console.WriteLine($"Locked door at {door.TileX},{door.TileZ} in {mapId:X4} with {door.KeyName}");
+#endif
+        }
+    }
+
+    private static bool LockCoversTile(MapLockedDoorData entry, int x, int z, int surface)
+    {
+        if (entry.TileX == x && entry.TileZ == z && entry.TileSurface == surface) return true;
+        int nx = entry.TileX, nz = entry.TileZ;
+        switch (entry.Direction)
+        {
+            case 4: nz -= 1; break;
+            case 5: nx += 1; break;
+            case 6: nz += 1; break;
+            case 7: nx -= 1; break;
+            default: return false;
+        }
+        return nx == x && nz == z && entry.TileSurface == surface;
+    }
+
     public static List<ushort> MapsWithBosses = new List<ushort>
     {
         0x000B, // The Hero's Winehall - Dullahan

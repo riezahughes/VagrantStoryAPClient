@@ -29,6 +29,7 @@ public class App
     public static CancellationTokenSource _cancellationTokenBreakArtListener = new CancellationTokenSource();
     public static CancellationTokenSource _cancellationTokenChainAbilityListener = new CancellationTokenSource();
     public static CancellationTokenSource _cancellationTokenMapChestListener = new CancellationTokenSource();
+    public static CancellationTokenSource _cancellationTokenMapDoorListener = new CancellationTokenSource();
     public static CancellationTokenSource _cancellationTokenMapBossListener = new CancellationTokenSource();
 
     [DllImport("libc")]
@@ -287,6 +288,7 @@ public class App
 
                 MapHelper.StartMapProgressionListener(_cancellationTokenMapListener, archipelagoClient);
                 MapHelper.StartMapChestListener(_cancellationTokenMapChestListener, archipelagoClient.Options);
+                MapHelper.StartMapDoorLockListener(_cancellationTokenMapDoorListener);
                 MapHelper.StartMapBossListener(_cancellationTokenMapBossListener, archipelagoClient.Options);
                 MapHelper.StartActorListener(_cancellationTokenMapBossListener, archipelagoClient.Options);
 

@@ -113,12 +113,12 @@ namespace VagrantStoryArchipelago.Data
             ["Chest Key"] = new InventoryItemData("Chest Key", 0xD1, 0x01, 1, 0x00),
 
             // Sigils (0xD2-0xE9)
-            ["Chamomile Sigil"] = new InventoryItemData("Chamomile Sigil", 0xD2, 0x01, 30, 0x00),
-            ["Lily Sigil"] = new InventoryItemData("Lily Sigil", 0xD3, 0x01, 30, 0x00),
-            ["Tearose Sigil"] = new InventoryItemData("Tearose Sigil", 0xD4, 0x01, 30, 0x00),
-            ["Clematis Sigil"] = new InventoryItemData("Clematis Sigil", 0xD5, 0x01, 30, 0x00),
-            ["Hyacinth Sigil"] = new InventoryItemData("Hyacinth Sigil", 0xD6, 0x01, 30, 0x00),
-            ["Fern Sigil"] = new InventoryItemData("Fern Sigil", 0xD7, 0x01, 30, 0x00),
+            ["Chamomile Sigil"] = new InventoryItemData("Chamomile Sigil", 0xD2, 0x01, 50, 0x00),
+            ["Lily Sigil"] = new InventoryItemData("Lily Sigil", 0xD3, 0x01, 50, 0x00),
+            ["Tearose Sigil"] = new InventoryItemData("Tearose Sigil", 0xD4, 0x01, 50, 0x00),
+            ["Clematis Sigil"] = new InventoryItemData("Clematis Sigil", 0xD5, 0x01, 50, 0x00),
+            ["Hyacinth Sigil"] = new InventoryItemData("Hyacinth Sigil", 0xD6, 0x01, 50, 0x00),
+            ["Fern Sigil"] = new InventoryItemData("Fern Sigil", 0xD7, 0x01, 50, 0x00),
             ["Aster Sigil"] = new InventoryItemData("Aster Sigil", 0xD8, 0x01, 50, 0x00),
             ["Eulelia Sigil"] = new InventoryItemData("Eulelia Sigil", 0xD9, 0x01, 50, 0x00),
             ["Melissa Sigil"] = new InventoryItemData("Melissa Sigil", 0xDA, 0x01, 50, 0x00),

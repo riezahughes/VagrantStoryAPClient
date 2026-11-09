@@ -36,12 +36,12 @@ namespace VagrantStoryArchipelago.Helpers
             ulong currentAddress = pointerAddress; // already the actor's address, don't dereference
             while (true)
             {
-                MapActorData actor = Memory.ReadObject<MapActorData>(currentAddress);
-                actor.GuaranteedLoot1_Name = 0x00;
-                actor.GuaranteedLoot2_Name = 0x00;
-                Memory.WriteObject(currentAddress, actor);
+                // Only the two drop ids are written. Writing the whole actor back would overwrite live values (hp, status, ...)
+                // with whatever they were when the object was read.
+                Memory.Write(currentAddress + 0x9A8, (ushort)0);
+                Memory.Write(currentAddress + 0x9AC, (ushort)0);
 
-                currentAddress = actor.NextActorPointer & 0x0FFFFFFF;
+                currentAddress = Memory.ReadUInt(currentAddress) & 0x0FFFFFFF;
                 if (currentAddress == 0x0)
                     break;
             }

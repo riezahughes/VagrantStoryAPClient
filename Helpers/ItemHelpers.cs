@@ -447,7 +447,10 @@ namespace VagrantStoryArchipelago.Helpers
                 byte itemID = ItemHelpers.ItemReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
                 InventoryItemData itemData = ItemDatabase.Items[item.ItemName];
                 itemData.ItemSlot = matchingItem.ItemSlot;
-                itemData.Quantity = (byte)(matchingItem.Quantity + 0x01);
+                // Doors use up one sigil each, so a received sigil refills the stack to the full 50
+                itemData.Quantity = item.ItemName.EndsWith(" Sigil")
+                    ? Math.Max(matchingItem.Quantity, (byte)50)
+                    : (byte)(matchingItem.Quantity + 0x01);
                 Memory.WriteObject<InventoryItemData>(InventoryItemSlotReference[matchingItem.ItemSlot], itemData);
                 return true;
             }
@@ -489,7 +492,7 @@ namespace VagrantStoryArchipelago.Helpers
             {
                 byte itemID = ItemHelpers.GemReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
                 InventoryGemData gem = GemDatabase.Gems[item.ItemName];
-                gem.GemInventorySlot = (byte)(listOfSlots.Count);
+                gem.GemInventorySlot = (ushort)(listOfSlots.Count + 1);
                 //Console.WriteLine($"No Gem has been found: Adding {gem.GemName} with Agi {gem.GemAgiStat} to slot {listOfSlots.Count}");
                 Memory.WriteObject<InventoryGemData>(InventoryGemSlotReference[listOfSlots.Count], GemDatabase.Gems[item.ItemName]);
                 return true;
@@ -584,14 +587,14 @@ namespace VagrantStoryArchipelago.Helpers
 
             if (matchingItem is not null && matchingItem.GripName != "Unknown Grip")
             {
-                //Console.WriteLine($"{matchingItem.GripName} has been found already: Ignoring Grip {matchingItem.GripInventorySlot}");
+                //Console.WriteLine($"{matchingItem.GripName} has been found already: Ignoring Grip {matchingItem.GripIndex}");
                 return true;
             }
             else
             {
                 byte itemID = ItemHelpers.CraftingGripReference.FirstOrDefault(itm => itm.Value == item.ItemName).Key;
                 InventoryGripData grip = GripDatabase.Grips[item.ItemName];
-                grip.GripInventorySlot = (byte)(listOfSlots.Count + 1);
+                grip.GripIndex = (ushort)(listOfSlots.Count + 1);
                 //Console.WriteLine($"No grips has been found: Adding {grip.GripName} with Agi {grip.GripAgiStat} to slot {listOfSlots.Count}");
                 Memory.WriteObject<InventoryGripData>(InventoryGripSlotReference[listOfSlots.Count], GripDatabase.Grips[item.ItemName]);
                 return true;
@@ -644,7 +647,7 @@ namespace VagrantStoryArchipelago.Helpers
                 }
 
                 //Console.WriteLine($"{matchingArmor.ArmorName} has been found already: Adding to newer slot {listOfSlots.Count + 1}");
-                armorData.ArmorInventorySlot = (byte)(listOfSlots.Count);
+                armorData.ArmorInventorySlot = (byte)(listOfSlots.Count + 1);
                 Memory.WriteObject<InventoryArmorData>(InventoryArmorSlotReference[listOfSlots.Count], armorData);
                 return true;
             }
@@ -672,7 +675,7 @@ namespace VagrantStoryArchipelago.Helpers
                     }
                 }
 
-                foundArmor.ArmorInventorySlot = (byte)(listOfSlots.Count);
+                foundArmor.ArmorInventorySlot = (byte)(listOfSlots.Count + 1);
 
                 //Console.WriteLine($"Armor does not exist: Adding {foundArmor.ArmorName} with material of {foundArmor.ArmorMaterial} to slot {listOfSlots.Count + 1}");
 

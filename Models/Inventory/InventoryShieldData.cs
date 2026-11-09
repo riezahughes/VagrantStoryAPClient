@@ -16,16 +16,16 @@ namespace VagrantStoryArchipelago.Models.Inventory
         [MemoryOffset(0x04)]  // 0x607d1 - Item ID (note: 16-bit, spans 0x02-0x03)
         public uint ShieldID { get; set; }
 
-        [MemoryOffset(0x07)]  // 0x607d4 - Max DP start (16-bit)
+        [MemoryOffset(0x08)]  // max DP
         public ushort ShieldMaxDP { get; set; }
 
-        [MemoryOffset(0x09)]  // 0x607d4 - Max DP start (16-bit)
+        [MemoryOffset(0x0a)]  // max PP
         public ushort ShieldMaxPP { get; set; }
 
-        [MemoryOffset(0x0b)]  // 0x607d8 - Current DP
+        [MemoryOffset(0x0e)]  // current PP
         public ushort ShieldCurrentPP { get; set; }
 
-        [MemoryOffset(0x0d)]  // 0x607d8 - Current DP
+        [MemoryOffset(0x0c)]  // current DP
         public ushort ShieldCurrentDP { get; set; }
 
         [MemoryOffset(0x10)]  // 0x607dd - STR
@@ -40,13 +40,13 @@ namespace VagrantStoryArchipelago.Models.Inventory
         [MemoryOffset(0x13)]  // 0x607df - AGI
         public byte ShieldAgiStat { get; set; }
 
-        [MemoryOffset(0x14)]  // 0x607e1 - Blunt
+        [MemoryOffset(0x15)]  // types[1] (signed); types[0] at 0x14 is bare hands
         public byte ShieldBluntDefStat { get; set; }
 
-        [MemoryOffset(0x15)]  // 0x607e2 - Edged
+        [MemoryOffset(0x16)]  // types[2] (signed); types[0] at 0x14 is bare hands
         public byte ShieldEdgedDefStat { get; set; }
 
-        [MemoryOffset(0x16)]  // 0x607e3 - Piercing
+        [MemoryOffset(0x17)]  // types[3] (signed); types[0] at 0x14 is bare hands
         public byte ShieldPiercingDefStat { get; set; }
 
         [MemoryOffset(0x18)]  // 0x607e4 - Human
@@ -130,13 +130,15 @@ namespace VagrantStoryArchipelago.Models.Inventory
             ItemMaterials shieldMaterial,
             byte inventoryGemSlotReference1,
             byte inventoryGemSlotReference2,
-            byte inventoryGemSlotReference3
+            byte inventoryGemSlotReference3,
+            byte shieldWepId = 0x00
         )
         {
             ShieldName = name;
             ShieldInventorySlot = shieldInventorySlot;
             ShieldEquipStatus = shieldEquipStatus;
-            ShieldID = Convert.ToByte(shieldID);
+            byte id = Convert.ToByte(shieldID);
+            ShieldID = (uint)(id | ((id - 126) << 8) | (shieldWepId << 16) | (1 << 24)); // id, sub id = id - 126, wep id, category 1
             ShieldGemSlotQuantity = gemSlotQuantity;
             ShieldMaxDP = shieldMaxDP;
             ShieldMaxPP = shieldMaxPP;
