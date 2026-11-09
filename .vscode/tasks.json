@@ -1,0 +1,19 @@
+{
+"version": "2.0.0",
+"tasks": [
+        {
+            "label": "build-debug",
+            "command": "dotnet",
+            "type": "process",
+            "args": ["build", "${workspaceFolder}/VagrantStoryArchipelago.csproj", "-c", "Debug"],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-release",
+            "command": "dotnet",
+            "type": "process",
+            "args": ["build", "${workspaceFolder}/VagrantStoryArchipelago.csproj", "-c", "Release"],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

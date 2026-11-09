@@ -54,6 +54,12 @@ public class App
             startInfo.ArgumentList.Add("-p");
             startInfo.ArgumentList.Add(Chalk.Magenta.Bold["  🔒 Password: "].ToString());
             startInfo.ArgumentList.Add(Environment.ProcessPath!);
+            // when launched through the dotnet host (e.g. the VS Code debugger), ProcessPath is "dotnet",
+            // so the app's .dll has to be passed along too or dotnet just prints its usage text
+            if (Path.GetFileNameWithoutExtension(Environment.ProcessPath!) == "dotnet")
+            {
+                startInfo.ArgumentList.Add(typeof(App).Assembly.Location);
+            }
             foreach (var arg in args) startInfo.ArgumentList.Add(arg);
 
             using var elevated = Process.Start(startInfo)!;

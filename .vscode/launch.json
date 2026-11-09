@@ -1,0 +1,23 @@
+{
+"version": "0.2.0",
+"configurations": [
+    {
+    "name": "Launch (Debug)",
+    "type": "coreclr",
+    "request": "launch",
+    "preLaunchTask": "build-debug",
+    "program": "${workspaceFolder}/bin/Debug/net8.0/VagrantStoryArchipelago.dll",
+    "cwd": "${workspaceFolder}",
+    "console": "integratedTerminal"
+    },
+    {
+    "name": "Launch (Release)",
+    "type": "coreclr",
+    "request": "launch",
+    "preLaunchTask": "build-release",
+    "program": "${workspaceFolder}/bin/Release/net8.0/VagrantStoryArchipelago.dll",
+    "cwd": "${workspaceFolder}",
+    "console": "integratedTerminal"
+    }
+]
+}
