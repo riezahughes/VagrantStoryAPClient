@@ -276,7 +276,7 @@ public class App
 
                 await archipelagoClient.ReceiveReady();
 
-                PlayerStateHelpers.OnGameLoaded(archipelagoClient);
+                PlayerStateHelpers.OnGameLoaded(archipelagoClient, false); // the map listener handles the title screen case
                 PlayerStateHelpers.SetUpMapListener(_cancellationTokenMapListener, archipelagoClient);
                 PlayerStateHelpers.EnableTeleportOptions(archipelagoClient);
                 PlayerStateHelpers.EnableNewGamePlus(archipelagoClient);

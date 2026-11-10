@@ -25,7 +25,7 @@ namespace VagrantStoryArchipelago.Helpers
         public static bool Enabled { get; set; } = true;
 
         // How long a message stays fully open before it is closed.
-        public static TimeSpan DisplayTime { get; set; } = TimeSpan.FromSeconds(3);
+        public static TimeSpan DisplayTime { get; set; } = TimeSpan.FromSeconds(5);
 
         // A slim one-line bar. The game's own information boxes are 4 lines tall (vs_battle_initInformationTextBox).
         // The game stops drawing at about y = 220 (of 240), so only the part of the bar above that is visible.

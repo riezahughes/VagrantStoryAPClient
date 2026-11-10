@@ -58,8 +58,27 @@ namespace Helpers
 #endif
         }
 
-        public static void OnGameLoaded(ArchipelagoClient client)
+        // The saved item index lives in the game's save-backed state flags, which are only valid
+        // once a room is loaded. waitForRoom = true blocks until the room id is non-zero and stable;
+        // false returns immediately (without touching the index) if no room is loaded yet.
+        public static void OnGameLoaded(ArchipelagoClient client, bool waitForRoom = true)
         {
+            if (Memory.ReadUShort(Addresses.CurrentMapandRoomID) == 0)
+            {
+                if (!waitForRoom) return;
+                while (Memory.ReadUShort(Addresses.CurrentMapandRoomID) == 0)
+                {
+                    Thread.Sleep(500);
+                }
+            }
+            // let the state flags finish restoring before trusting them
+            Thread.Sleep(500);
+            if (Memory.ReadUShort(Addresses.CurrentMapandRoomID) == 0)
+            {
+                OnGameLoaded(client, waitForRoom);
+                return;
+            }
+
             // Read the saved index from memory
             var index = Memory.ReadUShort(Addresses.ItemIndexStorage);
             App.ProcessedItemIndex = index;

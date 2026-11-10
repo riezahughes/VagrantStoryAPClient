@@ -811,6 +811,8 @@ public class MapHelper
     {
         { 0x000C, new(0x0008, 0x00) }, // minotaur
         { 0x000B, new(0x000c, 0x00) }, // dullahan
+        { 0x0010, new(0x0051, 0x00) }, // Hall of Sacrilege golem (needs 0xBB <= 6)
+        { 0x0011, new(0x0015, 0x00) }, // Cleansing Chantry dragon (needs 0xBB <= 7)
         { 0x0320, new(0x0020, null) }, // Duane
         { 0x1532, new(0x0020, null) }, // Ogre didn't trigger, did this in the room previous to it
         { 0x1632, new(0x0022, null) }, // Ogre
