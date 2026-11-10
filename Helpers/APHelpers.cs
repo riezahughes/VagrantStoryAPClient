@@ -109,7 +109,7 @@ namespace Helpers
 
             var timestamp = DateTime.Now.ToString("HH:mm:ss");
 
-            client.AddOverlayMessage(e.Message.ToString());
+            // client.AddOverlayMessage(e.Message.ToString()); // overlay removed, see MessageHelper
 
             ShowInGameNotification(e.Message);
 

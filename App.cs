@@ -8,7 +8,7 @@ using Archipelago.Core;
 using Archipelago.Core.Helpers;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
-using Archipelago.Core.Util.Overlay;
+// using Archipelago.Core.Util.Overlay;
 using Archipelago.Core.Util.PlatformMemory;
 using Archipelago.MultiClient.Net.Models;
 using Helpers;
@@ -259,16 +259,17 @@ public class App
             Console.WriteLine("Listening for locations...");
 
 
-            var toggleableOverlay = new ToggleableOverlayService(() => new WindowsOverlayService(new OverlayOptions
-            {
-                XOffset = 50,
-                YOffset = 500,
-                FontSize = 12,
-                DefaultTextColor = Archipelago.Core.Util.Overlay.Color.Yellow,
-                FadeDuration = 10.0f,
-            }));
-
-            archipelagoClient.IntializeOverlayService(toggleableOverlay);
+            // Overlay removed: item messages are shown in the game's own notification bar instead (see MessageHelper).
+            // var toggleableOverlay = new ToggleableOverlayService(() => new WindowsOverlayService(new OverlayOptions
+            // {
+            //     XOffset = 50,
+            //     YOffset = 500,
+            //     FontSize = 12,
+            //     DefaultTextColor = Archipelago.Core.Util.Overlay.Color.Yellow,
+            //     FadeDuration = 10.0f,
+            // }));
+            //
+            // archipelagoClient.IntializeOverlayService(toggleableOverlay);
 
             try
             {
@@ -292,7 +293,7 @@ public class App
                 MapHelper.StartMapBossListener(_cancellationTokenMapBossListener, archipelagoClient.Options);
                 MapHelper.StartActorListener(_cancellationTokenMapBossListener, archipelagoClient.Options);
 
-                toggleableOverlay.AddTextPopup("Vagrant Story is ready to go.");
+                // toggleableOverlay.AddTextPopup("Vagrant Story is ready to go.");
 
                 MessageHelper.Start(_cancellationTokenSource.Token);
                 MessageHelper.Show("Connected to Archipelago");
@@ -365,11 +366,11 @@ public class App
                         }
 
                     }
-                    else if (input?.Trim().ToLower() == "overlay")
-                    {
-                        toggleableOverlay.Enabled = !toggleableOverlay.Enabled;
-                        Console.WriteLine($"Game overlay {(toggleableOverlay.Enabled ? "enabled" : "disabled")}.");
-                    }
+                    // else if (input?.Trim().ToLower() == "overlay")
+                    // {
+                    //     toggleableOverlay.Enabled = !toggleableOverlay.Enabled;
+                    //     Console.WriteLine($"Game overlay {(toggleableOverlay.Enabled ? "enabled" : "disabled")}.");
+                    // }
                     else if (input?.Trim().ToLower() == "notify")
                     {
                         MessageHelper.Enabled = !MessageHelper.Enabled;
