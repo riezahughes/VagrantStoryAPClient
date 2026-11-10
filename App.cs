@@ -294,6 +294,9 @@ public class App
 
                 toggleableOverlay.AddTextPopup("Vagrant Story is ready to go.");
 
+                MessageHelper.Start(_cancellationTokenSource.Token);
+                MessageHelper.Show("Connected to Archipelago");
+
                 _ = archipelagoClient.MonitorLocationsAsync(GameLocations, _cancellationTokenSource.Token);
             }
             catch (Exception ex)
@@ -366,6 +369,29 @@ public class App
                     {
                         toggleableOverlay.Enabled = !toggleableOverlay.Enabled;
                         Console.WriteLine($"Game overlay {(toggleableOverlay.Enabled ? "enabled" : "disabled")}.");
+                    }
+                    else if (input?.Trim().ToLower() == "notify")
+                    {
+                        MessageHelper.Enabled = !MessageHelper.Enabled;
+                        Console.WriteLine($"In-game notifications {(MessageHelper.Enabled ? "enabled" : "disabled")}.");
+                    }
+                    else if (input?.Trim().ToLower().StartsWith("notify ") == true)
+                    {
+                        // e.g. notify "Received Cure Root\nfrom Bob" - shows a test message in the game's notification bar
+                        string message = input.Trim().Substring(7).Trim().Trim('"').Replace("\\n", "\n");
+                        if (string.IsNullOrWhiteSpace(message))
+                        {
+                            Console.WriteLine("Usage: notify \"here is my text\"");
+                        }
+                        else if (!MessageHelper.Enabled)
+                        {
+                            Console.WriteLine("In-game notifications are off. Type 'notify' to turn them on.");
+                        }
+                        else
+                        {
+                            MessageHelper.Show(message);
+                            Console.WriteLine($"Queued in-game message: {message.Replace("\n", " / ")}");
+                        }
                     }
                     else if (!string.IsNullOrWhiteSpace(input))
                     {

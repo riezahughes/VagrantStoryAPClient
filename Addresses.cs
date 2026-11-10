@@ -37,7 +37,12 @@ namespace VagrantStoryArchipelago
         public const uint TotalRiskAbilitiesEarned = 0x00060060; // byte
         public const uint RoodInverseActive = 0x0006159a; // byte
 
-        // Unlock message for break arts to listen to. 
+        // In-game notification bar (see Helpers/MessageHelper.cs, from rood-reverse BATTLE.PRG)
+        public const uint InfoTextBox = 0x000F5130; // vs_battle_textBoxes[7], 0x30 bytes
+        public const uint SceneMessageBuffer = 0x000EB9D8; // pointer, non-zero while the game shows its own message
+        public const uint NotificationTextBuffer = 0x000F7000; // 0x100 bytes in the unused gap after BATTLE.PRG
+
+        // Unlock message for break arts to listen to.
         public const uint MenuUnlockState = 0x000f4e73;
 
         // Title Addresses (uses individual bits)

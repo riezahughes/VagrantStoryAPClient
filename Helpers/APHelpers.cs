@@ -1,6 +1,7 @@
 using Archipelago.Core;
 using Archipelago.Core.Models;
 using Archipelago.Core.Util;
+using Archipelago.MultiClient.Net.MessageLog.Messages;
 using Kokuban;
 using Serilog;
 using VagrantStoryArchipelago;
@@ -110,6 +111,8 @@ namespace Helpers
 
             client.AddOverlayMessage(e.Message.ToString());
 
+            ShowInGameNotification(e.Message);
+
             // adds coloured messages to terminal
 
             string prefix;
@@ -130,6 +133,21 @@ namespace Helpers
             }
 
             Console.WriteLine(bg + (fg + $"[{timestamp}]{prefix}{message}"));
+        }
+
+        // items coming in or going out are shown in the game's own notification bar
+        private static void ShowInGameNotification(LogMessage message)
+        {
+            if (message is not ItemSendLogMessage itemMessage || message is HintItemSendLogMessage) return;
+
+            string itemName = itemMessage.Item.ItemName ?? "an item";
+
+            if (itemMessage.IsReceiverTheActivePlayer && itemMessage.IsSenderTheActivePlayer)
+                MessageHelper.ItemFound(itemName);
+            else if (itemMessage.IsReceiverTheActivePlayer)
+                MessageHelper.ItemReceived(itemName, itemMessage.Sender.Name);
+            else if (itemMessage.IsSenderTheActivePlayer)
+                MessageHelper.ItemSent(itemName, itemMessage.Receiver.Name);
         }
 
         public static void Client_LocationCompletedLogic(object sender, LocationCompletedEventArgs e, ArchipelagoClient client)
