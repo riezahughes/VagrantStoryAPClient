@@ -22,6 +22,9 @@ public class App
 {
 
     public static int ProcessedItemIndex = 0;
+    // False until the saved item index has been read from the loaded game. Items are not processed while false,
+    // otherwise a connect (or a load) replays every item from index 0 and overwrites the saved index.
+    public static volatile bool ItemIndexLoaded = false;
     public static int BloodSinsCollected = 0;
 
     public static CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
@@ -226,7 +229,7 @@ public class App
         try
         {
 
-            while (archipelagoClient.CurrentSession == null)
+            while (archipelagoClient.CurrentSession == null || archipelagoClient.ItemManager == null || archipelagoClient.LocationManager == null)
             {
                 Console.WriteLine("Waiting for current session");
                 Thread.Sleep(1000);
@@ -234,6 +237,21 @@ public class App
 
             // Register event handlers
             archipelagoClient.ItemManager.ItemReceived += (sender, args) => APHelpers.ItemReceivedLogic(sender, args, archipelagoClient);
+            // Core only raises ItemReceived for items past its own stored index, so items sent later (e.g. from the
+            // server console) can be missed. Listen to the session's own item event as well; processing is idempotent.
+            archipelagoClient.CurrentSession.Items.ItemReceived += _ =>
+            {
+                try
+                {
+                    APHelpers.PROCESSING_ITEM_LIST = true;
+                    ItemHelpers.ProcessPendingItems(archipelagoClient);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error processing received items: {ex}");
+                    APHelpers.PROCESSING_ITEM_LIST = false;
+                }
+            };
             archipelagoClient.MessageReceived += (sender, args) => APHelpers.Client_MessageReceivedLogic(sender, args, archipelagoClient, slot);
             archipelagoClient.LocationManager.LocationCompleted += (sender, args) => APHelpers.Client_LocationCompletedLogic(sender, args, archipelagoClient);
             archipelagoClient.LocationManager.EnableLocationsCondition = () => APHelpers.isInTheGame();

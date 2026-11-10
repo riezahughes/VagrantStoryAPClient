@@ -82,6 +82,7 @@ namespace Helpers
             // Read the saved index from memory
             var index = Memory.ReadUShort(Addresses.ItemIndexStorage);
             App.ProcessedItemIndex = index;
+            App.ItemIndexLoaded = true;
 #if DEBUG
             Console.WriteLine($"Loaded item index: {App.ProcessedItemIndex}");
 #endif
@@ -199,6 +200,7 @@ namespace Helpers
                 Addresses.CurrentMapandRoomID,
                 () =>
                 {
+                    App.ItemIndexLoaded = false; // map id 0 = loading/title; don't give items until the index is re-read
                     while (APHelpers.isInTheGame() == false)
                     {
                         Console.WriteLine("Waiting to return to game...");

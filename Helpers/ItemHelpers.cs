@@ -86,10 +86,29 @@ namespace VagrantStoryArchipelago.Helpers
         }
 
 
+        private static readonly object _processItemsLock = new object();
+
+        // Can be triggered from several places (Core's event, the session's own item event, game load),
+        // so only let one run at a time or items would be given twice.
         public static void ProcessPendingItems(ArchipelagoClient client)
+        {
+            lock (_processItemsLock)
+            {
+                ProcessPendingItemsInternal(client);
+            }
+        }
+
+        private static void ProcessPendingItemsInternal(ArchipelagoClient client)
         {
             if (client.CurrentSession == null)
             {
+                return;
+            }
+
+            if (!App.ItemIndexLoaded)
+            {
+                // Game not loaded / saved index not read yet; OnGameLoaded will process the backlog.
+                APHelpers.PROCESSING_ITEM_LIST = false;
                 return;
             }
 

@@ -94,7 +94,17 @@ namespace Helpers
         public static void ItemReceivedLogic(object sender, ItemReceivedEventArgs args, ArchipelagoClient client)
         {
             PROCESSING_ITEM_LIST = true;
-            ItemHelpers.ProcessPendingItems(client);
+            try
+            {
+                ItemHelpers.ProcessPendingItems(client);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error processing received item: {ex}");
+                Console.WriteLine($"  Item: {args.Item?.Name} (id {args.Item?.Id}, category {args.Item?.Category}, progression {args.Item?.IsProgression})");
+                Console.WriteLine($"  LocationId: {args.LocationId}, From: {args.Player?.Name} (slot {args.Player?.Slot}), Success: {args.Success}");
+                PROCESSING_ITEM_LIST = false;
+            }
         }
 
         public static void Client_MessageReceivedLogic(object sender, MessageReceivedEventArgs e, ArchipelagoClient client, string slot)
